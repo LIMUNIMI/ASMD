@@ -4,13 +4,7 @@ import pretty_midi
 from utils import io
 from copy import copy
 import tarfile
-
-# importing root folder from here
 import os
-import sys
-p = os.path.abspath('../..')
-if p not in sys.path:
-    sys.path.append(p)
 
 
 # The dictionary prototype for containing the ground-truth
