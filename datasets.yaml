@@ -76,6 +76,7 @@ datasets:
     ground-truth: 
       f0: false
       non-aligned: false
+      broad-alignment: false
       precise-alignment: true
       velocities: true
     recording:
@@ -140,8 +141,9 @@ datasets:
       format: wav
     ground-truth: 
       f0: false
-      non-aligned: false
-      precise-alignment: true
+      non-aligned: true
+      broad-alignment: true
+      precise-alignment: false
       velocities: true
     songs:
       - OP114 2. Andante:
@@ -2465,6 +2467,7 @@ datasets:
       f0: false
       non-aligned: false
       errors: false
+      broad-alignment: false
       precise-alignment: true
       velocities: true
     recording:
@@ -2830,8 +2833,9 @@ datasets:
     ensemble: true
     instruments: [violin, viola, cello, double bass, oboe, flute, clarinet, french horn, trumpet, bassoon]
     ground-truth: 
-      non-aligned: true
-      precise-alignment: true
+      non-aligned: false
+      broad-alignment: true
+      precise-alignment: false
       velocities: true
       f0: false
     recording:
@@ -2885,6 +2889,7 @@ datasets:
     ground-truth: 
       f0: false
       non-aligned: false
+      broad-alignment: false
       precise-alignment: true
       velocities: true
     recording:
@@ -11881,6 +11886,7 @@ datasets:
       f0: false
       non-aligned: unknown
       errors: unknown
+      broad-alignment: unknwon
       precise-alignment: unknown
       velocities: unknown
 
@@ -11894,6 +11900,7 @@ datasets:
     ground-truth: 
       f0: true
       non-aligned: true
+      broad-alignment: false
       precise-aligned: true
       velocities: false
     recording:
