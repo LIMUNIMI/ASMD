@@ -25,7 +25,7 @@ gt = {
 
 
 func_map = {
-    'Bach10': [(from_bach10_f0, {}), (from_mirex_txt, {})],
+    'Bach10': [(from_bach10_f0, {}), (from_mirex_txt, {}), (from_midi, {'non_aligned': True, 'pitches': False, 'velocities': False})],
     'SMD': [(from_midi, {})],
     'PHENICX': [(from_txt_phenicx, {}), (from_midi, {'non_aligned': None})],
     'MusicNet': [(from_csv), {}],
@@ -45,7 +45,7 @@ def change_ext(input_fn, new_ext):
         return root + new_ext
 
 
-def from_midi(midi_fn, non_aligned=False):
+def from_midi(midi_fn, non_aligned=False, pitches=True, velocities=True):
     """
     Open a midi file `midi_fn` and convert it to our ground-truth
     representation. This fills velocities, pitches and alignment (default:
@@ -68,8 +68,10 @@ def from_midi(midi_fn, non_aligned=False):
 
     for note_group in midi_notes:
         for note in note_group:
-            out["pitches"].append(note.pitch)
-            out["velocities"].append(note.velocity)
+            if pitches:
+                out["pitches"].append(note.pitch)
+            if velocities:
+                out["velocities"].append(note.velocity)
             if non_aligned is not None:
                 onsets.append(note.start)
                 offsets.append(note.end)
