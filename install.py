@@ -161,7 +161,7 @@ def main():
         if d['unpack']:
             for temp_fn in downloaded_file:
                 format =  ''.join(pathlib.Path(d['url']).suffixes) or '.zip'
-                format = supported_archives[format]
+                format = [j for i, j in supported_archives.items() if format.endswith(i)][0]
                 unpack_archive(temp_fn, full_path, format)
                 # cleaning up
                 os.remove(temp_fn)

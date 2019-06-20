@@ -1,15 +1,15 @@
-#########################################################################################
-######################                                           ########################
-###################### A META-DATASET FOR AUDIO-SCORE PROCESSING ########################
-######################                                           ########################
-#########################################################################################
+########################################################################################
+#####################                                           ########################
+##################### A META-DATASET FOR AUDIO-SCORE PROCESSING ########################
+#####################                                           ########################
+########################################################################################
 
-#########################################################################################
+########################################################################################
 # This file describes multiple datasets containing data about music
 # performances. All the datasets are described with the same fields, so that
 # you can use them easily disregarding their internal structure
 #
-#########################################################################################
+########################################################################################
 #
 # DESCRIPTION
 # Each dataset is an item in a global list `datasets`.
@@ -51,7 +51,7 @@
 # 2. all the fields can have the value 'unknown' to indicate that it is not
 #   available in that dataset
 #
-#########################################################################################
+########################################################################################
 #
 # INSTALLATION
 # 1. Install `python 3` and `pyyaml` (using your package manager or `sudo pip
@@ -60,7 +60,7 @@
 #   directory: python3 install.py
 # N.B. You should have `wget` installed in your system, otherwise SMD dataset
 # can't be downloaded.
-#########################################################################################
+########################################################################################
 
 author: Federico Simonetta
 year: 2019
@@ -128,7 +128,7 @@ datasets:
           path: [TRIOS_dataset/take_five/saxophone.wav, TRIOS_dataset/take_five/piano.wav, TRIOS_dataset/take_five/kick.wav, TRIOS_dataset/take_five/ride.wav, TRIOS_dataset/take_five/snare.wav]
         ground-truth: [TRIOS_dataset/take_five/saxophone.yaml, TRIOS_dataset/take_five/piano.yaml, TRIOS_dataset/take_five/kick.yaml, TRIOS_dataset/take_five/ride.yaml, TRIOS_dataset/take_five/snare.yaml]
 
-  - name: MusicNet # TODO
+  - name: MusicNet
     login: false
     url: https://homes.cs.washington.edu/~thickstn/media/musicnet.tar.gz
     unpack: true
@@ -2458,7 +2458,7 @@ datasets:
     login: false
     url: unknown
     unpack: false
-    post-process: [prev=$(pwd), [cd , *install_dir], mkdir SMD, "wget https://resources.mpi-inf.mpg.de/SMD/SMD_MIDI-Audio-Piano-Music.html -e robots=off -r -l1 -nd --no-parent -A.{mp3,mid} --directory-prefix=SMD/", cd $prev]
+    post-process: ["wget https://resources.mpi-inf.mpg.de/SMD/SMD_MIDI-Audio-Piano-Music.html -e robots=off -r -l1 -nd --no-parent -A.{mp3,mid} --directory-prefix=SMD/", ["mv SMD/ ", *install_dir ]]
     ensemble: false
     instruments: [piano]
     ground-truth: 
@@ -2826,7 +2826,7 @@ datasets:
     login: false
     url: https://zenodo.org/record/1289821/files/PHENICX-Anechoic_1.zip
     unpack: true
-    post-process: unknown # TODO - ground-truth
+    post-process: unknown
     ensemble: true
     instruments: [violin, viola, cello, double bass, oboe, flute, clarinet, french horn, trumpet, bassoon]
     ground-truth: 
@@ -2873,7 +2873,7 @@ datasets:
           path: [PHENICX/PHENICX-Anechoic/audio/mozart/bassoon.wav, PHENICX/PHENICX-Anechoic/audio/mozart/cello.wav, PHENICX/PHENICX-Anechoic/audio/mozart/clarinet.wav, PHENICX/PHENICX-Anechoic/audio/mozart/doublebass.wav, PHENICX/PHENICX-Anechoic/audio/mozart/flute.wav, PHENICX/PHENICX-Anechoic/audio/mozart/horn1.wav, PHENICX/PHENICX-Anechoic/audio/mozart/horn2.wav, PHENICX/PHENICX-Anechoic/audio/mozart/viola.wav, PHENICX/PHENICX-Anechoic/audio/mozart/violin1.wav, PHENICX/PHENICX-Anechoic/audio/mozart/violin2.wav]
         sources:
           path: [PHENICX/PHENICX-Anechoic/audio/mozart/bassoon.wav, PHENICX/PHENICX-Anechoic/audio/mozart/cello.wav, PHENICX/PHENICX-Anechoic/audio/mozart/clarinet.wav, PHENICX/PHENICX-Anechoic/audio/mozart/doublebass.wav, PHENICX/PHENICX-Anechoic/audio/mozart/flute.wav, PHENICX/PHENICX-Anechoic/audio/mozart/horn1.wav, PHENICX/PHENICX-Anechoic/audio/mozart/horn2.wav, PHENICX/PHENICX-Anechoic/audio/mozart/viola.wav, PHENICX/PHENICX-Anechoic/audio/mozart/violin1.wav, PHENICX/PHENICX-Anechoic/audio/mozart/violin2.wav]
-        ground-truth: [PHENICX/PHENICX-Anechoic/annotations/mozart/bassoon.yaml,, PHENICX/PHENICX-Anechoic/annotations/mozart/cello.yaml,, PHENICX/PHENICX-Anechoic/annotations/mozart/clarinet.yaml,, PHENICX/PHENICX-Anechoic/annotations/mozart/doublebass.yaml,, PHENICX/PHENICX-Anechoic/annotations/mozart/flute.yaml,, PHENICX/PHENICX-Anechoic/annotations/mozart/horn.yaml,, PHENICX/PHENICX-Anechoic/annotations/mozart/horn.yaml,, PHENICX/PHENICX-Anechoic/annotations/mozart/viola.yaml,, PHENICX/PHENICX-Anechoic/annotations/mozart/violin.yaml,, PHENICX/PHENICX-Anechoic/annotations/mozart/violin.yaml]
+        ground-truth: [PHENICX/PHENICX-Anechoic/annotations/mozart/bassoon.yaml, PHENICX/PHENICX-Anechoic/annotations/mozart/cello.yaml, PHENICX/PHENICX-Anechoic/annotations/mozart/clarinet.yaml, PHENICX/PHENICX-Anechoic/annotations/mozart/doublebass.yaml, PHENICX/PHENICX-Anechoic/annotations/mozart/flute.yaml, PHENICX/PHENICX-Anechoic/annotations/mozart/horn.yaml, PHENICX/PHENICX-Anechoic/annotations/mozart/horn.yaml, PHENICX/PHENICX-Anechoic/annotations/mozart/viola.yaml, PHENICX/PHENICX-Anechoic/annotations/mozart/violin.yaml, PHENICX/PHENICX-Anechoic/annotations/mozart/violin.yaml]
 
   - name: Maestro
     login: false
@@ -11889,7 +11889,7 @@ datasets:
     url: http://www.ece.rochester.edu/projects/air/datasets/Bach10.zip
     ensemble: true
     unpack: true
-    post-process: unknown # TODO: CSV??
+    post-process: unknown
     instruments: [violin, clarinet, tenor sax, bassoon]
     ground-truth: 
       f0: true

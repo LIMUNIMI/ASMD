@@ -25,32 +25,54 @@ gt = {
 
 
 func_map = {
-    'Bach10': [from_bach10_f0, from_mirex_txt],
-    'SMD': [from_midi]
+    'Bach10': [(from_bach10_f0, {}), (from_mirex_txt, {})],
+    'SMD': [(from_midi, {})],
+    'PHENICX': [(from_txt_phenicx, {}), (from_midi, {'non_aligned': None})],
+    'MusicNet': [(from_csv), {}],
+    'TRIOS_dataset': [(from_midi, {})],
+    'Maestro': [(from_midi, {})]
 }
+
+
+def change_ext(input_fn, new_ext):
+    """
+    Return the input path `input_fn` with `new_ext` as extension
+    """
+
+    root, _ = os.path.splitext(input_fn)
+    if not new_ext.startswith('.'):
+        new_ext = '.' + 'new_ext'
+        return root + new_ext
 
 
 def from_midi(midi_fn, non_aligned=False):
     """
     Open a midi file `midi_fn` and convert it to our ground-truth
     representation. This fills velocities, pitches and alignment (default:
-    `precise-alignment`). Returns a list containing a dictionary
+    `precise-alignment`). Returns a list containing a dictionary. `non_aligned`
+    can also be `None`, in that case no alignment is filled.
     """
+    midi_fn = change_ext(midi_fn, '.mid')
+    if not os.path.exists(midi_fn):
+        midi_fn = change_ext(midi_fn, '.midi')
+
     midi_notes = io.open_midi(midi_fn)
     out = copy(gt)
 
-    if non_aligned:
-        alignment = "non-aligned"
-    else:
-        alignment = "precise-alignment"
-    onsets, offsets = out[alignment].values()
+    if non_aligned is not None:
+        if non_aligned:
+            alignment = "non-aligned"
+        else:
+            alignment = "precise-alignment"
+        onsets, offsets = out[alignment].values()
 
     for note_group in midi_notes:
         for note in note_group:
             out["pitches"].append(note.pitch)
             out["velocities"].append(note.velocity)
-            onsets.append(note.start)
-            offsets.append(note.end)
+            if non_aligned is not None:
+                onsets.append(note.start)
+                offsets.append(note.end)
 
     return [out]
 
@@ -64,6 +86,7 @@ def from_mirex_txt(txt_fn, sources=[0]):
     per source.
     """
     out_list = list()
+    txt_fn = change_ext(txt_fn, 'txt')
 
     with open(txt_fn) as f:
         lines = f.readlines()
@@ -73,10 +96,32 @@ def from_mirex_txt(txt_fn, sources=[0]):
         for line in lines:
             fields = line.split(' ')
             if int(fields[-1] - 1) == source:
-                out["pitches"].append(fields[2])
-                out["precise_alignment"]["onsets"].append(fields[0]) / 1000.
-                out["precise_alignment"]["offsets"].append(fields[1]) / 1000.
+                out["pitches"].append(int(fields[2]))
+                out["precise_alignment"]["onsets"].append(float(fields[0]) / 1000.)
+                out["precise_alignment"]["offsets"].append(float(fields[1]) / 1000.)
         out_list.append(out)
+
+    return out_list
+
+
+def from_txt_phenicx(txt_fn, non_aligned=False):
+    """
+    Open a txt file `txt_fn` in the PHENICX format and convert it to our
+    ground-truth representation. This fills: `precise_alignment`.
+    """
+    out_list = list()
+    txt_fn = change_ext(txt_fn, 'txt')
+
+    with open(txt_fn) as f:
+        lines = f.readlines()
+
+    out = copy(gt)
+    for line in lines:
+        fields = line.split(',')
+        out["notes"].append(fields[2])
+        out["precise_alignment"]["onsets"].append(float(fields[0]))
+        out["precise_alignment"]["offsets"].append(float(fields[1]))
+    out_list.append(out)
 
     return out_list
 
@@ -90,6 +135,7 @@ def from_bach10_f0(nmat_fn, sources=[0]):
     one per source.
     """
     out_list = list()
+    nmat_fn = change_ext(nmat_fn, '.mat')
 
     import scipy.io
     f0s = scipy.io.loadmat(nmat_fn)['GTF0s']
@@ -101,30 +147,33 @@ def from_bach10_f0(nmat_fn, sources=[0]):
     return out_list
 
 
-def merge(obj1, obj2):
-    """
-    Merge two lists of dictionaries, by adding each other the values of
-    corresponding dictionaries
-    """
-
-    assert len(obj1) == len(obj2), "Cannot merge list with different lenghts"
-
-    assert type(obj1) == type(obj2) == list, "Input types must be lists"
-
-    obj1_copy = copy(obj1)
-    for i, d1 in enumerate(obj1_copy):
-        d2 = obj2[i]
-        for key in d1.keys():
-            d1[key].append(d2[key])
-
-    return obj1_copy
-
-
 def from_csv(csv_fn):
     """
     Open a csv file `csv_fn` and convert it to our ground-truth representation.
     """
+    csv_fn = change_ext(csv_fn, 'csv')
+
     return copy(gt)
+
+
+def merge(*args):
+    """
+    Merges lists of dictionaries, by adding each other the values of
+    corresponding dictionaries
+    """
+
+    assert all(type(x) is list for x in args), "Input types must be lists"
+
+    assert all(len(x) == len(args[0]) for x in args[1:]), "Cannot merge list with different lenghts"
+
+    obj1_copy = copy(args[0])
+    for i, d1 in enumerate(obj1_copy):
+        for arg in args:
+            d2 = arg[i]
+            for key in d1.keys():
+                d1[key].append(d2[key])
+
+    return obj1_copy
 
 
 def create_gt(data_fn, xztar=False):
@@ -146,8 +195,8 @@ def create_gt(data_fn, xztar=False):
             final_path = song['ground-truth']
 
             # calling each function listed in the map and merge everything
-            out = merge(*[func(input_path)
-                          for func in func_map[dataset['name']]])
+            out = merge(*[func(input_path, **params)
+                          for func, params in func_map[dataset['name']]])
 
             with open(final_path, 'w') as f:
                 yaml.safe_dump(out, f)
