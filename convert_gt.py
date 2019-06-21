@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-import yaml
+from ruamel.yaml import YAML
 import pretty_midi
+from pathlib import Path
 from utils import io
 from copy import copy
 import tarfile
 import os
+import csv
 
 
 # The dictionary prototype for containing the ground-truth
@@ -24,16 +26,6 @@ gt = {
 }
 
 
-func_map = {
-    'Bach10': [(from_bach10_f0, {}), (from_bach10_txt, {}), (from_midi, {'alignment': 'non_aligned', 'pitches': False, 'velocities': False, 'merge': False})],
-    'SMD': [(from_midi, {})],
-    'PHENICX': [(from_phenicx_txt, {}), (from_midi, {'alignment': 'non_aligned'})],
-    'MusicNet': [(from_csv), {}],
-    'TRIOS_dataset': [(from_midi, {})],
-    'Maestro': [(from_midi, {})]
-}
-
-
 def change_ext(input_fn, new_ext):
     """
     Return the input path `input_fn` with `new_ext` as extension
@@ -42,15 +34,16 @@ def change_ext(input_fn, new_ext):
     root, _ = os.path.splitext(input_fn)
     if not new_ext.startswith('.'):
         new_ext = '.' + 'new_ext'
-        return root + new_ext
+
+    return root + new_ext
 
 
-def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=False):
+def from_midi(midi_fn, alignment='precise-alignment', pitches=True, velocities=True, merge=False):
     """
     Open a midi file `midi_fn` and convert it to our ground-truth
     representation. This fills velocities, pitches and alignment (default:
-    `precise-alignment`). Returns a list containing a dictionary. `non_aligned`
-    can also be `None`, in that case no alignment is filled. If `merge` is
+    `precise-alignment`). Returns a list containing a dictionary. `alignment`
+    can also be `None` or `False`, in that case no alignment is filled. If `merge` is
     True, the returned list will contain a dictionary for each track.
     """
     midi_fn = change_ext(midi_fn, '.mid')
@@ -67,7 +60,7 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
     for track in midi_tracks:
         data = copy(gt)
 
-        if alignment in data:
+        if alignment:
             onsets, offsets = data[alignment].values()
             alignment = True
         else:
@@ -157,13 +150,28 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
     return out_list
 
 
-def from_csv(csv_fn):
+def from_musicnet_csv(csv_fn, fr=44100.0):
     """
     Open a csv file `csv_fn` and convert it to our ground-truth representation.
+    This fills: `precise-alignment`, `non-aligned`, `pitches`.
+    This returns a list containing only one dict. `fr` is the framerate of the
+    audio files (MusicNet csv contains the frame number as onset and offsets of
+    each note) and it shold be a float.
+
+    N.B. MusicNet contains wav files at 44100 Hz as framerate.
     """
     csv_fn = change_ext(csv_fn, 'csv')
+    data = csv.reader(open('csv_fn'), delimiter=',')
+    out = copy(gt)
 
-    return copy(gt)
+    for row in data:
+        out["precise_alignment"]["onsets"].append(row[0] / fr)
+        out["precise_alignment"]["offsets"].append(row[1] / fr)
+        out["pitches"].append(row[3])
+        out["non-aligned"]["onsets"].append(row[4])
+        out["non-aligned"]["offsets"].append(row[4] + row[5])
+
+    return [out]
 
 
 def merge(*args):
@@ -176,14 +184,31 @@ def merge(*args):
 
     assert all(len(x) == len(args[0]) for x in args[1:]), "Cannot merge list with different lenghts"
 
+    if len(args) == 1:
+        return args[0]
+
     obj1_copy = copy(args[0])
     for i, d1 in enumerate(obj1_copy):
         for arg in args:
             d2 = arg[i]
             for key in d1.keys():
-                d1[key].append(d2[key])
+                d1_element = d1[key]
+                if type(d1_element) is dict:
+                    d1[key] = merge([d1_element], [d2[key]])[0]
+                else:
+                    d1_element.append(d2[key])
 
     return obj1_copy
+
+
+func_map = {
+    'Bach10': [(from_bach10_f0, {}), (from_bach10_txt, {}), (from_midi, {'alignment': 'non-aligned', 'pitches': False, 'velocities': False, 'merge': False})],
+    'SMD': [(from_midi, {})],
+    'PHENICX': [(from_phenicx_txt, {}), (from_midi, {'alignment': 'non-aligned'})],
+    'MusicNet': [(from_musicnet_csv), {}],
+    'TRIOS_dataset': [(from_midi, {})],
+    'Maestro': [(from_midi, {})]
+}
 
 
 def create_gt(data_fn, xztar=False):
@@ -195,25 +220,31 @@ def create_gt(data_fn, xztar=False):
     positions.
     """
 
-    with open(data_fn) as f:
-        yaml_file = yaml.safe_load(f)
+    print("Opening YAML file: " + data_fn)
+    yaml = YAML(typ='safe')
+    yaml_file = yaml.load(Path(data_fn))
 
     to_be_included_in_the_archive = []
     for dataset in yaml_file['datasets']:
+        print("\n------------------------\n")
+        print("Starting processing " + dataset['name'])
         for song in dataset['songs']:
-            input_path = 'something'  # THE PROBLEM IS HERE
-            final_path = song['ground-truth']
+            print(" elaborating " + song['title'])
+            paths = song['ground-truth']
 
-            # calling each function listed in the map and merge everything
-            out = merge(*[func(input_path, **params)
-                          for func, params in func_map[dataset['name']]])
+            for path in paths:
+                final_path = os.path.join(yaml_file['install_dir'], path)
+                # calling each function listed in the map and merge everything
+                out = merge(*[func(final_path, **params)
+                              for func, params in func_map[dataset['name']]])
 
-            with open(final_path, 'w') as f:
-                yaml.safe_dump(out, f)
+                print("   saving " + final_path)
+                yaml.dump(out, Path(final_path))
 
             to_be_included_in_the_archive.append(final_path)
 
     # creating the archive
+    print("\n\nCreating the final archive")
     with tarfile.open('ground-truth.tar.xz', mode='w:xz') as tf:
         for fname in to_be_included_in_the_archive:
             tf.add(fname)
