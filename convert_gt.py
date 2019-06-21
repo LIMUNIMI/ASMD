@@ -25,9 +25,9 @@ gt = {
 
 
 func_map = {
-    'Bach10': [(from_bach10_f0, {}), (from_mirex_txt, {}), (from_midi, {'non_aligned': True, 'pitches': False, 'velocities': False})],
+    'Bach10': [(from_bach10_f0, {}), (from_bach10_txt, {}), (from_midi, {'alignment': 'non_aligned', 'pitches': False, 'velocities': False, 'merge': False})],
     'SMD': [(from_midi, {})],
-    'PHENICX': [(from_txt_phenicx, {}), (from_midi, {'non_aligned': None})],
+    'PHENICX': [(from_phenicx_txt, {}), (from_midi, {'alignment': 'non_aligned'})],
     'MusicNet': [(from_csv), {}],
     'TRIOS_dataset': [(from_midi, {})],
     'Maestro': [(from_midi, {})]
@@ -45,41 +45,71 @@ def change_ext(input_fn, new_ext):
         return root + new_ext
 
 
-def from_midi(midi_fn, non_aligned=False, pitches=True, velocities=True):
+def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=False):
     """
     Open a midi file `midi_fn` and convert it to our ground-truth
     representation. This fills velocities, pitches and alignment (default:
     `precise-alignment`). Returns a list containing a dictionary. `non_aligned`
-    can also be `None`, in that case no alignment is filled.
+    can also be `None`, in that case no alignment is filled. If `merge` is
+    True, the returned list will contain a dictionary for each track.
     """
     midi_fn = change_ext(midi_fn, '.mid')
     if not os.path.exists(midi_fn):
         midi_fn = change_ext(midi_fn, '.midi')
 
-    midi_notes = io.open_midi(midi_fn)
-    out = copy(gt)
+    midi_tracks = io.open_midi(midi_fn, merge=merge)
 
-    if non_aligned is not None:
-        if non_aligned:
-            alignment = "non-aligned"
+    out = list()
+
+    if merge:
+        midi_tracks = [midi_tracks]
+
+    for track in midi_tracks:
+        data = copy(gt)
+
+        if alignment in data:
+            onsets, offsets = data[alignment].values()
+            alignment = True
         else:
-            alignment = "precise-alignment"
-        onsets, offsets = out[alignment].values()
+            alignment = False
 
-    for note_group in midi_notes:
-        for note in note_group:
-            if pitches:
-                out["pitches"].append(note.pitch)
-            if velocities:
-                out["velocities"].append(note.velocity)
-            if non_aligned is not None:
-                onsets.append(note.start)
-                offsets.append(note.end)
+        for note_group in track:
+            for note in note_group:
+                if pitches:
+                    data["pitches"].append(note.pitch)
+                if velocities:
+                    data["velocities"].append(note.velocity)
+                if alignment:
+                    onsets.append(note.start)
+                    offsets.append(note.end)
+        out.append(data)
 
-    return [out]
+    return out
 
 
-def from_mirex_txt(txt_fn, sources=[0]):
+def from_phenicx_txt(txt_fn, non_aligned=False):
+    """
+    Open a txt file `txt_fn` in the PHENICX format and convert it to our
+    ground-truth representation. This fills: `precise_alignment`.
+    """
+    out_list = list()
+    txt_fn = change_ext(txt_fn, 'txt')
+
+    with open(txt_fn) as f:
+        lines = f.readlines()
+
+    out = copy(gt)
+    for line in lines:
+        fields = line.split(',')
+        out["notes"].append(fields[2])
+        out["precise_alignment"]["onsets"].append(float(fields[0]))
+        out["precise_alignment"]["offsets"].append(float(fields[1]))
+    out_list.append(out)
+
+    return out_list
+
+
+def from_bach10_txt(txt_fn, sources=range(4)):
     """
     Open a txt file `txt_fn` in the MIREX format (Bach10) and convert it to
     our ground-truth representation. This fills: `precise-alignment`, `pitches`.
@@ -106,29 +136,7 @@ def from_mirex_txt(txt_fn, sources=[0]):
     return out_list
 
 
-def from_txt_phenicx(txt_fn, non_aligned=False):
-    """
-    Open a txt file `txt_fn` in the PHENICX format and convert it to our
-    ground-truth representation. This fills: `precise_alignment`.
-    """
-    out_list = list()
-    txt_fn = change_ext(txt_fn, 'txt')
-
-    with open(txt_fn) as f:
-        lines = f.readlines()
-
-    out = copy(gt)
-    for line in lines:
-        fields = line.split(',')
-        out["notes"].append(fields[2])
-        out["precise_alignment"]["onsets"].append(float(fields[0]))
-        out["precise_alignment"]["offsets"].append(float(fields[1]))
-    out_list.append(out)
-
-    return out_list
-
-
-def from_bach10_f0(nmat_fn, sources=[0]):
+def from_bach10_f0(nmat_fn, sources=range(4)):
     """
     Open a matlab mat file `nmat_fn` in the MIREX format (Bach10) for frame
     evaluation and convert it to our ground-truth representation. This fills:
