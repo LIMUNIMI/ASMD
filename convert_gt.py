@@ -33,7 +33,7 @@ def change_ext(input_fn, new_ext):
 
     root, _ = os.path.splitext(input_fn)
     if not new_ext.startswith('.'):
-        new_ext = '.' + 'new_ext'
+        new_ext = '.' + new_ext
 
     return root + new_ext
 
@@ -73,8 +73,8 @@ def from_midi(midi_fn, alignment='precise-alignment', pitches=True, velocities=T
                 if velocities:
                     data["velocities"].append(note.velocity)
                 if alignment:
-                    onsets.append(note.start)
-                    offsets.append(note.end)
+                    onsets.append(float(note.start))
+                    offsets.append(float(note.end))
         out.append(data)
 
     return out
@@ -144,7 +144,7 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
     f0s = scipy.io.loadmat(nmat_fn)['GTF0s']
     for source in sources:
         out = copy('gt')
-        out["f0"] = f0s[source]
+        out["f0"] = float(f0s[source])
         out_list.append(out)
 
     return out_list
@@ -161,13 +161,20 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
     N.B. MusicNet contains wav files at 44100 Hz as framerate.
     """
     csv_fn = change_ext(csv_fn, 'csv')
-    data = csv.reader(open('csv_fn'), delimiter=',')
+    data = csv.reader(open(csv_fn), delimiter=',')
     out = copy(gt)
 
+    # skipping first line
+    next(data)
+
     for row in data:
-        out["precise_alignment"]["onsets"].append(row[0] / fr)
-        out["precise_alignment"]["offsets"].append(row[1] / fr)
-        out["pitches"].append(row[3])
+        # converting everything to float, except the last onw that is the
+        # duration name as string
+        row = list(map(float, row[:-1]))
+
+        out["precise-alignment"]["onsets"].append((row[0]) / fr)
+        out["precise-alignment"]["offsets"].append(row[1] / fr)
+        out["pitches"].append(int(row[3]))
         out["non-aligned"]["onsets"].append(row[4])
         out["non-aligned"]["offsets"].append(row[4] + row[5])
 
@@ -205,7 +212,7 @@ func_map = {
     'Bach10': [(from_bach10_f0, {}), (from_bach10_txt, {}), (from_midi, {'alignment': 'non-aligned', 'pitches': False, 'velocities': False, 'merge': False})],
     'SMD': [(from_midi, {})],
     'PHENICX': [(from_phenicx_txt, {}), (from_midi, {'alignment': 'non-aligned'})],
-    'MusicNet': [(from_musicnet_csv), {}],
+    'MusicNet': [(from_musicnet_csv, {})],
     'TRIOS_dataset': [(from_midi, {})],
     'Maestro': [(from_midi, {})]
 }
@@ -221,6 +228,7 @@ def create_gt(data_fn, xztar=False):
     """
 
     print("Opening YAML file: " + data_fn)
+
     yaml = YAML(typ='safe')
     yaml_file = yaml.load(Path(data_fn))
 
