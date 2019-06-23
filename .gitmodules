@@ -1,3 +1,4 @@
 [submodule "utils"]
 	path = utils
 	url = https://framagit.org/sapo/py-audio-utils.git
+	branch = master
