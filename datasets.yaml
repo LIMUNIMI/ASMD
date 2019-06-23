@@ -269,8 +269,8 @@ datasets:
         composer: Schubert
         instruments: [piano]
         recording:
-          path: [MusicNet/musicnet/train_data/1759.wav]
-        ground-truth: [MusicNet/musicnet/train_labels/1759.yaml]
+          path: [MusicNet/musicnet/test_data/1759.wav]
+        ground-truth: [MusicNet/musicnet/test_labels/1759.yaml]
 
       - title: D958 4. Allegro
         composer: Schubert
@@ -451,8 +451,8 @@ datasets:
         composer: Mozart
         instruments: [clarinet, french horn, bassoon]
         recording:
-          path: [MusicNet/musicnet/train_data/1819.wav]
-        ground-truth: [MusicNet/musicnet/train_labels/1819.yaml]
+          path: [MusicNet/musicnet/test_data/1819.wav]
+        ground-truth: [MusicNet/musicnet/test_labels/1819.yaml]
 
       - title: K421 1. Allegro moderato
         composer: Mozart
@@ -661,8 +661,8 @@ datasets:
         composer: Haydn
         instruments: [violin, viola, cello]
         recording:
-          path: [MusicNet/musicnet/train_data/2106.wav]
-        ground-truth: [MusicNet/musicnet/train_labels/2106.yaml]
+          path: [MusicNet/musicnet/test_data/2106.wav]
+        ground-truth: [MusicNet/musicnet/test_labels/2106.yaml]
 
       - title: OP38 1. Allegro non troppo
         composer: Brahms
@@ -899,8 +899,8 @@ datasets:
         composer: Bach
         instruments: [violin]
         recording:
-          path: [MusicNet/musicnet/train_data/2191.wav]
-        ground-truth: [MusicNet/musicnet/train_labels/2191.yaml]
+          path: [MusicNet/musicnet/test_data/2191.wav]
+        ground-truth: [MusicNet/musicnet/test_labels/2191.yaml]
 
       - title: BWV858 1. Prelude
         composer: Bach
@@ -1291,8 +1291,8 @@ datasets:
         composer: Bach
         instruments: [cello]
         recording:
-          path: [MusicNet/musicnet/train_data/2298.wav]
-        ground-truth: [MusicNet/musicnet/train_labels/2298.yaml]
+          path: [MusicNet/musicnet/test_data/2298.wav]
+        ground-truth: [MusicNet/musicnet/test_labels/2298.yaml]
 
       - title: BWV853 1. Prelude
         composer: Bach
@@ -1312,8 +1312,8 @@ datasets:
         composer: Bach
         instruments: [piano]
         recording:
-          path: [MusicNet/musicnet/train_data/2303.wav]
-        ground-truth: [MusicNet/musicnet/train_labels/2303.yaml]
+          path: [MusicNet/musicnet/test_data/2303.wav]
+        ground-truth: [MusicNet/musicnet/test_labels/2303.yaml]
 
       - title: BWV859 2. Fugue
         composer: Bach
@@ -1592,8 +1592,8 @@ datasets:
         composer: Beethoven
         instruments: [violin, viola, cello]
         recording:
-          path: [MusicNet/musicnet/train_data/2382.wav]
-        ground-truth: [MusicNet/musicnet/train_labels/2382.yaml]
+          path: [MusicNet/musicnet/test_data/2382.wav]
+        ground-truth: [MusicNet/musicnet/test_labels/2382.yaml]
 
       - title: OP130 3. Andante con moto, ma non troppo. Poco scherzoso
         composer: Beethoven
@@ -1718,8 +1718,8 @@ datasets:
         composer: Beethoven
         instruments: [clarinet, french horn, bassoon]
         recording:
-          path: [MusicNet/musicnet/train_data/2416.wav]
-        ground-truth: [MusicNet/musicnet/train_labels/2416.yaml]
+          path: [MusicNet/musicnet/test_data/2416.wav]
+        ground-truth: [MusicNet/musicnet/test_labels/2416.yaml]
 
       - title: OP71 4. Rondo. Allegro
         composer: Beethoven
@@ -2159,8 +2159,8 @@ datasets:
         composer: Beethoven
         instruments: [piano]
         recording:
-          path: [MusicNet/musicnet/train_data/2556.wav]
-        ground-truth: [MusicNet/musicnet/train_labels/2556.yaml]
+          path: [MusicNet/musicnet/test_data/2556.wav]
+        ground-truth: [MusicNet/musicnet/test_labels/2556.yaml]
 
       - title: OP109 3. Gesangvoll, mit innigster Empfindung
         composer: Beethoven
@@ -2411,8 +2411,8 @@ datasets:
         composer: Beethoven
         instruments: [violin, unknown]
         recording:
-          path: [MusicNet/musicnet/train_data/2628.wav]
-        ground-truth: [MusicNet/musicnet/train_labels/2628.yaml]
+          path: [MusicNet/musicnet/test_data/2628.wav]
+        ground-truth: [MusicNet/musicnet/test_labels/2628.yaml]
 
       - title: OP96 4. Poco allegretto
         composer: Beethoven
