@@ -83,7 +83,7 @@ def from_midi(midi_fn, alignment='precise-alignment', pitches=True, velocities=T
 def from_phenicx_txt(txt_fn, non_aligned=False):
     """
     Open a txt file `txt_fn` in the PHENICX format and convert it to our
-    ground-truth representation. This fills: `precise_alignment`.
+    ground-truth representation. This fills: `precise-alignment`.
     """
     out_list = list()
     txt_fn = change_ext(txt_fn, 'txt')
@@ -95,8 +95,8 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
     for line in lines:
         fields = line.split(',')
         out["notes"].append(fields[2])
-        out["precise_alignment"]["onsets"].append(float(fields[0]))
-        out["precise_alignment"]["offsets"].append(float(fields[1]))
+        out["precise-alignment"]["onsets"].append(float(fields[0]))
+        out["precise-alignment"]["offsets"].append(float(fields[1]))
     out_list.append(out)
 
     return out_list
@@ -122,8 +122,8 @@ def from_bach10_txt(txt_fn, sources=range(4)):
             fields = line.split(' ')
             if int(fields[-1] - 1) == source:
                 out["pitches"].append(int(fields[2]))
-                out["precise_alignment"]["onsets"].append(float(fields[0]) / 1000.)
-                out["precise_alignment"]["offsets"].append(float(fields[1]) / 1000.)
+                out["precise-alignment"]["onsets"].append(float(fields[0]) / 1000.)
+                out["precise-alignment"]["offsets"].append(float(fields[1]) / 1000.)
         out_list.append(out)
 
     return out_list
