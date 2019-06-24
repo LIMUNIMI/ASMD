@@ -19,26 +19,26 @@ Each dataset has the following field:
 1. `ensemble`: `true` if contains multiple instruments, `false` otherwise
 2. `instruments`: the list of the instruments contained in the dataset
 3. `sources`:
-1. `format`: the format of the audio recordings of the single
+    1. `format`: the format of the audio recordings of the single
 source-separated tracks
 4. `recording`:
-1. `format`: the format of the audio recordings of the mixed tracks
+    1. `format`: the format of the audio recordings of the mixed tracks
 5. `ground-truth`:
-1. `format`: the format of the ground-truth files
-2. `non-aligned`: `true` if non-aligned scores are provided
-3. `errors`: a list with the type of errors provided, or 'unknown'
-4. `precise-alignment`: `true` if precisely aligned scores are provided
-5. `velocities`: `true` if velocities are provided
+    1. `format`: the format of the ground-truth files
+    2. `non-aligned`: `true` if non-aligned scores are provided
+    3. `errors`: a list with the type of errors provided, or 'unknown'
+    4. `precise-alignment`: `true` if precisely aligned scores are provided
+    5. `velocities`: `true` if velocities are provided
 techniques) are provided
 6.  `songs`: the list of songs in the dataset unknown
-1. `composer`: the composer family name
-2. `instruments`: list of instruments in the song
-3. `recording`: dictionary
-1. `path`: a list of paths to be mixed for reconstructing the full track
-4. `sources`: dictionary
-1. `path`: a list of paths to the single instrument tracks in the same
+    1. `composer`: the composer family name
+    2. `instruments`: list of instruments in the song
+    3. `recording`: dictionary
+        1. `path`: a list of paths to be mixed for reconstructing the full track
+    4. `sources`: dictionary
+        1. `path`: a list of paths to the single instrument tracks in the same
 order as `instruments`
-5. `ground-truth`: dictionary containing paths to the ground-truth files
+    5. `ground-truth`: dictionary containing paths to the ground-truth files
 for each entry `true` in the dataset `ground-truth` field
 7.  `url`: the url to download the dataset including the protocol
 8.  `post-process`: a list of shell commands to be executed to prepare the
