@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-from ruamel.yaml import YAML
+import json
 import pretty_midi
-from pathlib import Path
 from utils import io
 from copy import copy
 import tarfile
+import sys
 import os
 import csv
 
@@ -229,12 +229,11 @@ def create_gt(data_fn, args, xztar=False):
 
     print("Opening YAML file: " + data_fn)
 
-    yaml = YAML(typ='safe')
-    yaml_file = yaml.load(Path(data_fn))
+    json_file = json.load(open(data_fn, 'r'))
 
     to_be_included_in_the_archive = []
-    for dataset in yaml_file['datasets']:
-        if dataset not in args:
+    for dataset in json_file['datasets']:
+        if dataset in args:
             continue
         print("\n------------------------\n")
         print("Starting processing " + dataset['name'])
@@ -243,13 +242,13 @@ def create_gt(data_fn, args, xztar=False):
             paths = song['ground-truth']
 
             for path in paths:
-                final_path = os.path.join(yaml_file['install_dir'], path)
+                final_path = os.path.join(json_file['install_dir'], path)
                 # calling each function listed in the map and merge everything
                 out = merge(*[func(final_path, **params)
                               for func, params in func_map[dataset['name']]])
 
                 print("   saving " + final_path)
-                yaml.dump(out, Path(final_path))
+                json.dump(out, open(final_path, 'w'))
 
             to_be_included_in_the_archive.append(final_path)
 
@@ -262,4 +261,8 @@ def create_gt(data_fn, args, xztar=False):
 
 
 if __name__ == "__main__":
-    create_gt('datasets.yaml', xztar=True)
+    print("Usage: ")
+    print("  python3 convert_gt.py [list of datasets to be excluded]")
+    print()
+
+    create_gt('datasets.json', sys.argv, xztar=True)

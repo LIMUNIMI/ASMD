@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-import yaml
+import json
 import os
 import pathlib
 from getpass import getpass
@@ -135,17 +135,17 @@ def download(item, credentials, install_dir):
 
 def main():
 
-    with open('datasets.yaml') as f:
-        yaml_file = yaml.safe_load(f)
+    with open('datasets.json') as f:
+        json_file = json.load(f)
 
     install_dir = input("Path to install datasets [empty to default ./]: ")
     if not install_dir:
         install_dir = './'
-    yaml_file['install_dir'] = install_dir
+    json_file['install_dir'] = install_dir
 
-    intro(yaml_file)
+    intro(json_file)
 
-    data = yaml_file['datasets']
+    data = json_file['datasets']
     chose_dataset(data, install_dir)
 
     # at now, no credential is needed
@@ -170,6 +170,7 @@ def main():
         if d['post-process'] != 'unknown':
             # recursively concatenate commands
             command = '; '.join(list(map(lambda x: ''.join(x), d['post-process'])))
+            command.replace('&install_dir', json_file['install_dir'])
             os.system(command)
         print("------------------")
 
@@ -182,11 +183,11 @@ def main():
         unpack_archive(gt_archive_fn, install_dir, 'xztar')
 
     # saving the Yaml file as modified
-    # not using yaml.dump beacuse it uses ugly syntax
-    with open('datasets.yaml', 'r+') as fd:
+    # not using json.dump beacuse it uses ugly syntax
+    with open('datasets.json', 'r+') as fd:
         contents = fd.readlines()
         # insert string at line 67
-        contents[66] = 'install_dir: &install_dir ' + install_dir + '\n'
+        contents[66] = 'install_dir: ' + install_dir + '\n'
         fd.seek(0)
         fd.writelines(contents)
 
