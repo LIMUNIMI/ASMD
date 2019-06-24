@@ -1,13 +1,11 @@
 # A META-DATASET FOR AUDIO-SCORE PROCESSING
 
----
-
 This file describes multiple datasets containing data about music
 performances. All the datasets are described with the same fields, so that
 you can use them easily disregarding their internal structure
 
 
-## DESCRIPTION
+## datasets.json
 The root element is a dictionary with fields:
 1. `author`: string containing the name of the author
 2. `year`: int containing the year
@@ -38,8 +36,10 @@ techniques) are provided
     4. `sources`: dictionary
         1. `path`: a list of paths to the single instrument tracks in the same
 order as `instruments`
-    5. `ground-truth`: dictionary containing paths to the ground-truth files
-for each entry `true` in the dataset `ground-truth` field
+    5. `ground-truth`: list of paths to the ground-truth json files. Ground-truth are in
+bijective relationships with the single-sources (multiple paths are provided, one per
+source file), or just one ground truth path is provided
+if no sources are available.
 7.  `url`: the url to download the dataset including the protocol
 8.  `post-process`: a list of shell commands to be executed to prepare the
 dataset; they can be lists themselves to allow the use of anchors to "install_dir"
@@ -50,9 +50,30 @@ field with the syntax "&install_dir"
 In general, I maintained the following principles:
 1. if a list of files is provided where you would logically expect one file,
 you should 'sum' the files in the list, whatever this means according to that
-type of file; this typically happens in the `ground-truth` files.
+type of file; this typically happens in the `ground-truth` files. or in the recording
+where only the single sources are available.
 2. all the fields can have the value 'unknown' to indicate that it is not
-available in that dataset
+available in that dataset; if you treat 'unknown' with the meaning of unavailable everything will be fine; however, in some cases it can mean that the data are available but that information is not documented.
+
+## Ground-truth json format
+
+The ground-truth is contained in json files indexed in `datasets.json`. Each ground truth
+file contains a dictionary with the following structure:
+1. `non-aligned`:
+    1. `onsets`: onsets in quarter notation
+    2. `offsets`: offsets in quarter notation
+2. `precise-alignment`:
+    1. `onsets`: onsets in ms
+    2. `offsets`: offsets in ms
+3. `broad_alignment`: alignment which does not consider the asynchronies between
+simultaneous notes
+    1. `onsets`: onsets in ms
+    2. `offsets`: offsets in ms
+4. `pitches`: list of midi pitches in onset ascending order
+5. `f0`: list of f0 frequencies, frame by frame (frame rate according to the source sound
+file or to the whole recording sound file if sources are not available)
+6. `note`: list of note names in onsets ascending order
+7. `velocities`: list of velocities in onsets ascending order
 
 ## INSTALLATION
 1. Install `python 3`
