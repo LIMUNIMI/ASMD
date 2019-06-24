@@ -218,7 +218,7 @@ func_map = {
 }
 
 
-def create_gt(data_fn, xztar=False):
+def create_gt(data_fn, args, xztar=False):
     """
     Parse the yaml file `data_fn` and convert all ground-truth to our
     representation. Then dump it according to the specified paths. Finally,
@@ -234,6 +234,8 @@ def create_gt(data_fn, xztar=False):
 
     to_be_included_in_the_archive = []
     for dataset in yaml_file['datasets']:
+        if dataset not in args:
+            continue
         print("\n------------------------\n")
         print("Starting processing " + dataset['name'])
         for song in dataset['songs']:
@@ -252,10 +254,11 @@ def create_gt(data_fn, xztar=False):
             to_be_included_in_the_archive.append(final_path)
 
     # creating the archive
-    print("\n\nCreating the final archive")
-    with tarfile.open('ground-truth.tar.xz', mode='w:xz') as tf:
-        for fname in to_be_included_in_the_archive:
-            tf.add(fname)
+    if xztar:
+        print("\n\nCreating the final archive")
+        with tarfile.open('ground-truth.tar.xz', mode='w:xz') as tf:
+            for fname in to_be_included_in_the_archive:
+                tf.add(fname)
 
 
 if __name__ == "__main__":
