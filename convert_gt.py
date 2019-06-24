@@ -196,14 +196,15 @@ def merge(*args):
 
     obj1_copy = copy(args[0])
     for i, d1 in enumerate(obj1_copy):
-        for arg in args:
+        for arg in args[1:]:
             d2 = arg[i]
             for key in d1.keys():
-                d1_element = d1[key]
+                d1_element = [d1[key]]
                 if type(d1_element) is dict:
                     d1[key] = merge([d1_element], [d2[key]])[0]
                 else:
                     d1_element.append(d2[key])
+                d1[key] = d1_element
 
     return obj1_copy
 
@@ -227,14 +228,15 @@ def create_gt(data_fn, args, xztar=False):
     positions.
     """
 
-    print("Opening YAML file: " + data_fn)
+    print("Opening JSON file: " + data_fn)
 
     json_file = json.load(open(data_fn, 'r'))
 
     to_be_included_in_the_archive = []
     for dataset in json_file['datasets']:
-        if dataset in args:
+        if dataset['name'] in args:
             continue
+
         print("\n------------------------\n")
         print("Starting processing " + dataset['name'])
         for song in dataset['songs']:
