@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import pretty_midi
+import scipy.io
 from utils import io
 from copy import copy
 import tarfile
@@ -31,14 +32,14 @@ def change_ext(input_fn, new_ext):
     Return the input path `input_fn` with `new_ext` as extension
     """
 
-    root, _ = os.path.splitext(input_fn)
+    root = input_fn[ :input_fn.rfind('-')]
     if not new_ext.startswith('.'):
         new_ext = '.' + new_ext
 
     return root + new_ext
 
 
-def from_midi(midi_fn, alignment='precise-alignment', pitches=True, velocities=True, merge=False):
+def from_midi(midi_fn, alignment='precise-alignment', pitches=True, velocities=True, merge=True):
     """
     Open a midi file `midi_fn` and convert it to our ground-truth
     representation. This fills velocities, pitches and alignment (default:
@@ -140,7 +141,6 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
     out_list = list()
     nmat_fn = change_ext(nmat_fn, '.mat')
 
-    import scipy.io
     f0s = scipy.io.loadmat(nmat_fn)['GTF0s']
     for source in sources:
         out = copy('gt')
@@ -249,8 +249,12 @@ def create_gt(data_fn, args, xztar=False):
                 out = merge(*[func(final_path, **params)
                               for func, params in func_map[dataset['name']]])
 
+                # get the index of the track from the path
+                idx = path[path.rfind('-') + 1 : path.rfind('.')]
+                idx = min(len(out) - 1, int(idx))
+
                 print("   saving " + final_path)
-                json.dump(out, open(final_path, 'w'))
+                json.dump(out[idx], open(final_path, 'w'))
 
             to_be_included_in_the_archive.append(final_path)
 

@@ -38,8 +38,7 @@ techniques) are provided
 order as `instruments`
     5. `ground-truth`: list of paths to the ground-truth json files. Ground-truth are in
 bijective relationships with the single-sources (multiple paths are provided, one per
-source file), or just one ground truth path is provided
-if no sources are available.
+source file), or just one ground truth path is provided if no sources are available.
 7.  `url`: the url to download the dataset including the protocol
 8.  `post-process`: a list of shell commands to be executed to prepare the
 dataset; they can be lists themselves to allow the use of anchors to "install_dir"
