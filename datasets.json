@@ -6261,45 +6261,45 @@
             {
                "composer" : "Bruckner",
                "ground-truth" : [
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/bassoon-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/bassoon-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/bassoon-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/cello-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/cello-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/clarinet-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/clarinet-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/clarinet-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/doublebass-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/flute-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/horn-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/horn-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/horn-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/horn-3.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/horn-4.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/horn-5.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/horn-6.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/horn-7.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/oboe-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/oboe-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/oboe-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/trumpet-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/trumpet-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/trumpet-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/viola-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/viola-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/viola-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-9.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-10.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-11.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-3.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-4.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-5.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-6.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-7.json",
-                 "PHENICX/PHENICX-Anechoic/audio/bruckner/violin-8.json"
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/bassoon-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/bassoon-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/bassoon-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/cello-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/cello-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/clarinet-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/clarinet-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/clarinet-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/doublebass-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/flute-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/horn-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/horn-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/horn-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/horn-3.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/horn-4.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/horn-5.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/horn-6.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/horn-7.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/oboe-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/oboe-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/oboe-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/trumpet-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/trumpet-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/trumpet-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/viola-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/viola-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/viola-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-9.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-10.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-11.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-3.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-4.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-5.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-6.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-7.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-8.json"
                ],
                "instruments" : [
                   "bassoon",
@@ -6433,36 +6433,36 @@
             {
                "composer" : "Mahler",
                "ground-truth" : [
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/bassoon-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/bassoon-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/bassoon-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/cello-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/clarinet-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/clarinet-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/clarinet-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/clarinet-3.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/doublebas-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/flute-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/horn-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/horn-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/horn-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/horn-3.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/horn-4.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/horn-5.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/horn-6.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/oboe-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/oboe-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/oboe-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/oboe-3.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/trumpet-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/trumpet-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/trumpet-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/trumpet-3.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/viola-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/violin-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/violin-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/violin-2.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mahler/violin-3.json"
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/bassoon-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/bassoon-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/bassoon-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/cello-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/clarinet-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/clarinet-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/clarinet-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/clarinet-3.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/doublebass-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/flute-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/horn-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/horn-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/horn-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/horn-3.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/horn-4.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/horn-5.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/horn-6.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/oboe-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/oboe-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/oboe-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/oboe-3.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/trumpet-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/trumpet-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/trumpet-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/trumpet-3.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/viola-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/violin-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/violin-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/violin-2.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mahler/violin-3.json"
                ],
                "instruments" : [
                   "bassoon",
@@ -6569,16 +6569,16 @@
             {
                "composer" : "Mozart",
                "ground-truth" : [
-                 "PHENICX/PHENICX-Anechoic/audio/mozart/bassoon-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mozart/cello-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mozart/clarinet-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mozart/doublebass-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mozart/flute-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mozart/horn-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mozart/horn-1.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mozart/viola-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mozart/violin-0.json",
-                 "PHENICX/PHENICX-Anechoic/audio/mozart/violin-1.json"
+                 "PHENICX/PHENICX-Anechoic/annotations/mozart/bassoon-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mozart/cello-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mozart/clarinet-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mozart/doublebass-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mozart/flute-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mozart/horn-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mozart/horn-1.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mozart/viola-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mozart/violin-0.json",
+                 "PHENICX/PHENICX-Anechoic/annotations/mozart/violin-1.json"
                ],
                "instruments" : [
                   "bassoon",
@@ -6756,14 +6756,14 @@
             {
                "composer" : "Scriabin",
                "ground-truth" : [
-                  "Mestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--3.wav"
                   ]
                },
                "title" : "Etude Op. 2 No.1;  Etudes Op. 8, Nos. 5, 11 and 12"
@@ -6831,14 +6831,14 @@
             {
                "composer" : "Scriabin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_11_R3_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_11_R3_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_11_R3_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_11_R3_2013_wav--3.wav"
                   ]
                },
                "title" : "Fantasy Op. 28 in B Minor"
@@ -7011,14 +7011,14 @@
             {
                "composer" : "Scriabin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Sonata No. 4 in F-sharp Major ,Op.30"
@@ -7326,14 +7326,14 @@
             {
                "composer" : "Debussy",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--2.wav"
                   ]
                },
                "title" : "Images, Series I"
@@ -7686,14 +7686,14 @@
             {
                "composer" : "Debussy",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "L'isle joyeuse"
@@ -7701,14 +7701,14 @@
             {
                "composer" : "Debussy",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--3.wav"
                   ]
                },
                "title" : "L'isle joyeuse"
@@ -7881,14 +7881,14 @@
             {
                "composer" : "Debussy",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--2.wav"
                   ]
                },
                "title" : "Preludes, Book II, III - La puerta del vino"
@@ -7926,14 +7926,14 @@
             {
                "composer" : "Debussy",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--3.wav"
                   ]
                },
                "title" : "Preludes, Book II, VII - La terasse des audiences du clair de lune"
@@ -8616,14 +8616,14 @@
             {
                "composer" : "Mendelssohn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Rondo Capriccioso in E Minor, Op. 14"
@@ -8796,14 +8796,14 @@
             {
                "composer" : "Mendelssohn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_02_R3_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_02_R3_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_02_R3_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_02_R3_2013_wav--1.wav"
                   ]
                },
                "title" : "Variations Serieuses, Op. 54"
@@ -8811,14 +8811,14 @@
             {
                "composer" : "Mendelssohn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_11_R3_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_11_R3_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_11_R3_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_11_R3_2013_wav--1.wav"
                   ]
                },
                "title" : "Variations Serieuses, Op. 54"
@@ -8826,14 +8826,14 @@
             {
                "composer" : "Mendelssohn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_15_R3_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_15_R3_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_15_R3_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_15_R3_2013_wav--1.wav"
                   ]
                },
                "title" : "Variations Serieuses, Op. 54"
@@ -8841,14 +8841,14 @@
             {
                "composer" : "Mendelssohn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--2.wav"
                   ]
                },
                "title" : "Variations Serieuses, Op. 54"
@@ -8856,14 +8856,14 @@
             {
                "composer" : "Mendelssohn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--3.wav"
                   ]
                },
                "title" : "Variations Serieuses, Op. 54"
@@ -9141,14 +9141,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Au bord d'une source"
@@ -9156,14 +9156,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_04_R2_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_04_R2_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_04_R2_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_04_R2_2013_wav--3.wav"
                   ]
                },
                "title" : "Ballade No. 2 in B Minor, S 171"
@@ -9171,14 +9171,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_15_R2_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_15_R2_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_15_R2_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_15_R2_2013_wav--2.wav"
                   ]
                },
                "title" : "Ballade No. 2 in B Minor, S 171"
@@ -9231,14 +9231,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Concert Etude La Leggierezza"
@@ -9291,14 +9291,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--5-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--5-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--5.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--5.wav"
                   ]
                },
                "title" : "Concert Etude No. 2 Gnomenreigen"
@@ -9681,14 +9681,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_14_R2_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_14_R2_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_14_R2_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_14_R2_2013_wav--4.wav"
                   ]
                },
                "title" : "Hungarian Rhapsody No. 13 (arr. Volodos)"
@@ -9711,14 +9711,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--5-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--5-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--5.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--5.wav"
                   ]
                },
                "title" : "Hungarian Rhapsody No. 15 in A Minor"
@@ -9876,14 +9876,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_11_R2_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_11_R2_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_11_R2_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_11_R2_2013_wav--3.wav"
                   ]
                },
                "title" : "Mephisto Waltz No. 1"
@@ -9936,14 +9936,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--5-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--5-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--5.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--5.wav"
                   ]
                },
                "title" : "Paganini Etude No. 3, S. 141/3 La Campanella"
@@ -9951,14 +9951,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Paganini Etude No. 3, S. 141/3 La Campanella"
@@ -10086,14 +10086,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_17_R2_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_17_R2_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_17_R2_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_17_R2_2013_wav--3.wav"
                   ]
                },
                "title" : "Rhapsodie Espagnole, S. 254"
@@ -10101,14 +10101,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--4.wav"
                   ]
                },
                "title" : "Rhapsodie Espagnole, S. 254"
@@ -10506,14 +10506,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Transcendental Etude No. 10 in F Minor"
@@ -10671,14 +10671,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Transcendental Etude No. 5 Feux Follets"
@@ -10686,14 +10686,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Transcendental Etude No. 5 Feux Follets"
@@ -10731,14 +10731,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Transcendental Etude No. 8 Wilde Jagd"
@@ -10746,14 +10746,14 @@
             {
                "composer" : "Liszt",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Transcendental Etude No. 8 Wilde Jagd"
@@ -11181,14 +11181,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_15_R2_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_15_R2_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_15_R2_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_15_R2_2013_wav--1.wav"
                   ]
                },
                "title" : "Impromptu Op. 142 No. 1 in F Minor, D935"
@@ -11211,14 +11211,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--1.wav"
                   ]
                },
                "title" : "Impromptu Op. 142 No. 3 in B-Flat Major, D935"
@@ -11271,14 +11271,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_11_R2_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_11_R2_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_11_R2_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_11_R2_2013_wav--1.wav"
                   ]
                },
                "title" : "Impromptu Op. 142 No. 3 in B-flat Major"
@@ -11316,14 +11316,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_02_R2_2013_wav--1.wav"
                   ]
                },
                "title" : "Impromptu Op. 142 No. 3 in B-flat Major, D935"
@@ -11331,14 +11331,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--2.wav"
                   ]
                },
                "title" : "Impromptu Op. 142 No. 3 in B-flat Major, D935"
@@ -11346,14 +11346,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_14_R2_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_14_R2_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_14_R2_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_14_R2_2013_wav--1.wav"
                   ]
                },
                "title" : "Impromptu Op. 142 No. 3 in B-flat Major, D935"
@@ -11361,14 +11361,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--1.wav"
                   ]
                },
                "title" : "Impromptu Op. 142 No. 3 in B-flat Major, D935"
@@ -11496,14 +11496,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_04_R2_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_04_R2_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_04_R2_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_04_R2_2013_wav--1.wav"
                   ]
                },
                "title" : "Impromptu Op. 90 No. 1 in C Minor"
@@ -11631,14 +11631,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_03_R2_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_03_R2_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_03_R2_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_03_R2_2013_wav--2.wav"
                   ]
                },
                "title" : "Impromptu Op. 90 No. 2 in E-flat Major, D899"
@@ -11766,14 +11766,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_17_R2_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_17_R2_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_17_R2_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_17_R2_2013_wav--2.wav"
                   ]
                },
                "title" : "Impromptu Op. 90 No. 3 in G-flat Major, D899"
@@ -11901,14 +11901,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--1.wav"
                   ]
                },
                "title" : "Impromptu Op.142 No.3, in B-Flat Major, D935"
@@ -11961,14 +11961,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_07_R2_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_07_R2_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_07_R2_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_07_R2_2013_wav--2.wav"
                   ]
                },
                "title" : "Moment Musical Op. 94 No. 4 in C-sharp Minor, D780"
@@ -12381,14 +12381,14 @@
             {
                "composer" : "Schubert",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata in A Major, Op. 120, I. Allegro moderato"
@@ -14241,14 +14241,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Andante spianato et grande polonaise brillante, Op. 22"
@@ -14331,14 +14331,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--3.wav"
                   ]
                },
                "title" : "Ballade No. 1 in G Minor, Op. 23"
@@ -14346,14 +14346,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--3.wav"
                   ]
                },
                "title" : "Ballade No. 1 in G Minor, Op. 23"
@@ -14556,14 +14556,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Ballade No. 4 in F Minor, Op. 52"
@@ -14631,14 +14631,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_18_R3_2013_wav--1.wav"
                   ]
                },
                "title" : "Barcarolle in F-sharp Major, Op. 60"
@@ -14676,14 +14676,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--3.wav"
                   ]
                },
                "title" : "Barcarolle, Op. 60"
@@ -14871,14 +14871,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Etude Op. 10 No. 1"
@@ -15036,14 +15036,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Etude Op. 10 No. 2"
@@ -15066,14 +15066,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Etude Op. 10 No. 4"
@@ -15081,14 +15081,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Etude Op. 10 No. 4"
@@ -15261,14 +15261,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Etude Op. 10 No. 8"
@@ -15336,14 +15336,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Etude Op. 25 No. 1"
@@ -15381,14 +15381,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--5-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--5-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--5.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--5.wav"
                   ]
                },
                "title" : "Etude Op. 25 No. 10"
@@ -15471,14 +15471,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--2.wav"
                   ]
                },
                "title" : "Etude Op. 25 No. 11"
@@ -15651,14 +15651,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Etude Op. 25 No. 6"
@@ -15756,14 +15756,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_03_R2_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_03_R2_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_03_R2_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_03_R2_2013_wav--1.wav"
                   ]
                },
                "title" : "Etudes Op. 25 Nos. 1-5"
@@ -15801,14 +15801,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Mazurka Op. 50 No. 3 in C-sharp Minor"
@@ -15831,14 +15831,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Mazurka in C-sharp Minor, Op. 50 No. 3"
@@ -16161,14 +16161,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--3.wav"
                   ]
                },
                "title" : "Nocturne in E-flat Major, Op. 55 No. 2"
@@ -16221,14 +16221,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_19_R2_2013_wav--4.wav"
                   ]
                },
                "title" : "Polonaise Op. 53 in A-flat Major"
@@ -16356,14 +16356,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Rondo in C minor, Op. 1"
@@ -16401,14 +16401,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Scherzo No. 1 in B minor, Op. 20"
@@ -16701,14 +16701,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Scherzo No. 4 in E Major, Op. 54"
@@ -16806,14 +16806,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_14_R3_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_14_R3_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_14_R3_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_14_R3_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata No. 2 in B-flat Minor, Op. 35"
@@ -16941,14 +16941,14 @@
             {
                "composer" : "Chopin",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_8_13_Group__MID--AUDIO_18_R2_2013_wav--4.wav"
                   ]
                },
                "title" : "Sonata No. 3 in B Minor, Op. 58, 1st mov."
@@ -17481,14 +17481,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--2.wav"
                   ]
                },
                "title" : "English Suite in A Minor, BWV 807"
@@ -17601,14 +17601,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--1.wav"
                   ]
                },
                "title" : "Overture in the French Style in B Minor, BWV 831"
@@ -17631,14 +17631,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_12_R2_2013_wav--1.wav"
                   ]
                },
                "title" : "Partita No. 2 in C Minor, I. Sinfonia"
@@ -17721,14 +17721,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude & Fugue in B flat minor, Book I, BWV 867"
@@ -17871,14 +17871,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in A Minor, WTC II, BWV 847"
@@ -17976,14 +17976,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in A-flat Major, WTC I, BWV 862"
@@ -18066,14 +18066,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in B Minor, WTC II, BWV 893"
@@ -18111,14 +18111,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in B-flat Minor, WTC I, BWV 867"
@@ -18126,14 +18126,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in B-flat Minor, WTC I, BWV 867"
@@ -18291,14 +18291,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in C-sharp Major, BWV 848"
@@ -18351,14 +18351,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in C-sharp Major, WTC I, BWV 848"
@@ -18501,14 +18501,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in D Major, WTC II, BWV 874"
@@ -18591,14 +18591,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in D Minor, WTC II, BWV 875"
@@ -18666,14 +18666,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in D-sharp Minor, WTC II, BWV 877"
@@ -18681,14 +18681,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in E Major, WTC I, BWV 854"
@@ -18696,14 +18696,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in E Major, WTC I, BWV 854"
@@ -19101,14 +19101,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Prelude and Fugue in F-sharp Minor, WTC II, BWV 883"
@@ -19221,14 +19221,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in G Major, WTC I, BWV 860"
@@ -19341,14 +19341,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude and Fugue in G-sharp Minor, WTC I, BWV 863"
@@ -19386,14 +19386,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude from English Suite No. 3 in G Major"
@@ -19401,14 +19401,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude from English Suite No. 6 in D Minor, BWV 811"
@@ -19446,14 +19446,14 @@
             {
                "composer" : "Bach",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Prelude from the English Suite No. 6"
@@ -19551,14 +19551,14 @@
             {
                "composer" : "Petri",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Sheep May Safely Graze"
@@ -19881,14 +19881,14 @@
             {
                "composer" : "Brahms",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--3.wav"
                   ]
                },
                "title" : "Six Pieces for Piano, Op. 118"
@@ -20076,14 +20076,14 @@
             {
                "composer" : "Brahms",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_07_R2_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_07_R2_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_07_R2_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_8_13_Group__MID--AUDIO_07_R2_2013_wav--1.wav"
                   ]
                },
                "title" : "Variations on a Theme by Paganini, Op. 35, Book II"
@@ -20256,14 +20256,14 @@
             {
                "composer" : "Haydn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_10_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata in A-flat Major, No. 31 Hob. XVI:46, 1st mov."
@@ -20421,14 +20421,14 @@
             {
                "composer" : "Haydn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata in C Major, Hob. XVI:50, 1st mov."
@@ -20436,14 +20436,14 @@
             {
                "composer" : "Haydn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_17_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata in C Major, Hob. XVI:50, 1st mov."
@@ -20481,14 +20481,14 @@
             {
                "composer" : "Haydn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_14_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata in C Minor, Hob. XVI:20, 1st mov."
@@ -20496,14 +20496,14 @@
             {
                "composer" : "Haydn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_19_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata in C Minor, Hob. XVI:20, 1st mov."
@@ -20601,14 +20601,14 @@
             {
                "composer" : "Haydn",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_15_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata in E-flat Major, Hob. XVI:52, 1st mov."
@@ -21171,14 +21171,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_08_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata No. 17 in D minor, Op. 31 No. 2, 1st mov."
@@ -21381,14 +21381,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_03_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata No. 21 in C Major, Op. 53, 1st mov."
@@ -21441,14 +21441,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata No. 21 in C major, Op. 53, 1st mov."
@@ -22086,14 +22086,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata No. 4 in E-flat Major, Op. 7, 1st mov."
@@ -22101,14 +22101,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata No. 4 in E-flat Major, Op. 7, 1st mov."
@@ -22221,14 +22221,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_06_R1_2013_wav--1.wav"
                   ]
                },
                "title" : "Sonata No. 7 in D Major, Op. 10 No. 3, 1st mov."
@@ -22236,14 +22236,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata No. 7 in D Major, Op. 10 No. 3, 1st mov."
@@ -22476,14 +22476,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_16_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata in C Major, Op. 2 No. 3, 1st mov."
@@ -22791,14 +22791,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_07_R3_2013_wav--2.wav"
                   ]
                },
                "title" : "Thirty-Two Variations in C Minor, WoO 80"
@@ -22806,14 +22806,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_10_13_Group_MID--AUDIO_08_R3_2013_wav--1.wav"
                   ]
                },
                "title" : "Thirty-Two Variations in C Minor, WoO 80"
@@ -22821,14 +22821,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_12_R3_2013_wav--1.wav"
                   ]
                },
                "title" : "Thirty-Two Variations in C Minor, WoO 80"
@@ -22941,14 +22941,14 @@
             {
                "composer" : "Beethoven",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_14_R3_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_14_R3_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_14_R3_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_10_13_Group_MID--AUDIO_14_R3_2013_wav--1.wav"
                   ]
                },
                "title" : "Thirty-Two Variations in C minor, WoO 80"
@@ -23256,14 +23256,14 @@
             {
                "composer" : "Clementi",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_07_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata in F-sharp minor, op. 25 no. 5, 1st mov."
@@ -23691,14 +23691,14 @@
             {
                "composer" : "Schumann",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--5-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--5-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--5.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--5.wav"
                   ]
                },
                "title" : "ABEGG Variations, Op. 1"
@@ -23706,14 +23706,14 @@
             {
                "composer" : "Schumann",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_13_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "ABEGG Variations, Op. 1"
@@ -23721,14 +23721,14 @@
             {
                "composer" : "Schumann",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_8_13_Group__MID--AUDIO_08_R2_2013_wav--3.wav"
                   ]
                },
                "title" : "ABEGG Variations, Op. 1"
@@ -23766,14 +23766,14 @@
             {
                "composer" : "Schumann",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_15_R3_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_15_R3_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_15_R3_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_15_R3_2013_wav--2.wav"
                   ]
                },
                "title" : "Arabesque, Op. 18"
@@ -24426,14 +24426,14 @@
             {
                "composer" : "Rachmaninoff",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_01_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Elegie in E-flat Minor, Op. 3 No. 1"
@@ -24561,14 +24561,14 @@
             {
                "composer" : "Rachmaninoff",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_04_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Etude-Tableaux Op. 39 No. 5"
@@ -24756,14 +24756,14 @@
             {
                "composer" : "Rachmaninoff",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--4-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--4-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--4.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_6_13_Group__MID--AUDIO_02_R1_2013_wav--4.wav"
                   ]
                },
                "title" : "Moment Musicaux, Op. 16 No. 5"
@@ -25071,14 +25071,14 @@
             {
                "composer" : "Rachmaninoff",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_6_13_Group__MID--AUDIO_05_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Prelude in D Major, Op. 23, No. 4"
@@ -25431,14 +25431,14 @@
             {
                "composer" : "Mozart",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--1-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--1-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--1.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_10_13_Group_MID--AUDIO_17_R3_2013_wav--1.wav"
                   ]
                },
                "title" : "Sonata in B-flat Major, K. 333, 1st mov."
@@ -25461,14 +25461,14 @@
             {
                "composer" : "Mozart",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_02_7_7_13_Group__MID--AUDIO_18_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Sonata in B-flat Major, K. 570, 1st mov."
@@ -25551,14 +25551,14 @@
             {
                "composer" : "Mozart",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_11_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata in C Minor, K. 457, 1st mov."
@@ -25656,14 +25656,14 @@
             {
                "composer" : "Mozart",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--2-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--2-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--2.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--2.wav"
                   ]
                },
                "title" : "Sonata in D Major, K. 576, I - Allegro"
@@ -25671,14 +25671,14 @@
             {
                "composer" : "Mozart",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_01_7_7_13_Group__MID--AUDIO_12_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Sonata in D Major, K. 576, II - Adagio"
@@ -25776,14 +25776,14 @@
             {
                "composer" : "Mozart",
                "ground-truth" : [
-                  "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--3-0.json"
+                  "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--3-0.json"
                ],
                "instruments" : [
                   "piano"
                ],
                "recording" : {
                   "path" : [
-                     "2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--3.wav"
+                     "Maestro/maestro-v2.0.0/2013/ORIG-MIDI_03_7_6_13_Group__MID--AUDIO_09_R1_2013_wav--3.wav"
                   ]
                },
                "title" : "Sonata in F Major, K. 280, 1st mov."
@@ -25908,7 +25908,8 @@
             "format" : "unknown"
          },
          "unpack" : true,
-         "url" : "https://zenodo.org/record/1408985/files/flute-audio-labelled-database-AMT.zip"
+         "url" : "https://zenodo.org/record/1408985/files/flute-audio-labelled-database-AMT.zip",
+         "songs" : []
       },
       {
          "name" : "Bach10",
