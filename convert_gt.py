@@ -47,11 +47,11 @@ def from_midi(midi_fn, alignment='precise-alignment', pitches=True, velocities=T
     can also be `None` or `False`, in that case no alignment is filled. If `merge` is
     True, the returned list will contain a dictionary for each track.
     """
-    midi_fn = change_ext(midi_fn, '.mid')
-    if not os.path.exists(midi_fn):
-        midi_fn = change_ext(midi_fn, '.midi')
+    new_midi_fn = change_ext(midi_fn, '.mid')
+    if not os.path.exists(new_midi_fn):
+        new_midi_fn = change_ext(midi_fn, '.midi')
 
-    midi_tracks = io.open_midi(midi_fn, merge=merge)
+    midi_tracks = io.open_midi(new_midi_fn, merge=merge)
 
     out = list()
 
