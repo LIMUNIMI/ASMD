@@ -81,7 +81,7 @@ compressed using the `lzma` Python 3.7 module. Thus, you need to decompress them
 import lzma
 import json
 
-ground_truth = json.load(fp, lzma.open('ground-truth.json.xz', 'rt'))
+ground_truth = json.load(lzma.open('ground-truth.json.xz', 'rt'))
 
 print(ground_truth)
 ```
