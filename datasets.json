@@ -172,6 +172,7 @@
       },
       {
          "name" : "MusicNet",
+         "ensemble" : false,
          "ground-truth" : {
             "broad-alignment" : true,
             "f0" : false,

@@ -86,11 +86,28 @@ ground_truth = json.load(lzma.open('ground-truth.json.xz', 'rt'))
 print(ground_truth)
 ```
 
-## INSTALLATION
+## API
+This project also provides a few API for filtering the datasets according to some
+specified prerequisites and getting the data in a convenient format.
+
+### Matlab
+
+Add this directory to your path and use the function `load_data`.
+
+### Python
+
+Add this directory to your path, add `from audiodatasets import load_data` and use the
+function `load_data`.
+
+## Installation
 1. Install `python 3`
 2. Run the following command from a shell terminal from inside this
 directory: python3 install.py
 3. Follow the steps.
+
+## Reproduce from scratch
+If you want, you can also recreate the annotations from scratch by running the python 3
+script `convert_gt.py` after having installed the datasets.
 
 **N.B. You should have `wget` installed in your system, otherwise SMD dataset
 can't be downloaded.**
