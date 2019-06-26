@@ -74,6 +74,18 @@ file or to the whole recording sound file if sources are not available)
 6. `note`: list of note names in onsets ascending order
 7. `velocities`: list of velocities in onsets ascending order
 
+Note that json ground-truth files have extension `.json.xz`, indicating that they are
+compressed using the `lzma` Python 3.7 module. Thus, you need to decompress them:
+
+```python
+import lzma
+import json
+
+ground_truth = json.load(fp, lzma.open('ground-truth.json.xz', 'rt'))
+
+print(ground_truth)
+```
+
 ## INSTALLATION
 1. Install `python 3`
 2. Run the following command from a shell terminal from inside this
