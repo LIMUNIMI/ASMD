@@ -8,6 +8,7 @@ import tarfile
 import sys
 import os
 import csv
+import lzma
 
 
 # The dictionary prototype for containing the ground-truth
@@ -250,11 +251,11 @@ def create_gt(data_fn, args, xztar=False):
                               for func, params in func_map[dataset['name']]])
 
                 # get the index of the track from the path
-                idx = path[path.rfind('-') + 1 : path.rfind('.')]
+                idx = path[path.rfind('-') + 1 : path.rfind('.json.xz')]
                 idx = min(len(out) - 1, int(idx))
 
                 print("   saving " + final_path)
-                json.dump(out[idx], open(final_path, 'w'))
+                json.dump(out[idx], lzma.open(final_path, 'wt'))
 
             to_be_included_in_the_archive.append(final_path)
 
