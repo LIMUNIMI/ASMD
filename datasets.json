@@ -25919,7 +25919,7 @@
             "broad-alignment" : false,
             "f0" : true,
             "non-aligned" : true,
-            "precise-aligned" : true,
+            "precise_alignment" : true,
             "velocities" : false
          },
          "instruments" : [

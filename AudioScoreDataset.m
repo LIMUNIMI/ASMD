@@ -3,14 +3,22 @@ classdef AudioScoreDataset
     properties
         data % the output of `jsondecode`: a structured array representing the dataset
         paths = [] % an cell-array containing the paths of the filtered songs
-                    % [mixed paths, sources patshs, ground_truth paths]
+                    % [mixed paths, sources paths, ground_truth paths]
         decompress_path
+        install_dir % a string representing the path where the dataset is installed
     end
     
     methods
         function obj = AudioScoreDataset(path)
             % Create a class instance by loading the json file specified in `path`
             obj.data = jsondecode(fileread('datasets.json'));
+            obj.set_install_dir(obj.data.install_dir);
+        end
+
+        function set_install_dir(obj, dir)
+            % set the `install_dir` field of this object and add it to the path
+            obj.install_dir = dir;
+            addpath(dir);
         end
 
         function filter(obj, varargin)
@@ -46,27 +54,28 @@ classdef AudioScoreDataset
 
             for i = 1:length(obj.data.datasets)
                 FLAG = true;
+                mydataset = obj.data.datasets{i};
 
                 % checking dataset-level filters
-                if p.Results.ensemble ~= dataset.ensemble
+                if p.Results.ensemble ~= mydataset.ensemble
                     FLAG = false;
                 end
 
                 if p.Results.instrument ~= -1
-                    if ~contains(dataset.instruments, p.Results.instrument)
+                    if ~contains(mydataset.instruments, p.Results.instrument)
                         FLAG = false;
                     end
                 end
 
                 if p.Results.sources
-                    if dataset.sources.format ~= 'unknown'
+                    if mydataset.sources.format ~= 'unknown'
                         FLAG = false;
                     end
                 end
 
                 if p.Results.ground_truth ~= -1
-                    for gt = p.Results.ground_truth
-                        if ~getfield(dataset.ground_truth, gt)
+                    for gt = p.Results.ground_truth(:)
+                        if ~getfield(mydataset.ground_truth, gt)
                             FLAG = false;
                             break;
                         end
@@ -74,9 +83,8 @@ classdef AudioScoreDataset
                 end
 
                 if FLAG
-                    disp(dataset.name);
-                    for k = 1:length(dataset.songs)
-                        song = dataset.songs(k);
+                    for k = 1:length(mydataset.songs)
+                        song = mydataset.songs(k);
                         % checking song levels filters
                         if p.Results.instrument ~= -1
                             if ~contains(song.instruments, p.Results.instrument)
@@ -110,7 +118,7 @@ classdef AudioScoreDataset
                             if p.Results.mixed
                                 mixed = {song.recording.path};
                             end
-                            paths = [paths; mixed sources gts];
+                            obj.paths = [obj.paths; mixed sources gts];
                         end % closing `if FLAG` check
 
                     end % closing song loop
@@ -140,10 +148,13 @@ classdef AudioScoreDataset
                         fprintf('Cannot move %s\n', filepath);
                         return;
                     end
+                    filepath, filename, ext = fileparts(obj.paths{i, 3}{j});
+                    obj.paths{i, 3}{j} = {strcat(filename, ext)};
                 end
             end
 
-            obj.set_decompress_path(tmpfs)
+            obj.set_install_dir(tmpfs);
+            obj.set_decompress_path(tmpfs);
         end
 
         function set_decompress_path(obj, tmpfs)
@@ -156,15 +167,64 @@ classdef AudioScoreDataset
             obj.decompress_path = tmpfs;
         end
 
-        function mix sources gts = get_item(obj, idx)
+        function mix = get_mix(obj, idx)
+            % - `idx`: the index of the wanted item.
+            %
+            % RETURNED:
+            % - `mix`:      the audio waveform of the mixed song (array)
+            %
+            recordings_fn = obj.paths{idx, 1};
+
+            if length(recordings_fn) > 1
+                for k = 1:length(recordings_fn)
+                    recordings(k) = audioread(fullfile(obj.install_dir, recordings_fn{k}));
+                end
+
+                mix = mean(cellmat(recordings), 2);
+            else
+                mix = audioread(fullfile(obj.install_dir, recordings_fn{k}));
+            end
+        end
+
+        function gts = get_gts(obj, idx)
+            % - `idx`: the index of the wanted item.
+            %
+            % RETURNED:
+            % - `gts`:  the ground-truths of each single source (1xn struct array with fields)
+            %
+            temp_fn = fullfile(decompress_path, 'temp.fn');
+            gts_fn = obj.paths{idx, 3};
+            for k = 1:length(gts_fn)
+                system(['xz -d --keep ' fullfile(obj.install_dir, gts_fn{k}) ' > ' temp_fn]);
+                gts(1) = jsondecode(fileread(temp_fn));
+            end
+        end
+
+        function sources = get_source(obj, idx)
+            % - `idx`: the index of the wanted item.
+            %
+            % RETURNED:
+            % - `sources`:  the audio values of each sources (nx1 cell-array)
+            %
+            sources_fn = obj.paths{idx, 2};
+
+            for k = 1:length(sources_fn)
+                sources(k) = audioread(fullfile(obj.install_dir, sources_fn{k}));
+            end
+
+        end
+
+        function [mix, sources, gts] = get_item(obj, idx)
             % - `idx`: the index of the wanted item.
             %
             % RETURNED:
             % - `mix`:      the audio waveform of the mixed song (array)
             % - `sources`:  the audio values of each sources (nx1 cell-array)
-            % - `gts`:      the ground-truths of each source (or of the mixed track
-            %               if sources is empty) (nx1 cell-array)
+            % - `gts`:      the ground-truths of each single source (1xn struct array with fields)
             %
+            mix = obj.get_mix(idx)
+            sources = obj.get_source(idx)
+            gts = obj.get_gts(idx)
         end
 
     end % closing method section
