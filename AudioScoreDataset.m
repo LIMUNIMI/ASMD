@@ -199,8 +199,7 @@ classdef AudioScoreDataset < handle
                 [filepath,name,ext] = fileparts(gts_fn{k});
                 input_fn = fullfile(obj.install_dir, gts_fn{k});
 
-                command_line = ['xz -d -c --keep ' input_fn ' > ' output_fn];
-                system(command_line);
+                gunzip(input_fn, obj.decompress_path);
                 gts(1) = jsondecode(fileread(output_fn));
             end
         end

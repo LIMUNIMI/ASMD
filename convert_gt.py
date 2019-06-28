@@ -8,7 +8,7 @@ import tarfile
 import sys
 import os
 import csv
-import lzma
+import gzip
 
 
 # The dictionary prototype for containing the ground-truth
@@ -220,11 +220,11 @@ func_map = {
 }
 
 
-def create_gt(data_fn, args, xztar=False):
+def create_gt(data_fn, args, gztar=False):
     """
     Parse the yaml file `data_fn` and convert all ground-truth to our
     representation. Then dump it according to the specified paths. Finally,
-    if `xztar` is True, create a xztar archive called 'ground-truth.tar.xz' in
+    if `gztar` is True, create a gztar archive called 'ground-truth.tar.gz' in
     this directory containing only the ground truth file in their final
     positions.
     """
@@ -251,18 +251,18 @@ def create_gt(data_fn, args, xztar=False):
                               for func, params in func_map[dataset['name']]])
 
                 # get the index of the track from the path
-                idx = path[path.rfind('-') + 1 : path.rfind('.json.xz')]
+                idx = path[path.rfind('-') + 1 : path.rfind('.json.gz')]
                 idx = min(len(out) - 1, int(idx))
 
                 print("   saving " + final_path)
-                json.dump(out[idx], lzma.open(final_path, 'wt'))
+                json.dump(out[idx], gzip.open(final_path, 'wt'))
 
             to_be_included_in_the_archive.append(final_path)
 
     # creating the archive
-    if xztar:
+    if gztar:
         print("\n\nCreating the final archive")
-        with tarfile.open('ground-truth.tar.xz', mode='w:xz') as tf:
+        with tarfile.open('ground-truth.tar.gz', mode='w:gz') as tf:
             for fname in to_be_included_in_the_archive:
                 tf.add(fname)
 
@@ -272,4 +272,4 @@ if __name__ == "__main__":
     print("  python3 convert_gt.py [list of datasets to be excluded]")
     print()
 
-    create_gt('datasets.json', sys.argv, xztar=True)
+    create_gt('datasets.json', sys.argv, gztar=True)
