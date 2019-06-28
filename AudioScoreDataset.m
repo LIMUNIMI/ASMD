@@ -1,9 +1,9 @@
-classdef AudioScoreDataset
+classdef AudioScoreDataset < handle
     % A class to represent data, load them, split etc.
     properties
-        data % the output of `jsondecode`: a structured array representing the dataset
-        paths = [] % an cell-array containing the paths of the filtered songs
-                    % [mixed paths, sources paths, ground_truth paths]
+        data    % the output of `jsondecode`: a structured array representing the dataset
+        paths   % an cell-array containing the paths of the filtered songs
+                % [mixed paths, sources paths, ground_truth paths]
         decompress_path
         install_dir % a string representing the path where the dataset is installed
     end
@@ -11,7 +11,7 @@ classdef AudioScoreDataset
     methods
         function obj = AudioScoreDataset(path)
             % Create a class instance by loading the json file specified in `path`
-            obj.data = jsondecode(fileread('datasets.json'));
+            obj.data = jsondecode(fileread(path));
             obj.set_install_dir(obj.data.install_dir);
         end
 
@@ -100,8 +100,8 @@ classdef AudioScoreDataset
 
                         if FLAG
                             gts = {song.ground_truth};
-                            sources = {};
-                            mixed = {};
+                            sources = {''};
+                            mixed = {''};
                             if p.Results.sources
                                 if p.Results.all
                                     sources = {song.sources.path};
@@ -160,10 +160,10 @@ classdef AudioScoreDataset
         function set_decompress_path(obj, tmpfs)
             % - `tmpfs`: a string representing the directory where the returned
             %            ground truth files are decompressed. In linux, it is
-            %            Needed at least XX MB or free space.
+            %            Suggested at least 512 MB or free space.
             %
             %            I recommend to do not use this parameter if not in
-            %            linux.
+            %            linux. Even in linux, slight improvements are actually achieved.
             obj.decompress_path = tmpfs;
         end
 
@@ -182,7 +182,7 @@ classdef AudioScoreDataset
 
                 mix = mean(cellmat(recordings), 2);
             else
-                mix = audioread(fullfile(obj.install_dir, recordings_fn{k}));
+                mix = audioread(fullfile(obj.install_dir, recordings_fn{1}));
             end
         end
 
@@ -192,11 +192,16 @@ classdef AudioScoreDataset
             % RETURNED:
             % - `gts`:  the ground-truths of each single source (1xn struct array with fields)
             %
-            temp_fn = fullfile(decompress_path, 'temp.fn');
+            output_fn = fullfile(obj.decompress_path, 'temp.json');
             gts_fn = obj.paths{idx, 3};
             for k = 1:length(gts_fn)
-                system(['xz -d --keep ' fullfile(obj.install_dir, gts_fn{k}) ' > ' temp_fn]);
-                gts(1) = jsondecode(fileread(temp_fn));
+
+                [filepath,name,ext] = fileparts(gts_fn{k});
+                input_fn = fullfile(obj.install_dir, gts_fn{k});
+
+                command_line = ['xz -d -c --keep ' input_fn ' > ' output_fn];
+                system(command_line);
+                gts(1) = jsondecode(fileread(output_fn));
             end
         end
 
@@ -207,6 +212,7 @@ classdef AudioScoreDataset
             % - `sources`:  the audio values of each sources (nx1 cell-array)
             %
             sources_fn = obj.paths{idx, 2};
+            sources = [];
 
             for k = 1:length(sources_fn)
                 sources(k) = audioread(fullfile(obj.install_dir, sources_fn{k}));
@@ -222,9 +228,9 @@ classdef AudioScoreDataset
             % - `sources`:  the audio values of each sources (nx1 cell-array)
             % - `gts`:      the ground-truths of each single source (1xn struct array with fields)
             %
-            mix = obj.get_mix(idx)
-            sources = obj.get_source(idx)
-            gts = obj.get_gts(idx)
+            mix = obj.get_mix(idx);
+            sources = obj.get_source(idx);
+            gts = obj.get_gts(idx);
         end
 
     end % closing method section
