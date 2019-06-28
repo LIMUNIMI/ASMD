@@ -113,8 +113,8 @@ Example:
 ```matlab
 d = AudioScoreDataset('datasets.json');
 d.filter('instrument', 'piano', 'ensemble', false, 'composer', 'Mozart', 'ground_truth', 'precise_alignment');
-d.move_to_ram('/mnt/tmpfs');
-% d.set_decompress_path('/mnt/tmpfs'); only if you don't have enough space in RAM
+d.move_to_ram('/mnt/tmpfs'); % discouraged but maybe can turn to be useful
+d.set_decompress_path('/mnt/tmpfs'); % only if you don't have enough space in RAM, discouraged
 
 audio_array, sources_array, ground_truth_array = d.get_item(1);
 
@@ -123,7 +123,6 @@ source_array = d.get_source(2);
 ground_truth_array = d.get_gts(2);
 
 disp(d.paths);
-
 ```
 
 ### Python
