@@ -28,14 +28,17 @@ gt = {
 }
 
 
-def change_ext(input_fn, new_ext):
+def change_ext(input_fn, new_ext, no_dot=False):
     """
-    Return the input path `input_fn` with `new_ext` as extension
+    Return the input path `input_fn` with `new_ext` as extension.
+    If `no_dot` is True, it will not add a dot before of the extension,
+    otherwise it will add it if not present.
     """
 
     root = input_fn[ :input_fn.rfind('-')]
     if not new_ext.startswith('.'):
-        new_ext = '.' + new_ext
+        if not no_dot:
+            new_ext = '.' + new_ext
 
     return root + new_ext
 
@@ -64,9 +67,6 @@ def from_midi(midi_fn, alignment='precise-alignment', pitches=True, velocities=T
 
         if alignment:
             onsets, offsets = data[alignment].values()
-            alignment = True
-        else:
-            alignment = False
 
         for note_group in track:
             for note in note_group:
@@ -121,8 +121,8 @@ def from_bach10_txt(txt_fn, sources=range(4)):
     for source in sources:
         out = copy(gt)
         for line in lines:
-            fields = line.split(' ')
-            if int(fields[-1] - 1) == source:
+            fields = line.split('\t')
+            if int(fields[-1]) - 1 == source:
                 out["pitches"].append(int(fields[2]))
                 out["precise-alignment"]["onsets"].append(float(fields[0]) / 1000.)
                 out["precise-alignment"]["offsets"].append(float(fields[1]) / 1000.)
@@ -140,12 +140,12 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
     one per source.
     """
     out_list = list()
-    nmat_fn = change_ext(nmat_fn, '.mat')
+    nmat_fn = change_ext(nmat_fn, '-GTF0s.mat', no_dot=True)
 
     f0s = scipy.io.loadmat(nmat_fn)['GTF0s']
     for source in sources:
-        out = copy('gt')
-        out["f0"] = float(f0s[source])
+        out = copy(gt)
+        out["f0"] = f0s[source].tolist()
         out_list.append(out)
 
     return out_list
