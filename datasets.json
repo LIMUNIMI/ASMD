@@ -177,7 +177,7 @@
             "broad-alignment" : true,
             "f0" : false,
             "non-aligned" : true,
-            "precise-alignment" : false,
+            "precise-alignment" : true,
             "velocities" : true
          },
          "instruments" : [
