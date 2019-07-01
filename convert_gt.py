@@ -21,6 +21,10 @@ gt = {
         "onsets": [],
         "offsets": []
     },
+    "broad-alignment": {
+        "onsets": [],
+        "offsets": []
+    },
     "velocities": [],
     "notes": [],
     "pitches": [],
@@ -173,8 +177,8 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
         # duration name as string
         row = list(map(float, row[:-1]))
 
-        out["precise-alignment"]["onsets"].append((row[0]) / fr)
-        out["precise-alignment"]["offsets"].append(row[1] / fr)
+        out["broad-alignment"]["onsets"].append((row[0]) / fr)
+        out["broad-alignment"]["offsets"].append(row[1] / fr)
         out["pitches"].append(int(row[3]))
         out["non-aligned"]["onsets"].append(row[4])
         out["non-aligned"]["offsets"].append(row[4] + row[5])
