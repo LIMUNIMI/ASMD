@@ -13,6 +13,7 @@ classdef AudioScoreDataset < handle
             % Create a class instance by loading the json file specified in `path`
             obj.data = jsondecode(fileread(path));
             obj.set_install_dir(obj.data.install_dir);
+            obj.decompress_path = './';
         end
 
         function set_install_dir(obj, dir)
@@ -68,7 +69,7 @@ classdef AudioScoreDataset < handle
                 end
 
                 if p.Results.sources
-                    if mydataset.sources.format ~= 'unknown'
+                    if strcmp(mydataset.sources.format, 'unknown')
                         FLAG = false;
                     end
                 end
@@ -192,15 +193,16 @@ classdef AudioScoreDataset < handle
             % RETURNED:
             % - `gts`:  the ground-truths of each single source (1xn struct array with fields)
             %
-            output_fn = fullfile(obj.decompress_path, 'temp.json');
             gts_fn = obj.paths{idx, 3};
             for k = 1:length(gts_fn)
 
                 [filepath,name,ext] = fileparts(gts_fn{k});
                 input_fn = fullfile(obj.install_dir, gts_fn{k});
+                output_fn = fullfile(obj.decompress_path, name);
 
                 gunzip(input_fn, obj.decompress_path);
                 gts(1) = jsondecode(fileread(output_fn));
+                delete(output_fn);
             end
         end
 
