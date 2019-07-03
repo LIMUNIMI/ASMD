@@ -83,6 +83,7 @@ def from_midi(midi_fn, alignment='precise-alignment', pitches=True, velocities=T
                     offsets.append(float(note.end))
         out.append(data)
 
+
     return out
 
 
@@ -132,6 +133,7 @@ def from_bach10_txt(txt_fn, sources=range(4)):
                 out["precise-alignment"]["offsets"].append(float(fields[1]) / 1000.)
         out_list.append(out)
 
+
     return out_list
 
 
@@ -151,6 +153,7 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
         out = copy(gt)
         out["f0"] = f0s[source].tolist()
         out_list.append(out)
+
 
     return out_list
 
@@ -204,12 +207,12 @@ def merge(*args):
         for arg in args[1:]:
             d2 = arg[i]
             for key in d1.keys():
-                d1_element = [d1[key]]
+                d1_element = d1[key]
                 if type(d1_element) is dict:
                     d1[key] = merge([d1_element], [d2[key]])[0]
                 else:
-                    d1_element.append(d2[key])
-                d1[key] = d1_element
+                    d1[key] += d2[key]
+                    # d1_element.append(d2[key])
 
     return obj1_copy
 
