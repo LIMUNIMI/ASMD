@@ -3,7 +3,7 @@ import json
 import pretty_midi
 import scipy.io
 from utils import io
-from copy import copy
+from copy import deepcopy
 import tarfile
 import sys
 import os
@@ -67,7 +67,7 @@ def from_midi(midi_fn, alignment='precise-alignment', pitches=True, velocities=T
         midi_tracks = [midi_tracks]
 
     for track in midi_tracks:
-        data = copy(gt)
+        data = deepcopy(gt)
 
         if alignment:
             onsets, offsets = data[alignment].values()
@@ -98,7 +98,7 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
     with open(txt_fn) as f:
         lines = f.readlines()
 
-    out = copy(gt)
+    out = deepcopy(gt)
     for line in lines:
         fields = line.split(',')
         out["notes"].append(fields[2])
@@ -124,7 +124,7 @@ def from_bach10_txt(txt_fn, sources=range(4)):
         lines = f.readlines()
 
     for source in sources:
-        out = copy(gt)
+        out = deepcopy(gt)
         for line in lines:
             fields = line.split('\t')
             if int(fields[-1]) - 1 == source:
@@ -150,7 +150,7 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
 
     f0s = scipy.io.loadmat(nmat_fn)['GTF0s']
     for source in sources:
-        out = copy(gt)
+        out = deepcopy(gt)
         out["f0"] = f0s[source].tolist()
         out_list.append(out)
 
@@ -170,7 +170,7 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
     """
     csv_fn = change_ext(csv_fn, 'csv')
     data = csv.reader(open(csv_fn), delimiter=',')
-    out = copy(gt)
+    out = deepcopy(gt)
 
     # skipping first line
     next(data)
@@ -203,7 +203,7 @@ def merge(idx, *args):
         return args[0]
 
     idx = min(idx, len(args[0]) - 1) # For PHENICX
-    obj1_copy = copy(args[0][idx])
+    obj1_copy = deepcopy(args[0][idx])
     for arg in args[1:]:
         arg = arg[idx]
         for key in obj1_copy.keys():
@@ -260,8 +260,6 @@ def create_gt(data_fn, args, gztar=False):
                 # calling each function listed in the map and merge everything
                 out = merge(int(idx), *[func(final_path, **params)
                               for func, params in func_map[dataset['name']]])
-
-                # idx = min(len(out) - 1, int(idx)) # this is for PHENICX
 
                 print("   saving " + final_path)
                 json.dump(out, gzip.open(final_path, 'wt'))

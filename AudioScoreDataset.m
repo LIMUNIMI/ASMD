@@ -213,7 +213,6 @@ classdef AudioScoreDataset < handle
             % - `sources`:  the audio values of each sources (nx1 cell-array)
             %
             sources_fn = obj.paths{idx, 2};
-            sources = [];
 
             for k = 1:length(sources_fn)
                 sources(k) = audioread(fullfile(obj.install_dir, sources_fn{k}));
