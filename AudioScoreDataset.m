@@ -181,9 +181,9 @@ classdef AudioScoreDataset < handle
                     recordings(k) = audioread(fullfile(obj.install_dir, recordings_fn{k}));
                 end
 
-                mix = mean(cellmat(recordings), 2);
+                mix = {mean(cellmat(recordings), 2)};
             else
-                mix = audioread(fullfile(obj.install_dir, recordings_fn{1}));
+                mix = {audioread(fullfile(obj.install_dir, recordings_fn{1}))};
             end
         end
 
@@ -215,7 +215,7 @@ classdef AudioScoreDataset < handle
             sources_fn = obj.paths{idx, 2};
 
             for k = 1:length(sources_fn)
-                sources(k) = audioread(fullfile(obj.install_dir, sources_fn{k}));
+                sources{k} = audioread(fullfile(obj.install_dir, sources_fn{k}));
             end
 
         end
