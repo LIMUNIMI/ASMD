@@ -50,7 +50,7 @@ classdef AudioScoreDataset < handle
             addParameter(p, 'all', false);
             addParameter(p, 'composer', -1);
             addParameter(p, 'instrument', -1);
-            addParameter(p, 'ground_truth', -1);
+            addParameter(p, 'ground_truth', []);
             parse(p, varargin{:});
 
             for i = 1:length(obj.data.datasets)
@@ -74,12 +74,11 @@ classdef AudioScoreDataset < handle
                     end
                 end
 
-                if p.Results.ground_truth ~= -1
-                    for gt = p.Results.ground_truth(:)
-                        if ~getfield(mydataset.ground_truth, gt)
-                            FLAG = false;
-                            break;
-                        end
+                for i = 1:length(p.Results.ground_truth)
+                    gt = p.Results.ground_truth{i};
+                    if ~getfield(mydataset.ground_truth, gt)
+                        FLAG = false;
+                        break;
                     end
                 end
 
