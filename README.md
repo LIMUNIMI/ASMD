@@ -126,8 +126,31 @@ disp(d.paths);
 ```
 
 ### Python
+Import `audioscoredataset` and create a `Dataset` object, giving
+the path of the `datasets.json` file in this directory as argument to the
+constructor. Then, you can use the `filter` method to filter data according
+to your needs (you can also re-filter them later without reloading
+`datasets.json`). 
 
-Not yet implemented.
+You will find a value `paths` in your `Dataset` instance containing
+the correct paths to the files you are requesting.
+
+Moreover, the method `get_item` returns an array of audio values and a
+structured_array representing the ground_truth as loaded from the json file.
+
+Example:
+
+```matlab
+import audioscoredataset as asd
+d = asd.Dataset('./datasets.json')
+d.filter(instrument='piano', ensemble=False, composer='Mozart', ground_truth='precise-alignment')
+
+audio_array, sources_array, ground_truth_array = d.get_item(1);
+
+audio_array = d.get_mix(2);
+source_array = d.get_source(2);
+ground_truth_list = d.get_gts(2);
+```
 
 ## Installation
 1. Install `python 3`
