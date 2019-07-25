@@ -27,7 +27,7 @@ classdef AudioScoreDataset < handle
             % - `instrument`:   a string representing the instrument that you
             %                   want to select (only one supported for now)
             % - `ensemble`:     if loading songs which are composed for an ensemble of
-            %                   instrument (default `false`
+            %                   instrument (default `false`)
             % - `mixed`:        if returning the mixed track for ensemble song
             %                   (default `true`)
             % - `sources`:      if returning the source track for ensemble recording
@@ -68,12 +68,6 @@ classdef AudioScoreDataset < handle
                     end
                 end
 
-                if p.Results.sources
-                    if strcmp(mydataset.sources.format, 'unknown')
-                        FLAG = false;
-                    end
-                end
-
                 for i = 1:length(p.Results.ground_truth)
                     gt = p.Results.ground_truth{i};
                     if ~getfield(mydataset.ground_truth, gt)
@@ -102,8 +96,8 @@ classdef AudioScoreDataset < handle
                             gts = {song.ground_truth};
                             sources = {''};
                             mixed = {''};
-                            if p.Results.sources
-                                if p.Results.all
+                            if p.Results.sources & getfield(song, "sources")
+                                if p.Results.all 
                                     sources = {song.sources.path};
                                 else
                                     % find the index of the instrument
@@ -200,7 +194,7 @@ classdef AudioScoreDataset < handle
                 output_fn = fullfile(obj.decompress_path, name);
 
                 gunzip(input_fn, obj.decompress_path);
-                gts(1) = jsondecode(fileread(output_fn));
+                gts(k) = jsondecode(fileread(output_fn));
                 delete(output_fn);
             end
         end
