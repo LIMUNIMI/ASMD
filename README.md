@@ -32,13 +32,15 @@ following field:
     3. `recording`: dictionary
         1. `path`: a list of paths to be mixed for reconstructing the full track
 (usually only one)
-4. `sources`: dictionary
+    4. `sources`: dictionary
         1. `path`: a list of paths to the single instrument tracks in the same
-           order as `instruments`
+order as `instruments`
     5. `ground-truth`: list of paths to the ground-truth json files.
-Ground-truth are in bijective relationships with the single-sources
-(multiple paths are provided, one per source file), or just one ground
-truth path is provided if no sources are available.
+One ground-truth path per instrument is provided if the dataset contains
+instrument-specific data, otherwise they are all mixed in one big ground-truth.
+The order of the ground-truth path is the same of sources and of the
+instruments. Note that some ground-truth paths can be identical (as in PHENICX
+for indicating that violin1 and violin2 are playing exactly the same thing).
 7.  `url`: the url to download the dataset including the protocol
 8.  `post-process`: a list of shell commands to be executed to prepare the
 dataset; they can be lists themselves to allow the use of anchors to
@@ -76,20 +78,24 @@ source sound file or to the whole recording sound file if sources are not
 available)
 6. `note`: list of note names in onsets ascending order
 7. `velocities`: list of velocities in onsets ascending order
+8. instrument: General Midi program number associated with this instrument,
+   starting from 0. 128 indicates a drum kit (should be synthesized on channel 8
+   with a program number of your choice, usually 0).
 
-Note that json ground-truth files have extension `.json.xz`, indicating that
-they are compressed using the `lzma` Python 3.7 module. Thus, you need to
+Note that json ground-truth files have extension `.json.gz`, indicating that
+they are compressed using the `gzip` Python 3.7 module. Thus, you need to
 decompress them:
-
 ```python import lzma import json
 
-ground_truth = json.load(lzma.open('ground-truth.json.xz', 'rt'))
+ground_truth = json.load(gzip.open('ground-truth.json.gz', 'rt'))
 
 print(ground_truth) 
 
 ```
 
-## API This project also provides a few API for filtering the datasets according
+## API
+
+This project also provides a few API for filtering the datasets according
 to some specified prerequisites and getting the data in a convenient format.
 
 ### Matlab
@@ -158,7 +164,9 @@ ground_truth_list = d.get_gts(2);
    python3 install.py
 3. Follow the steps.
 
-## Reproduce from scratch If you want, you can also recreate the annotations
+## Reproduce from scratch 
+
+If you want, you can also recreate the annotations
 from scratch by running the python 3 script `convert_gt.py` after having
 installed the datasets.
 

@@ -2,7 +2,7 @@
 import json
 import gzip
 from os.path import join as joinpath
-from utils import io
+from .utils import io
 import numpy as np
 
 class Dataset:
@@ -85,6 +85,8 @@ class Dataset:
 
                     if FLAG:
                         gts = song['ground-truth']
+                        source = []
+                        mix = []
                         if sources and "sources" in song.keys():
                             if all:
                                 source = song['sources']['path']

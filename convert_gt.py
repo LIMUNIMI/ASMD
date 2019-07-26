@@ -9,7 +9,20 @@ import sys
 import os
 import csv
 import gzip
+from difflib import SequenceMatcher
+from pretty_midi.constants import INSTRUMENT_MAP
 
+
+def normalize_text(text):
+    return ''.join(ch for ch in text if ch.isalnum()).lower()
+
+def text_similarity(a, b):
+    return SequenceMatcher(None, a, b).find_longest_match(0, len(a), 0, len(b)).size
+
+# normalizing MIDI instrument names
+INSTRUMENT_MAP = list(map(normalize_text, INSTRUMENT_MAP))
+
+INSTRUMENT_MAP.append('drumkit')
 
 # The dictionary prototype for containing the ground-truth
 gt = {
@@ -29,6 +42,7 @@ gt = {
     "notes": [],
     "pitches": [],
     "f0": [],
+    "instrument": 255
 }
 
 
@@ -189,7 +203,7 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
     return [out]
 
 
-def merge(idx, *args):
+def merge_dicts(idx, *args):
     """
     Merges lists of dictionaries, by adding each other the values of
     corresponding dictionaries
@@ -199,17 +213,18 @@ def merge(idx, *args):
 
     assert all(len(x) == len(args[0]) for x in args[1:]), "Cannot merge list with different lenghts"
 
-    if len(args) == 1:
-        return args[0]
-
     idx = min(idx, len(args[0]) - 1) # For PHENICX
+
+    if len(args) == 1:
+        return args[0][idx]
+
     obj1_copy = deepcopy(args[0][idx])
-    for arg in args[1:]:
+    for arg in args:
         arg = arg[idx]
         for key in obj1_copy.keys():
             d1_element = obj1_copy[key]
             if type(d1_element) is dict:
-                obj1_copy[key] = merge(0, [d1_element], [arg[key]])
+                obj1_copy[key] = merge_dicts(0, [d1_element], [arg[key]])
             else:
                 obj1_copy[key] = d1_element + arg[key]
         del arg
@@ -252,14 +267,22 @@ def create_gt(data_fn, args, gztar=False):
             print(" elaborating " + song['title'])
             paths = song['ground-truth']
 
-            for path in paths:
+            for i, path in enumerate(paths):
                 final_path = os.path.join(json_file['install_dir'], path)
                 # get the index of the track from the path
                 idx = path[path.rfind('-') + 1 : path.rfind('.json.gz')]
 
                 # calling each function listed in the map and merge everything
-                out = merge(int(idx), *[func(final_path, **params)
+                out = merge_dicts(int(idx), *[func(final_path, **params)
                               for func, params in func_map[dataset['name']]])
+
+                # take the General Midi program number associated with the most
+                # similar instrument name
+                instrument = normalize_text(song['instruments'][i])
+                out['instrument'] = max(
+                    range(len(INSTRUMENT_MAP)),
+                    key=lambda x: text_similarity(INSTRUMENT_MAP[x], instrument)
+                )
 
                 print("   saving " + final_path)
                 json.dump(out, gzip.open(final_path, 'wt'))
