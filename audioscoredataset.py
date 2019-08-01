@@ -115,18 +115,21 @@ class Dataset:
         -------
         mix : numpy.ndarray
             the audio waveform of the mixed song
+        int :
+            The sampling rate of the audio array
         """
         recordings_fn = self.paths[idx][0]
 
         recordings = []
         for recording_fn in recordings_fn:
-            recordings.append(io.open_audio(joinpath(self.install_dir, recording_fn)))
+            audio, sr = io.open_audio(joinpath(self.install_dir, recording_fn))
+            recordings.append(audio)
 
         if len(recordings) > 1:
             mix = np.mean(recordings, axis=0)
         else:
             mix = recordings[0]
-        return mix
+        return mix, sr
 
     def get_gts(self, idx):
         """
@@ -164,13 +167,16 @@ class Dataset:
         Returns
         list : 
             a list of numpy.ndarray representing the audio of each source
+        int :
+            The sampling rate of the audio array
         """
         sources_fn = self.paths[idx][1]
 
         sources = []
         for source_fn in sources_fn:
-            sources.append(io.open_audio(joinpath(self.install_dir, source_fn)))
-        return sources
+            audio, sr = io.open_audio(joinpath(self.install_dir, source_fn))
+            sources.append(audio)
+        return sources, sr
 
     def get_item(self, idx):
         """
@@ -193,3 +199,73 @@ class Dataset:
         sources = self.get_source(idx)
         gts = self.get_gts(idx)
         return mix, sources, gts
+
+    def get_score(self, idx, score_type='non_aligned'):
+        """
+        Get the score of a certain score, with times of `score_type`
+
+        Arguments
+        ---------
+        idx : int
+            The index of the song to retrieve.
+        score_type : str
+            The key to retrieve the list of notes from the ground_truths
+
+        Returns
+        -------
+        numpy.ndarray :
+            A (n x 4) array where columns represent pitches, onsets (seconds),
+            offsets (seconds) and MIDI program instrument. Ordered by onsets.
+        """
+
+        print("    Loading ground truth")
+        gts = self.get_gts(idx)
+        mat = []
+        for gt in gts:
+            # This is due to Bach10 datasets which has one less note in non-aligned data
+            end_idx = None
+            if len(gt['pitches']) != len(gt[score_type]['onsets']):
+                end_idx = -abs(len(gt['pitches']) - len(gt[score_type]['onsets']))
+                print('---- This file contains different data in non-aligned and number of pitches!')
+                print('----', end_idx, 'different notes')
+            mat.append([gt['pitches'][:end_idx], gt[score_type]['onsets'], gt[score_type]['offsets'], gt['instrument']])
+
+        if len(mat) > 1:
+            # mat now contains one list per each ground-truth, concatenating
+            mat = np.concatenate(mat, axis=1).T
+        # transposing: one row per note
+        mat = mat.T
+        # ordering by onset
+        mat = mat[mat[:, 1].argsort()]
+        return mat
+
+    def get_audio(self, idx, sources=None):
+        """
+        Get the mixed audio of certain sources or of the mix
+
+        Arguments
+        ---------
+        idx : int
+            The index of the song to retrieve.
+        sources : list or None
+            A list containing the indices of sources to be mixed and returned.
+            If `None`, no sources will be mixed and the global mix will be
+            returned.
+
+        Arguments
+        ---------
+        numpy.ndarray :
+            A (n x 1) array which represents the mixed audio.
+        int :
+            The sampling rate of the audio array
+        """
+        print("    Loading audio")
+        if sources is not None:
+            audio, sr = self.get_source(idx)
+            audio = np.mean(audio, axis=0)
+        else:
+            audio, sr = self.get_mix(idx)
+
+        return audio, sr
+
+
