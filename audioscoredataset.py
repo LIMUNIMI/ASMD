@@ -214,21 +214,33 @@ class Dataset:
         Returns
         -------
         numpy.ndarray :
-            A (n x 4) array where columns represent pitches, onsets (seconds),
-            offsets (seconds) and MIDI program instrument. Ordered by onsets.
+            A (n x 6) array where columns represent pitches, onsets (seconds),
+            offsets (seconds), velocities, MIDI program instrument and number of
+            the instrument. Ordered by onsets. If some information is not
+            available, value -255 is used.
         """
 
         print("    Loading ground truth")
         gts = self.get_gts(idx)
         mat = []
-        for gt in gts:
+        for i, gt in enumerate(gts):
             # This is due to Bach10 datasets which has one less note in non-aligned data
             end_idx = None
             if len(gt['pitches']) != len(gt[score_type]['onsets']):
                 end_idx = -abs(len(gt['pitches']) - len(gt[score_type]['onsets']))
                 print('---- This file contains different data in non-aligned and number of pitches!')
                 print('----', end_idx, 'different notes')
-            mat.append([gt['pitches'][:end_idx], gt[score_type]['onsets'], gt[score_type]['offsets'], gt['instrument']])
+            ons = gt[score_type]['onsets']
+            if not ons:
+                ons = np.full_like(gt['pitches'], -255)
+            offs = gt[score_type]['offsets']
+            if not offs:
+                offs = np.full_like(ons, -255)
+            vel = gt['velocities']
+            if not vel:
+                vel = np.full_like(vel, -255)
+            num = np.full_like(ons, i)
+            mat.append([gt['pitches'][:end_idx], ons, offs, vel, gt['instrument'], num])
 
         if len(mat) > 1:
             # mat now contains one list per each ground-truth, concatenating
