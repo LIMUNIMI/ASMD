@@ -24,17 +24,17 @@ INSTRUMENT_MAP = list(map(normalize_text, INSTRUMENT_MAP))
 
 INSTRUMENT_MAP.append('drumkit')
 
-# The dictionary prototype for containing the ground-truth
+# The dictionary prototype for containing the ground_truth
 gt = {
-    "precise-alignment": {
+    "precise_alignment": {
         "onsets": [],
         "offsets": []
     },
-    "non-aligned": {
+    "non_aligned": {
         "onsets": [],
         "offsets": []
     },
-    "broad-alignment": {
+    "broad_alignment": {
         "onsets": [],
         "offsets": []
     },
@@ -61,11 +61,11 @@ def change_ext(input_fn, new_ext, no_dot=False):
     return root + new_ext
 
 
-def from_midi(midi_fn, alignment='precise-alignment', pitches=True, velocities=True, merge=True):
+def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True):
     """
-    Open a midi file `midi_fn` and convert it to our ground-truth
+    Open a midi file `midi_fn` and convert it to our ground_truth
     representation. This fills velocities, pitches and alignment (default:
-    `precise-alignment`). Returns a list containing a dictionary. `alignment`
+    `precise_alignment`). Returns a list containing a dictionary. `alignment`
     can also be `None` or `False`, in that case no alignment is filled. If `merge` is
     True, the returned list will contain a dictionary for each track.
     """
@@ -104,7 +104,7 @@ def from_midi(midi_fn, alignment='precise-alignment', pitches=True, velocities=T
 def from_phenicx_txt(txt_fn, non_aligned=False):
     """
     Open a txt file `txt_fn` in the PHENICX format and convert it to our
-    ground-truth representation. This fills: `precise-alignment`.
+    ground_truth representation. This fills: `precise_alignment`.
     """
     out_list = list()
     txt_fn = change_ext(txt_fn, 'txt')
@@ -116,8 +116,8 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
     for line in lines:
         fields = line.split(',')
         out["notes"].append(fields[2])
-        out["precise-alignment"]["onsets"].append(float(fields[0]))
-        out["precise-alignment"]["offsets"].append(float(fields[1]))
+        out["precise_alignment"]["onsets"].append(float(fields[0]))
+        out["precise_alignment"]["offsets"].append(float(fields[1]))
     out_list.append(out)
 
     return out_list
@@ -126,7 +126,7 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
 def from_bach10_txt(txt_fn, sources=range(4)):
     """
     Open a txt file `txt_fn` in the MIREX format (Bach10) and convert it to
-    our ground-truth representation. This fills: `precise-alignment`, `pitches`.
+    our ground_truth representation. This fills: `precise_alignment`, `pitches`.
     `sources` is an iterable containing the indices of the  sources to be
     considered, where the first source is 0. Returns a list of dictionary, one
     per source.
@@ -143,8 +143,8 @@ def from_bach10_txt(txt_fn, sources=range(4)):
             fields = line.split('\t')
             if int(fields[-1]) - 1 == source:
                 out["pitches"].append(int(fields[2]))
-                out["precise-alignment"]["onsets"].append(float(fields[0]) / 1000.)
-                out["precise-alignment"]["offsets"].append(float(fields[1]) / 1000.)
+                out["precise_alignment"]["onsets"].append(float(fields[0]) / 1000.)
+                out["precise_alignment"]["offsets"].append(float(fields[1]) / 1000.)
         out_list.append(out)
 
 
@@ -154,7 +154,7 @@ def from_bach10_txt(txt_fn, sources=range(4)):
 def from_bach10_f0(nmat_fn, sources=range(4)):
     """
     Open a matlab mat file `nmat_fn` in the MIREX format (Bach10) for frame
-    evaluation and convert it to our ground-truth representation. This fills:
+    evaluation and convert it to our ground_truth representation. This fills:
     `f0`.  `sources` is an iterable containing the indices of the  sources to
     be considered, where the first source is 0.  Returns a list of dictionary,
     one per source.
@@ -174,8 +174,8 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
 
 def from_musicnet_csv(csv_fn, fr=44100.0):
     """
-    Open a csv file `csv_fn` and convert it to our ground-truth representation.
-    This fills: `precise-alignment`, `non-aligned`, `pitches`.
+    Open a csv file `csv_fn` and convert it to our ground_truth representation.
+    This fills: `precise_alignment`, `non_aligned`, `pitches`.
     This returns a list containing only one dict. `fr` is the framerate of the
     audio files (MusicNet csv contains the frame number as onset and offsets of
     each note) and it shold be a float.
@@ -194,11 +194,11 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
         # duration name as string
         row = list(map(float, row[:-1]))
 
-        out["broad-alignment"]["onsets"].append((row[0]) / fr)
-        out["broad-alignment"]["offsets"].append(row[1] / fr)
+        out["broad_alignment"]["onsets"].append((row[0]) / fr)
+        out["broad_alignment"]["offsets"].append(row[1] / fr)
         out["pitches"].append(int(row[3]))
-        out["non-aligned"]["onsets"].append(row[4])
-        out["non-aligned"]["offsets"].append(row[4] + row[5])
+        out["non_aligned"]["onsets"].append(row[4])
+        out["non_aligned"]["offsets"].append(row[4] + row[5])
 
     return [out]
 
@@ -234,9 +234,9 @@ def merge_dicts(idx, *args):
 
 
 func_map = {
-    'Bach10': [(from_bach10_f0, {}), (from_bach10_txt, {}), (from_midi, {'alignment': 'non-aligned', 'pitches': False, 'velocities': False, 'merge': False})],
+    'Bach10': [(from_bach10_f0, {}), (from_bach10_txt, {}), (from_midi, {'alignment': 'non_aligned', 'pitches': False, 'velocities': False, 'merge': False})],
     'SMD': [(from_midi, {})],
-    'PHENICX': [(from_phenicx_txt, {}), (from_midi, {'alignment': 'non-aligned'})],
+    'PHENICX': [(from_phenicx_txt, {}), (from_midi, {'alignment': 'non_aligned'})],
     'MusicNet': [(from_musicnet_csv, {})],
     'TRIOS_dataset': [(from_midi, {})],
     'Maestro': [(from_midi, {})]
@@ -245,9 +245,9 @@ func_map = {
 
 def create_gt(data_fn, args, gztar=False):
     """
-    Parse the yaml file `data_fn` and convert all ground-truth to our
+    Parse the yaml file `data_fn` and convert all ground_truth to our
     representation. Then dump it according to the specified paths. Finally,
-    if `gztar` is True, create a gztar archive called 'ground-truth.tar.gz' in
+    if `gztar` is True, create a gztar archive called 'ground_truth.tar.gz' in
     this directory containing only the ground truth file in their final
     positions.
     """
@@ -265,7 +265,7 @@ def create_gt(data_fn, args, gztar=False):
         print("Starting processing " + dataset['name'])
         for song in dataset['songs']:
             print(" elaborating " + song['title'])
-            paths = song['ground-truth']
+            paths = song['ground_truth']
 
             for i, path in enumerate(paths):
                 final_path = os.path.join(json_file['install_dir'], path)
@@ -292,7 +292,7 @@ def create_gt(data_fn, args, gztar=False):
     # creating the archive
     if gztar:
         print("\n\nCreating the final archive")
-        with tarfile.open('ground-truth.tar.gz', mode='w:gz') as tf:
+        with tarfile.open('ground_truth.tar.gz', mode='w:gz') as tf:
             for fname in to_be_included_in_the_archive:
                 tf.add(fname)
 
