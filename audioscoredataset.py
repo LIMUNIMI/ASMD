@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import json
 import gzip
 from os.path import join as joinpath
@@ -68,7 +68,7 @@ class Dataset:
                     FLAG = False
 
             for gt in ground_truth:
-                if gt not in mydataset['ground_truth']:
+                if not mydataset['ground_truth'][gt]:
                     FLAG = False
                     break
 
@@ -84,7 +84,7 @@ class Dataset:
                             FLAG = False
 
                     if FLAG:
-                        gts = song['ground-truth']
+                        gts = song['ground_truth']
                         source = []
                         mix = []
                         if sources and "sources" in song.keys():
@@ -165,7 +165,7 @@ class Dataset:
             the index of the wanted item
 
         Returns
-        list : 
+        list :
             a list of numpy.ndarray representing the audio of each source
         int :
             The sampling rate of the audio array
@@ -188,9 +188,9 @@ class Dataset:
             the index of the wanted item
 
         Returns
-        numpy.ndarray : 
+        numpy.ndarray :
             audio of the mixed sources
-        list : 
+        list :
             a list of numpy.ndarray representing the audio of each source
         list :
             list of dictionary representing the ground truth of each single source
@@ -224,27 +224,41 @@ class Dataset:
         gts = self.get_gts(idx)
         mat = []
         for i, gt in enumerate(gts):
-            # This is due to Bach10 datasets which has one less note in non-aligned data
-            end_idx = None
+            # This is due to Bach10 datasets 
+            diff_notes = 0
             if len(gt['pitches']) != len(gt[score_type]['onsets']):
-                end_idx = -abs(len(gt['pitches']) - len(gt[score_type]['onsets']))
-                print('---- This file contains different data in non-aligned and number of pitches!')
-                print('----', end_idx, 'different notes')
+                import wdb; wdb.set_trace()
+                diff_notes = len(gt['pitches']) - len(gt[score_type]['onsets'])
+                print('---- This file contains different data in '+score_type+' and number of pitches!')
+                print('----', diff_notes, 'different notes')
+
+            # initilize each column
             ons = gt[score_type]['onsets']
             if not ons:
                 ons = np.full_like(gt['pitches'], -255)
             offs = gt[score_type]['offsets']
             if not offs:
                 offs = np.full_like(ons, -255)
+            pitches = gt['pitches']
+            if diff_notes < 0:
+                # not the best way to deal with this...
+                ons = ons[:len(pitches)]
+                offs = offs[:len(pitches)]
+            elif diff_notes > 0:
+                pitches = pitches[:len(ons)]
+
             vel = gt['velocities']
             if not vel:
-                vel = np.full_like(vel, -255)
+                vel = np.full_like(ons, -255)
             num = np.full_like(ons, i)
-            mat.append([gt['pitches'][:end_idx], ons, offs, vel, gt['instrument'], num])
+            instr = np.full_like(ons, gt['instrument'])
+            mat.append(np.array([pitches, ons, offs, vel, instr, num]))
 
         if len(mat) > 1:
             # mat now contains one list per each ground-truth, concatenating
-            mat = np.concatenate(mat, axis=1).T
+            mat = np.concatenate(mat, axis=1)
+        else:
+            mat = np.array(mat)
         # transposing: one row per note
         mat = mat.T
         # ordering by onset
