@@ -26,7 +26,7 @@ class Dataset:
         self.decompress_path = './'
         self.paths = []
 
-    def filter(self, instrument='', ensemble=False, mixed=True, sources=False, all=False, composer='', ground_truth=[]):
+    def filter(self, instrument='', ensemble=True, mixed=True, sources=False, all=False, composer='', ground_truth=[]):
         """
         Filters the dataset and load the paths of the songs which accomplish
         the filter described in `kwargs`. A field `paths` is added to this
@@ -227,7 +227,6 @@ class Dataset:
             # This is due to Bach10 datasets 
             diff_notes = 0
             if len(gt['pitches']) != len(gt[score_type]['onsets']):
-                import wdb; wdb.set_trace()
                 diff_notes = len(gt['pitches']) - len(gt[score_type]['onsets'])
                 print('---- This file contains different data in '+score_type+' and number of pitches!')
                 print('----', diff_notes, 'different notes')
