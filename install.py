@@ -177,9 +177,9 @@ def main():
         # just to be sure
         urlcleanup()
 
-    gt_archive_fn = 'ground-truth.tar.xz'
+    gt_archive_fn = 'ground_truth.tar.xz'
     if os.path.exists(gt_archive_fn):
-        # unpacking the ground-truth data
+        # unpacking the ground_truth data
         unpack_archive(gt_archive_fn, install_dir, 'xztar')
 
     # saving the Yaml file as modified
