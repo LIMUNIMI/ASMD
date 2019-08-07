@@ -5,11 +5,11 @@
          "name" : "TRIOS_dataset",
          "ensemble" : true,
          "ground_truth" : {
-            "broad_alignment" : false,
-            "f0" : false,
-            "non_aligned" : false,
-            "precise_alignment" : true,
-            "velocities" : true
+            "broad_alignment" : 0,
+            "f0" : 0,
+            "non_aligned" : 0,
+            "precise_alignment" : 1,
+            "velocities" : 1
          },
          "instruments" : [
             "clarinet",
@@ -176,11 +176,11 @@
          "name" : "MusicNet",
          "ensemble" : true,
          "ground_truth" : {
-            "broad_alignment" : true,
-            "f0" : false,
-            "non_aligned" : true,
-            "precise_alignment" : true,
-            "velocities" : true
+            "broad_alignment" : 2,
+            "f0" : 0,
+            "non_aligned" : 1,
+            "precise_alignment" : 0,
+            "velocities" : 0
          },
          "instruments" : [
             "piano",
@@ -5358,12 +5358,12 @@
          "name" : "SMD",
          "ensemble" : false,
          "ground_truth" : {
-            "broad_alignment" : false,
-            "errors" : false,
-            "f0" : false,
-            "non_aligned" : false,
-            "precise_alignment" : true,
-            "velocities" : true
+            "broad_alignment" : 0,
+            "errors" : 0,
+            "f0" : 0,
+            "non_aligned" : 0,
+            "precise_alignment" : 1,
+            "velocities" : 1
          },
          "instruments" : [
             "piano"
@@ -6141,11 +6141,11 @@
          "name" : "PHENICX",
          "ensemble" : true,
          "ground_truth" : {
-            "broad_alignment" : true,
-            "f0" : false,
-            "non_aligned" : false,
-            "precise_alignment" : false,
-            "velocities" : true
+            "broad_alignment" : 1,
+            "f0" : 0,
+            "non_aligned" : 0,
+            "precise_alignment" : 0,
+            "velocities" : 0
          },
          "instruments" : [
             "violin",
@@ -6636,11 +6636,11 @@
          "name" : "Maestro",
          "ensemble" : false,
          "ground_truth" : {
-            "broad_alignment" : false,
-            "f0" : false,
-            "non_aligned" : false,
-            "precise_alignment" : true,
-            "velocities" : true
+            "broad_alignment" : 0,
+            "f0" : 0,
+            "non_aligned" : 0,
+            "precise_alignment" : 1,
+            "velocities" : 1
          },
          "instruments" : [
             "piano"
@@ -25918,11 +25918,11 @@
          "name" : "Bach10",
          "ensemble" : true,
          "ground_truth" : {
-            "broad_alignment" : false,
-            "f0" : true,
-            "non_aligned" : true,
-            "precise_alignment" : true,
-            "velocities" : false
+            "broad_alignment" : 0,
+            "f0" : 2,
+            "non_aligned" : 1,
+            "precise_alignment" : 1,
+            "velocities" : 0
          },
          "instruments" : [
             "violin",

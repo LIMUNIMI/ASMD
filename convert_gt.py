@@ -104,7 +104,7 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
 def from_phenicx_txt(txt_fn, non_aligned=False):
     """
     Open a txt file `txt_fn` in the PHENICX format and convert it to our
-    ground_truth representation. This fills: `precise_alignment`.
+    ground_truth representation. This fills: `broad_alignment`.
     """
     out_list = list()
     txt_fn = change_ext(txt_fn, 'txt')
@@ -116,8 +116,8 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
     for line in lines:
         fields = line.split(',')
         out["notes"].append(fields[2])
-        out["precise_alignment"]["onsets"].append(float(fields[0]))
-        out["precise_alignment"]["offsets"].append(float(fields[1]))
+        out["broad_alignment"]["onsets"].append(float(fields[0]))
+        out["broad_alignment"]["offsets"].append(float(fields[1]))
     out_list.append(out)
 
     return out_list
@@ -175,7 +175,7 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
 def from_musicnet_csv(csv_fn, fr=44100.0):
     """
     Open a csv file `csv_fn` and convert it to our ground_truth representation.
-    This fills: `precise_alignment`, `non_aligned`, `pitches`.
+    This fills: `broad_alignment`, `non_aligned`, `pitches`.
     This returns a list containing only one dict. `fr` is the framerate of the
     audio files (MusicNet csv contains the frame number as onset and offsets of
     each note) and it shold be a float.
@@ -236,7 +236,7 @@ def merge_dicts(idx, *args):
 func_map = {
     'Bach10': [(from_bach10_f0, {}), (from_bach10_txt, {}), (from_midi, {'alignment': 'non_aligned', 'pitches': False, 'velocities': False, 'merge': False})],
     'SMD': [(from_midi, {})],
-    'PHENICX': [(from_phenicx_txt, {}), (from_midi, {'alignment': 'non_aligned'})],
+    'PHENICX': [(from_phenicx_txt, {})],
     'MusicNet': [(from_musicnet_csv, {})],
     'TRIOS_dataset': [(from_midi, {})],
     'Maestro': [(from_midi, {})]
