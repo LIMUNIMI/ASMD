@@ -2,3 +2,6 @@
 	path = utils
 	url = https://framagit.org/sapo/py-audio-utils.git
 	branch = master
+[submodule "quantization"]
+	path = quantization
+	url = https://framagit.org/sapo/CompleteTranscription.git

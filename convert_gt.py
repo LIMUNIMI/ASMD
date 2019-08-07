@@ -168,7 +168,6 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
         out["f0"] = f0s[source].tolist()
         out_list.append(out)
 
-
     return out_list
 
 
@@ -219,16 +218,17 @@ def merge_dicts(idx, *args):
         return args[0][idx]
 
     obj1_copy = deepcopy(args[0][idx])
-    for arg in args:
+    for arg in args[1:]:
         arg = arg[idx]
         for key in obj1_copy.keys():
             d1_element = obj1_copy[key]
             if type(d1_element) is dict:
                 obj1_copy[key] = merge_dicts(0, [d1_element], [arg[key]])
+            elif type(d1_element) is int:
+                obj1_copy[key] = min(d1_element, arg[key])
             else:
                 obj1_copy[key] = d1_element + arg[key]
         del arg
-                # d1_element.append(d2[key])
 
     return obj1_copy
 
