@@ -4,6 +4,21 @@ This file describes multiple datasets containing data about music performances.
 All the datasets are described with the same fields, so that you can use them
 easily disregarding their internal structure
 
+- [Usage](#usage)
+  * [datasets.json](#datasetsjson)
+  * [Ground-truth json format](#ground-truth-json-format)
+  * [API](#api)
+    + [Matlab](#matlab)
+    + [Python](#python)
+  * [Installation](#installation)
+- [Reproduce from scratch](#reproduce-from-scratch)
+- [Adding new datasets](#adding-new-datasets)
+  * [Adding sections to `datasets.json`](#adding-sections-to--datasetsjson-)
+  * [Provide a conversion function](#provide-a-conversion-function)
+  * [Add your function to `func_map`](#add-your-function-to--func-map-)
+  * [Run `conversion_gt`](#run--conversion-gt-)
+
+# Usage
 
 ## datasets.json 
 
@@ -18,40 +33,35 @@ following field:
 1. `ensemble`: `true` if contains multiple instruments, `false` otherwise
 2. `instruments`: the list of the instruments contained in the dataset
 3. `sources`:
-1. `format`: the format of the audio recordings of the single
+    1. `format`: the format of the audio recordings of the single
 source-separated tracks
 4. `recording`:
-1. `format`: the format of the audio recordings of the mixed tracks
-5. `ground_truth`:
-N.B. each ground_truth has an `int` value:
-        -  `0`: false
-        -  `1`: true, manual or mechanichal (Disklavier) annotation
-        -  `2`: true, automatic annotation with state-of-art algorithms
-            1. `non_aligned`: `true` if non_aligned scores are provided
-            2. `broad_alignment`: `true` if broad_alignment scores are provided
-            3. `precise_alignment`: `true` if precisely aligned scores are provided
-            4. `velocities`: `true` if velocities are provided
-            5. `f0`: `true` if f0 values are provided
-            6.  `songs`: the list of songs in the dataset unknown
-            1. `composer`: the composer family name
-            2. `instruments`: list of instruments in the song
-            3. `recording`: dictionary
-            1. `path`: a list of paths to be mixed for reconstructing the full track
-            (usually only one)
-            4. `sources`: dictionary
-            1. `path`: a list of paths to the single instrument tracks in the same
-            order as `instruments`
-            5. `ground_truth`: list of paths to the ground_truth json files.
-            One ground_truth path per instrument is provided if the dataset contains
-            instrument-specific data, otherwise they are all mixed in one big ground_truth.
-            The order of the ground_truth path is the same of sources and of the
-            instruments. Note that some ground_truth paths can be identical (as in PHENICX
-            for indicating that violin1 and violin2 are playing exactly the same thing).
-            7.  `url`: the url to download the dataset including the protocol
-            8.  `post-process`: a list of shell commands to be executed to prepare the
-            dataset; they can be lists themselves to allow the use of anchors to
-            "install_dir" field with the syntax "&install_dir"
-            9.  `unpack`: `true` if the url needs to be unpacked
+    1. `format`: the format of the audio recordings of the mixed tracks
+5. `ground_truth`: *N.B. each ground_truth has an `int` value, indicating `0` -> false, `1` -> true (manual or mechanical - Disklavier - annotation), `2` -> true (automatic annotation with state-of-art algorithms)*
+    1. `non_aligned`: `true` if non_aligned scores are provided
+    2. `broad_alignment`: `true` if broad_alignment scores are provided
+    3. `precise_alignment`: `true` if precisely aligned scores are provided
+    4. `velocities`: `true` if velocities are provided
+    5. `f0`: `true` if f0 values are provided
+6.  `songs`: the list of songs in the dataset
+    1. `composer`: the composer family name
+    2. `instruments`: list of instruments in the song
+    3. `recording`: dictionary
+        1. `path`: a list of paths to be mixed for reconstructing the full track
+(usually only one)
+    4. `sources`: dictionary
+        1. `path`: a list of paths to the single instrument tracks in the same
+order as `instruments`
+    5. `ground_truth`: list of paths to the ground_truth json files.
+One ground_truth path per instrument is alway provided. The order of the 
+ground_truth path is the same of sources and of the instruments. Note that 
+some ground_truth paths can be identical (as in PHENICX for indicating that 
+violin1 and violin2 are playing exactly the same thing).
+7.  `url`: the url to download the dataset including the protocol
+8.  `post-process`: a list of shell commands to be executed to prepare the
+dataset; they can be lists themselves to allow the use of anchors to
+install_dir" field with the syntax "&install_dir"
+9.  `unpack`: `true` if the url needs to be unpacked
 
 
 In general, I maintained the following principles:
@@ -153,18 +163,20 @@ structured_array representing the ground_truth as loaded from the json file.
 
 Example:
 
-```matlab
+```python
 import audioscoredataset as asd
 d = asd.Dataset('./datasets.json')
 d.filter(instrument='piano', ensemble=False, composer='Mozart', ground_truth=['precise_alignment'])
 
-audio_array, sources_array, ground_truth_array = d.get_item(1);
+audio_array, sources_array, ground_truth_array = d.get_item(1)
 
-audio_array = d.get_mix(2);
-source_array = d.get_source(2);
-ground_truth_list = d.get_gts(2);
-```
+audio_array = d.get_mix(2)
+source_array = d.get_source(2)
+ground_truth_list = d.get_gts(2)
+
 mat = d.get_score(2, score_type='precise_alignment')
+
+```
 
 ## Installation
 1. Install `python 3`
@@ -172,7 +184,7 @@ mat = d.get_score(2, score_type='precise_alignment')
 python3 install.py
 3. Follow the steps.
 
-## Reproduce from scratch
+# Reproduce from scratch
 
 If you want, you can also recreate the annotations
 from scratch by running the python 3 script `convert_gt.py` after having
@@ -267,7 +279,7 @@ but please, take care of it.
             }
         )
     ]
-    ```
+```
 
 ## Run `conversion_gt`
 
