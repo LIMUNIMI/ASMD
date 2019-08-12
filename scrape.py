@@ -148,10 +148,10 @@ def scrape_composer_page(db, session, link, composer_id, url, recursion_level):
     r = http_get(page_url, session)
     if r.success:
         bs4 = BeautifulSoup(r.text, "html.parser")
-        # looking for first midi element
-        element = bs4.find('p', {'class': 'midi'})
-        if not element:
-            # page without midi, onli list of subsections (e.g., bach,
+        # looking for midi elements
+        midis = bs4.find_all('p', {'class': 'midi'})
+        if not midis:
+            # page without midi, only list of subsections (e.g., bach,
             # beethoven...)
             lists = bs4.find_all('li')
             for list in lists:
@@ -161,19 +161,14 @@ def scrape_composer_page(db, session, link, composer_id, url, recursion_level):
                     scrape_composer_page(db, session, link, composer_id, page_url, recursion_level+1)
             return
 
-        while True:
-            # skip all elements with no class
-            element = element.find_next_sibling()
-            if not element:
-                return
-            css_class = element.get('class')
-            if css_class:
-                if css_class[0] == 'midi':
-                    add_song(db, element, page_url, composer_id)
+        for element in midis:
+            add_song(db, element, page_url, composer_id)
 
 def main():
     db = create_db_tables()
     s = requests.Session()
+
+    composer_id = 0
     for character in ascii_lowercase:
         print("Chracter", character)
         url = BASE_URL + 'classical/' + character + '.htm'
@@ -187,7 +182,7 @@ def main():
             table = midi_link.find_parent('td')
             # take all the composers
             composers = table.find_all('h1')
-            for composer_id, composer in enumerate(composers, start=1):
+            for composer_id, composer in enumerate(composers, start=composer_id + 1):
                 add_composer(db, composer)
 
                 # looking for songs from composer
@@ -210,6 +205,8 @@ def main():
                 db.commit()
         else:
             print("Request not succesful, skipping")
+    # just to be sure
+    db.commit()
 
 if __name__ == "__main__":
     main()
