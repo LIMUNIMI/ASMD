@@ -226,10 +226,8 @@ class Dataset:
         for i, gt in enumerate(gts):
             # This is due to Bach10 datasets 
             diff_notes = 0
-            if len(gt['pitches']) != len(gt[score_type]['onsets']):
-                diff_notes = len(gt['pitches']) - len(gt[score_type]['onsets'])
-                print('---- This file contains different data in '+score_type+' and number of pitches!')
-                print('----', diff_notes, 'different notes')
+            find_bach10_errors(gt, score_type)
+            truncate_score(gt)
 
             # initilize each column
             ons = gt[score_type]['onsets']
@@ -264,6 +262,7 @@ class Dataset:
         mat = mat[mat[:, 1].argsort()]
         return mat
 
+
     def get_audio(self, idx, sources=None):
         """
         Get the mixed audio of certain sources or of the mix
@@ -294,3 +293,52 @@ class Dataset:
         return audio, sr
 
 
+def find_bach10_errors(gt, score_type):
+    """
+    Fix the ground-truth so that:
+        - the extra notes in `score_type` are removed
+        - the missing notes are inserted in middle of the last correct note,
+          and the last correct note is halfed.
+
+    NOTE
+    ----
+    NOTE IMPLEMENTED YET [probably never]
+
+    Arguments
+    ---------
+    gt : dict
+        the ground truth
+    score_type : str
+        the key to access the score to be fixed in the ground truth
+        [non_aligned, broad_alignment, precise_alignment]
+
+    Returns
+    -------
+    bool :
+        if errors are detected
+    """
+    if len(gt['pitches']) != len(gt[score_type]['onsets']):
+        diff_notes = len(gt['pitches']) - len(gt[score_type]['onsets'])
+        print('---- This file contains different data in '+score_type+' and number of pitches!')
+        print('----', diff_notes, 'different notes')
+        return True
+    return False
+
+def truncate_score(gt):
+    """
+    Takes a ground truth and truncates all its lists so that the number of pitches is the same of the scoretype with the minimum number of pitches in this ground_truth
+    """
+    length_to_truncate = len(gt['pitches'])
+    score_types = ['non_aligned', 'precise_alignment', 'broad_alignment']
+
+    # look for the length of the final lists
+    for score_type in score_types:
+        if len(gt[score_type]['onsets']) > 0:
+            length_to_truncate = min(len(gt[score_type]['onsets']), length_to_truncate)
+
+    # truncating lists
+    gt['pitches'] = gt['pitches'][:length_to_truncate]
+    for score_type in score_types:
+        if len(gt[score_type]['onsets']) > 0:
+            gt[score_type]['onsets'] = gt[score_type]['onsets'][:length_to_truncate]
+            gt[score_type]['offsets'] = gt[score_type]['offsets'][:length_to_truncate]
