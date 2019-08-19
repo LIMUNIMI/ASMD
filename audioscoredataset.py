@@ -5,6 +5,7 @@ from os.path import join as joinpath
 from .utils import io
 import numpy as np
 
+
 class Dataset:
 
     def __init__(self, path):
@@ -57,7 +58,7 @@ class Dataset:
             (logical AND among list elements)
         """
         for mydataset in self.data['datasets']:
-            FLAG = True;
+            FLAG = True
 
             # checking dataset-level filters
             if ensemble != mydataset['ensemble']:
@@ -147,7 +148,7 @@ class Dataset:
         """
 
         gts = []
-        gts_fn = self.paths[idx][2];
+        gts_fn = self.paths[idx][2]
         for gt_fn in gts_fn:
             input_fn = joinpath(self.install_dir, gt_fn)
 
@@ -224,7 +225,7 @@ class Dataset:
         gts = self.get_gts(idx)
         mat = []
         for i, gt in enumerate(gts):
-            # This is due to Bach10 datasets 
+            # This is due to Bach10 datasets
             diff_notes = 0
             find_bach10_errors(gt, score_type)
             truncate_score(gt)
@@ -233,20 +234,17 @@ class Dataset:
             ons = gt[score_type]['onsets']
             if not ons:
                 ons = np.full_like(gt['pitches'], -255)
+
             offs = gt[score_type]['offsets']
             if not offs:
                 offs = np.full_like(ons, -255)
+
             pitches = gt['pitches']
-            if diff_notes < 0:
-                # not the best way to deal with this...
-                ons = ons[:len(pitches)]
-                offs = offs[:len(pitches)]
-            elif diff_notes > 0:
-                pitches = pitches[:len(ons)]
 
             vel = gt['velocities']
             if not vel:
                 vel = np.full_like(ons, -255)
+
             num = np.full_like(ons, i)
             instr = np.full_like(ons, gt['instrument'])
             mat.append(np.array([pitches, ons, offs, vel, instr, num]))
@@ -261,7 +259,6 @@ class Dataset:
         # ordering by onset
         mat = mat[mat[:, 1].argsort()]
         return mat
-
 
     def get_audio(self, idx, sources=None):
         """
@@ -283,6 +280,7 @@ class Dataset:
         int :
             The sampling rate of the audio array
         """
+
         print("    Loading audio")
         if sources is not None:
             audio, sr = self.get_source(idx)
@@ -319,10 +317,12 @@ def find_bach10_errors(gt, score_type):
     """
     if len(gt['pitches']) != len(gt[score_type]['onsets']):
         diff_notes = len(gt['pitches']) - len(gt[score_type]['onsets'])
-        print('---- This file contains different data in '+score_type+' and number of pitches!')
+        print('---- This file contains different data in ' +
+              score_type+' and number of pitches!')
         print('----', diff_notes, 'different notes')
         return True
     return False
+
 
 def truncate_score(gt):
     """
@@ -334,10 +334,12 @@ def truncate_score(gt):
     # look for the length of the final lists
     for score_type in score_types:
         if len(gt[score_type]['onsets']) > 0:
-            length_to_truncate = min(len(gt[score_type]['onsets']), length_to_truncate)
+            length_to_truncate = min(
+                len(gt[score_type]['onsets']), length_to_truncate)
 
     # truncating lists
     gt['pitches'] = gt['pitches'][:length_to_truncate]
+    gt['velocities'] = gt['velocities'][:length_to_truncate]
     for score_type in score_types:
         if len(gt[score_type]['onsets']) > 0:
             gt[score_type]['onsets'] = gt[score_type]['onsets'][:length_to_truncate]

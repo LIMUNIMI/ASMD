@@ -226,5 +226,89 @@ classdef AudioScoreDataset < handle
             gts = obj.get_gts(idx);
         end
 
+        function mat_score = get_score(obj, idx, mat_score_type)
+            % - `idx`: the index of the wanted item.
+            % - `mat_score_type`: a string indicating the type of the mat_score
+            %
+            % RETURNED:
+            % - `mat_score`: the ground-truth of all the instruments (struct array
+            % with fields)
+            mat_score = [];
+            disp('    Loading ground truth');
+            gts = obj.get_gts(idx);
+            for i = 1:length(gts)
+                gt = gts(1, i);
+                % This is due to Bach10 datasets
+                diff_notes = 0;
+                find_bach10_errors(gt, mat_score_type);
+                gt = truncate_score(gt);
+
+                % initialize each column
+                score_type_ = getfield(gt, mat_score_type);
+                ons = score_type_.onsets;
+                if length(ons) == 0
+                    ons = repmat(-255, length(gt.pitches), 1);
+                end
+
+                offs = score_type_.offsets;
+                if length(offs) == 0
+                    offs = repmat(-255, length(gt.pitches), 1);
+                end
+
+                vel = gt.velocities;
+                if length(vel) == 0
+                    vel = repmat(-255, length(gt.pitches), 1);
+                end
+
+                num = repmat(i, length(gt.pitches), 1);
+                instr = repmat(gt.instrument, length(gt.pitches), 1);
+
+                try
+                    mat_score = [mat_score; gt.pitches ons offs vel instr num];
+                catch
+                    keyboard
+                end
+
+            end
+            % sorting by onset
+            mat_score = sortrows(mat_score, 2);
+        end
+
     end % closing method section
 end % closing class
+
+function find_bach10_errors(gt, score_type)
+    if length(gt.pitches) ~= length(gt.non_aligned.onsets)
+        end_idx = length(gt.pitches) - length(gt.non_aligned.onsets);
+        disp('---- This file contains different data in non-aligned and number of pitches!');
+        fprintf('---- %d different notes\n', end_idx);
+    end
+end
+
+function gt = truncate_score(gt)
+    score_types = [ "non_aligned", "precise_alignment", "broad_alignment" ];
+
+    % looking for the length of the final lists
+    len = length(gt.pitches);
+    for score_type = score_types
+        score_type_ = getfield(gt, score_type);
+        onsets_len = length(score_type_.onsets);
+        if onsets_len > 0
+            len = min(len, onsets_len);
+        end
+    end
+    
+    % truncating lists
+    if length(gt.velocities) > 0
+        len = min(len, length(gt.velocities));
+        gt.velocities = gt.velocities(1:len);
+    end
+
+    gt.pitches = gt.pitches(1:len);
+    for score_type = score_types
+        if length(gt.(score_type).onsets) > 0
+            gt.(score_type).onsets = gt.(score_type).onsets(1:len);
+            gt.(score_type).offsets = gt.(score_type).offsets(1:len);
+        end
+    end
+end
