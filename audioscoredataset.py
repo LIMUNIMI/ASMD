@@ -8,6 +8,9 @@ import numpy as np
 
 class Dataset:
 
+    def __len__(self):
+        return len(self.paths)
+
     def __init__(self, path):
         """
         Load the dataset description
@@ -27,7 +30,7 @@ class Dataset:
         self.decompress_path = './'
         self.paths = []
 
-    def filter(self, instrument='', ensemble=True, mixed=True, sources=False, all=False, composer='', ground_truth=[]):
+    def filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', ground_truth=[]):
         """
         Filters the dataset and load the paths of the songs which accomplish
         the filter described in `kwargs`. A field `paths` is added to this
@@ -40,7 +43,7 @@ class Dataset:
             want to select (only one supported for now)
         ensemble : bool
             if loading songs which are composed for an ensemble of
-            instrument (default  False )
+            instrument. If None, ensemble field will not be checked (default  None )
         mixed : bool
             if returning the mixed track for ensemble song
             (default  True )
@@ -61,10 +64,11 @@ class Dataset:
             FLAG = True
 
             # checking dataset-level filters
-            if ensemble != mydataset['ensemble']:
-                FLAG = False
+            if ensemble is not None:
+                if ensemble != mydataset['ensemble']:
+                    FLAG = False
 
-            if not instrument:
+            if instrument:
                 if instrument not in mydataset['instruments']:
                     FLAG = False
 
