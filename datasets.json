@@ -25889,32 +25889,6 @@
          "url" : "https://storage.googleapis.com/magentadata/datasets/maestro/v2.0.0/maestro-v2.0.0.zip"
       },
       {
-         "name" : "flute-audio-labelled-database-AMT",
-         "ensemble" : false,
-         "ground_truth" : {
-            "broad_alignment" : "unknwon",
-            "errors" : "unknown",
-            "f0" : false,
-            "non_aligned" : "unknown",
-            "precise_alignment" : "unknown",
-            "velocities" : "unknown"
-         },
-         "instruments" : [
-            "flute"
-         ],
-         "login" : false,
-         "post-process" : "unknown",
-         "recording" : {
-            "format" : "unknown"
-         },
-         "sources" : {
-            "format" : "unknown"
-         },
-         "unpack" : true,
-         "url" : "https://zenodo.org/record/1408985/files/flute-audio-labelled-database-AMT.zip",
-         "songs" : []
-      },
-      {
          "name" : "Bach10",
          "ensemble" : true,
          "ground_truth" : {
