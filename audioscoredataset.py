@@ -2,7 +2,7 @@
 import json
 import gzip
 from os.path import join as joinpath
-from .utils import io
+from utils import io
 import numpy as np
 
 

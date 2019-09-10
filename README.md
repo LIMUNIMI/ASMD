@@ -17,6 +17,7 @@ easily disregarding their internal structure
   * [Provide a conversion function](#provide-a-conversion-function)
   * [Add your function to `func_map`](#add-your-function-to--func-map-)
   * [Run `conversion_gt`](#run--conversion-gt-)
+  * [Generate misaligned data](#generate--misaligned--data)
 
 # Usage
 
@@ -287,3 +288,16 @@ You can run the script with `python 3`. You can also skip the already existing
 datasets by simply add their names as argument. If you do this, their ground
 truth will not be added to the final archive, thus, remember to backup the
 previous one and to merge the archives.
+
+## Generate misaligned data
+
+If you want, you can generate misaligned data by rerunning `conversion_gt` script. First,
+after having created the ground-truth, run `alignment_stats`, which collects
+data about the script with real non-aligned scores and saves stats in a pickled
+file in this directory. Then, run `conversion_gt` again: it will load the
+pickled file and will generate misaligned data by using the same deviation
+distribution of the available non-aligned data.
+
+Note that misaligned data should be annotated as `2` in the `ground_truth` value
+of the dataset description (see [datasets.json](#datasetsjson) ), otherwise no
+misaligned value will be added to the `non_aligned` field.
