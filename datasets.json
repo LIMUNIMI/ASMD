@@ -7,7 +7,7 @@
          "ground_truth" : {
             "broad_alignment" : 0,
             "f0" : 0,
-            "non_aligned" : 0,
+            "non_aligned" : 2,
             "precise_alignment" : 1,
             "velocities" : 1
          },
@@ -5361,7 +5361,7 @@
             "broad_alignment" : 0,
             "errors" : 0,
             "f0" : 0,
-            "non_aligned" : 0,
+            "non_aligned" : 2,
             "precise_alignment" : 1,
             "velocities" : 1
          },
@@ -6143,7 +6143,7 @@
          "ground_truth" : {
             "broad_alignment" : 1,
             "f0" : 0,
-            "non_aligned" : 0,
+            "non_aligned" : 2,
             "precise_alignment" : 0,
             "velocities" : 0
          },
@@ -6638,7 +6638,7 @@
          "ground_truth" : {
             "broad_alignment" : 0,
             "f0" : 0,
-            "non_aligned" : 0,
+            "non_aligned" : 2,
             "precise_alignment" : 1,
             "velocities" : 1
          },
