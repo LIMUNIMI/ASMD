@@ -1,10 +1,7 @@
 from audioscoredataset import Dataset
 import numpy as np
 from sklearn.preprocessing import StandardScaler
-import plotly.graph_objects as go
-import plotly.offline as plt
 from random import choices, uniform
-import pickle
 
 
 data = Dataset('datasets.json')
@@ -80,23 +77,24 @@ def fill_stats(alignments):
     stats = Stats()
 
     for alignment in alignments:
-        data.filter(ground_truth=["non_aligned", alignment])
+        data.paths = []
+        data.filter(ground_truth=[("non_aligned", 1), (alignment, 1)])
 
         for i in range(len(data)):
             mat_aligned = data.get_score(i, score_type=alignment)
             mat_score = data.get_score(i, score_type='non_aligned')
-            try:
-                ons_diffs = mat_score[:, 1] - mat_aligned[:, 1]
-                offs_diffs = mat_score[:, 2] - mat_aligned[:, 2]
-            except:
-                import ipdb; ipdb.set_trace()
+            ons_diffs = mat_score[:, 1] - mat_aligned[:, 1]
+            offs_diffs = mat_score[:, 2] - mat_aligned[:, 2]
             stats.add_data(ons_diffs, offs_diffs)
 
     return stats
 
 if __name__ == '__main__':
-    stats = fill_stats(['precise_alignment'])
-    # _ons_hist, _offs_hist = take_hist('broad_alignment')
+    import os
+    import pickle
+    import plotly.graph_objects as go
+    import plotly.offline as plt
+    stats = fill_stats(['precise_alignment', 'broad_alignment'])
     stats.compute_hist()
     seed()
     v1 = stats.get_random_onset_dev()
@@ -107,7 +105,9 @@ if __name__ == '__main__':
     print("Testing getting random value")
     print(v1, v2, v3, v4, v5)
 
-    pickle.dump(stats, open("alignment_stats.pkl", 'wb'))
+    if os.path.exists("_alignment_stats.pkl"):
+        os.remove("_alignment_stats.pkl")
+    pickle.dump(stats, open("_alignment_stats.pkl", 'wb'))
 
     fig1 = go.Figure(data=[go.Scatter(y=stats.ons_hist[0], x=stats.ons_hist[1])])
     plt.plot(fig1, filename='ons.html')

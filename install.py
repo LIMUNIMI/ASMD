@@ -170,7 +170,7 @@ def main():
         if d['post-process'] != 'unknown':
             # recursively concatenate commands
             command = '; '.join(list(map(lambda x: ''.join(x), d['post-process'])))
-            command.replace('&install_dir', json_file['install_dir'])
+            command = command.replace('&install_dir', json_file['install_dir'])
             os.system(command)
         print("------------------")
 
