@@ -14,7 +14,10 @@ from pretty_midi.constants import INSTRUMENT_MAP
 from alignment_stats import Stats, seed
 import numpy as np
 import multiprocessing as mp
+import re
 
+#: if True, run conversion in parallel processes
+PARALLEL = False
 
 def normalize_text(text):
     return ''.join(ch for ch in text if ch.isalnum()).lower()
@@ -118,11 +121,12 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
 
     out = deepcopy(gt)
     for line in lines:
-        fields = line.split(',')
+        fields = re.split(',|\n', line)
         out["notes"].append(fields[2])
+        out["pitches"].append(pretty_midi.note_name_to_number(fields[2]))
         out["broad_alignment"]["onsets"].append(float(fields[0]))
         out["broad_alignment"]["offsets"].append(float(fields[1]))
-    out_list.append(out)
+        out_list.append(out)
 
     return out_list
 
@@ -272,6 +276,10 @@ def misalign(ons_dev, offs_dev, mean, out, stats):
 
 
 def conversion(arg):
+    """
+    A function that is run on each song to convert its ground_truth.
+    Intended to be run in parallel.
+    """
     l, song, json_file, dataset, stats, ons_dev, offs_dev, mean = arg
     print(" elaborating " + song['title'])
     paths = song['ground_truth']
@@ -347,16 +355,18 @@ def create_gt(data_fn, args, gztar=False):
         else:
             arg = [(i, song, json_file, dataset, None, None, None, None)
                    for i, song in enumerate(dataset['songs'])]
-        # for l, song in enumerate(dataset['songs']):
-        #     conversion(arg[l])
-        CPU = os.cpu_count() - 1
-        p = mp.Pool(CPU)
-        result = p.map_async(
-            conversion,
-            arg,
-            len(dataset['songs']) // CPU + 1
-        )
-        to_be_included_in_the_archive += sum(result.get(), [])
+        if not PARALLEL:
+            for l, song in enumerate(dataset['songs']):
+                to_be_included_in_the_archive += conversion(arg[l])
+        else:
+            CPU = os.cpu_count() - 1
+            p = mp.Pool(CPU)
+            result = p.map_async(
+                conversion,
+                arg,
+                len(dataset['songs']) // CPU + 1
+            )
+            to_be_included_in_the_archive += sum(result.get(), [])
 
     # creating the archive
     if gztar:
