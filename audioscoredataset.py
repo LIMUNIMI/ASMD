@@ -56,9 +56,14 @@ class Dataset:
             False , only the target instrument is returned. Default False.
         composer : string
             the surname of the composer to filter
-        ground_truth : list of strings
-            a list of strings representing the type of ground-truths needed
-            (logical AND among list elements)
+        ground_truth : list of tuples
+            a list of tuples representing the type of ground-truths needed
+            (logical AND among list elements).
+            Each tuple has the form `('needed_ground_truth_type',
+            level_of_truth)`, where `needed_ground_truth_type` is the key of
+            the ground_truth dictionary and `level_of_truth` is an int ranging
+            from 0 to 2 (0->False, 1->True (manual annotation),
+                         2->True(automatic annotation))
         """
         for mydataset in self.data['datasets']:
             FLAG = True
@@ -73,7 +78,7 @@ class Dataset:
                     FLAG = False
 
             for gt in ground_truth:
-                if not mydataset['ground_truth'][gt]:
+                if mydataset['ground_truth'][gt[0]] != gt[1]:
                     FLAG = False
                     break
 
@@ -257,7 +262,7 @@ class Dataset:
             # mat now contains one list per each ground-truth, concatenating
             mat = np.concatenate(mat, axis=1)
         else:
-            mat = np.array(mat)
+            mat = np.array(mat[0])
         # transposing: one row per note
         mat = mat.T
         # ordering by onset
