@@ -199,7 +199,7 @@ In order to add new datasets, you have to:
 
 1. Add the correspondent section in `datasets.json`
 2. Provide a conversion function for the ground truth
-3. Add the conversion function to the structure `func_map` in `convert_gt.py`
+3. Add the conversion function to the structure `func_map` in `convert_from_file.py`
 4. Rerun the `convert_gt.py` script
 
 ## Adding sections to `datasets.json`
@@ -255,11 +255,11 @@ Finally, you can also use multiple conversion functions if your ground-truth is
 splitted among multiple files, but note that the final ground-truth is produced
 as the sum of all the elements of all the dictionaries created.
 
-**The core of the conversion is the function `merge`. Read it and be sure to
-understand its behavior.** Please, take care of how the `merge` function
-behaves with your conversion function, since it is really hard to write a
-single `merge` function for all the possible representations. It should work,
-but please, take care of it.
+**The core of the conversion is the function `conversion_tool.merge`. Read it
+and be sure to understand its behavior.** Please, take care of how the `merge`
+function behaves with your conversion function, since it is really hard to
+write a single `merge` function for all the possible representations. It should
+work, but please, take care of it.
 
 ## Add your function to `func_map`
 
@@ -291,12 +291,12 @@ previous one and to merge the archives.
 
 ## Generate misaligned data
 
-If you want, you can generate misaligned data by rerunning `conversion_gt` script. First,
-after having created the ground-truth, run `alignment_stats`, which collects
-data about the script with real non-aligned scores and saves stats in a pickled
-file in this directory. Then, run `conversion_gt` again: it will load the
-pickled file and will generate misaligned data by using the same deviation
-distribution of the available non-aligned data.
+If you want, you can generate misaligned data. First, after having created the
+ground-truth, run `alignment_stats`, which collects data about the datasets
+with real non-aligned scores and saves stats in a pickled file in this
+directory. Then, run `conversion_gt` again: it will load the pickled file and
+will generate misaligned data by using the same deviation distribution of the
+available non-aligned data.
 
 Note that misaligned data should be annotated as `2` in the `ground_truth` value
 of the dataset description (see [datasets.json](#datasetsjson) ), otherwise no
