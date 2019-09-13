@@ -234,7 +234,7 @@ class Dataset:
         gts = self.get_gts(idx)
         mat = []
         for i, gt in enumerate(gts):
-            # This is due to Bach10 datasets
+            # Make pitches and alignments of thesame number of notes
             diff_notes = 0
             find_bach10_errors(gt, score_type)
             truncate_score(gt)

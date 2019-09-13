@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#cython: language_level=3
 import json
 from copy import deepcopy
 import tarfile
@@ -12,7 +12,7 @@ from alignment_stats import seed
 import multiprocessing as mp
 
 #: if True, run conversion in parallel processes
-PARALLEL = False
+PARALLEL = True
 
 
 def normalize_text(text):
@@ -81,7 +81,21 @@ def misalign(ons_dev, offs_dev, mean, out, stats):
         np.array(onsets) * ons_dev + mean
     offsets = np.array(out[aligned]['offsets']) + \
         np.array(offsets) * offs_dev + mean
-    return onsets.tolist(), offsets.tolist()
+
+    # set first onset to 0
+    first_onset = onsets.min()
+    onsets -= first_onset
+    offsets -= first_onset
+
+    # make each offset being greater than the onset
+    def fix_offsets(i):
+        if offsets[i] > onsets[i]:
+            return offsets[i]
+        else:
+            return 2*onsets[i] - offsets[i]
+    offsets = list(map(fix_offsets, range(len(onsets))))
+
+    return onsets.tolist(), offsets
 
 
 def conversion(arg):
