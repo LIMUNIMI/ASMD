@@ -1,3 +1,4 @@
+#cython: language_level=3
 from copy import deepcopy
 import os
 import csv
