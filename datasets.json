@@ -192,8 +192,8 @@
             ],
             "login" : false,
             "post-process" : [
-                "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_5x22_piano_corpus/data/audio.zip; unzip audio.zip -d vienna_corpus/; mv vienna_corpus/audio/*/*.wav vienna_corpus/; rm -r vienna_corpus/audio/",
-                "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/midi.zip; unzip midi.zip -d vienna_corpus; cp my_scores/*.mid vienna_corpus/; mv vienna_corpus/midi/*.mid vienna_corpus/; rm -r vienna_corpus/midi/",
+                "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_5x22_piano_corpus/data/audio.zip; unzip audio.zip -d vienna_corpus/; rm -r vienna_corpus/audio/Chopin_Ballade_special-versions/; mv vienna_corpus/audio/*/*.wav vienna_corpus/; rm -r vienna_corpus/audio/",
+                "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/midi.zip; unzip midi.zip -d vienna_corpus; cp my_scores/*.mid vienna_corpus/; rm vienna_corpus/midi/Chopin_op38_1st-3rd_*; mv vienna_corpus/midi/*.mid vienna_corpus/; rm -r vienna_corpus/midi/",
                 "rm audio.zip midi.zip",
                 [
                     "mv vienna_corpus/ ", "&install_dir"
@@ -536,7 +536,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p01-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p01-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -551,7 +551,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p02-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p02-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -566,7 +566,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p03-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p03-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -581,7 +581,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p04-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p04-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -596,7 +596,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p05-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p05-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -611,7 +611,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p06-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p06-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -626,7 +626,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p07-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p07-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -641,7 +641,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p08-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p08-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -656,7 +656,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p09-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p09-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -671,7 +671,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p10-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p10-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -686,7 +686,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p11-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p11-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -701,7 +701,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p12-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p12-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -716,7 +716,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p13-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p13-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -731,7 +731,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p14-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p14-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -746,7 +746,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p15-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p15-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -761,7 +761,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p16-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p16-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -776,7 +776,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p17-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p17-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -791,7 +791,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p18-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p18-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -806,7 +806,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p19-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p19-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -821,7 +821,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p20-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p20-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -836,7 +836,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p21-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p21-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -851,7 +851,7 @@
                 {
                     "composer" : "Friedriech Chopin",
                     "ground_truth" : [
-                        "vienna_corpus/Chopin_op38_first-3d_p22-0.json.gz"
+                        "vienna_corpus/Chopin_op38_p22-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
@@ -1196,332 +1196,332 @@
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p01-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p01-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p01.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p01.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p01"
+                    "title" : "Mozart_K331_1st-mov_p01"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p02-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p02-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p02.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p02.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p02"
+                    "title" : "Mozart_K331_1st-mov_p02"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p03-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p03-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p03.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p03.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p03"
+                    "title" : "Mozart_K331_1st-mov_p03"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p04-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p04-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p04.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p04.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p04"
+                    "title" : "Mozart_K331_1st-mov_p04"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p05-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p05-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p05.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p05.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p05"
+                    "title" : "Mozart_K331_1st-mov_p05"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p06-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p06-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p06.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p06.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p06"
+                    "title" : "Mozart_K331_1st-mov_p06"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p07-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p07-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p07.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p07.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p07"
+                    "title" : "Mozart_K331_1st-mov_p07"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p08-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p08-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p08.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p08.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p08"
+                    "title" : "Mozart_K331_1st-mov_p08"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p09-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p09-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p09.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p09.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p09"
+                    "title" : "Mozart_K331_1st-mov_p09"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p10-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p10-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p10.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p10.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p10"
+                    "title" : "Mozart_K331_1st-mov_p10"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p11-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p11-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p11.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p11.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p11"
+                    "title" : "Mozart_K331_1st-mov_p11"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p12-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p12-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p12.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p12.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p12"
+                    "title" : "Mozart_K331_1st-mov_p12"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p13-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p13-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p13.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p13.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p13"
+                    "title" : "Mozart_K331_1st-mov_p13"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p14-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p14-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p14.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p14.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p14"
+                    "title" : "Mozart_K331_1st-mov_p14"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p15-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p15-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p15.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p15.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p15"
+                    "title" : "Mozart_K331_1st-mov_p15"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p16-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p16-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p16.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p16.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p16"
+                    "title" : "Mozart_K331_1st-mov_p16"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p17-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p17-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p17.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p17.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p17"
+                    "title" : "Mozart_K331_1st-mov_p17"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p18-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p18-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p18.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p18.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p18"
+                    "title" : "Mozart_K331_1st-mov_p18"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p19-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p19-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p19.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p19.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p19"
+                    "title" : "Mozart_K331_1st-mov_p19"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p20-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p20-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p20.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p20.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p20"
+                    "title" : "Mozart_K331_1st-mov_p20"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p21-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p21-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p21.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p21.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p21"
+                    "title" : "Mozart_K331_1st-mov_p21"
                 },
                 {
                     "composer" : "Wolfang Amadeus Mozart",
                     "ground_truth" : [
-                        "vienna_corpus/Mozart_k331-first_mov_p22-0.json.gz"
+                        "vienna_corpus/Mozart_K331_1st-mov_p22-0.json.gz"
                     ],
                     "instruments" : [
                         "piano"
                     ],
                     "recording" : {
                         "path" : [
-                            "vienna_corpus/Mozart_k331-first_mov_p22.wav"
+                            "vienna_corpus/Mozart_K331_1st-mov_p22.wav"
                         ]
                     },
-                    "title" : "Mozart_k331-first_mov_p22"
+                    "title" : "Mozart_K331_1st-mov_p22"
                 }
             ]
         },

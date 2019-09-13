@@ -16,7 +16,7 @@ easily disregarding their internal structure
   * [Adding sections to `datasets.json`](#adding-sections-to--datasetsjson-)
   * [Provide a conversion function](#provide-a-conversion-function)
   * [Add your function to `func_map`](#add-your-function-to--func-map-)
-  * [Run `conversion_gt`](#run--conversion-gt-)
+  * [Run `generate_ground_truth.py`](#run--conversion-gt-)
   * [Generate misaligned data](#generate--misaligned--data)
 
 # Usage
@@ -220,7 +220,7 @@ datasets).
 
 After this, you should install the dataset by running the installation script.
 
-## Provide a conversion function
+## Provide a conversion function in `convert_from_file.pyx`
 
 The conversion function takes as input the name of the file to be created (i.e.
 the paths added to the new `datasets.json` section) and outputs a list of
@@ -263,7 +263,10 @@ work, but please, take care of it.
 
 ## Add your function to `func_map`
 
-`func_map` is a dictionary which stores all the functions that are needed and their parameters for each dataset. The keys are the datasets name you added in `datasets.json`. The element is a list of tuples like this: 
+In `convert_from_file.py` you can find a dictionary called `func_map`. It is a
+dictionary which stores all the functions that are needed and their parameters
+for each dataset. The keys are the datasets name you added in `datasets.json`.
+The element is a list of tuples like this: 
 
 ```python
     [
@@ -282,7 +285,7 @@ work, but please, take care of it.
     ]
 ```
 
-## Run `conversion_gt`
+## Run `generate_ground_truth.py`
 
 You can run the script with `python 3`. You can also skip the already existing
 datasets by simply add their names as argument. If you do this, their ground
@@ -294,7 +297,7 @@ previous one and to merge the archives.
 If you want, you can generate misaligned data. First, after having created the
 ground-truth, run `alignment_stats`, which collects data about the datasets
 with real non-aligned scores and saves stats in a pickled file in this
-directory. Then, run `conversion_gt` again: it will load the pickled file and
+directory. Then, run `generate_ground_truth.py` again: it will load the pickled file and
 will generate misaligned data by using the same deviation distribution of the
 available non-aligned data.
 
