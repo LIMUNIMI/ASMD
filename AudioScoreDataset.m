@@ -161,22 +161,24 @@ classdef AudioScoreDataset < handle
             obj.decompress_path = tmpfs;
         end
 
-        function mix = get_mix(obj, idx)
+        function [mix, sr] = get_mix(obj, idx)
             % - `idx`: the index of the wanted item.
             %
             % RETURNED:
-            % - `mix`:      the audio waveform of the mixed song (array)
+            % - `mix`:      the audio waveform of the mixed song (array) mixed to mono
+            % - `sr`:       the sampling rate
             %
             recordings_fn = obj.paths{idx, 1};
 
             if length(recordings_fn) > 1
                 for k = 1:length(recordings_fn)
-                    recordings(k) = audioread(fullfile(obj.install_dir, recordings_fn{k}));
+                    [recordings(k), sr] = audioread(fullfile(obj.install_dir, recordings_fn{k}));
                 end
 
                 mix = {mean(cellmat(recordings), 2)};
             else
-                mix = {audioread(fullfile(obj.install_dir, recordings_fn{1}))};
+                [mix, sr] = audioread(fullfile(obj.install_dir, recordings_fn{1}));
+                mix = {mean(mix, 2)};
             end
         end
 
@@ -199,16 +201,17 @@ classdef AudioScoreDataset < handle
             end
         end
 
-        function sources = get_source(obj, idx)
+        function [sources, sr] = get_source(obj, idx)
             % - `idx`: the index of the wanted item.
             %
             % RETURNED:
             % - `sources`:  the audio values of each sources (nx1 cell-array)
+            % - `sr`:   the sampling rate
             %
             sources_fn = obj.paths{idx, 2};
 
             for k = 1:length(sources_fn)
-                sources{k} = audioread(fullfile(obj.install_dir, sources_fn{k}));
+                [sources{k}, sr] = audioread(fullfile(obj.install_dir, sources_fn{k}));
             end
 
         end
