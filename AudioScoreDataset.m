@@ -37,6 +37,8 @@ classdef AudioScoreDataset < handle
             %                   `false`, only the target instrument is
             %                   returned. Default `false`.
             % - `composer`:     the surname of the composer to filter
+            % - `datasets`:     a list of strings containing the name of the
+            %                   datasets to be used. If empty, all datasets are used.
             % - `ground_truth`: a list of strings representing the type of
             %                   ground-truths needed (logical AND among list elements)
             %
@@ -50,12 +52,24 @@ classdef AudioScoreDataset < handle
             addParameter(p, 'all', false);
             addParameter(p, 'composer', -1);
             addParameter(p, 'instrument', -1);
+            addParameter(p, 'datasets', []);
             addParameter(p, 'ground_truth', []);
             parse(p, varargin{:});
 
             for i = 1:length(obj.data.datasets)
-                FLAG = true;
                 mydataset = obj.data.datasets{i};
+
+                FLAG = true;
+                if length(p.Results.datasets) > 0
+                    FLAG = false;
+                    for i = 1:length(p.Results.datasets)
+                        dataset = p.Results.datasets{i};
+                        if strcmp(mydataset.name, dataset)
+                            FLAG = true;
+                            break;
+                        end
+                    end
+                end
 
                 % checking dataset-level filters
                 if p.Results.ensemble ~= mydataset.ensemble
@@ -70,7 +84,7 @@ classdef AudioScoreDataset < handle
 
                 for i = 1:length(p.Results.ground_truth)
                     gt = p.Results.ground_truth{i};
-                    if ~getfield(mydataset.ground_truth, gt)
+                    if getfield(mydataset.ground_truth, gt{1}) ~= gt{2}
                         FLAG = false;
                         break;
                     end

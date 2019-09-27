@@ -188,7 +188,7 @@
                 "velocities" : 1
             },
             "instruments" : [
-                "flute"
+                "piano"
             ],
             "login" : false,
             "post-process" : [

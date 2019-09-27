@@ -30,7 +30,7 @@ class Dataset:
         self.decompress_path = './'
         self.paths = []
 
-    def filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', ground_truth=[]):
+    def filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets = [], ground_truth=[]):
         """
         Filters the dataset and load the paths of the songs which accomplish
         the filter described in `kwargs`. A field `paths` is added to this
@@ -56,6 +56,9 @@ class Dataset:
             False , only the target instrument is returned. Default False.
         composer : string
             the surname of the composer to filter
+        datasets : list of strings
+            a list of strings containing the name of the datasets to be used.
+            If empty, all datasets are used.
         ground_truth : list of tuples
             a list of tuples representing the type of ground-truths needed
             (logical AND among list elements).
@@ -67,6 +70,11 @@ class Dataset:
         """
         for mydataset in self.data['datasets']:
             FLAG = True
+            if len(datasets) > 0:
+                if mydataset['name'] in datasets:
+                    FLAG = True
+                else:
+                    FLAG = False
 
             # checking dataset-level filters
             if ensemble is not None:
