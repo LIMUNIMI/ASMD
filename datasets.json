@@ -9,7 +9,8 @@
                 "f0" : 0,
                 "non_aligned" : 2,
                 "precise_alignment" : 1,
-                "velocities" : 1
+                "velocities" : 1,
+                "beats_non_aligned" : 0
             },
             "instruments" : [
                 "clarinet",
@@ -185,7 +186,8 @@
                 "f0" : 0,
                 "non_aligned" : 1,
                 "precise_alignment" : 1,
-                "velocities" : 1
+                "velocities" : 1,
+                "beats_non_aligned" : 1
             },
             "instruments" : [
                 "piano"
@@ -1538,7 +1540,8 @@
                 "f0" : 0,
                 "non_aligned" : 1,
                 "precise_alignment" : 1,
-                "velocities" : 0
+                "velocities" : 0,
+                "beats_non_aligned" : 1
             },
             "instruments" : [
                 "flute"
@@ -1851,7 +1854,8 @@
                 "f0" : 0,
                 "non_aligned" : 1,
                 "precise_alignment" : 0,
-                "velocities" : 0
+                "velocities" : 0,
+                "beats_non_aligned" : 1
             },
             "instruments" : [
                 "piano",
@@ -7034,7 +7038,8 @@
                 "f0" : 0,
                 "non_aligned" : 2,
                 "precise_alignment" : 1,
-                "velocities" : 1
+                "velocities" : 1,
+                "beats_non_aligned" : 0
             },
             "instruments" : [
                 "piano"
@@ -7816,7 +7821,8 @@
                 "f0" : 0,
                 "non_aligned" : 2,
                 "precise_alignment" : 0,
-                "velocities" : 0
+                "velocities" : 0,
+                "beats_non_aligned" : 0
             },
             "instruments" : [
                 "violin",
@@ -8311,7 +8317,8 @@
                 "f0" : 0,
                 "non_aligned" : 2,
                 "precise_alignment" : 1,
-                "velocities" : 1
+                "velocities" : 1,
+                "beats_non_aligned" : 0
             },
             "instruments" : [
                 "piano"
@@ -27567,7 +27574,8 @@
                 "f0" : 2,
                 "non_aligned" : 1,
                 "precise_alignment" : 1,
-                "velocities" : 0
+                "velocities" : 0,
+                "beats_non_aligned" : 1
             },
             "instruments" : [
                 "violin",
