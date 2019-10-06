@@ -1,6 +1,6 @@
 from audioscoredataset import Dataset
 import numpy as np
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, minmax_scale
 from random import choices, uniform
 
 
@@ -39,20 +39,20 @@ class Stats:
         self.ons_dev_hist = np.histogram(self.ons_dev, bins='auto', density=True)
         self.offs_dev_hist = np.histogram(self.offs_dev, bins='auto', density=True)
 
-    def get_random_onset_dev(self, k=1):
-        return _get_random_value_from_hist(self.ons_dev_hist, k)
+    def get_random_onset_dev(self, k=1, max=0.1):
+        return _get_random_value_from_hist(self.ons_dev_hist, k, max=0.1)
 
-    def get_random_offset_dev(self, k=1):
-        return _get_random_value_from_hist(self.offs_dev_hist, k)
+    def get_random_offset_dev(self, k=1, max=0.1):
+        return _get_random_value_from_hist(self.offs_dev_hist, k, max=0.1)
 
-    def get_random_mean(self, k=1):
-        return _get_random_value_from_hist(self.means_hist, k)
+    def get_random_mean(self, k=1, max=0.1):
+        return _get_random_value_from_hist(self.means_hist, k, max=0.1)
 
-    def get_random_onset_diff(self, k=1):
-        return _get_random_value_from_hist(self.ons_hist, k)
+    def get_random_onset_diff(self, k=1, max=0.1):
+        return _get_random_value_from_hist(self.ons_hist, k, max=0.1)
 
-    def get_random_offset_diff(self, k=1):
-        return _get_random_value_from_hist(self.offs_hist, k)
+    def get_random_offset_diff(self, k=1, max=0.1):
+        return _get_random_value_from_hist(self.offs_hist, k, max=0.1)
 
 
 def seed():
@@ -62,14 +62,17 @@ def seed():
     import random
     random.seed(1992)
 
-def _get_random_value_from_hist(hist, k=1):
+def _get_random_value_from_hist(hist, k=1, max=0.1):
     """
     Given a histogram (tuple returned by np.histogram), returns a random value
     picked with uniform distribution from a bin of the histogram. The bin is
-    picked following the histogram distribution.
+    picked following the histogram distribution. If `max` is specified, the
+    histogram is first normalized so that the maximum absolute value is the one
+    specified.
     """
-    start = choices(hist[1][:-1], weights=hist[0], k=k)
-    bin_w = abs(hist[1][1] - hist[1][0])
+    values = minmax_scale(hist[1], (-abs(max), abs(max)))
+    start = choices(values[:-1], weights=hist[0], k=k)
+    bin_w = abs(values[1] - values[0])
     end = np.array(start) + bin_w
     return [uniform(start[i], end[i]) for i in range(len(start))]
 
