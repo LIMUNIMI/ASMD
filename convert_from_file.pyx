@@ -25,7 +25,8 @@ gt = {
     "notes": [],
     "pitches": [],
     "f0": [],
-    "instrument": 255
+    "instrument": 255,
+    "beats_non_aligned": []
 }
 
 
@@ -48,21 +49,22 @@ def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):
     return root + new_ext
 
 
-def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, remove_player=False):
+def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, beats=False, remove_player=False):
     """
     Open a midi file `midi_fn` and convert it to our ground_truth
-    representation. This fills velocities, pitches and alignment (default:
+    representation. This fills velocities, pitches, beats and alignment (default:
     `precise_alignment`). Returns a list containing a dictionary. `alignment`
     can also be `None` or `False`, in that case no alignment is filled. If `merge` is
     True, the returned list will contain a dictionary for each track.
     `remove_player` can be used to remove the name of the player in the last
-    part of the file name when: use this for the `traditional_flute` dataset.
+    part of the file name: use this for the `traditional_flute` dataset.
+    Beats are filled according to tempo changes.
     """
     new_midi_fn = change_ext(midi_fn, '.mid', remove_player=remove_player)
     if not os.path.exists(new_midi_fn):
         new_midi_fn = change_ext(midi_fn, '.midi', remove_player=remove_player)
 
-    midi_tracks = io.open_midi(new_midi_fn, merge=merge)
+    midi_tracks, pm = io.open_midi(new_midi_fn, merge=merge, pm_object=True)
 
     out = list()
 
@@ -84,6 +86,8 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
                 if alignment:
                     onsets.append(float(note.start))
                     offsets.append(float(note.end))
+                if beats:
+                    data["beats_non_aligned"].append(pm.get_beats().tolist())
         out.append(data)
 
     return out
@@ -183,12 +187,14 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
         # duration name as string
         row = list(map(float, row[:-1]))
 
-        out["broad_alignment"]["onsets"].append((row[0]) / fr)
-        out["broad_alignment"]["offsets"].append(row[1] / fr)
+        out["broad_alignment"]["onsets"].append(int(row[0]) / fr)
+        out["broad_alignment"]["offsets"].append(int(row[1]) / fr)
+        out["instrument"] = int(row[2])
         out["pitches"].append(int(row[3]))
-        out["non_aligned"]["onsets"].append(row[4])
-        out["non_aligned"]["offsets"].append(row[4] + row[5])
+        out["non_aligned"]["onsets"].append(float(row[4]))
+        out["non_aligned"]["offsets"].append(float(row[4]) + float(row[5]))
 
+    out["beats_non_aligned"] = [i for i in range(int(max(out["non_aligned"]["offsets"])) + 1)]
     return [out]
 
 
@@ -218,7 +224,8 @@ func_map = {
              'alignment': 'non_aligned',
              'pitches': False,
              'velocities': False,
-             'merge': False
+             'merge': False,
+             'beats': True
          }
          )
     ],
@@ -243,7 +250,8 @@ func_map = {
             'pitches': True,
             'velocities': False,
             'merge': False,
-            'remove_player': True
+            'remove_player': True,
+            'beats': True
         }),
         (from_sonic_visualizer, {})
     ],
@@ -253,7 +261,8 @@ func_map = {
             'pitches': True,
             'velocities': False,
             'merge': True,
-            'remove_player': True
+            'remove_player': True,
+            'beats': True
         }),
         (from_midi, {
             'alignment': 'precise_alignment',

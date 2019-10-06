@@ -8,11 +8,12 @@ from difflib import SequenceMatcher
 from pretty_midi.constants import INSTRUMENT_MAP
 from convert_from_file import func_map
 import numpy as np
-from alignment_stats import seed
+from alignment_stats import seed, fill_stats
 import multiprocessing as mp
 
 #: if True, run conversion in parallel processes
 PARALLEL = True
+# PARALLEL = False
 
 
 def normalize_text(text):
@@ -74,9 +75,9 @@ def misalign(ons_dev, offs_dev, mean, out, stats):
         aligned = 'broad_alignment'
     length = len(out['pitches'])
     seed()
-    onsets = stats.get_random_onset_diff(k=length)
+    onsets = stats.get_random_onset_diff(k=length, max=0.1)
     seed()
-    offsets = stats.get_random_offset_diff(k=length)
+    offsets = stats.get_random_offset_diff(k=length, max=0.1)
     onsets = np.array(out[aligned]['onsets']) + \
         np.array(onsets) * ons_dev + mean
     offsets = np.array(out[aligned]['offsets']) + \
@@ -158,6 +159,8 @@ def create_gt(data_fn, args, gztar=False):
         stats = pickle.load(open('_alignment_stats.pkl', 'rb'))
     else:
         stats = None
+    #     stats = fill_stats(['precise_alignment', 'broad_alignment'])
+    #     stats.compute_hist()
 
     to_be_included_in_the_archive = []
     for dataset in json_file['datasets']:
@@ -168,11 +171,11 @@ def create_gt(data_fn, args, gztar=False):
         print("Starting processing " + dataset['name'])
         if dataset['ground_truth']['non_aligned'] == 2 and stats:
             # computing means and std deviations for each song in the dataset
-            mean = stats.get_random_mean(k=len(dataset['songs']))
+            mean = stats.get_random_mean(k=len(dataset['songs']), max=0.1)
             seed()
-            ons_dev = stats.get_random_onset_dev(k=len(dataset['songs']))
+            ons_dev = stats.get_random_onset_dev(k=len(dataset['songs']), max=1)
             seed()
-            offs_dev = stats.get_random_offset_dev(k=len(dataset['songs']))
+            offs_dev = stats.get_random_offset_dev(k=len(dataset['songs']), max=1)
             arg = [(i, song, json_file, dataset, stats, ons_dev, offs_dev, mean)
                    for i, song in enumerate(dataset['songs'])]
         else:
