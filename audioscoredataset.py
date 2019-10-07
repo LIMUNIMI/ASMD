@@ -218,6 +218,28 @@ class Dataset:
         gts = self.get_gts(idx)
         return mix, sources, gts
 
+    def get_beats(self, idx):
+        """
+        Get a list of beat position in seconds, to be used together with the
+        non_aligned data.
+
+        Arguments
+        ---------
+        idx : int
+            The index of the song to retrieve.
+
+        Returns
+        -------
+        numpy.ndarray :
+            each row contains beat positions of each ground truth
+        """
+        gts = self.get_gts(idx)
+        beats = []
+        for i, gt in enumerate(gts):
+            beats.append(gt['beats_non_aligned'])
+
+        return np.array(beats)
+
     def get_score(self, idx, score_type='non_aligned'):
         """
         Get the score of a certain score, with times of `score_type`

@@ -86,8 +86,8 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
                 if alignment:
                     onsets.append(float(note.start))
                     offsets.append(float(note.end))
-                if beats:
-                    data["beats_non_aligned"].append(pm.get_beats().tolist())
+        if beats:
+            data["beats_non_aligned"] = pm.get_beats().tolist()
         out.append(data)
 
     return out
