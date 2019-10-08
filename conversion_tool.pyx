@@ -164,8 +164,9 @@ def create_gt(data_fn, args, gztar=False):
 
     to_be_included_in_the_archive = []
     for dataset in json_file['datasets']:
-        if dataset['name'] in args:
-            continue
+        if len(args) > 1:
+            if dataset['name'] not in args:
+                continue
 
         print("\n------------------------\n")
         print("Starting processing " + dataset['name'])
