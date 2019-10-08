@@ -2,6 +2,7 @@
 from copy import deepcopy
 import os
 import csv
+import numpy as np
 import scipy.io
 from utils import io
 import re
@@ -116,7 +117,7 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
     return out_list
 
 
-def from_bach10_txt(txt_fn, sources=range(4)):
+def from_bach10_mat(mat_fn, sources=range(4)):
     """
     Open a txt file `txt_fn` in the MIREX format (Bach10) and convert it to
     our ground_truth representation. This fills: `precise_alignment`, `pitches`.
@@ -125,21 +126,19 @@ def from_bach10_txt(txt_fn, sources=range(4)):
     per source.
     """
     out_list = list()
-    txt_fn = change_ext(txt_fn, 'txt')
+    mat_fn = change_ext(mat_fn, '-GTNotes.mat', no_dot=True)
 
-    with open(txt_fn) as f:
-        lines = f.readlines()
-
-    for source in sources:
+    mat = scipy.io.loadmat(mat_fn)['GTNotes']
+    for i in range(len(mat)):
         out = deepcopy(gt)
-        for line in lines:
-            fields = line.split('\t')
-            if int(fields[-1]) - 1 == source:
-                out["pitches"].append(int(fields[2]))
-                out["precise_alignment"]["onsets"].append(
-                    float(fields[0]) / 1000.)
-                out["precise_alignment"]["offsets"].append(
-                    float(fields[1]) / 1000.)
+        source = mat[i, 0]
+        for j in range(len(source)):
+            note = source[j, 0]
+            out["pitches"].append(np.median(np.rint(note[1, :])))
+            out["precise_alignment"]["onsets"].append(
+                (note[0, 0] - 2) * 10 / 1000.)
+            out["precise_alignment"]["offsets"].append(
+                (note[0, -1] - 2) * 10 / 1000.)
         out_list.append(out)
 
     return out_list
@@ -218,7 +217,7 @@ def from_sonic_visualizer(gt_fn, alignment='precise_alignment'):
 func_map = {
     'Bach10': [
         (from_bach10_f0, {}),
-        (from_bach10_txt, {}),
+        (from_bach10_mat, {}),
         (from_midi,
          {
              'alignment': 'non_aligned',
