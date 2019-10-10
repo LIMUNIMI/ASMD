@@ -260,7 +260,7 @@ class Dataset:
             available, value -255 is used.
         """
 
-        print("    Loading ground truth")
+        print("    Loading ground truth " + score_type)
         gts = self.get_gts(idx)
         mat = []
         for i, gt in enumerate(gts):
@@ -365,7 +365,9 @@ def find_bach10_errors(gt, score_type):
 
 def truncate_score(gt):
     """
-    Takes a ground truth and truncates all its lists so that the number of pitches is the same of the scoretype with the minimum number of pitches in this ground_truth
+    Takes a ground truth and truncates all its lists so that the number of
+    pitches is the same of the scoretype with the minimum number of pitches in
+    this ground_truth
     """
     length_to_truncate = len(gt['pitches'])
     score_types = ['non_aligned', 'precise_alignment', 'broad_alignment']
