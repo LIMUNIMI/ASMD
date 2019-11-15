@@ -73,11 +73,11 @@ def misalign(ons_dev, offs_dev, mean, out, stats):
         aligned = 'precise_alignment'
     else:
         aligned = 'broad_alignment'
-    length = len(out['pitches'])
+    length = len(out[aligned]['onsets'])
     seed()
-    onsets = stats.get_random_onset_diff(k=length, max=0.1)
+    onsets = stats.get_random_onset_diff(k=length, max_value=None)
     seed()
-    offsets = stats.get_random_offset_diff(k=length, max=0.1)
+    offsets = stats.get_random_offset_diff(k=length, max_value=None)
     onsets = np.array(out[aligned]['onsets']) + \
         np.array(onsets) * ons_dev + mean
     offsets = np.array(out[aligned]['offsets']) + \
@@ -172,11 +172,11 @@ def create_gt(data_fn, args, gztar=False):
         print("Starting processing " + dataset['name'])
         if dataset['ground_truth']['non_aligned'] == 2 and stats:
             # computing means and std deviations for each song in the dataset
-            mean = stats.get_random_mean(k=len(dataset['songs']), max=0.1)
+            mean = stats.get_random_mean(k=len(dataset['songs']), max_value=None)
             seed()
-            ons_dev = stats.get_random_onset_dev(k=len(dataset['songs']), max=1)
+            ons_dev = stats.get_random_onset_dev(k=len(dataset['songs']), max_value=None)
             seed()
-            offs_dev = stats.get_random_offset_dev(k=len(dataset['songs']), max=1)
+            offs_dev = stats.get_random_offset_dev(k=len(dataset['songs']), max_value=None)
             arg = [(i, song, json_file, dataset, stats, ons_dev, offs_dev, mean)
                    for i, song in enumerate(dataset['songs'])]
         else:

@@ -184,7 +184,7 @@
             "ground_truth" : {
                 "broad_alignment" : 0,
                 "f0" : 0,
-                "non_aligned" : 1,
+                "non_aligned" : 2,
                 "precise_alignment" : 1,
                 "velocities" : 1,
                 "beats_non_aligned" : 1
@@ -1538,7 +1538,7 @@
             "ground_truth" : {
                 "broad_alignment" : 0,
                 "f0" : 0,
-                "non_aligned" : 1,
+                "non_aligned" : 2,
                 "precise_alignment" : 1,
                 "velocities" : 0,
                 "beats_non_aligned" : 1
@@ -1852,7 +1852,7 @@
             "ground_truth" : {
                 "broad_alignment" : 2,
                 "f0" : 0,
-                "non_aligned" : 1,
+                "non_aligned" : 2,
                 "precise_alignment" : 0,
                 "velocities" : 0,
                 "beats_non_aligned" : 1
@@ -27572,7 +27572,7 @@
             "ground_truth" : {
                 "broad_alignment" : 0,
                 "f0" : 2,
-                "non_aligned" : 1,
+                "non_aligned" : 2,
                 "precise_alignment" : 1,
                 "velocities" : 0,
                 "beats_non_aligned" : 1
