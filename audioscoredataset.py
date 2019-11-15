@@ -240,7 +240,7 @@ class Dataset:
 
         return np.array(beats)
 
-    def get_score(self, idx, score_type='non_aligned'):
+    def get_score(self, idx, score_type='non_aligned', truncate=False):
         """
         Get the score of a certain score, with times of `score_type`
 
@@ -250,6 +250,9 @@ class Dataset:
             The index of the song to retrieve.
         score_type : str
             The key to retrieve the list of notes from the ground_truths
+        truncate : bool
+            If True, truncate mat to the shortest list among ons, offs and pitches,
+            otherwise, insert -255 for missing values (enlarging lists)
 
         Returns
         -------
@@ -266,28 +269,46 @@ class Dataset:
         for i, gt in enumerate(gts):
             # Make pitches and alignments of thesame number of notes
             diff_notes = 0
-            find_bach10_errors(gt, score_type)
-            truncate_score(gt)
+            if truncate:
+                find_bach10_errors(gt, score_type)
+                truncate_score(gt)
 
             # initilize each column
-            ons = gt[score_type]['onsets']
-            if not ons:
-                ons = np.full_like(gt['pitches'], -255)
+            pitches = np.array(gt['pitches'])
 
-            offs = gt[score_type]['offsets']
-            if not offs:
+            ons = np.array(gt[score_type]['onsets'])
+            if not len(ons):
+                ons = np.full_like(pitches, -255)
+            
+            missing = len(pitches) - len(ons)
+            if missing < 0:
+                # add -255 to pitches
+                pitches = np.append(pitches, [-255] * -missing)
+            elif missing > 0:
+                # add -255 to ons
+                ons = np.append(ons, [-255] * missing)
+
+            offs = np.append(gt[score_type]['offsets'], [-255] * missing)
+            if not len(offs):
                 offs = np.full_like(ons, -255)
 
-            pitches = gt['pitches']
-
-            vel = gt['velocities']
-            if not vel:
+            vel = np.append(gt['velocities'], [-255] * missing)
+            if not len(vel):
                 vel = np.full_like(ons, -255)
+            missing = len(pitches) - len(vel)
+            if missing < 0:
+                # add -255 to pitches, ons and offs
+                pitches = np.append(pitches, [-255] * -missing)
+                ons = np.append(ons, [-255] * -missing)
+                offs = np.append(offs, [-255] * -missing)
+            elif missing > 0:
+                # add -255 to vel
+                vel = np.append(vel, [-255] * missing)
 
             num = np.full_like(ons, i)
             instr = np.full_like(ons, gt['instrument'])
             mat.append(np.array([pitches, ons, offs, vel, instr, num]))
-
+        
         if len(mat) > 1:
             # mat now contains one list per each ground-truth, concatenating
             mat = np.concatenate(mat, axis=1)
