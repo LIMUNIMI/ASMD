@@ -274,7 +274,7 @@ class Dataset:
                 truncate_score(gt)
 
             # initilize each column
-            pitches = np.array(gt['pitches'])
+            pitches = np.array(gt[score_type]['pitches'])
 
             ons = np.array(gt[score_type]['onsets'])
             if not len(ons):
@@ -292,7 +292,7 @@ class Dataset:
             if not len(offs):
                 offs = np.full_like(ons, -255)
 
-            vel = np.append(gt['velocities'], [-255] * missing)
+            vel = np.append(gt[score_type]['velocities'], [-255] * missing)
             if not len(vel):
                 vel = np.full_like(ons, -255)
             missing = len(pitches) - len(vel)
@@ -375,8 +375,8 @@ def find_bach10_errors(gt, score_type):
     bool :
         if errors are detected
     """
-    if len(gt['pitches']) != len(gt[score_type]['onsets']):
-        diff_notes = len(gt['pitches']) - len(gt[score_type]['onsets'])
+    if len(gt[score_type]['pitches']) != len(gt[score_type]['onsets']):
+        diff_notes = len(gt[score_type]['pitches']) - len(gt[score_type]['onsets'])
         print('---- This file contains different data in ' +
               score_type+' and number of pitches!')
         print('----', diff_notes, 'different notes')
@@ -390,19 +390,18 @@ def truncate_score(gt):
     pitches is the same of the scoretype with the minimum number of pitches in
     this ground_truth
     """
-    length_to_truncate = len(gt['pitches'])
+    length_to_truncate = len(gt['non_aligned']['pitches'])
     score_types = ['non_aligned', 'precise_alignment', 'broad_alignment']
 
     # look for the length of the final lists
     for score_type in score_types:
         if len(gt[score_type]['onsets']) > 0:
             length_to_truncate = min(
-                len(gt[score_type]['onsets']), length_to_truncate)
+                [len(gt[score_type]['onsets']), length_to_truncate, len(gt[score_type]['pitches'])])
 
     # truncating lists
-    gt['pitches'] = gt['pitches'][:length_to_truncate]
-    gt['velocities'] = gt['velocities'][:length_to_truncate]
     for score_type in score_types:
-        if len(gt[score_type]['onsets']) > 0:
-            gt[score_type]['onsets'] = gt[score_type]['onsets'][:length_to_truncate]
-            gt[score_type]['offsets'] = gt[score_type]['offsets'][:length_to_truncate]
+        gt[score_type]['pitches'] = gt[score_type]['pitches'][:length_to_truncate]
+        gt[score_type]['velocities'] = gt[score_type]['velocities'][:length_to_truncate]
+        gt[score_type]['onsets'] = gt[score_type]['onsets'][:length_to_truncate]
+        gt[score_type]['offsets'] = gt[score_type]['offsets'][:length_to_truncate]
