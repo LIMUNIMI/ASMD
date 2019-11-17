@@ -4,7 +4,7 @@ import os
 import csv
 import numpy as np
 import scipy.io
-from utils import io
+from utils import io, utils
 import re
 import pretty_midi
 
@@ -12,19 +12,25 @@ import pretty_midi
 gt = {
     "precise_alignment": {
         "onsets": [],
-        "offsets": []
+        "offsets": [],
+        "pitches": [],
+        "notes": [],
+        "velocities": []
     },
     "non_aligned": {
         "onsets": [],
-        "offsets": []
+        "offsets": [],
+        "pitches": [],
+        "notes": [],
+        "velocities": []
     },
     "broad_alignment": {
         "onsets": [],
-        "offsets": []
+        "offsets": [],
+        "pitches": [],
+        "notes": [],
+        "velocities": []
     },
-    "velocities": [],
-    "notes": [],
-    "pitches": [],
     "f0": [],
     "instrument": 255,
     "beats_non_aligned": []
@@ -75,18 +81,15 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
     for track in midi_tracks:
         data = deepcopy(gt)
 
-        if alignment:
-            onsets, offsets = data[alignment].values()
-
         for note_group in track:
             for note in note_group:
                 if pitches:
-                    data["pitches"].append(note.pitch)
+                    data[alignment]["pitches"].append(note.pitch)
                 if velocities:
-                    data["velocities"].append(note.velocity)
+                    data[alignment]["velocities"].append(note.velocity)
                 if alignment:
-                    onsets.append(float(note.start))
-                    offsets.append(float(note.end))
+                    data[alignment]["onsets"].append(float(note.start))
+                    data[alignment]["offsets"].append(float(note.end))
         if beats:
             data["beats_non_aligned"] = pm.get_beats().tolist()
         out.append(data)
@@ -97,7 +100,8 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
 def from_phenicx_txt(txt_fn, non_aligned=False):
     """
     Open a txt file `txt_fn` in the PHENICX format and convert it to our
-    ground_truth representation. This fills: `broad_alignment`.
+    ground_truth representation. This fills: `broad_alignment` and 
+    `pitches` and `notes` of `non_aligned`.
     """
     out_list = list()
     txt_fn = change_ext(txt_fn, 'txt')
@@ -108,8 +112,10 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
     out = deepcopy(gt)
     for line in lines:
         fields = re.split(',|\n', line)
-        out["notes"].append(fields[2])
-        out["pitches"].append(pretty_midi.note_name_to_number(fields[2]))
+        out["non_aligned"]["notes"].append(fields[2])
+        out["non_aligned"]["pitches"].append(pretty_midi.note_name_to_number(fields[2]))
+        out["broad_alignment"]["notes"].append(fields[2])
+        out["broad_alignment"]["pitches"].append(pretty_midi.note_name_to_number(fields[2]))
         out["broad_alignment"]["onsets"].append(float(fields[0]))
         out["broad_alignment"]["offsets"].append(float(fields[1]))
         out_list.append(out)
@@ -134,7 +140,7 @@ def from_bach10_mat(mat_fn, sources=range(4)):
         source = mat[i, 0]
         for j in range(len(source)):
             note = source[j, 0]
-            out["pitches"].append(np.median(np.rint(note[1, :])))
+            out["precise_alignment"]["pitches"].append(np.median(np.rint(note[1, :])))
             out["precise_alignment"]["onsets"].append(
                 (note[0, 0] - 2) * 10 / 1000.)
             out["precise_alignment"]["offsets"].append(
@@ -189,7 +195,8 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
         out["broad_alignment"]["onsets"].append(int(row[0]) / fr)
         out["broad_alignment"]["offsets"].append(int(row[1]) / fr)
         out["instrument"] = int(row[2])
-        out["pitches"].append(int(row[3]))
+        out["broad_alignment"]["pitches"].append(int(row[3]))
+        out["non_aligned"]["pitches"].append(int(row[3]))
         out["non_aligned"]["onsets"].append(float(row[4]))
         out["non_aligned"]["offsets"].append(float(row[4]) + float(row[5]))
 
@@ -209,6 +216,8 @@ def from_sonic_visualizer(gt_fn, alignment='precise_alignment'):
     for row in data:
         out[alignment]["onsets"].append(float(row[0]))
         out[alignment]["offsets"].append(float(row[0]) + float(row[2]))
+        pitch = utils.f0_to_midi_pitch(float(row[1]))
+        out[alignment]["pitches"].append(pitch)
 
     return [out]
 
@@ -221,7 +230,7 @@ func_map = {
         (from_midi,
          {
              'alignment': 'non_aligned',
-             'pitches': False,
+             'pitches': True,
              'velocities': False,
              'merge': False,
              'beats': True
@@ -265,7 +274,7 @@ func_map = {
         }),
         (from_midi, {
             'alignment': 'precise_alignment',
-            'pitches': False,
+            'pitches': True,
             'velocities': True,
             'merge': True,
             'remove_player': False

@@ -93,6 +93,8 @@ def fill_stats(datasets):
             # selecting only rows where mat scores have values > 0
             mat_aligned = mat_aligned[np.all(mat_aligned[:, [0, 1, 2]] >= 0, axis=1), :]
             mat_score = mat_score[np.all(mat_score[:, [0, 1, 2]] >= 0, axis=1), :]
+            mat_aligned[:, 0] = np.round(mat_aligned[:, 0])
+            mat_score[:, 0] = np.round(mat_score[:, 0])
             ons_diffs, offs_diffs = utils.evaluate(mat_score, mat_aligned)
             stats.add_data(ons_diffs, offs_diffs)
 
@@ -105,7 +107,7 @@ if __name__ == '__main__':
     import plotly.offline as plt
     stats = fill_stats([
         ('vienna_corpus', 'precise_alignment'),
-        ('PHENICX', 'broad_alignment'),
+        # ('PHENICX', 'broad_alignment'),
         ('Bach10', 'precise_alignment'),
         ('traditional_flute', 'precise_alignment')
     ])
