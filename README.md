@@ -8,8 +8,9 @@ easily disregarding their internal structure
   * [datasets.json](#datasetsjson)
   * [Ground-truth json format](#ground-truth-json-format)
   * [API](#api)
-    + [Matlab](#matlab)
+    + [Matlab [outdated]](#matlab-(outdated))
     + [Python](#python)
+    + [Julia](#julia)
   * [Installation](#installation)
 - [Reproduce from scratch](#reproduce-from-scratch)
 - [Adding new datasets](#adding-new-datasets)
@@ -31,6 +32,7 @@ The root element is a dictionary with fields:
 
 Each dataset is an item in a global list `datasets`.  Each dataset has the
 following field:
+
 1. `ensemble`: `true` if contains multiple instruments, `false` otherwise
 2. `instruments`: the list of the instruments contained in the dataset
 3. `sources`:
@@ -81,22 +83,28 @@ The ground_truth is contained in json files indexed in `datasets.json`. Each
 ground truth file contains only one isntrument in a dictionary with the
 following structure:
 1. `non_aligned`:
-1. `onsets`: onsets in quarter notation
-2. `offsets`: offsets in quarter notation
+    1. `onsets`: onsets in quarter notation
+    2. `offsets`: offsets in quarter notation
+    3. `pitches`: list of midi pitches in onset ascending order
+    4. `note`: list of note names in onsets ascending order
+    5. `velocities`: list of velocities in onsets ascending order
 2. `precise_alignment`:
-1. `onsets`: onsets in ms
-2. `offsets`: offsets in ms
+    1. `onsets`: onsets in ms
+    2. `offsets`: offsets in ms
+    3. `pitches`: list of midi pitches in onset ascending order
+    4. `note`: list of note names in onsets ascending order
+    5. `velocities`: list of velocities in onsets ascending order
 3. `broad_alignment`: alignment which does not consider the asynchronies between
 simultaneous notes
-1. `onsets`: onsets in ms
-2. `offsets`: offsets in ms
-4. `pitches`: list of midi pitches in onset ascending order
-5. `f0`: list of f0 frequencies, frame by frame (frame rate according to the
+    1. `onsets`: onsets in ms
+    2. `offsets`: offsets in ms
+    3. `pitches`: list of midi pitches in onset ascending order
+    4. `note`: list of note names in onsets ascending order
+    5. `velocities`: list of velocities in onsets ascending order
+4. `f0`: list of f0 frequencies, frame by frame (frame rate according to the
 source sound file or to the whole recording sound file if sources are not
 available)
-6. `note`: list of note names in onsets ascending order
-7. `velocities`: list of velocities in onsets ascending order
-8. `instrument`: General Midi program number associated with this instrument,
+6. `instrument`: General Midi program number associated with this instrument,
 starting from 0. 128 indicates a drum kit (should be synthesized on channel 8
 with a program number of your choice, usually 0).
 
@@ -116,7 +124,7 @@ print(ground_truth)
 This project also provides a few API for filtering the datasets according
 to some specified prerequisites and getting the data in a convenient format.
 
-### Matlab
+### Matlab [outdated]
 
 Add this directory to your path and create an `AudioScoreDataset` object, giving
 the path of the `datasets.json` file in this directory as argument to the
@@ -178,6 +186,9 @@ ground_truth_list = d.get_gts(2)
 mat = d.get_score(2, score_type='precise_alignment')
 
 ```
+
+### Julia 
+[TODO]
 
 ## Installation
 1. Install `python 3`

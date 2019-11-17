@@ -1,6 +1,7 @@
 from audioscoredataset import Dataset
 import numpy as np
 from sklearn.preprocessing import StandardScaler, minmax_scale
+from utils import utils
 from random import choices, uniform
 
 
@@ -39,30 +40,30 @@ class Stats:
         self.ons_dev_hist = np.histogram(self.ons_dev, bins='auto', density=True)
         self.offs_dev_hist = np.histogram(self.offs_dev, bins='auto', density=True)
 
-    def get_random_onset_dev(self, k=1, max=0.1):
-        return _get_random_value_from_hist(self.ons_dev_hist, k, max=0.1)
+    def get_random_onset_dev(self, k=1, max_value=None):
+        return _get_random_value_from_hist(self.ons_dev_hist, k, max_value=max_value)
 
-    def get_random_offset_dev(self, k=1, max=0.1):
-        return _get_random_value_from_hist(self.offs_dev_hist, k, max=0.1)
+    def get_random_offset_dev(self, k=1, max_value=None):
+        return _get_random_value_from_hist(self.offs_dev_hist, k, max_value=max_value)
 
-    def get_random_mean(self, k=1, max=0.1):
-        return _get_random_value_from_hist(self.means_hist, k, max=0.1)
+    def get_random_mean(self, k=1, max_value=None):
+        return _get_random_value_from_hist(self.means_hist, k, max_value=max_value)
 
-    def get_random_onset_diff(self, k=1, max=0.1):
-        return _get_random_value_from_hist(self.ons_hist, k, max=0.1)
+    def get_random_onset_diff(self, k=1, max_value=None):
+        return _get_random_value_from_hist(self.ons_hist, k, max_value=None)
 
-    def get_random_offset_diff(self, k=1, max=0.1):
-        return _get_random_value_from_hist(self.offs_hist, k, max=0.1)
+    def get_random_offset_diff(self, k=1, max_value=None):
+        return _get_random_value_from_hist(self.offs_hist, k, max_value=None)
 
 
 def seed():
     """
     Apply a seed to the python random module to reproduce my results
     """
-    import random
-    random.seed(1992)
+    # import random
+    # random.seed(1992)
 
-def _get_random_value_from_hist(hist, k=1, max=0.1):
+def _get_random_value_from_hist(hist, k=1, max_value=None):
     """
     Given a histogram (tuple returned by np.histogram), returns a random value
     picked with uniform distribution from a bin of the histogram. The bin is
@@ -70,24 +71,31 @@ def _get_random_value_from_hist(hist, k=1, max=0.1):
     histogram is first normalized so that the maximum absolute value is the one
     specified.
     """
-    values = minmax_scale(hist[1], (-abs(max), abs(max)))
+    if max_value:
+        values = minmax_scale(hist[1], (-abs(max_value), abs(max_value)))
+    else:
+        values = hist[1]
     start = choices(values[:-1], weights=hist[0], k=k)
     bin_w = abs(values[1] - values[0])
     end = np.array(start) + bin_w
     return [uniform(start[i], end[i]) for i in range(len(start))]
 
-def fill_stats(alignments):
+def fill_stats(datasets):
     stats = Stats()
 
-    for alignment in alignments:
+    for dataset_name, alignment_type in datasets:
         data.paths = []
-        data.filter(ground_truth=[("non_aligned", 1), (alignment, 1)])
+        data.filter(datasets=[dataset_name])
 
         for i in range(len(data)):
-            mat_aligned = data.get_score(i, score_type=alignment)
+            mat_aligned = data.get_score(i, score_type=alignment_type)
             mat_score = data.get_score(i, score_type='non_aligned')
-            ons_diffs = mat_score[:, 1] - mat_aligned[:, 1]
-            offs_diffs = mat_score[:, 2] - mat_aligned[:, 2]
+            # selecting only rows where mat scores have values > 0
+            mat_aligned = mat_aligned[np.all(mat_aligned[:, [0, 1, 2]] >= 0, axis=1), :]
+            mat_score = mat_score[np.all(mat_score[:, [0, 1, 2]] >= 0, axis=1), :]
+            mat_aligned[:, 0] = np.round(mat_aligned[:, 0])
+            mat_score[:, 0] = np.round(mat_score[:, 0])
+            ons_diffs, offs_diffs = utils.evaluate(mat_score, mat_aligned)
             stats.add_data(ons_diffs, offs_diffs)
 
     return stats
@@ -97,7 +105,12 @@ if __name__ == '__main__':
     import pickle
     import plotly.graph_objects as go
     import plotly.offline as plt
-    stats = fill_stats(['precise_alignment', 'broad_alignment'])
+    stats = fill_stats([
+        ('vienna_corpus', 'precise_alignment'),
+        # ('PHENICX', 'broad_alignment'),
+        ('Bach10', 'precise_alignment'),
+        ('traditional_flute', 'precise_alignment')
+    ])
     stats.compute_hist()
     seed()
     v1 = stats.get_random_onset_dev()
