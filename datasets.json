@@ -27887,6 +27887,6 @@
             "url" : "http://www.ece.rochester.edu/projects/air/datasets/Bach10.zip"
         }
     ],
-    "install_dir" : "/datasets/AudioScoreDatasets",
+    "install_dir" : "/opt/AudioScoreDatasets",
     "year" : 2019
 }
