@@ -2,6 +2,7 @@
 import json
 import gzip
 from os.path import join as joinpath
+import essentia.standard as es
 from utils import io
 import numpy as np
 
@@ -120,7 +121,7 @@ class Dataset:
                             mix = song['recording']['path']
                         self.paths.append([mix, source, gts])
 
-    def get_mix(self, idx):
+    def get_mix(self, idx, sr=None):
         """
         Returns the audio array of the mixed song
 
@@ -128,6 +129,10 @@ class Dataset:
         ---------
         idx : int
             the index of the wanted item
+        sr : int or None
+            the sampling rate at which the audio will be returned
+            (if needed, a resampling is performed). If `None`, no
+            resampling is performed
 
         Returns
         -------
@@ -140,13 +145,19 @@ class Dataset:
 
         recordings = []
         for recording_fn in recordings_fn:
-            audio, sr = io.open_audio(joinpath(self.install_dir, recording_fn))
+            audio, in_sr = io.open_audio(joinpath(self.install_dir, recording_fn))
             recordings.append(audio)
 
         if len(recordings) > 1:
             mix = np.mean(recordings, axis=0)
         else:
             mix = recordings[0]
+
+        if sr is not None:
+            resampler = es.Resample(in_sr, sr)
+            mix = resampler(mix)
+        else:
+            sr = in_sr
         return mix, sr
 
     def get_gts(self, idx):
@@ -240,7 +251,7 @@ class Dataset:
 
         return np.array(beats)
 
-    def get_score(self, idx, score_type='non_aligned', truncate=False):
+    def get_score(self, idx, score_type=['non_aligned'], truncate=False):
         """
         Get the score of a certain score, with times of `score_type`
 
@@ -248,8 +259,12 @@ class Dataset:
         ---------
         idx : int
             The index of the song to retrieve.
-        score_type : str
-            The key to retrieve the list of notes from the ground_truths
+        score_type : list of str
+            The key to retrieve the list of notes from the ground_truths. If multiple keys are provided,
+            only one is retrieved by using the following criteria:
+                if there is `precise_alignment` in the list of keys and in the ground truth, use that;
+                otherwise, if there is `broa_alignment` in the list of keys and in the ground truth, 
+                use that; otherwise use `non_aligned`.
         truncate : bool
             If True, truncate mat to the shortest list among ons, offs and pitches,
             otherwise, insert -255 for missing values (enlarging lists)
@@ -263,8 +278,16 @@ class Dataset:
             available, value -255 is used.
         """
 
-        print("    Loading ground truth " + score_type)
         gts = self.get_gts(idx)
+        if len(score_type) > 1:
+            if 'precise_alignment' in score_type and len(gts['precise_alignment']['pitches']) > 0:
+                score_type = 'precise_alignment'
+            elif 'broad_alignment' in score_type and len(gts['broad_alignment']['pitches']) > 0:
+                score_type = 'broad_alignment'
+            else:
+                score_type = 'non_aligned'
+
+        print("    Loading ground truth " + score_type)
         mat = []
         for i, gt in enumerate(gts):
             # Make pitches and alignments of thesame number of notes
