@@ -1,0 +1,9 @@
+requests==2.22.0
+beautifulsoup4==4.8.1
+Cython==0.29.14
+essentia==2.1b5
+numpy==1.17.4
+plotly==4.3.0
+pretty_midi==0.2.8
+scikit_learn==0.21.3
+test_utils==0.1.0
