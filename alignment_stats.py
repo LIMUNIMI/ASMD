@@ -88,8 +88,8 @@ def fill_stats(datasets):
         data.filter(datasets=[dataset_name])
 
         for i in range(len(data)):
-            mat_aligned = data.get_score(i, score_type=alignment_type)
-            mat_score = data.get_score(i, score_type='non_aligned')
+            mat_aligned = data.get_score(i, score_type=[alignment_type])
+            mat_score = data.get_score(i, score_type=['non_aligned'])
             # selecting only rows where mat scores have values > 0
             mat_aligned = mat_aligned[np.all(mat_aligned[:, [0, 1, 2]] >= 0, axis=1), :]
             mat_score = mat_score[np.all(mat_score[:, [0, 1, 2]] >= 0, axis=1), :]

@@ -169,6 +169,10 @@ def create_gt(data_fn, args, gztar=False):
         if len(args) > 1:
             if dataset['name'] not in args:
                 continue
+            
+        if not os.path.exists(os.path.join(json_file["install_dir"], dataset["name"])):
+            print(dataset["name"] + " not installed, skipping it")
+            continue
 
         print("\n------------------------\n")
         print("Starting processing " + dataset['name'])
