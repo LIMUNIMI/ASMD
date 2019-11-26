@@ -8,6 +8,9 @@ from utils import io, utils
 import re
 import pretty_midi
 
+BPM = 20
+
+
 # The dictionary prototype for containing the ground_truth
 gt = {
     "precise_alignment": {
@@ -78,6 +81,12 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
     if merge:
         midi_tracks = [midi_tracks]
 
+    this_bpm = pm.get_tempo_changes()[1][0]
+    if alignment == 'non_aligned':
+        bpm_ratio = this_bpm / BPM
+    else:
+        bpm_ratio = 1
+
     for track in midi_tracks:
         data = deepcopy(gt)
 
@@ -88,10 +97,10 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
                 if velocities:
                     data[alignment]["velocities"].append(note.velocity)
                 if alignment:
-                    data[alignment]["onsets"].append(float(note.start))
-                    data[alignment]["offsets"].append(float(note.end))
+                    data[alignment]["onsets"].append(float(note.start) * bpm_ratio)
+                    data[alignment]["offsets"].append(float(note.end) * bpm_ratio)
         if beats:
-            data["beats_non_aligned"] = pm.get_beats().tolist()
+            data["beats_non_aligned"] = (pm.get_beats() * bpm_ratio).tolist()
         out.append(data)
 
     return out
@@ -197,8 +206,8 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
         out["instrument"] = int(row[2])
         out["broad_alignment"]["pitches"].append(int(row[3]))
         out["non_aligned"]["pitches"].append(int(row[3]))
-        out["non_aligned"]["onsets"].append(float(row[4]))
-        out["non_aligned"]["offsets"].append(float(row[4]) + float(row[5]))
+        out["non_aligned"]["onsets"].append(float(row[4]) * 60 / BPM)
+        out["non_aligned"]["offsets"].append(float(row[4] * 60 / BPM) + float(row[5]) * 60 / BPM)
 
     out["beats_non_aligned"] = [i for i in range(int(max(out["non_aligned"]["offsets"])) + 1)]
     return [out]
