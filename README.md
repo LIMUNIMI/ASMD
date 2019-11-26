@@ -83,8 +83,8 @@ The ground_truth is contained in json files indexed in `datasets.json`. Each
 ground truth file contains only one isntrument in a dictionary with the
 following structure:
 1. `non_aligned`:
-    1. `onsets`: onsets in quarter notation
-    2. `offsets`: offsets in quarter notation
+    1. `onsets`: onsets in seconds at 20 bpm
+    2. `offsets`: offsets in seconds at 20 bpm
     3. `pitches`: list of midi pitches in onset ascending order
     4. `note`: list of note names in onsets ascending order
     5. `velocities`: list of velocities in onsets ascending order
@@ -183,9 +183,13 @@ audio_array = d.get_mix(2)
 source_array = d.get_source(2)
 ground_truth_list = d.get_gts(2)
 
-mat = d.get_score(2, score_type='precise_alignment')
+mat = d.get_score(2, score_type=['precise_alignment'])
 
 ```
+
+Note that you can inherit from `audioscoredataset.Dataset` and `torch.utils.data.Dataset` to create a PyTorch
+compatible dataset which only load audio files when thay are accessed. You will just need to implement the
+`__getitem__` method.
 
 ### Julia 
 [TODO]

@@ -194,8 +194,8 @@
             ],
             "login" : false,
             "post-process" : [
+                "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/midi.zip; unzip midi.zip -d vienna_corpus/; cp my_scores/*.mid vienna_corpus/; rm vienna_corpus/midi/Chopin_op38_1st-3rd_*; mv vienna_corpus/midi/*.mid vienna_corpus/; rm -r vienna_corpus/midi/",
                 "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/audio.zip; unzip audio.zip -d vienna_corpus/; rm -r vienna_corpus/audio/Chopin_Ballade_special-versions/; mv vienna_corpus/audio/*/*.wav vienna_corpus/; rm -r vienna_corpus/audio/",
-                "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/midi.zip; unzip midi.zip -d vienna_corpus/; rm vienna_corpus/midi/Chopin_op38_1st-3rd_*; mv vienna_corpus/midi/*.mid vienna_corpus/; rm -r vienna_corpus/midi/",
                 "rm audio.zip midi.zip",
                 [
                     "mv vienna_corpus/ ", "&install_dir"
@@ -1548,8 +1548,7 @@
             ],
             "login" : false,
             "post-process" : [
-                "wget --header 'Host: storage.googleapis.com' --user-agent 'Mozilla/5.0 (X11; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0' --header 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' --header 'Accept-Language: en-US,en;q=0.5' --header 'DNT: 1' --header 'Upgrade-Insecure-Requests: 1' --header 'Cookie-Installing-Permission: required' 'https://storage.googleapis.com/kaggle-datasets/27138/34890/traditional-flute-dataset.zip?GoogleAccessId=web-data@kaggle-161607.iam.gserviceaccount.com&Expires=1568467954&Signature=kotVsVNIhZWuNLaJED4lKC1acTQWNzpNh1MDABZU7BWT2baoPWK%2BnJXGQFrHiKqR1xXPtrXeC6oChCs94DGo8moJ0yKGOXL8pATGWcSHRLQUDdMlARVKzIeqiXwNG0H0Hr8JT1%2FCYS1voUhLJmB3T9Ywm9J2IYotJ3qsu1cCT5IQ%2F%2B5WgxbYVQteH0yQ2Qp7XGvtDXk669p%2BvCWnITtXHK%2FhxExBQAf1tI7N8PRuQ%2FIlo%2F%2Fgk5BdS2HrRHczygsefJcdbfbS1VWiz6W3O%2FoIcw%2B3VCS97fNxV34740tX28cTKdUzHlrnmBjdmkH6SHUBBChhxo7SgWZd7vR5szjClA%3D%3D' --output-document 'traditional-flute-dataset.zip'",
-                "mkdir traditional_flute; unzip -o traditional-flute-dataset.zip; unzip traditional-flute-dataset.zip -d traditional_flute/; rm traditional-flute-dataset.zip",
+                "wget https://traditional-flute-firebase.firebaseapp.com/traditional-flute-dataset.zip ; unzip traditional-flute-dataset.zip -d traditional_flute/; rm traditional-flute-dataset.zip",
                 "mv traditional_flute/score/*.midi traditional_flute/ground_truth/",
                 [
                     "mv traditional_flute/ ", "&install_dir"
