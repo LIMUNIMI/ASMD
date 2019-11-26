@@ -178,11 +178,11 @@ def create_gt(data_fn, args, gztar=False):
         print("Starting processing " + dataset['name'])
         if dataset['ground_truth']['non_aligned'] == 2 and stats:
             # computing means and std deviations for each song in the dataset
-            mean = stats.get_random_mean(k=len(dataset['songs']), max_value=None)
+            mean = stats.get_random_mean(k=len(dataset['songs']), max_value=5)
             seed()
-            ons_dev = stats.get_random_onset_dev(k=len(dataset['songs']), max_value=None)
+            ons_dev = stats.get_random_onset_dev(k=len(dataset['songs']), max_value=5)
             seed()
-            offs_dev = stats.get_random_offset_dev(k=len(dataset['songs']), max_value=None)
+            offs_dev = stats.get_random_offset_dev(k=len(dataset['songs']), max_value=5)
             arg = [(i, song, json_file, dataset, stats, ons_dev, offs_dev, mean)
                    for i, song in enumerate(dataset['songs'])]
         else:

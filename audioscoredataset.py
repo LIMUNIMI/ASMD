@@ -280,9 +280,9 @@ class Dataset:
 
         gts = self.get_gts(idx)
         if len(score_type) > 1:
-            if 'precise_alignment' in score_type and len(gts['precise_alignment']['pitches']) > 0:
+            if 'precise_alignment' in score_type and len(gts[0]['precise_alignment']['pitches']) > 0:
                 score_type = 'precise_alignment'
-            elif 'broad_alignment' in score_type and len(gts['broad_alignment']['pitches']) > 0:
+            elif 'broad_alignment' in score_type and len(gts[0]['broad_alignment']['pitches']) > 0:
                 score_type = 'broad_alignment'
             else:
                 score_type = 'non_aligned'
