@@ -286,6 +286,8 @@ class Dataset:
                 score_type = 'broad_alignment'
             else:
                 score_type = 'non_aligned'
+        else:
+            score_type = score_type[0]
 
         print("    Loading ground truth " + score_type)
         mat = []

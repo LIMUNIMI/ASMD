@@ -138,9 +138,10 @@ def main():
     with open('datasets.json') as f:
         json_file = json.load(f)
 
-    install_dir = input("Path to install datasets [empty to default ./]: ")
+    default_dir = json_file['install_dir'] or './'
+    install_dir = input("Path to install datasets [empty to default "+ default_dir + "] ")
     if not install_dir:
-        install_dir = './'
+        install_dir = default_dir
     json_file['install_dir'] = install_dir
 
     intro(json_file)
@@ -182,12 +183,10 @@ def main():
         # unpacking the ground_truth data
         unpack_archive(gt_archive_fn, install_dir, 'xztar')
 
-    # saving the Yaml file as modified
+    # saving the Json file as modified
     # not using json.dump beacuse it uses ugly syntax
     with open('datasets.json', 'r+') as fd:
         contents = fd.readlines()
-        # insert string at line 67
-        contents[66] = 'install_dir: ' + install_dir + '\n'
         fd.seek(0)
         fd.writelines(contents)
 
