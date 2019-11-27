@@ -89,12 +89,33 @@ def misalign(ons_dev, offs_dev, mean, out, stats):
     onsets -= first_onset
     offsets -= first_onset
 
+    # a table to search for same pitches
+    table_pitches = [[] for i in range(128)]
+    for i, p in enumerate(pitches):
+        table_pitches[int(p)].append(i)
+
     # make each offset being greater than the onset
+    # but smaller than the following onset in the 
+    # same pitch
     def fix_offsets(i):
-        if offsets[i] > onsets[i]:
-            return offsets[i]
-        else:
-            return 2*onsets[i] - offsets[i]
+                
+        ret = offsets[i]
+        if offsets[i] <= onsets[i]:
+            ret = 2*onsets[i] - offsets[i]
+
+        # search next note with same pitch
+        j = None
+        for k in table_pitches[int(pitches[i])]:
+            if onsets[k] > onsets[i]:
+                j = k
+                break
+        
+        if j is not None and j < len(onsets):
+            if ret > onsets[j]:
+                ret = onsets[j] - 0.005
+
+        return ret
+
     offsets = list(map(fix_offsets, range(len(onsets))))
 
     return pitches, onsets.tolist(), offsets
@@ -178,11 +199,11 @@ def create_gt(data_fn, args, gztar=False):
         print("Starting processing " + dataset['name'])
         if dataset['ground_truth']['non_aligned'] == 2 and stats:
             # computing means and std deviations for each song in the dataset
-            mean = stats.get_random_mean(k=len(dataset['songs']), max_value=5)
+            mean = stats.get_random_mean(k=len(dataset['songs']), max_value=None)
             seed()
-            ons_dev = stats.get_random_onset_dev(k=len(dataset['songs']), max_value=5)
+            ons_dev = stats.get_random_onset_dev(k=len(dataset['songs']), max_value=0.1)
             seed()
-            offs_dev = stats.get_random_offset_dev(k=len(dataset['songs']), max_value=5)
+            offs_dev = stats.get_random_offset_dev(k=len(dataset['songs']), max_value=0.1)
             arg = [(i, song, json_file, dataset, stats, ons_dev, offs_dev, mean)
                    for i, song in enumerate(dataset['songs'])]
         else:
