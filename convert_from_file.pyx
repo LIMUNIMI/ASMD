@@ -225,7 +225,10 @@ def from_sonic_visualizer(gt_fn, alignment='precise_alignment'):
     for row in data:
         out[alignment]["onsets"].append(float(row[0]))
         out[alignment]["offsets"].append(float(row[0]) + float(row[2]))
-        pitch = utils.f0_to_midi_pitch(float(row[1]))
+        p = float(row[1])
+        if p == 0:
+            p += 1
+        pitch = utils.f0_to_midi_pitch(p)
         out[alignment]["pitches"].append(pitch)
 
     return [out]
