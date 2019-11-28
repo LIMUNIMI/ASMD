@@ -31,7 +31,7 @@ class Dataset:
         self.decompress_path = './'
         self.paths = []
 
-    def filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets = [], ground_truth=[]):
+    def filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
         """
         Filters the dataset and load the paths of the songs which accomplish
         the filter described in `kwargs`. A field `paths` is added to this
@@ -145,7 +145,8 @@ class Dataset:
 
         recordings = []
         for recording_fn in recordings_fn:
-            audio, in_sr = io.open_audio(joinpath(self.install_dir, recording_fn))
+            audio, in_sr = io.open_audio(
+                joinpath(self.install_dir, recording_fn))
             recordings.append(audio)
 
         if len(recordings) > 1:
@@ -154,7 +155,7 @@ class Dataset:
             mix = recordings[0]
 
         if sr is not None:
-            resampler = es.Resample(in_sr, sr)
+            resampler = es.Resample(inputSampleRate=in_sr, outputSampleRate=sr)
             mix = resampler(mix)
         else:
             sr = in_sr
@@ -289,7 +290,7 @@ class Dataset:
         else:
             score_type = score_type[0]
 
-        print("    Loading ground truth " + score_type)
+        # print("    Loading ground truth " + score_type)
         mat = []
         for i, gt in enumerate(gts):
             # Make pitches and alignments of thesame number of notes
@@ -304,7 +305,7 @@ class Dataset:
             ons = np.array(gt[score_type]['onsets'])
             if not len(ons):
                 ons = np.full_like(pitches, -255)
-            
+
             missing = len(pitches) - len(ons)
             if missing < 0:
                 # add -255 to pitches
@@ -333,7 +334,7 @@ class Dataset:
             num = np.full_like(ons, i)
             instr = np.full_like(ons, gt['instrument'])
             mat.append(np.array([pitches, ons, offs, vel, instr, num]))
-        
+
         if len(mat) > 1:
             # mat now contains one list per each ground-truth, concatenating
             mat = np.concatenate(mat, axis=1)
@@ -401,7 +402,8 @@ def find_bach10_errors(gt, score_type):
         if errors are detected
     """
     if len(gt[score_type]['pitches']) != len(gt[score_type]['onsets']):
-        diff_notes = len(gt[score_type]['pitches']) - len(gt[score_type]['onsets'])
+        diff_notes = len(gt[score_type]['pitches']) - \
+            len(gt[score_type]['onsets'])
         print('---- This file contains different data in ' +
               score_type+' and number of pitches!')
         print('----', diff_notes, 'different notes')

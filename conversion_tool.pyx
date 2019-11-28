@@ -14,6 +14,11 @@ import multiprocessing as mp
 #: if True, run conversion in parallel processes
 PARALLEL = True
 # PARALLEL = False
+ONS_MAX = 1
+OFFS_MAX = 1
+ONS_DEV_MAX = 0.2
+OFFS_DEV_MAX = 0.2
+MEAN_MAX = None
 
 
 def normalize_text(text):
@@ -75,9 +80,9 @@ def misalign(ons_dev, offs_dev, mean, out, stats):
         aligned = 'broad_alignment'
     length = len(out[aligned]['onsets'])
     seed()
-    onsets = stats.get_random_onset_diff(k=length, max_value=None)
+    onsets = stats.get_random_onset_diff(k=length, max_value=ONS_MAX)
     seed()
-    offsets = stats.get_random_offset_diff(k=length, max_value=None)
+    offsets = stats.get_random_offset_diff(k=length, max_value=OFFS_MAX)
     onsets = np.array(out[aligned]['onsets']) + \
         np.array(onsets) * ons_dev + mean
     offsets = np.array(out[aligned]['offsets']) + \
@@ -90,15 +95,15 @@ def misalign(ons_dev, offs_dev, mean, out, stats):
     offsets -= first_onset
 
     # a table to search for same pitches
-    table_pitches = [[] for i in range(128)]
+    table_pitches = [[]] * 128
     for i, p in enumerate(pitches):
         table_pitches[int(p)].append(i)
 
     # make each offset being greater than the onset
-    # but smaller than the following onset in the 
+    # but smaller than the following onset in the
     # same pitch
     def fix_offsets(i):
-                
+
         ret = offsets[i]
         if offsets[i] <= onsets[i]:
             ret = 2*onsets[i] - offsets[i]
@@ -109,7 +114,7 @@ def misalign(ons_dev, offs_dev, mean, out, stats):
             if onsets[k] > onsets[i]:
                 j = k
                 break
-        
+
         if j is not None and j < len(onsets):
             if ret > onsets[j]:
                 ret = onsets[j] - 0.005
@@ -190,7 +195,7 @@ def create_gt(data_fn, args, gztar=False):
         if len(args) > 1:
             if dataset['name'] not in args:
                 continue
-            
+
         if not os.path.exists(os.path.join(json_file["install_dir"], dataset["name"])):
             print(dataset["name"] + " not installed, skipping it")
             continue
@@ -199,11 +204,11 @@ def create_gt(data_fn, args, gztar=False):
         print("Starting processing " + dataset['name'])
         if dataset['ground_truth']['non_aligned'] == 2 and stats:
             # computing means and std deviations for each song in the dataset
-            mean = stats.get_random_mean(k=len(dataset['songs']), max_value=None)
+            mean = stats.get_random_mean(k=len(dataset['songs']), max_value=MEAN_MAX)
             seed()
-            ons_dev = stats.get_random_onset_dev(k=len(dataset['songs']), max_value=0.1)
+            ons_dev = stats.get_random_onset_dev(k=len(dataset['songs']), max_value=ONS_DEV_MAX)
             seed()
-            offs_dev = stats.get_random_offset_dev(k=len(dataset['songs']), max_value=0.1)
+            offs_dev = stats.get_random_offset_dev(k=len(dataset['songs']), max_value=OFFS_DEV_MAX)
             arg = [(i, song, json_file, dataset, stats, ons_dev, offs_dev, mean)
                    for i, song in enumerate(dataset['songs'])]
         else:
