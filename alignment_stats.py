@@ -1,3 +1,5 @@
+import pyximport
+pyximport.install()
 from audioscoredataset import Dataset
 import numpy as np
 from sklearn.preprocessing import StandardScaler, minmax_scale
