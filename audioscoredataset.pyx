@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+#cython: language_level=3
+import pyximport; pyximport.install()
 import json
 import gzip
 from os.path import join as joinpath
