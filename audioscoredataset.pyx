@@ -32,6 +32,7 @@ class Dataset:
         self.install_dir = self.data['install_dir']
         self.decompress_path = './'
         self.paths = []
+        self._chunks = {}
 
     def filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
         """
@@ -71,6 +72,7 @@ class Dataset:
             from 0 to 2 (0->False, 1->True (manual annotation),
                          2->True(automatic annotation))
         """
+        end = 0
         for mydataset in self.data['datasets']:
             FLAG = True
             if len(datasets) > 0:
@@ -94,6 +96,7 @@ class Dataset:
                     break
 
             if FLAG:
+                self._chunks[mydataset['name']] = [end, end]
                 for song in mydataset['songs']:
                     # checking song levels filters
                     if instrument:
@@ -122,6 +125,22 @@ class Dataset:
                         if mixed:
                             mix = song['recording']['path']
                         self.paths.append([mix, source, gts])
+                        end += 1
+                self._chunks[mydataset['name']][1] = end
+
+
+    def idx_chunk_to_whole(self, name, idx):
+        """
+        Given a dataset name and an idx or a list of idx relative to the input dataset,
+        returns the idx relative to this whole dataset.
+        """
+        if type(idx) is int:
+            return idx + self._chunks[name][0]
+        elif type(idx) is list:
+            return [i + self._chunks[name][0] for i in idx]
+        else:
+            raise Exception('idx should be int or list of int!')
+
 
     def get_mix(self, idx, sr=None):
         """
