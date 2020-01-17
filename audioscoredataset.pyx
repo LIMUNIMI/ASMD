@@ -315,7 +315,6 @@ class Dataset:
         mat = []
         for i, gt in enumerate(gts):
             # Make pitches and alignments of thesame number of notes
-            diff_notes = 0
             if truncate:
                 find_bach10_errors(gt, score_type)
                 truncate_score(gt)
