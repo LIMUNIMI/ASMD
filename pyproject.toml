@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "datasets"
+version = "0.1.0"
+description = ""
+authors = ["Federico Simonetta"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+numpy = "^1.18.1"
+requests = "^2.22.0"
+beautifulsoup4 = "^4.8.2"
+cython = "^0.29.14"
+essentia = "^2.1b6.dev90"
+plotly = "^4.4.1"
+pretty_midi = "^0.2.8"
+scikit_learn = "^0.22.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
