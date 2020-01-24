@@ -3,6 +3,7 @@
 import pyximport; pyximport.install()
 import json
 import gzip
+import os
 from os.path import join as joinpath
 import essentia.standard as es
 from utils import io
@@ -14,23 +15,42 @@ class Dataset:
     def __len__(self):
         return len(self.paths)
 
-    def __init__(self, path):
+    def __init__(self, paths=[], metadataset_path='datasets/datasets.json'):
         """
         Load the dataset description
 
         Parameters
         ----------
-        path : str
-            path of the `json` dataset file
+
+        * paths : list of str
+            paths where `json` dataset definitions are stored; if empty, the
+            default definitions are used
+
+        * metadataset_path : str
+            the path were the generic information about where this datetimeis
+            installed are stored
 
         Returns
         -------
-        AudioScoreDataset :
+        * AudioScoreDataset :
             instance of the class
         """
-        self.data = json.load(open(path, 'rt'))
-        self.install_dir = self.data['install_dir']
-        self.decompress_path = './'
+        if len(paths) == 0:
+            paths.append('datasets/definitions')
+
+        self.datasets = []
+        for path in paths:
+            # look for json files in path
+            for file in os.listdir(path):
+                fullpath = joinpath(path, file)
+                if os.path.isfile(fullpath) and fullpath.endswith('.json'):
+                    # add this dataset
+                    self.datasets.append(json.load(open(fullpath, 'rt')))
+
+        # opening medataset json file
+        self.metadataset = json.load(open(metadataset_path, 'rt'))
+        self.install_dir = self.metadataset['install_dir']
+        self.decompress_path = self.metadataset['decompress_path']
         self.paths = []
         self._chunks = {}
 
@@ -73,7 +93,7 @@ class Dataset:
                          2->True(automatic annotation))
         """
         end = 0
-        for mydataset in self.data['datasets']:
+        for mydataset in self.datasets:
             FLAG = True
             if len(datasets) > 0:
                 if mydataset['name'] in datasets:
