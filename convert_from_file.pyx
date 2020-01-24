@@ -10,6 +10,71 @@ import pretty_midi
 
 BPM = 20
 
+class ConvertDataset:
+    """
+    Base class for classes which convert various datasets
+    """
+    gt = {
+        "precise_alignment": {
+            "onsets": [],
+            "offsets": [],
+            "pitches": [],
+            "notes": [],
+            "velocities": []
+        },
+        "non_aligned": {
+            "onsets": [],
+            "offsets": [],
+            "pitches": [],
+            "notes": [],
+            "velocities": []
+        },
+        "broad_alignment": {
+            "onsets": [],
+            "offsets": [],
+            "pitches": [],
+            "notes": [],
+            "velocities": []
+        },
+        "f0": [],
+        "instrument": 255,
+        "beats_non_aligned": []
+    }
+
+    def __init__(self, ext, no_dot, remove_player):
+        """
+        Parameters
+        ---
+
+        * ext : list of str
+            the possible extensions of the ground-truths to be converted, e.g.
+            ['.mid', '.midi']
+
+        * no_dot : boolean
+            if True, don't add a dot before of the extension, if False, add it
+            if not present.
+
+        * remove_player : boolean
+            if True, remove the name of the player in the last part of the file
+            name: use this for the `traditional_flute` dataset.
+        """
+        self.ext = ext
+        self.no_dot = no_dot
+        self.remove_player = remove_player
+
+    def __call__(self, input_fn, *args):
+        # compute original extension
+        for ext in self.ext:
+            new_fn = change_ext(input_fn, ext, self.no_dot, self.remove_player)
+            if os.path.exists(new_fn):
+                break
+
+        # run conversion function
+        return self.convert(new_fn)
+
+    def convert(self, fn, *args):
+        pass
+
 
 # The dictionary prototype for containing the ground_truth
 gt = {
