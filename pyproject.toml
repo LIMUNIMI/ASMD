@@ -17,6 +17,9 @@ pretty_midi = "^0.2.8"
 scikit_learn = "^0.22.1"
 
 [tool.poetry.dev-dependencies]
+ipython = "^7.11.1"
+snoop = "^0.2.4"
+ipdb = "^0.12.3"
 
 [build-system]
 requires = ["poetry>=0.12"]

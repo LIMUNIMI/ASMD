@@ -6,6 +6,7 @@ easily disregarding their internal structure
 
 - [Usage](#usage)
   * [datasets.json](#datasetsjson)
+  * [Definitions](#definitions)
   * [Ground-truth json format](#ground-truth-json-format)
   * [API](#api)
     + [Matlab [outdated]](#matlab-(outdated))
@@ -14,7 +15,7 @@ easily disregarding their internal structure
   * [Installation](#installation)
 - [Reproduce from scratch](#reproduce-from-scratch)
 - [Adding new datasets](#adding-new-datasets)
-  * [Adding sections to `datasets.json`](#adding-sections-to--datasetsjson-)
+  * [Adding new definitions](#adding-new-definitions)
   * [Provide a conversion function](#provide-a-conversion-function)
   * [Add your function to `func_map`](#add-your-function-to--func-map-)
   * [Run `generate_ground_truth.py`](#run--conversion-gt-)
@@ -30,8 +31,11 @@ The root element is a dictionary with fields:
 2. `year`: int containing the year
 3. `install_dir`: string containing the install directory
 4. `datasets`: list of datasets object
+5. `decompress_path`: the path were files are decompressed
 
-Each dataset is an item in a global list `datasets`.  Each dataset has the
+## Definitions
+
+Each dataset is described by a JSON file which.  Each dataset has the
 following field:
 
 1. `ensemble`: `true` if contains multiple instruments, `false` otherwise
@@ -80,7 +84,7 @@ the data are available but that information is not documented.
 
 ## Ground-truth json format
 
-The ground_truth is contained in json files indexed in `datasets.json`. Each
+The ground_truth is contained in JSON files indexed in each definition file. Each
 ground truth file contains only one isntrument in a dictionary with the
 following structure:
 1. `non_aligned`:
@@ -175,7 +179,9 @@ Example:
 
 ```python
 import audioscoredataset as asd
-d = asd.Dataset('./datasets.json')
+
+d = asd.Dataset()
+# d = asd.Dataset(paths=['path_to_my_definitions', 'path_to_default_definitions'])
 d.filter(instrument='piano', ensemble=False, composer='Mozart', ground_truth=['precise_alignment'])
 
 audio_array, sources_array, ground_truth_array = d.get_item(1)
@@ -188,8 +194,9 @@ mat = d.get_score(2, score_type=['precise_alignment'])
 
 ```
 
-Note that you can inherit from `audioscoredataset.Dataset` and `torch.utils.data.Dataset` to create a PyTorch
-compatible dataset which only load audio files when thay are accessed. You will just need to implement the
+Note that you can inherit from `audioscoredataset.Dataset` and
+`torch.utils.data.Dataset` to create a PyTorch compatible dataset which only
+load audio files when thay are accessed. You will just need to implement the
 `__getitem__` method.
 
 ### Julia 
@@ -213,12 +220,12 @@ can't be downloaded.**
 # Adding new datasets
 In order to add new datasets, you have to:
 
-1. Add the correspondent section in `datasets.json`
+1. Create the correspondent definition
 2. Provide a conversion function for the ground truth
 3. Add the conversion function to the structure `func_map` in `convert_from_file.py`
 4. Rerun the `convert_gt.py` script
 
-## Adding sections to `datasets.json`
+## Adding new definitions
 
 The most important thing is that one ground-truth file is provided for each
 instrument. Add the paths, even if they still do not exist, because
