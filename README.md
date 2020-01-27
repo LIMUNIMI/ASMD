@@ -363,3 +363,7 @@ analysis, I always consider the prescripted tempo as 20 BPM (see
 do not have the BPM of all the available scorse, I found more convenient having
 all of them scored with a non-usual BPM, in the attempt of making the BPM the
 least influent as possible.
+
+# TODO
+1. move wget to curl
+2. support to Windows for command line post-processing
