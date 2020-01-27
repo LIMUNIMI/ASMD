@@ -10,74 +10,60 @@ import pretty_midi
 
 BPM = 20
 
-class ConvertDataset:
+
+def convert(exts, no_dot=True, remove_player=False):
     """
-    Base class for classes which convert various datasets
-    """
-    gt = {
-        "precise_alignment": {
-            "onsets": [],
-            "offsets": [],
-            "pitches": [],
-            "notes": [],
-            "velocities": []
-        },
-        "non_aligned": {
-            "onsets": [],
-            "offsets": [],
-            "pitches": [],
-            "notes": [],
-            "velocities": []
-        },
-        "broad_alignment": {
-            "onsets": [],
-            "offsets": [],
-            "pitches": [],
-            "notes": [],
-            "velocities": []
-        },
-        "f0": [],
-        "instrument": 255,
-        "beats_non_aligned": []
-    }
+    This function that is designed to be used as decorators for functions which
+    converts from a filetype to our JSON format.
 
-    def __init__(self, ext, no_dot, remove_player):
-        """
-        Parameters
-        ---
+    Example of usage:
 
-        * ext : list of str
-            the possible extensions of the ground-truths to be converted, e.g.
-            ['.mid', '.midi']
-
-        * no_dot : boolean
-            if True, don't add a dot before of the extension, if False, add it
-            if not present.
-
-        * remove_player : boolean
-            if True, remove the name of the player in the last part of the file
-            name: use this for the `traditional_flute` dataset.
-        """
-        self.ext = ext
-        self.no_dot = no_dot
-        self.remove_player = remove_player
-
-    def __call__(self, input_fn, *args):
-        # compute original extension
-        for ext in self.ext:
-            new_fn = change_ext(input_fn, ext, self.no_dot, self.remove_player)
-            if os.path.exists(new_fn):
-                break
-
-        # run conversion function
-        return self.convert(new_fn)
-
-    def convert(self, fn, *args):
+    ```
+    @convert(['.myext'], no_dot=True, remove_player=False)
+    def function_which_converts(...):
         pass
+    ```
+
+    Parameters
+    ---
+    * input_fn : str
+        the file name in input as in the original dataset
+
+    * ext : list of str
+        the possible extensions of the ground-truths to be converted, e.g.
+        ['.mid', '.midi']
+
+    * no_dot : boolean
+        if True, don't add a dot before of the extension, if False, add it
+        if not present.
+
+    * remove_player : boolean
+        if True, remove the name of the player in the last part of the file
+        name: use this for the `traditional_flute` dataset.
+    """
+
+
+    def _convert(user_convert):
+
+        def func(input_fn, *args, **kwargs):
+            for ext in exts:
+                new_fn = change_ext(input_fn, ext, no_dot, remove_player)
+                if os.path.exists(new_fn):
+                    break
+
+            out = user_convert(new_fn, *args, **kwargs)
+
+            if type(out) is dict:
+                out = [out]
+            return out
+
+        return func
+
+    return _convert
 
 
 # The dictionary prototype for containing the ground_truth
-gt = {
+prototype_gt = {
     "precise_alignment": {
         "onsets": [],
         "offsets": [],
@@ -153,7 +139,7 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
         bpm_ratio = 1
 
     for track in midi_tracks:
-        data = deepcopy(gt)
+        data = deepcopy(prototype_gt)
 
         for note_group in track:
             for note in note_group:
@@ -174,7 +160,7 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
 def from_phenicx_txt(txt_fn, non_aligned=False):
     """
     Open a txt file `txt_fn` in the PHENICX format and convert it to our
-    ground_truth representation. This fills: `broad_alignment` and 
+    ground_truth representation. This fills: `broad_alignment` and
     `pitches` and `notes` of `non_aligned`.
     """
     out_list = list()
@@ -183,7 +169,7 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
     with open(txt_fn) as f:
         lines = f.readlines()
 
-    out = deepcopy(gt)
+    out = deepcopy(prototype_gt)
     for line in lines:
         fields = re.split(',|\n', line)
         out["non_aligned"]["notes"].append(fields[2])
@@ -210,7 +196,7 @@ def from_bach10_mat(mat_fn, sources=range(4)):
 
     mat = scipy.io.loadmat(mat_fn)['GTNotes']
     for i in range(len(mat)):
-        out = deepcopy(gt)
+        out = deepcopy(prototype_gt)
         source = mat[i, 0]
         for j in range(len(source)):
             note = source[j, 0]
@@ -237,7 +223,7 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
 
     f0s = scipy.io.loadmat(nmat_fn)['GTF0s']
     for source in sources:
-        out = deepcopy(gt)
+        out = deepcopy(prototype_gt)
         out["f0"] = f0s[source].tolist()
         out_list.append(out)
 
@@ -256,7 +242,7 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
     """
     csv_fn = change_ext(csv_fn, 'csv')
     data = csv.reader(open(csv_fn), delimiter=',')
-    out = deepcopy(gt)
+    out = deepcopy(prototype_gt)
 
     # skipping first line
     next(data)
@@ -286,7 +272,7 @@ def from_sonic_visualizer(gt_fn, alignment='precise_alignment'):
     gt_fn = change_ext(gt_fn, '.gt')
 
     data = csv.reader(open(gt_fn), delimiter=',')
-    out = deepcopy(gt)
+    out = deepcopy(prototype_gt)
     for row in data:
         out[alignment]["onsets"].append(float(row[0]))
         out[alignment]["offsets"].append(float(row[0]) + float(row[2]))
