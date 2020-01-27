@@ -15,11 +15,14 @@ essentia = "^2.1b6.dev90"
 plotly = "^4.4.1"
 pretty_midi = "^0.2.8"
 scikit_learn = "^0.22.1"
+pyfiglet = "^0.8.post1"
+alive-progress = "^1.3.3"
 
 [tool.poetry.dev-dependencies]
-ipython = "^7.11.1"
 snoop = "^0.2.4"
-ipdb = "^0.12.3"
+ipdb = "*"
+ipython = "*"
+prompt_toolkit = "^3.0.3"
 
 [build-system]
 requires = ["poetry>=0.12"]

@@ -1,6 +1,7 @@
 {
     "author" : "Federico Simonetta",
     "install_dir" : "/opt/AudioScoreDatasets",
-    "year" : 2019,
+    "year" : 2020,
+    "url" : "https://federicosimonetta.eu.org",
     "decompress_path" : "./"
 }
