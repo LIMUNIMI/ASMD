@@ -1,7 +1,10 @@
 #cython: language_level=3
+import pyximport; pyximport.install()
+from audioscoredataset import load_definitions
 import json
 from copy import deepcopy
 import tarfile
+from os.path import join as joinpath
 import os
 import gzip
 from difflib import SequenceMatcher
@@ -191,9 +194,11 @@ def create_gt(data_fn, args, gztar=False):
     #     stats.compute_hist()
 
     to_be_included_in_the_archive = []
-    for dataset in json_file['datasets']:
+    datasets = load_definitions('definitions')
+    for dataset in datasets:
         if len(args) > 1:
             if dataset['name'] not in args:
+                print("Skipping", dataset['name'])
                 continue
 
         if not os.path.exists(os.path.join(json_file["install_dir"], dataset["name"])):
@@ -215,7 +220,7 @@ def create_gt(data_fn, args, gztar=False):
             arg = [(i, song, json_file, dataset, None, None, None, None)
                    for i, song in enumerate(dataset['songs'])]
         if not PARALLEL:
-            for l, song in enumerate(dataset['songs']):
+            for l in range(len(dataset['songs'])):
                 to_be_included_in_the_archive += conversion(arg[l])
         else:
             CPU = os.cpu_count() - 1
@@ -227,9 +232,15 @@ def create_gt(data_fn, args, gztar=False):
             )
             to_be_included_in_the_archive += sum(result.get(), [])
 
+
+    def _remove_basedir(x):
+        x.name = x.name.replace(json_file['install_dir'][1:]+'/', '')
+        return x
+
     # creating the archive
     if gztar:
         print("\n\nCreating the final archive")
         with tarfile.open('ground_truth.tar.gz', mode='w:gz') as tf:
             for fname in to_be_included_in_the_archive:
-                tf.add(fname)
+                # adding file with relative path
+                tf.add(fname, filter=_remove_basedir)

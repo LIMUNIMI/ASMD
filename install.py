@@ -7,19 +7,20 @@ from prompt_toolkit.validation import Validator
 from prompt_toolkit import prompt
 import os
 import pathlib
+import tarfile
 import tempfile
 from pyfiglet import Figlet
 from alive_progress import alive_bar
 from subprocess import Popen, DEVNULL
-from os.path import join as joinpath
 from getpass import getpass
 from ftplib import FTP
 from urllib.request import urlretrieve, urlcleanup
 from urllib.parse import urlparse
 from collections import deque
 from shutil import unpack_archive
-import readline
-readline.parse_and_bind("tab: complete")
+import pyximport
+pyximport.install()
+from audioscoredataset import load_definitions
 
 #: Set to True to skip datasets which already exist
 SKIP_EXISTING_DIR = True
@@ -60,7 +61,6 @@ they will be skipped. Empty to select all of them.")
             print("Wrong answer, please use only numbers in your answer.")
             flag = False
 
-    print()
     # skipping directories already existing
     i = 0
     for k in range(len(data)):
@@ -75,7 +75,7 @@ they will be skipped. Empty to select all of them.")
         i += 1
 
 
-def load_definitions():
+def definitions_path():
     validator = Validator.from_callable(
         lambda x: os.path.isdir(x) or x == '',
         error_message="Not a directory!",
@@ -84,16 +84,11 @@ def load_definitions():
     path_completer = PathCompleter(only_directories=True)
     question = "\nType the path to a definition dir (empty to continue) "
 
-    print("\n------------------")
     datasets = []
     path = prompt(question, completer=path_completer, validator=validator)
     while path != "":
         # look for json files in path
-        for file in os.listdir(path):
-            fullpath = joinpath(path, file)
-            if os.path.isfile(fullpath) and fullpath.endswith('.json'):
-                # add this dataset
-                datasets.append(json.load(open(fullpath, 'rt')))
+        datasets += load_definitions(path)
         path = prompt(question, completer=path_completer, validator=validator)
     return datasets
 
@@ -140,19 +135,15 @@ def get_credentials(data):
 
 
 def intro(data):
-    f = Figlet(font='eftiwater')
-    print(f.renderText('Audio-Score Meta'))
+    f = Figlet(font='standard')
+    print(f.renderText('Audio\nScore\nMeta'))
     f = Figlet(font='sblood')
     print(f.renderText('Dataset'))
     print()
 
-    print("Starting installation")
-    print("---------------------")
     print("Author: " + data['author'])
     print("Year: ", data['year'])
     print("Website: ", data['url'])
-    print("------------------")
-    print()
 
 
 def download(item, credentials, install_dir):
@@ -215,17 +206,15 @@ def main():
     intro(json_file)
 
     f = Figlet(font='digital')
-    print(f.renderText("Initial setup"))
+    print(f.renderText("\nInitial setup"))
     install_dir = chose_install_dir(json_file)
-    data = load_definitions()
-    print("\n------------------")
-    print(f.renderText("Chosing datasets"))
+    data = definitions_path()
+    print(f.renderText("\nChosing datasets"))
     chose_dataset(data, install_dir)
 
     # at now, no credential is needed
-    print("\n------------------")
     credentials = deque(get_credentials(data))
-    print(f.renderText("Processing"))
+    print(f.renderText("\nProcessing"))
     for d in data:
         full_path = os.path.join(install_dir, d['name'])
         print("Creating " + d['name'])
@@ -236,7 +225,7 @@ def main():
 
         # unzipping if needed
         if d['unpack']:
-            print("Unpacking...")
+            print("Unpacking downloaded archive...")
             for temp_fn in downloaded_file:
                 format = ''.join(pathlib.Path(d['url']).suffixes) or '.zip'
                 format = [
@@ -270,19 +259,25 @@ def main():
             ) as bar:
                 while p.poll() is None:
                     bar()
-            os.remove(tf_name)
 
-        print("------------------")
+            # removing script
+            os.remove(tf_name)
 
         # just to be sure
         urlcleanup()
 
-    print("\n------------------")
-    print(f.renderText("Unpacking ground-truths"))
-    gt_archive_fn = 'ground_truth.tar.xz'
-    if os.path.exists(gt_archive_fn):
-        # unpacking the ground_truth data
-        unpack_archive(gt_archive_fn, install_dir, 'xztar')
+    print(f.renderText("\nUnpacking ground-truths"))
+    # unpacking the ground_truth data of only the files of the chosen datasets
+    gt_archive_fn = 'ground_truth.tar.gz'
+    with tarfile.open(gt_archive_fn, mode='w:gz') as tf:
+        # taking only paths that we really want
+        subdir_and_files = [
+            gt
+            for d in data
+            for s in d['songs']
+            for gt in s['ground_truth']
+        ]
+        tf.extractall(members=subdir_and_files)
 
     # saving the Json file as modified
     # not using json.dump beacuse it uses ugly syntax
