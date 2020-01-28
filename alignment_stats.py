@@ -1,13 +1,13 @@
 import pyximport
 pyximport.install()
-from audioscoredataset import Dataset
-import numpy as np
-from sklearn.preprocessing import StandardScaler, minmax_scale
-from utils import utils
 from random import choices, uniform
+from utils import utils
+from sklearn.preprocessing import StandardScaler, minmax_scale
+import numpy as np
+from audioscoredataset import Dataset
 
+data = Dataset()
 
-data = Dataset('datasets.json')
 
 class Stats:
     def __init__(self):
@@ -24,8 +24,10 @@ class Stats:
         self.ons_dev.append(np.std(ons_diffs))
         self.offs_dev.append(np.std(offs_diffs))
         self.means.append(np.mean([offs_diffs, ons_diffs]))
-        self.ons_diffs += StandardScaler().fit_transform(ons_diffs.reshape(-1, 1)).tolist()
-        self.offs_diffs += StandardScaler().fit_transform(offs_diffs.reshape(-1, 1)).tolist()
+        self.ons_diffs += StandardScaler().fit_transform(
+            ons_diffs.reshape(-1, 1)).tolist()
+        self.offs_diffs += StandardScaler().fit_transform(
+            offs_diffs.reshape(-1, 1)).tolist()
 
     def compute_hist(self):
         """
@@ -37,19 +39,31 @@ class Stats:
         self.offs_dev_hist
         """
         self.ons_hist = np.histogram(self.ons_diffs, bins='auto', density=True)
-        self.offs_hist = np.histogram(self.offs_diffs, bins='auto', density=True)
+        self.offs_hist = np.histogram(self.offs_diffs,
+                                      bins='auto',
+                                      density=True)
         self.means_hist = np.histogram(self.means, bins='auto', density=True)
-        self.ons_dev_hist = np.histogram(self.ons_dev, bins='auto', density=True)
-        self.offs_dev_hist = np.histogram(self.offs_dev, bins='auto', density=True)
+        self.ons_dev_hist = np.histogram(self.ons_dev,
+                                         bins='auto',
+                                         density=True)
+        self.offs_dev_hist = np.histogram(self.offs_dev,
+                                          bins='auto',
+                                          density=True)
 
     def get_random_onset_dev(self, k=1, max_value=None):
-        return _get_random_value_from_hist(self.ons_dev_hist, k, max_value=max_value)
+        return _get_random_value_from_hist(self.ons_dev_hist,
+                                           k,
+                                           max_value=max_value)
 
     def get_random_offset_dev(self, k=1, max_value=None):
-        return _get_random_value_from_hist(self.offs_dev_hist, k, max_value=max_value)
+        return _get_random_value_from_hist(self.offs_dev_hist,
+                                           k,
+                                           max_value=max_value)
 
     def get_random_mean(self, k=1, max_value=None):
-        return _get_random_value_from_hist(self.means_hist, k, max_value=max_value)
+        return _get_random_value_from_hist(self.means_hist,
+                                           k,
+                                           max_value=max_value)
 
     def get_random_onset_diff(self, k=1, max_value=None):
         return _get_random_value_from_hist(self.ons_hist, k, max_value=None)
@@ -62,8 +76,9 @@ def seed():
     """
     Apply a seed to the python random module to reproduce my results
     """
-    # import random
-    # random.seed(1992)
+    import random
+    random.seed(1992)
+
 
 def _get_random_value_from_hist(hist, k=1, max_value=None):
     """
@@ -82,6 +97,7 @@ def _get_random_value_from_hist(hist, k=1, max_value=None):
     end = np.array(start) + bin_w
     return [uniform(start[i], end[i]) for i in range(len(start))]
 
+
 def fill_stats(datasets):
     stats = Stats()
 
@@ -93,14 +109,17 @@ def fill_stats(datasets):
             mat_aligned = data.get_score(i, score_type=[alignment_type])
             mat_score = data.get_score(i, score_type=['non_aligned'])
             # selecting only rows where mat scores have values > 0
-            mat_aligned = mat_aligned[np.all(mat_aligned[:, [0, 1, 2]] >= 0, axis=1), :]
-            mat_score = mat_score[np.all(mat_score[:, [0, 1, 2]] >= 0, axis=1), :]
+            mat_aligned = mat_aligned[
+                np.all(mat_aligned[:, [0, 1, 2]] >= 0, axis=1), :]
+            mat_score = mat_score[np.all(mat_score[:,
+                                                   [0, 1, 2]] >= 0, axis=1), :]
             mat_aligned[:, 0] = np.round(mat_aligned[:, 0])
             mat_score[:, 0] = np.round(mat_score[:, 0])
             ons_diffs, offs_diffs = utils.evaluate(mat_score, mat_aligned)
             stats.add_data(ons_diffs, offs_diffs)
 
     return stats
+
 
 if __name__ == '__main__':
     import os
@@ -127,13 +146,18 @@ if __name__ == '__main__':
         os.remove("_alignment_stats.pkl")
     pickle.dump(stats, open("_alignment_stats.pkl", 'wb'))
 
-    fig1 = go.Figure(data=[go.Scatter(y=stats.ons_hist[0], x=stats.ons_hist[1])])
+    fig1 = go.Figure(
+        data=[go.Scatter(y=stats.ons_hist[0], x=stats.ons_hist[1])])
     plt.plot(fig1, filename='ons.html')
-    fig2 = go.Figure(data=[go.Scatter(y=stats.offs_hist[0], x=stats.offs_hist[1])])
+    fig2 = go.Figure(
+        data=[go.Scatter(y=stats.offs_hist[0], x=stats.offs_hist[1])])
     plt.plot(fig2, filename='offs.html')
-    fig3 = go.Figure(data=[go.Scatter(y=stats.means_hist[0], x=stats.means_hist[1])])
+    fig3 = go.Figure(
+        data=[go.Scatter(y=stats.means_hist[0], x=stats.means_hist[1])])
     plt.plot(fig3, filename='ons_means.html')
-    fig5 = go.Figure(data=[go.Scatter(y=stats.ons_dev_hist[0], x=stats.ons_dev_hist[1])])
+    fig5 = go.Figure(
+        data=[go.Scatter(y=stats.ons_dev_hist[0], x=stats.ons_dev_hist[1])])
     plt.plot(fig5, filename='ons_devs.html')
-    fig6 = go.Figure(data=[go.Scatter(y=stats.offs_dev_hist[0], x=stats.offs_dev_hist[1])])
+    fig6 = go.Figure(
+        data=[go.Scatter(y=stats.offs_dev_hist[0], x=stats.offs_dev_hist[1])])
     plt.plot(fig6, filename='offs_devs.html')
