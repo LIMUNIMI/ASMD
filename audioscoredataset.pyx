@@ -15,7 +15,7 @@ class Dataset:
     def __len__(self):
         return len(self.paths)
 
-    def __init__(self, paths=[], metadataset_path='datasets/datasets.json'):
+    def __init__(self, paths=[], metadataset_path='datasets.json'):
         """
         Load the dataset description
 
@@ -36,16 +36,11 @@ class Dataset:
             instance of the class
         """
         if len(paths) == 0:
-            paths.append('datasets/definitions')
+            paths.append('definitions/')
 
         self.datasets = []
         for path in paths:
-            # look for json files in path
-            for file in os.listdir(path):
-                fullpath = joinpath(path, file)
-                if os.path.isfile(fullpath) and fullpath.endswith('.json'):
-                    # add this dataset
-                    self.datasets.append(json.load(open(fullpath, 'rt')))
+            self.datasets += load_definitions(path)
 
         # opening medataset json file
         self.metadataset = json.load(open(metadataset_path, 'rt'))
@@ -288,7 +283,7 @@ class Dataset:
         """
         gts = self.get_gts(idx)
         beats = []
-        for i, gt in enumerate(gts):
+        for gt in gts:
             beats.append(gt['beats_non_aligned'])
 
         return np.array(beats)
@@ -472,3 +467,17 @@ def truncate_score(gt):
         gt[score_type]['velocities'] = gt[score_type]['velocities'][:length_to_truncate]
         gt[score_type]['onsets'] = gt[score_type]['onsets'][:length_to_truncate]
         gt[score_type]['offsets'] = gt[score_type]['offsets'][:length_to_truncate]
+
+
+def load_definitions(path):
+    """
+    Given a `path` to a directory, returns a list of dictionaries containing
+    the definitions found in that directory (not recursive search)
+    """
+    datasets = []
+    for file in os.listdir(path):
+        fullpath = joinpath(path, file)
+        if os.path.isfile(fullpath) and fullpath.endswith('.json'):
+            # add this dataset
+            datasets.append(json.load(open(fullpath, 'rt')))
+    return datasets
