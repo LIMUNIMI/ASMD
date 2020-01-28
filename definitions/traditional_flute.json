@@ -16,14 +16,14 @@
         ],
         "url" : "unknown",
         "conversion":[
-            [from_midi_remove_player, {
+            ["from_midi_remove_player", {
                 "alignment": "non_aligned",
                 "pitches": true,
                 "velocities": false,
                 "merge": false,
                 "beats": true
             }],
-            [from_sonic_visualizer, {}]
+            ["from_sonic_visualizer", {}]
         ]
     },
     "ground_truth" : {

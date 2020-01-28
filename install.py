@@ -90,7 +90,7 @@ def definitions_path():
 
     path = prompt(question, completer=path_completer, validator=validator)
     if path == "":
-        datasets = load_definitions('definitions')
+        datasets = load_definitions(joinpath(THISDIR, 'definitions'))
     else:
         datasets = []
     while path != "":

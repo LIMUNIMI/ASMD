@@ -480,5 +480,8 @@ def load_definitions(path):
         fullpath = joinpath(path, file)
         if os.path.isfile(fullpath) and fullpath.endswith('.json'):
             # add this dataset
-            datasets.append(json.load(open(fullpath, 'rt')))
+            try:
+                datasets.append(json.load(open(fullpath, 'rt')))
+            except:
+                print(fullpath)
     return datasets
