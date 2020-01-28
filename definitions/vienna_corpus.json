@@ -17,14 +17,14 @@
         ],
         "url" : "unknown",
         "conversion":[
-            [from_midi_remove_player, {
+            ["from_midi_remove_player", {
                 "alignment": "non_aligned",
                 "pitches": true,
                 "velocities": false,
                 "merge": true,
                 "beats": true
             }],
-            [from_midi, {
+            ["from_midi", {
                 "alignment": "precise_alignment",
                 "pitches": true,
                 "velocities": true,

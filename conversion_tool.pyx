@@ -196,7 +196,7 @@ def create_gt(data_fn, args, gztar=False):
     #     stats.compute_hist()
 
     to_be_included_in_the_archive = []
-    datasets = load_definitions('definitions')
+    datasets = load_definitions(joinpath(THISDIR, 'definitions'))
     for dataset in datasets:
         if len(args) > 1:
             if dataset['name'] not in args:
