@@ -4,8 +4,28 @@
     "sources" : {
         "format" : "unknown"
     },
-    "unpack" : false,
-    "url" : "unknown",
+    "install": {
+        "unpack" : false,
+        "login" : false,
+        "post-process" : [
+            "wget https://traditional-flute-firebase.firebaseapp.com/traditional-flute-dataset.zip ; unzip traditional-flute-dataset.zip -d traditional_flute/; rm traditional-flute-dataset.zip",
+            "mv traditional_flute/score/*.midi traditional_flute/ground_truth/",
+            [
+                "mv traditional_flute/ ", "&install_dir"
+            ]
+        ],
+        "url" : "unknown",
+        "conversion":[
+            [from_midi_remove_player, {
+                "alignment": "non_aligned",
+                "pitches": true,
+                "velocities": false,
+                "merge": false,
+                "beats": true
+            }],
+            [from_sonic_visualizer, {}]
+        ]
+    },
     "ground_truth" : {
         "broad_alignment" : 0,
         "f0" : 0,
@@ -16,14 +36,6 @@
     },
     "instruments" : [
         "flute"
-    ],
-    "login" : false,
-    "post-process" : [
-        "wget https://traditional-flute-firebase.firebaseapp.com/traditional-flute-dataset.zip ; unzip traditional-flute-dataset.zip -d traditional_flute/; rm traditional-flute-dataset.zip",
-        "mv traditional_flute/score/*.midi traditional_flute/ground_truth/",
-        [
-            "mv traditional_flute/ ", "&install_dir"
-        ]
     ],
     "recording" : {
         "format" : "wav"

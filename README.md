@@ -9,18 +9,21 @@ easily disregarding their internal structure
   * [Definitions](#definitions)
   * [Ground-truth json format](#ground-truth-json-format)
   * [API](#api)
-    + [Matlab [outdated]](#matlab-(outdated))
+    + [Matlab [outdated]](#matlab--outdated-)
     + [Python](#python)
-    + [Julia](#julia)
   * [Installation](#installation)
+    + [Using Poetry (recommended)](#using-poetry--recommended-)
+    + [Using pip](#using-pip)
+    + [Using pypi (not recommended)](#using-pypi--not-recommended-)
 - [Reproduce from scratch](#reproduce-from-scratch)
 - [Adding new datasets](#adding-new-datasets)
   * [Adding new definitions](#adding-new-definitions)
   * [Provide a conversion function](#provide-a-conversion-function)
-  * [Add your function to `func_map`](#add-your-function-to--func-map-)
-  * [Run `generate_ground_truth.py`](#run--conversion-gt-)
-  * [Generate misaligned data](#generate--misaligned--data)
+  * [Add your function to the JSON definition](#add-your-function-to-the-json-definition)
+  * [Run `generate_ground_truth.py`](#run--generate-ground-truthpy-)
+  * [Generate misaligned data](#generate-misaligned-data)
 - [Scientific notes](#scientific-notes)
+- [TODO](#todo)
 
 # Usage
 
@@ -65,11 +68,13 @@ One ground_truth path per instrument is alway provided. The order of the
 ground_truth path is the same of sources and of the instruments. Note that 
 some ground_truth paths can be identical (as in PHENICX for indicating that 
 violin1 and violin2 are playing exactly the same thing).
-7.  `url`: the url to download the dataset including the protocol
-8.  `post-process`: a list of shell commands to be executed to prepare the
-dataset; they can be lists themselves to allow the use of anchors to
-install_dir" field with the syntax "&install_dir"
-9.  `unpack`: `true` if the url needs to be unpacked
+7.  `install`: where information for the installation process are stored
+    1.  `url`: the url to download the dataset including the protocol
+    2.  `post-process`: a list of shell commands to be executed to prepare the
+    dataset; they can be lists themselves to allow the use of anchors to
+    install_dir" field with the syntax "&install_dir"
+    3.  `unpack`: `true` if the url needs to be unpacked
+    4.  `login`: true if you a login is needed - no more used, but maybe useful in future
 
 
 In general, I maintained the following principles:
@@ -199,14 +204,50 @@ Note that you can inherit from `audioscoredataset.Dataset` and
 load audio files when thay are accessed. You will just need to implement the
 `__getitem__` method.
 
-### Julia 
-[TODO]
+More info in the docs.
 
 ## Installation
+
+I suggest to clone this repo and using it with python >= 3.6. If you need to
+use it in multiple projects (or folders) just clone the code and fix the
+`install_dir` in `datasets.json`, so that you can have only one  copy of the
+huge datasets.
+
+However, you can also try to install it in your system using [`poetry`](https://python-poetry.org/)
+
+### Using Poetry (recommended)
+Once you have cloned the repo follow these steps:
 1. Install `python 3`
-2. Run the following command from a shell terminal from inside this directory:
-python3 install.py
-3. Follow the steps.
+2. Install [`poetry`](https://python-poetry.org/docs/#installation)
+3. Install [`pyenv`](https://github.com/pyenv/pyenv#installation) and fix your `.bashrc`(optional)
+4. `pyenv install 3.6.9` (optional, recommended python >= 3.6.9)
+5. `cd myproject`
+6. `touch __init__.py`
+7. `pyenv local 3.6.9` (optional)
+8. `git clone https://framagit.org/sapo/asmd.git`
+9. `cd amsd`
+10. `poetry install`
+11. Execute `poetry run python install.py`
+12. Follow the steps
+
+Now you can start developing in the parent directory (`myproject`) and you can
+use `from amsd import audioscoredataset as asd`.
+
+### Using pip
+1. Install `python 3` (recommended python >= 3.6.9)
+2. `cd myproject`
+3. `git clone https://framagit.org/sapo/asmd.git`
+4. `cd amsd`
+5. Enter the git root directory and run `pip install -r requirements.txt`
+11. Execute `poetry run python install.py`
+12. Follow the steps
+
+Now you can start developing in the parent directory (`myproject`) and you can
+use `from amsd import audioscoredataset as asd`.
+
+### Using pypi (not recommended)
+
+Not available at now.
 
 # Reproduce from scratch
 
@@ -218,43 +259,50 @@ installed the datasets.
 can't be downloaded.**
 
 # Adding new datasets
-In order to add new datasets, you have to:
+In order to add new datasets, you have to create the correspondent definition in a JSON file.
+The definitions can be in any directory but you have to provide this path to
+the API and to the installation script (you will be asked for this, so you
+can't be wrong).
 
-1. Create the correspondent definition
-2. Provide a conversion function for the ground truth
-3. Add the conversion function to the structure `func_map` in `convert_from_file.py`
-4. Rerun the `convert_gt.py` script
+The dataset files, instead, should be in the installation directory and the
+paths in the definition should not take into account the installation
+directory.
+
+If you also want to add the new dataset to the installation procedure, you should:
+
+1. Provide a conversion function for the ground truth
+2. Add the conversion function with all parameters to the JSON definition
+(section `install>conversion`)
+3. Rerun the `install.py` and `convert_gt.py` scripts
 
 ## Adding new definitions
 
 The most important thing is that one ground-truth file is provided for each
-instrument. Add the paths, even if they still do not exist, because
-`convert_gt.py` relies on that to create them. It is important to provide an
-index starting with `-` at the end of the path (see the other sections as
-example), so that it is possible to distinguish among multiple instruments (for
-instance, PHENICX provides one ground-truth file for all the violins of a song,
-even if there are 4 different violins). The index allows `convert_gt` to better
-handle different files and to pick the ground-truth wanted.
+instrument. 
+
+If you want to add datasets to the installation procedure, add the paths, even
+if they still do not exist, because `convert_gt.py` relies on that to create
+them. It is important to provide an index starting with `-` at the end of the
+path (see the other sections as example), so that it is possible to distinguish
+among multiple instruments (for instance, PHENICX provides one ground-truth
+file for all the violins of a song, even if there are 4 different violins). The
+index allows `convert_gt` to better handle different files and to pick the
+ground-truth wanted.
 
 It is mandatory to provide a url, a name and so on. Also, provide a composer
 and instrument list. Please, do not use new words for instruments already
 existing (for instance, do not use `saxophone` if `sax` already exists in other
 datasets).
 
-After this, you should install the dataset by running the installation script.
+## Provide a conversion function
 
-## Provide a conversion function in `convert_from_file.pyx`
+The conversion function takes as input the name of the file in the original dataset.
+You can also use the bundled conversion functions (see docs).
 
-The conversion function takes as input the name of the file to be created (i.e.
-the paths added to the new `datasets.json` section) and outputs a list of
-dictionaries. You should:
+1. use `deepcopy(gt)` to create the output ground truth.
+2. use decorator `@convert` to provide the input file extensions and parameters
 
-1. use `change_ext` to recreate the input file name (this also takes care of the
-final index removal)
-2. use `deepcopy(gt)` to create the output ground truth.
-
-In future, these to operations should be automated with a more object-oriented
-approach.  You should consider three possible cases for creating the conversion function:
+You should consider three possible cases for creating the conversion function:
 
 1. there is a bijective relationship between instruments and ground_truth file
 you have, that is, you already have a convesion file per each instrument and
@@ -274,39 +322,41 @@ tackle these three different situations.
     element of the list.
 -  In the 3rd case, you can still output a single element list.
 
+If you want to output a list with only one dict, you can also output the dict
+itself. The decorator will take care of handling file names and of putting the
+output dict inside a list.
+
 Finally, you can also use multiple conversion functions if your ground-truth is
 splitted among multiple files, but note that the final ground-truth is produced
 as the sum of all the elements of all the dictionaries created.
 
-**The core of the conversion is the function `conversion_tool.merge`. Read it
-and be sure to understand its behavior.** Please, take care of how the `merge`
-function behaves with your conversion function, since it is really hard to
-write a single `merge` function for all the possible representations. It should
-work, but please, take care of it.
+## Add your function to the JSON definition
 
-## Add your function to `func_map`
+In the JSON definitions, you should declare the functions that should be used
+for converting the ground-truth and their parameters. The section where you can
+do this is in `install>conversion`.
 
-In `convert_from_file.py` you can find a dictionary called `func_map`. It is a
-dictionary which stores all the functions that are needed and their parameters
-for each dataset. The keys are the datasets name you added in `datasets.json`.
-The element is a list of tuples like this: 
-
+Here, you should put a list like the following:
 ```python
     [
-        (
-            function1, {
+        [
+            'module1.function1', {
                 'argument1_name': argument1_value,
                 'argument2_name': argument2_value
             }
-        ), 
-        (
-            function2, {
-                'argument1_name': argument1_value, 
+    ],
+        [
+            'module2.function2', {
+                'argument1_name': argument1_value,
                 'argument2_name': argument2_value
             }
-        )
+        ]
     ]
 ```
+Note that you have to provide the *name* of the function, which will be
+evaluated with the `eval` python function. Also, you can use any function in
+any module, included the bundled functions - in this case, use just the function
+name w/o the module.
 
 ## Run `generate_ground_truth.py`
 
@@ -319,7 +369,7 @@ previous one and to merge the archives.
 
 If you want, you can generate misaligned data. First, after having created the
 ground-truth, run `alignment_stats`, which collects data about the datasets
-with real non-aligned scores and saves stats in a pickled file in this
+with real non-aligned scores and saves stats in `_alignment_stats.pkl` file in the working
 directory. Then, run `generate_ground_truth.py` again: it will load the pickled file and
 will generate misaligned data by using the same deviation distribution of the
 available non-aligned data.
@@ -332,7 +382,7 @@ misaligned value will be added to the `non_aligned` field.
 
 This dataset tries to overcome the problem of needing manual alignment of
 scores to audio for training models which exploit audio and scores at the both
-time.  The underlying idea is that we have many scores and a lot of audio and
+time. The underlying idea is that we have many scores and a lot of audio and
 users of trained models could easily take advantage of such multimodality (the
 ability of the model to exploit both scores and audio). The main problem is the
 annotation stage: we have quite a lot of aligned data, but we miss the

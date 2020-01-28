@@ -4,8 +4,34 @@
     "sources" : {
         "format" : "unknown"
     },
-    "unpack" : false,
-    "url" : "unknown",
+    "install": {
+        "unpack" : false,
+        "login" : false,
+        "post-process" : [
+            "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/midi.zip; unzip midi.zip -d vienna_corpus/; cp my_scores/*.mid vienna_corpus/; rm vienna_corpus/midi/Chopin_op38_1st-3rd_*; mv vienna_corpus/midi/*.mid vienna_corpus/; rm -r vienna_corpus/midi/",
+            "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/audio.zip; unzip audio.zip -d vienna_corpus/; rm -r vienna_corpus/audio/Chopin_Ballade_special-versions/; mv vienna_corpus/audio/*/*.wav vienna_corpus/; rm -r vienna_corpus/audio/",
+            "rm audio.zip midi.zip",
+            [
+                "mv vienna_corpus/ ", "&install_dir"
+            ]
+        ],
+        "url" : "unknown",
+        "conversion":[
+            [from_midi_remove_player, {
+                "alignment": "non_aligned",
+                "pitches": true,
+                "velocities": false,
+                "merge": true,
+                "beats": true
+            }],
+            [from_midi, {
+                "alignment": "precise_alignment",
+                "pitches": true,
+                "velocities": true,
+                "merge": true
+            }]
+        ]
+    },
     "ground_truth" : {
         "broad_alignment" : 0,
         "f0" : 0,
@@ -16,15 +42,6 @@
     },
     "instruments" : [
         "piano"
-    ],
-    "login" : false,
-    "post-process" : [
-        "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/midi.zip; unzip midi.zip -d vienna_corpus/; cp my_scores/*.mid vienna_corpus/; rm vienna_corpus/midi/Chopin_op38_1st-3rd_*; mv vienna_corpus/midi/*.mid vienna_corpus/; rm -r vienna_corpus/midi/",
-        "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/audio.zip; unzip audio.zip -d vienna_corpus/; rm -r vienna_corpus/audio/Chopin_Ballade_special-versions/; mv vienna_corpus/audio/*/*.wav vienna_corpus/; rm -r vienna_corpus/audio/",
-        "rm audio.zip midi.zip",
-        [
-            "mv vienna_corpus/ ", "&install_dir"
-        ]
     ],
     "recording" : {
         "format" : "wav"

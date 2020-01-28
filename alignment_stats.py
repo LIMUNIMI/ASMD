@@ -1,12 +1,15 @@
-import pyximport
-pyximport.install()
 from random import choices, uniform
-from utils import utils
 from sklearn.preprocessing import StandardScaler, minmax_scale
 import numpy as np
+import os.path
+import pyximport
+pyximport.install()
 from audioscoredataset import Dataset
+from utils import utils
 
 data = Dataset()
+
+THISDIR = os.path.dirname(os.path.realpath(__file__))
 
 
 class Stats:
@@ -142,9 +145,10 @@ if __name__ == '__main__':
     print("Testing getting random value")
     print(v1, v2, v3, v4, v5)
 
-    if os.path.exists("_alignment_stats.pkl"):
-        os.remove("_alignment_stats.pkl")
-    pickle.dump(stats, open("_alignment_stats.pkl", 'wb'))
+    file_stats = os.path.join(THISDIR, "_alignment_stats.pkl")
+    if os.path.exists(file_stats):
+        os.remove(file_stats)
+    pickle.dump(stats, open(file_stats, 'wb'))
 
     fig1 = go.Figure(
         data=[go.Scatter(y=stats.ons_hist[0], x=stats.ons_hist[1])])

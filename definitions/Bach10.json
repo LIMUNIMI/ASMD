@@ -15,8 +15,6 @@
         "tenor sax",
         "bassoon"
     ],
-    "login" : false,
-    "post-process" : "unknown",
     "recording" : {
         "format" : "wav"
     },
@@ -315,6 +313,23 @@
     "sources" : {
         "format" : "wav"
     },
-    "unpack" : true,
-    "url" : "http://www.ece.rochester.edu/projects/air/datasets/Bach10.zip"
+    "install": {
+        "login" : false,
+        "post-process" : "unknown",
+        "unpack" : true,
+        "url" : "http://www.ece.rochester.edu/projects/air/datasets/Bach10.zip",
+        "conversion": [
+            ["from_bach10_f0", {}],
+            ["from_bach10_mat", {}],
+            ["from_midi", {
+                 "alignment": "non_aligned",
+                 "pitches": true,
+                 "velocities": false,
+                 "merge": false,
+                 "beats": true
+                }
+            ]
+        ]
+    }
+    }
 }

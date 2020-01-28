@@ -22,8 +22,6 @@
         "harpsichord",
         "string bass"
     ],
-    "login" : false,
-    "post-process" : "unknown",
     "recording" : {
         "format" : "wav"
     },
@@ -5178,6 +5176,11 @@
     "sources" : {
         "format" : "unknown"
     },
-    "unpack" : true,
-    "url" : "https://homes.cs.washington.edu/~thickstn/media/musicnet.tar.gz"
+    "install": {
+        "unpack" : true,
+        "login" : false,
+        "post-process" : "unknown",
+        "url" : "https://homes.cs.washington.edu/~thickstn/media/musicnet.tar.gz",
+        "conversion": [[from_musicnet_csv, {}]]
+    }
 }

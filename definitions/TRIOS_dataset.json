@@ -21,8 +21,6 @@
         "alto sax",
         "drum kit"
     ],
-    "login" : false,
-    "post-process" : "unknown",
     "recording" : {
         "format" : "wav"
     },
@@ -167,6 +165,11 @@
     "sources" : {
         "format" : "wav"
     },
-    "unpack" : true,
-    "url" : "https://c4dm.eecs.qmul.ac.uk/rdr/bitstream/handle/123456789/27/TRIOS_dataset.zip"
+    "install": {
+        "unpack" : true,
+        "login" : false,
+        "post-process" : "unknown",
+        "url" : "https://c4dm.eecs.qmul.ac.uk/rdr/bitstream/handle/123456789/27/TRIOS_dataset.zip",
+        "conversion": [[from_midi, {}]]
+    }
 }

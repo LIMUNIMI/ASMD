@@ -21,8 +21,6 @@
         "trumpet",
         "bassoon"
     ],
-    "login" : false,
-    "post-process" : "unknown",
     "recording" : {
         "format" : "wav"
     },
@@ -491,6 +489,11 @@
     "sources" : {
         "format" : "wav"
     },
-    "unpack" : true,
-    "url" : "https://zenodo.org/record/1289821/files/PHENICX-Anechoic_1.zip"
+    "install": {
+        "unpack" : true,
+        "login" : false,
+        "post-process" : "unknown",
+        "url" : "https://zenodo.org/record/1289821/files/PHENICX-Anechoic_1.zip",
+        "conversion": [[from_phenicx_txt, {}]]
+    }
 }
