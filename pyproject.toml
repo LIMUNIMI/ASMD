@@ -4,6 +4,8 @@ version = "0.1.0"
 description = ""
 authors = ["Federico Simonetta"]
 license = "MIT"
+# include = ["*.json", "**/*.json", "*.mid", "**/*.mid", "*.pyx", "**/*.pyx"]
+# exclude = ["kunstderfuge/*", ".git*", ".python-version"]
 
 [tool.poetry.dependencies]
 python = "^3.6"

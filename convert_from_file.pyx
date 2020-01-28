@@ -7,6 +7,7 @@ import scipy.io
 from utils import io, utils
 import re
 import pretty_midi
+from functools import wraps
 
 BPM = 20
 
@@ -26,25 +27,27 @@ def convert(exts, no_dot=True, remove_player=False):
 
     Parameters
     ---
-    * input_fn : str
-        the file name in input as in the original dataset
-
     * ext : list of str
         the possible extensions of the ground-truths to be converted, e.g.
-        ['.mid', '.midi']
+        ['.mid', '.midi']. You can also use this parameter to remove exceeding
+        parts at the end of the filename (see `from_bach10_mat` and
+        `from_bach10_f0` source code)
 
     * no_dot : boolean
         if True, don't add a dot before of the extension, if False, add it
-        if not present.
+        if not present; this is useful if you are using the extension to remove
+        other parts in the file name (see `ext`).
 
     * remove_player : boolean
         if True, remove the name of the player in the last part of the file
-        name: use this for the `traditional_flute` dataset.
+        name: use this for the `traditional_flute` dataset; it will remove the
+        part after the last '_'.
     """
 
 
     def _convert(user_convert):
 
+        @wraps(user_convert)
         def func(input_fn, *args, **kwargs):
             for ext in exts:
                 new_fn = change_ext(input_fn, ext, no_dot, remove_player)
@@ -93,11 +96,13 @@ prototype_gt = {
 
 def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):
     """
-    Return the input path `input_fn` with `new_ext` as extension.
+    Return the input path `input_fn` with `new_ext` as extension and the part
+    after the last '-' removed.
     If `no_dot` is True, it will not add a dot before of the extension,
     otherwise it will add it if not present.
     `remove_player` can be used to remove the name of the player in the last
-    part of the file name when: use this for the `traditional_flute` dataset.
+    part of the file name when: use this for the `traditional_flute` dataset;
+    it will remove the last part after '_'.
     """
 
     root = input_fn[:input_fn.rfind('-')]
@@ -110,7 +115,7 @@ def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):
     return root + new_ext
 
 
-def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, beats=False, remove_player=False):
+def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, beats=False):
     """
     Open a midi file `midi_fn` and convert it to our ground_truth
     representation. This fills velocities, pitches, beats and alignment (default:
@@ -120,12 +125,13 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
     `remove_player` can be used to remove the name of the player in the last
     part of the file name: use this for the `traditional_flute` dataset.
     Beats are filled according to tempo changes.
-    """
-    new_midi_fn = change_ext(midi_fn, '.mid', remove_player=remove_player)
-    if not os.path.exists(new_midi_fn):
-        new_midi_fn = change_ext(midi_fn, '.midi', remove_player=remove_player)
 
-    midi_tracks, pm = io.open_midi(new_midi_fn, merge=merge, pm_object=True)
+    This functions is decorated with two different sets of parameters:
+
+    * `from_midi` is the decorated version with `remove_player=False`
+    * `from_midi_remove_player` is the decorated version with `remove_player=True`
+    """
+    midi_tracks, pm = io.open_midi(midi_fn, merge=merge, pm_object=True)
 
     out = list()
 
@@ -156,7 +162,11 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
 
     return out
 
+from_midi = convert(['.mid', '.midi'], remove_player=False)(from_midi)
+from_midi_remove_player = convert(['.mid', '.midi'], remove_player=True)(from_midi)
 
+
+@convert(['txt'])
 def from_phenicx_txt(txt_fn, non_aligned=False):
     """
     Open a txt file `txt_fn` in the PHENICX format and convert it to our
@@ -164,7 +174,6 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
     `pitches` and `notes` of `non_aligned`.
     """
     out_list = list()
-    txt_fn = change_ext(txt_fn, 'txt')
 
     with open(txt_fn) as f:
         lines = f.readlines()
@@ -178,11 +187,12 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
         out["broad_alignment"]["pitches"].append(pretty_midi.note_name_to_number(fields[2]))
         out["broad_alignment"]["onsets"].append(float(fields[0]))
         out["broad_alignment"]["offsets"].append(float(fields[1]))
-        out_list.append(out)
+    out_list.append(out)
 
     return out_list
 
 
+@convert(['-GTNotes.mat'], no_dot=True)
 def from_bach10_mat(mat_fn, sources=range(4)):
     """
     Open a txt file `txt_fn` in the MIREX format (Bach10) and convert it to
@@ -192,7 +202,6 @@ def from_bach10_mat(mat_fn, sources=range(4)):
     per source.
     """
     out_list = list()
-    mat_fn = change_ext(mat_fn, '-GTNotes.mat', no_dot=True)
 
     mat = scipy.io.loadmat(mat_fn)['GTNotes']
     for i in range(len(mat)):
@@ -210,6 +219,7 @@ def from_bach10_mat(mat_fn, sources=range(4)):
     return out_list
 
 
+@convert(['-GTNotes.mat'], no_dot=True)
 def from_bach10_f0(nmat_fn, sources=range(4)):
     """
     Open a matlab mat file `nmat_fn` in the MIREX format (Bach10) for frame
@@ -219,7 +229,6 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
     one per source.
     """
     out_list = list()
-    nmat_fn = change_ext(nmat_fn, '-GTF0s.mat', no_dot=True)
 
     f0s = scipy.io.loadmat(nmat_fn)['GTF0s']
     for source in sources:
@@ -230,6 +239,7 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
     return out_list
 
 
+@convert(['.csv'])
 def from_musicnet_csv(csv_fn, fr=44100.0):
     """
     Open a csv file `csv_fn` and convert it to our ground_truth representation.
@@ -240,7 +250,6 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
 
     N.B. MusicNet contains wav files at 44100 Hz as framerate.
     """
-    csv_fn = change_ext(csv_fn, 'csv')
     data = csv.reader(open(csv_fn), delimiter=',')
     out = deepcopy(prototype_gt)
 
@@ -261,15 +270,15 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
         out["non_aligned"]["offsets"].append(float(row[4] * 60 / BPM) + float(row[5]) * 60 / BPM)
 
     out["beats_non_aligned"] = [i for i in range(int(max(out["non_aligned"]["offsets"])) + 1)]
-    return [out]
+    return out
 
 
+@convert(['.gt'])
 def from_sonic_visualizer(gt_fn, alignment='precise_alignment'):
     """
     Takes a filename of a sonic visualizer output file  exported as 'csv' and fills the
     'alignment' specified
     """
-    gt_fn = change_ext(gt_fn, '.gt')
 
     data = csv.reader(open(gt_fn), delimiter=',')
     out = deepcopy(prototype_gt)
@@ -282,65 +291,4 @@ def from_sonic_visualizer(gt_fn, alignment='precise_alignment'):
         pitch = utils.f0_to_midi_pitch(p)
         out[alignment]["pitches"].append(pitch)
 
-    return [out]
-
-
-#: a dictionary which maps each dataset to a set of functions
-func_map = {
-    'Bach10': [
-        (from_bach10_f0, {}),
-        (from_bach10_mat, {}),
-        (from_midi,
-         {
-             'alignment': 'non_aligned',
-             'pitches': True,
-             'velocities': False,
-             'merge': False,
-             'beats': True
-         }
-         )
-    ],
-    'SMD': [
-        (from_midi, {})
-    ],
-    'PHENICX': [
-        (from_phenicx_txt, {})
-    ],
-    'MusicNet': [
-        (from_musicnet_csv, {})
-    ],
-    'TRIOS_dataset': [
-        (from_midi, {})
-    ],
-    'Maestro': [
-        (from_midi, {})
-    ],
-    'traditional_flute': [
-        (from_midi, {
-            'alignment': 'non_aligned',
-            'pitches': True,
-            'velocities': False,
-            'merge': False,
-            'remove_player': True,
-            'beats': True
-        }),
-        (from_sonic_visualizer, {})
-    ],
-    'vienna_corpus': [
-        (from_midi, {
-            'alignment': 'non_aligned',
-            'pitches': True,
-            'velocities': False,
-            'merge': True,
-            'remove_player': True,
-            'beats': True
-        }),
-        (from_midi, {
-            'alignment': 'precise_alignment',
-            'pitches': True,
-            'velocities': True,
-            'merge': True,
-            'remove_player': False
-        })
-    ]
-}
+    return out

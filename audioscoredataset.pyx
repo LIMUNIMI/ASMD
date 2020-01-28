@@ -9,13 +9,14 @@ import essentia.standard as es
 from utils import io
 import numpy as np
 
+THISDIR = os.path.dirname(os.path.realpath(__file__))
 
 class Dataset:
 
     def __len__(self):
         return len(self.paths)
 
-    def __init__(self, paths=[], metadataset_path='datasets.json'):
+    def __init__(self, paths=[], metadataset_path=joinpath(THISDIR, 'datasets.json')):
         """
         Load the dataset description
 
@@ -36,7 +37,7 @@ class Dataset:
             instance of the class
         """
         if len(paths) == 0:
-            paths.append('definitions/')
+            paths.append(joinpath(THISDIR, 'definitions/'))
 
         self.datasets = []
         for path in paths:

@@ -5,10 +5,12 @@ import json
 from prompt_toolkit.completion import PathCompleter
 from prompt_toolkit.validation import Validator
 from prompt_toolkit import prompt
+from os.path import join as joinpath
 import os
 import pathlib
 import tarfile
 import tempfile
+import time
 from pyfiglet import Figlet
 from alive_progress import alive_bar
 from subprocess import Popen, DEVNULL
@@ -24,6 +26,8 @@ from audioscoredataset import load_definitions
 
 #: Set to True to skip datasets which already exist
 SKIP_EXISTING_DIR = True
+
+THISDIR = os.path.dirname(os.path.realpath(__file__))
 
 supported_archives = {
     '.zip': 'zip',
@@ -82,13 +86,18 @@ def definitions_path():
         move_cursor_to_end=True,
     )
     path_completer = PathCompleter(only_directories=True)
-    question = "\nType the path to a definition dir (empty to continue) "
+    question = "\nType the path to a definition dir (empty for default and continue) "
 
-    datasets = []
     path = prompt(question, completer=path_completer, validator=validator)
+    if path == "":
+        datasets = load_definitions('definitions')
+    else:
+        datasets = []
     while path != "":
         # look for json files in path
         datasets += load_definitions(path)
+
+        # asking for a new path
         path = prompt(question, completer=path_completer, validator=validator)
     return datasets
 
@@ -96,10 +105,10 @@ def definitions_path():
 def ftp_download(d, credential, install_dir, parsed_url=None):
     """
     NO MORE USED
-    download all files at d['url'] using user and password in `credentials`
+    download all files at d['install']['url'] using user and password in `credentials`
     """
     if parsed_url is None:
-        parsed_url = urlparse(d['url'])
+        parsed_url = urlparse(d['install']['url'])
     os.makedirs(os.path.join(install_dir, d['name']), exist_ok=True)
     downloaded_files = []
 
@@ -123,7 +132,7 @@ def get_credentials(data):
     """
     NO MORE USED
     """
-    credentials = [d['name'] for d in data if d['login']]
+    credentials = [d['name'] for d in data if d['install']['login']]
     for i, credential in enumerate(credentials):
         print("Login credentials for " + credential)
         user = input("User: ")
@@ -152,11 +161,11 @@ def download(item, credentials, install_dir):
     FTP connections for now.
     """
     # getting credential credentials
-    if item['login']:
+    if item['install']['login']:
         credential = credentials.popleft()
 
     # getting the protocol and the resource to be downloaded
-    parsed_url = urlparse(item['url'])
+    parsed_url = urlparse(item['install']['url'])
     if parsed_url.scheme == 'ftp':
         # FTP
         # at now, no FTP connection is needed
@@ -167,7 +176,7 @@ def download(item, credentials, install_dir):
         with alive_bar(
             unknown='notes2', spinner='notes_scrolling'
         ) as bar:
-            temp_fn, _header = urlretrieve(item['url'],
+            temp_fn, _header = urlretrieve(item['install']['url'],
                                            filename=os.path.join(
                                                install_dir, 'temp'),
                                            reporthook=lambda x, y, z: bar)
@@ -200,7 +209,7 @@ def chose_install_dir(json_file):
 
 def main():
 
-    with open('datasets.json') as f:
+    with open(joinpath(THISDIR, 'datasets.json')) as f:
         json_file = json.load(f)
 
     intro(json_file)
@@ -219,15 +228,15 @@ def main():
         full_path = os.path.join(install_dir, d['name'])
         print("Creating " + d['name'])
 
-        if d['url'] != 'unknown':
+        if d['install']['url'] != 'unknown':
             print("Downloading (this can take a looooooooooooooot)...")
             downloaded_file = download(d, credentials, install_dir)
 
         # unzipping if needed
-        if d['unpack']:
+        if d['install']['unpack']:
             print("Unpacking downloaded archive...")
             for temp_fn in downloaded_file:
-                format = ''.join(pathlib.Path(d['url']).suffixes) or '.zip'
+                format = ''.join(pathlib.Path(d['install']['url']).suffixes) or '.zip'
                 format = [
                     j for i, j in supported_archives.items()
                     if format.endswith(i)
@@ -237,12 +246,12 @@ def main():
                 os.remove(temp_fn)
 
         # post-processing
-        if d['post-process'] != 'unknown':
+        if d['install']['post-process'] != 'unknown':
             # the following line is only for POSIX!!!
             print("Post-processing (this could take a biiiiiiiiiiiiiiit)...")
             # recursively concatenate commands
             command = '; '.join(
-                list(map(lambda x: ''.join(x), d['post-process'])))
+                list(map(lambda x: ''.join(x), d['install']['post-process'])))
             command = command.replace('&install_dir', json_file['install_dir'])
 
             # writing commands to temporary file and executing it as a shell
@@ -259,6 +268,7 @@ def main():
             ) as bar:
                 while p.poll() is None:
                     bar()
+                    time.sleep(1)
 
             # removing script
             os.remove(tf_name)
@@ -268,20 +278,19 @@ def main():
 
     print(f.renderText("\nUnpacking ground-truths"))
     # unpacking the ground_truth data of only the files of the chosen datasets
-    gt_archive_fn = 'ground_truth.tar.gz'
-    with tarfile.open(gt_archive_fn, mode='w:gz') as tf:
+    gt_archive_fn = joinpath(THISDIR, 'ground_truth.tar.gz')
+    with tarfile.open(gt_archive_fn, mode='r:gz') as tf:
         # taking only paths that we really want
         subdir_and_files = [
-            gt
-            for d in data
-            for s in d['songs']
-            for gt in s['ground_truth']
+            member
+            for member in tf.getmembers()
+            for d in data if d['name'] in member.name
         ]
-        tf.extractall(members=subdir_and_files)
+        tf.extractall(path=json_file['install_dir'], members=subdir_and_files)
 
     # saving the Json file as modified
     # not using json.dump beacuse it uses ugly syntax
-    with open('datasets.json', 'r+') as fd:
+    with open(joinpath(THISDIR, 'datasets.json'), 'r+') as fd:
         contents = fd.readlines()
         fd.seek(0)
         fd.writelines(contents)
