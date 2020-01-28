@@ -782,6 +782,6 @@
             ]
         ],
         "url" : "unknown",
-        "conversion": [[from_midi, {}]]
+        "conversion": [["from_midi", {}]]
     }
 }

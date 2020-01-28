@@ -494,6 +494,6 @@
         "login" : false,
         "post-process" : "unknown",
         "url" : "https://zenodo.org/record/1289821/files/PHENICX-Anechoic_1.zip",
-        "conversion": [[from_phenicx_txt, {}]]
+        "conversion": [["from_phenicx_txt", {}]]
     }
 }
