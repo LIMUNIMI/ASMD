@@ -9,10 +9,12 @@ import os
 import gzip
 from difflib import SequenceMatcher
 from pretty_midi.constants import INSTRUMENT_MAP
-from convert_from_file import func_map
 import numpy as np
 from alignment_stats import seed, fill_stats
 import multiprocessing as mp
+from convert_from_file import *
+
+THISDIR = os.path.dirname(os.path.realpath(__file__))
 
 #: if True, run conversion in parallel processes
 PARALLEL = True
@@ -147,7 +149,7 @@ def conversion(arg):
 
         # calling each function listed in the map and merge everything
 
-        out = merge_dicts(int(idx), *[func(final_path, **params) for func, params in func_map[dataset['name']]])
+        out = merge_dicts(int(idx), *[eval(func)(final_path, **params) for func, params in dataset["install"]["conversion"]])
 
         # take the General Midi program number associated with the most
         # similar instrument name
@@ -185,7 +187,7 @@ def create_gt(data_fn, args, gztar=False):
     print("Opening JSON file: " + data_fn)
 
     json_file = json.load(open(data_fn, 'r'))
-    if os.path.exists('_alignment_stats.pkl'):
+    if os.path.exists(joinpath(THISDIR, '_alignment_stats.pkl')):
         import pickle
         stats = pickle.load(open('_alignment_stats.pkl', 'rb'))
     else:
@@ -240,7 +242,7 @@ def create_gt(data_fn, args, gztar=False):
     # creating the archive
     if gztar:
         print("\n\nCreating the final archive")
-        with tarfile.open('ground_truth.tar.gz', mode='w:gz') as tf:
+        with tarfile.open(joinpath(THISDIR, 'ground_truth.tar.gz'), mode='w:gz') as tf:
             for fname in to_be_included_in_the_archive:
                 # adding file with relative path
                 tf.add(fname, filter=_remove_basedir)
