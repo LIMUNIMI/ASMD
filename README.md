@@ -1,4 +1,43 @@
-# A META-DATASET FOR AUDIO-SCORE PROCESSING
+    _             _ _       
+   / \  _   _  __| (_) ___  
+  / _ \| | | |/ _` | |/ _ \ 
+ / ___ \ |_| | (_| | | (_) |
+/_/   \_\__,_|\__,_|_|\___/ 
+                            
+ ____                     
+/ ___|  ___ ___  _ __ ___ 
+\___ \ / __/ _ \| '__/ _ \
+ ___) | (_| (_) | | |  __/
+|____/ \___\___/|_|  \___|
+                          
+ __  __      _        
+|  \/  | ___| |_ __ _ 
+| |\/| |/ _ \ __/ _` |
+| |  | |  __/ || (_| |
+|_|  |_|\___|\__\__,_|
+                      
+
+ @@@@@@@   @@@@@@  @@@@@@@  @@@@@@   @@@@@@ @@@@@@@@ @@@@@@@
+ @@!  @@@ @@!  @@@   @@!   @@!  @@@ !@@     @@!        @@!  
+ @!@  !@! @!@!@!@!   @!!   @!@!@!@!  !@@!!  @!!!:!     @!!  
+ !!:  !!! !!:  !!!   !!:   !!:  !!!     !:! !!:        !!:  
+ :: :  :   :   : :    :     :   : : ::.: :  : :: :::    :   
+
+This is the repository for paper *ASMD: Audio-Score Meta Dataset*. 
+
+Read more in the [docs](https://asmd.readthedocs.org).
+
+# Cite us
+[...]
+
+Federico Simonetta 
+
+https://federicosimonetta.eu.org
+https://lim.di.unimi.org
+
+
+
+---
 
 This file describes multiple datasets containing data about music performances.
 All the datasets are described with the same fields, so that you can use them
