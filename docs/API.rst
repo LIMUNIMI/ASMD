@@ -6,6 +6,8 @@ Python API
    :caption: Contents:
 
 .. automodule:: audioscoredataset
-    :members:
+   :members:
 
+.. autoclass:: audioscoredataset.Dataset
+   :members:
 

@@ -2,8 +2,9 @@ ASMD: Audio-Score Meta Dataset
 ================================
 
 .. toctree::
-   :maxdepth: 4
-   :caption: Contents:
+   :maxdepth: 2
+   :caption: Table of Contents
+
 
 This file describes multiple datasets containing data about music
 performances. All the datasets are described with the same fields, so
@@ -33,8 +34,7 @@ that you can use them easily disregarding their internal structure
    -  `Provide a conversion function <#provide-a-conversion-function>`__
    -  `Add your function to the JSON
       definition <#add-your-function-to-the-json-definition>`__
-   -  `Run
-      ``generate_ground_truth.py`` <#run--generate-ground-truthpy->`__
+   -  `Run generate_ground_truth.py <#run--generate-ground-truthpy->`__
    -  `Generate misaligned data <#generate-misaligned-data>`__
 
 -  `Scientific notes <#scientific-notes>`__
@@ -46,11 +46,13 @@ Usage
 datasets.json
 -------------
 
-The root element is a dictionary with fields: 1. ``author``: string
-containing the name of the author 2. ``year``: int containing the year
-3. ``install_dir``: string containing the install directory 4.
-``datasets``: list of datasets object 5. ``decompress_path``: the path
-were files are decompressed
+The root element is a dictionary with fields:
+
+1. ``author``: string containing the name of the author
+2. ``year``: int containing the year
+3. ``install_dir``: string containing the install directory
+4. ``datasets``: list of datasets object
+5. ``decompress_path``: the path were files are decompressed
 
 Definitions
 -----------
@@ -59,111 +61,107 @@ Each dataset is described by a JSON file which. Each dataset has the
 following field:
 
 1. ``ensemble``: ``true`` if contains multiple instruments, ``false``
-   otherwise
+    otherwise
 2. ``instruments``: the list of the instruments contained in the dataset
 3. ``sources``:
-
-   1. ``format``: the format of the audio recordings of the single
+    1. ``format``: the format of the audio recordings of the single
       source-separated tracks
-
 4. ``recording``:
-
-   1. ``format``: the format of the audio recordings of the mixed tracks
-
-5. ``ground_truth``: *N.B. each ground_truth has an ``int`` value,
-   indicating ``0`` -> false, ``1`` -> true (manual or mechanical -
-   Disklavier - annotation), ``2`` -> true (automatic annotation with
-   state-of-art algorithms)*
-
-   1. ``non_aligned``: ``true`` if non_aligned scores are provided
-   2. ``broad_alignment``: ``true`` if broad_alignment scores are
-      provided
-   3. ``precise_alignment``: ``true`` if precisely aligned scores are
-      provided
-   4. ``velocities``: ``true`` if velocities are provided
-   5. ``f0``: ``true`` if f0 values are provided
-
+    1. ``format``: the format of the audio recordings of the mixed tracks
+5. ``ground_truth``: *N.B. each ground_truth has an ``int`` value, indicating
+   ``0`` -> false, ``1`` -> true (manual or mechanical - Disklavier -
+   annotation), ``2`` -> true (automatic annotation with state-of-art
+   algorithms)*
+    1. ``non_aligned``: ``true`` if non_aligned scores are provided
+    2. ``broad_alignment``: ``true`` if broad_alignment scores are provided
+    3. ``precise_alignment``: ``true`` if precisely aligned scores are provided
+    4. ``velocities``: ``true`` if velocities are provided
+    5. ``f0``: ``true`` if f0 values are provided
 6. ``songs``: the list of songs in the dataset
-
-   1. ``composer``: the composer family name
-   2. ``instruments``: list of instruments in the song
-   3. ``recording``: dictionary
-
-      1. ``path``: a list of paths to be mixed for reconstructing the
-         full track (usually only one)
-
-   4. ``sources``: dictionary
-
-      1. ``path``: a list of paths to the single instrument tracks in
-         the same order as ``instruments``
-
-   5. ``ground_truth``: list of paths to the ground_truth json files.
-      One ground_truth path per instrument is alway provided. The order
-      of the ground_truth path is the same of sources and of the
-      instruments. Note that some ground_truth paths can be identical
-      (as in PHENICX for indicating that violin1 and violin2 are playing
-      exactly the same thing).
-
+    1. ``composer``: the composer family name
+    2. ``instruments``: list of instruments in the song
+    3. ``recording``: dictionary
+        1. ``path``: a list of paths to be mixed for reconstructing the full
+                   track (usually only one)
+    4. ``sources``: dictionary
+        1. ``path``: a list of paths to the single instrument tracks in the
+                   same order as ``instruments``
+    5. ``ground_truth``: list of paths to the ground_truth json files.  One
+           ground_truth path per instrument is alway provided. The order of the
+           ground_truth path is the same of sources and of the instruments.
+           Note that some ground_truth paths can be identical (as in PHENICX
+           for indicating that violin1 and violin2 are playing exactly the same
+           thing).
 7. ``install``: where information for the installation process are
    stored
+    1. ``url``: the url to download the dataset including the protocol
+    2. ``post-process``: a list of shell commands to be executed to prepare the
+           dataset; they can be lists themselves to allow the use of anchors to
+           install_dir" field with the syntax “&install_dir”
+    3. ``unpack``: ``true`` if the url needs to be unpacked
+    4. ``login``: true if you a login is needed - no more used, but maybe
+           useful in future
 
-   1. ``url``: the url to download the dataset including the protocol
-   2. ``post-process``: a list of shell commands to be executed to
-      prepare the dataset; they can be lists themselves to allow the use
-      of anchors to install_dir" field with the syntax “&install_dir”
-   3. ``unpack``: ``true`` if the url needs to be unpacked
-   4. ``login``: true if you a login is needed - no more used, but maybe
-      useful in future
+In general, I maintained the following principles:
 
-In general, I maintained the following principles: 1. if a list of files
-is provided where you would logically expect one file, you should ‘sum’
-the files in the list, whatever this means according to that type of
-file; this typically happens in the ``ground_truth`` files. or in the
-recording where only the single sources are available. 2. all the fields
-can have the value ‘unknown’ to indicate that it is not available in
-that dataset; if you treat ‘unknown’ with the meaning of unavailable
-everything will be fine; however, in some cases it can mean that the
-data are available but that information is not documented.
+1. if a list of files is provided where you would logically expect one file,
+   you should ‘sum’ the files in the list, whatever this means according to
+   that type of file; this typically happens in the ``ground_truth`` files. or
+   in the recording where only the single sources are available.
+2. all the fields can have the value ‘unknown’ to indicate that it is not
+   available in that dataset; if you treat ‘unknown’ with the meaning of
+   unavailable everything will be fine; however, in some cases it can mean that
+   the data are available but that information is not documented.
 
 Ground-truth json format
 ------------------------
 
 The ground_truth is contained in JSON files indexed in each definition
 file. Each ground truth file contains only one isntrument in a
-dictionary with the following structure: 1. ``non_aligned``: 1.
-``onsets``: onsets in seconds at 20 bpm 2. ``offsets``: offsets in
-seconds at 20 bpm 3. ``pitches``: list of midi pitches in onset
-ascending order 4. ``note``: list of note names in onsets ascending
-order 5. ``velocities``: list of velocities in onsets ascending order 2.
-``precise_alignment``: 1. ``onsets``: onsets in ms 2. ``offsets``:
-offsets in ms 3. ``pitches``: list of midi pitches in onset ascending
-order 4. ``note``: list of note names in onsets ascending order 5.
-``velocities``: list of velocities in onsets ascending order 3.
-``broad_alignment``: alignment which does not consider the asynchronies
-between simultaneous notes 1. ``onsets``: onsets in ms 2. ``offsets``:
-offsets in ms 3. ``pitches``: list of midi pitches in onset ascending
-order 4. ``note``: list of note names in onsets ascending order 5.
-``velocities``: list of velocities in onsets ascending order 4. ``f0``:
-list of f0 frequencies, frame by frame (frame rate according to the
-source sound file or to the whole recording sound file if sources are
-not available) 6. ``instrument``: General Midi program number associated
-with this instrument, starting from 0. 128 indicates a drum kit (should
-be synthesized on channel 8 with a program number of your choice,
-usually 0).
+dictionary with the following structure:
+
+1. ``non_aligned``:
+    1. ``onsets``: onsets in seconds at 20 bpm
+    2. ``offsets``: offsets in seconds at 20 bpm
+    3. ``pitches``: list of midi pitches in onset ascending order
+    4. ``note``: list of note names in onsets ascending order
+    5. ``velocities``: list of velocities in onsets ascending order
+2. ``precise_alignment``:
+    1. ``onsets``: onsets in ms
+    2. ``offsets``: offsets in ms
+    3. ``pitches``: list of midi pitches in onset ascending order
+    4. ``note``: list of note names in onsets ascending order
+    5. ``velocities``: list of velocities in onsets ascending order
+3. ``broad_alignment``: alignment which does not consider the asynchronies
+   between simultaneous notes
+    1. ``onsets``: onsets in ms
+    2. ``offsets``: offsets in ms
+    3. ``pitches``: list of midi pitches in onset ascending order
+    4. ``note``: list of note names in onsets ascending order
+    5. ``velocities``: list of velocities in onsets ascending order
+4. ``f0``: list of f0 frequencies, frame by frame (frame rate according to the
+   source sound file or to the whole recording sound file if sources are not
+   available)
+5. ``instrument``: General Midi program number associated with this instrument,
+   starting from 0. 128 indicates a drum kit (should be synthesized on channel
+   8 with a program number of your choice, usually 0).
 
 Note that json ground_truth files have extension ``.json.gz``,
 indicating that they are compressed using the ``gzip`` Python 3.7
-module. Thus, you need to decompress them: \```python import lzma import
-json
+module. Thus, you need to decompress them:
 
-ground_truth = json.load(gzip.open(‘ground_truth.json.gz’, ‘rt’))
+.. code: python
 
-print(ground_truth)
+    import lzma import
+    json
 
-::
+    ground_truth = json.load(gzip.open(‘ground_truth.json.gz’, ‘rt’))
+
+    print(ground_truth)
 
 
-## API
+API
+---
 
 This project also provides a few API for filtering the datasets according
 to some specified prerequisites and getting the data in a convenient format.
@@ -205,7 +203,7 @@ Example:
 Python
 ~~~~~~
 
-Docs available at :doc:`API.rst`
+Docs available at :doc: `./API`
 
 Import ``audioscoredataset`` and create a ``Dataset`` object, giving the
 path of the ``datasets.json`` file in this directory as argument to the
@@ -259,19 +257,19 @@ However, you can also try to install it in your system using
 Using Poetry (recommended)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once you have cloned the repo follow these steps: 
+Once you have cloned the repo follow these steps:
 
 1. Install ``python 3``
-2. Install ```poetry`` <https://python-poetry.org/docs/#installation>`__ 
-3. Install ```pyenv`` <https://github.com/pyenv/pyenv#installation>`__ and fix your
-``.bashrc``\ (optional) 
-4. ``pyenv install 3.6.9`` (optional, recommended python >= 3.6.9) 
-5. ``cd myproject`` 
-6.  ``touch __init__.py`` 
+2. Install ```poetry`` <https://python-poetry.org/docs/#installation>`__
+3. Install ```pyenv`` <https://github.com/pyenv/pyenv#installation>`__ and fix
+   your ``.bashrc``\ (optional)
+4. ``pyenv install 3.6.9`` (optional, recommended python >= 3.6.9)
+5. ``cd myproject``
+6.  ``touch __init__.py``
 7. ``pyenv local 3.6.9`` (optional)
 8.  ``git clone https://framagit.org/sapo/asmd.git``
 9. ``cd amsd``
-10. ``poetry install`` 
+10. ``poetry install``
 11. Execute ``poetry run python install.py``
 12. Follow the steps
 
@@ -351,7 +349,7 @@ instruments already existing (for instance, do not use ``saxophone`` if
 
 Provide a conversion function
 -----------------------------
-Docs available at :doc:`Conversion.rst`
+Docs available at :doc: `./Converting`
 
 The conversion function takes as input the name of the file in the
 original dataset. You can also use the bundled conversion functions (see
@@ -502,9 +500,11 @@ Federico Simonetta
 https://federicosimonetta.eu.org
 https://lim.di.unimi.org
 
-Indices and tables
-==================
+Indices
+=======
 
+* :doc:`./API`
+* :doc:`./Converting`
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`

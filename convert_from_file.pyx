@@ -13,7 +13,8 @@ BPM = 20
 
 
 def convert(exts, no_dot=True, remove_player=False):
-    """
+    """convert(exts, no_dot=True, remove_player=False) -> callable
+
     This function that is designed to be used as decorators for functions which
     converts from a filetype to our JSON format.
 
@@ -65,7 +66,7 @@ def convert(exts, no_dot=True, remove_player=False):
     return _convert
 
 
-# The dictionary prototype for containing the ground_truth
+#: The dictionary prototype for containing the ground_truth
 prototype_gt = {
     "precise_alignment": {
         "onsets": [],
@@ -95,7 +96,8 @@ prototype_gt = {
 
 
 def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):
-    """
+    """change_ext(input_fn, new_ext, no_dot=False, remove_player=False) -> str
+
     Return the input path `input_fn` with `new_ext` as extension and the part
     after the last '-' removed.
     If `no_dot` is True, it will not add a dot before of the extension,
@@ -116,14 +118,14 @@ def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):
 
 
 def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, beats=False):
-    """
+    """from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, beats=False) -> list
+    from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, beats=False) -> list
+
     Open a midi file `midi_fn` and convert it to our ground_truth
     representation. This fills velocities, pitches, beats and alignment (default:
     `precise_alignment`). Returns a list containing a dictionary. `alignment`
     can also be `None` or `False`, in that case no alignment is filled. If `merge` is
     True, the returned list will contain a dictionary for each track.
-    `remove_player` can be used to remove the name of the player in the last
-    part of the file name: use this for the `traditional_flute` dataset.
     Beats are filled according to tempo changes.
 
     This functions is decorated with two different sets of parameters:
@@ -168,7 +170,10 @@ from_midi_remove_player = convert(['.mid', '.midi'], remove_player=True)(from_mi
 
 @convert(['txt'])
 def from_phenicx_txt(txt_fn, non_aligned=False):
-    """
+    """from_phenicx_txt(txt_fn, non_aligned=False) -> list
+    from_phenicx_txt(txt_fn, non_aligned=False) -> list
+
+
     Open a txt file `txt_fn` in the PHENICX format and convert it to our
     ground_truth representation. This fills: `broad_alignment` and
     `pitches` and `notes` of `non_aligned`.
@@ -194,7 +199,9 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
 
 @convert(['-GTNotes.mat'], no_dot=True)
 def from_bach10_mat(mat_fn, sources=range(4)):
-    """
+    """from_bach10_mat(mat_fn, sources=range(4)) -> list
+    from_bach10_mat(mat_fn, sources=range(4)) -> list
+
     Open a txt file `txt_fn` in the MIREX format (Bach10) and convert it to
     our ground_truth representation. This fills: `precise_alignment`, `pitches`.
     `sources` is an iterable containing the indices of the  sources to be
@@ -221,7 +228,9 @@ def from_bach10_mat(mat_fn, sources=range(4)):
 
 @convert(['-GTNotes.mat'], no_dot=True)
 def from_bach10_f0(nmat_fn, sources=range(4)):
-    """
+    """from_bach10_f0(nmat_fn, sources=range(4)) -> list
+    from_bach10_f0(nmat_fn, sources=range(4)) -> list
+
     Open a matlab mat file `nmat_fn` in the MIREX format (Bach10) for frame
     evaluation and convert it to our ground_truth representation. This fills:
     `f0`.  `sources` is an iterable containing the indices of the  sources to
@@ -241,7 +250,9 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
 
 @convert(['.csv'])
 def from_musicnet_csv(csv_fn, fr=44100.0):
-    """
+    """from_musicnet_csv(csv_fn, fr=44100.0) -> dict
+    from_musicnet_csv(csv_fn, fr=44100.0) -> dict
+
     Open a csv file `csv_fn` and convert it to our ground_truth representation.
     This fills: `broad_alignment`, `non_aligned`, `pitches`.
     This returns a list containing only one dict. `fr` is the framerate of the
@@ -275,7 +286,9 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
 
 @convert(['.gt'])
 def from_sonic_visualizer(gt_fn, alignment='precise_alignment'):
-    """
+    """from_sonic_visualizer(gt_fn, alignment='precise_alignment') -> dict
+    from_sonic_visualizer(gt_fn, alignment='precise_alignment') -> dict
+
     Takes a filename of a sonic visualizer output file  exported as 'csv' and fills the
     'alignment' specified
     """
