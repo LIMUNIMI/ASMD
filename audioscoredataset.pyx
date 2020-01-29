@@ -5,9 +5,9 @@ import json
 import gzip
 import os
 from os.path import join as joinpath
-import essentia.standard as es
 from utils import io
 import numpy as np
+from essentia.standard import Resample
 
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -192,7 +192,7 @@ class Dataset:
             mix = recordings[0]
 
         if sr is not None:
-            resampler = es.Resample(inputSampleRate=in_sr, outputSampleRate=sr)
+            resampler = Resample(inputSampleRate=in_sr, outputSampleRate=sr)
             mix = resampler(mix)
         else:
             sr = in_sr

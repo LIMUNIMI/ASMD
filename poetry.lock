@@ -107,7 +107,7 @@ description = "Library for audio and music analysis, description and synthesis"
 name = "essentia"
 optional = false
 python-versions = "*"
-version = "2.1b6.dev90"
+version = "2.1b6.dev184"
 
 [package.dependencies]
 numpy = ">=1.8.2"
@@ -191,12 +191,13 @@ description = "An autocompletion tool for Python that can be used for text edito
 name = "jedi"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "0.15.2"
+version = "0.16.0"
 
 [package.dependencies]
 parso = ">=0.5.2"
 
 [package.extras]
+qa = ["flake8 (3.7.9)"]
 testing = ["colorama (0.4.1)", "docopt", "pytest (>=3.9.0,<5.0.0)"]
 
 [[package]]
@@ -232,8 +233,8 @@ category = "dev"
 description = "A Python Parser"
 name = "parso"
 optional = false
-python-versions = "*"
-version = "0.5.2"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.6.0"
 
 [package.extras]
 testing = ["docopt", "pytest (>=3.0.7)"]
@@ -264,7 +265,7 @@ description = "An open-source, interactive graphing library for Python"
 name = "plotly"
 optional = false
 python-versions = "*"
-version = "4.4.1"
+version = "4.5.0"
 
 [package.dependencies]
 retrying = ">=1.3.3"
@@ -284,7 +285,7 @@ numpy = ">=1.7.0"
 six = "*"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Library for building powerful interactive command lines in Python"
 name = "prompt-toolkit"
 optional = false
@@ -297,7 +298,7 @@ wcwidth = "*"
 [[package]]
 category = "dev"
 description = "Run a subprocess in a pseudo terminal"
-marker = "python_version >= \"3.4\" and sys_platform != \"win32\" or sys_platform != \"win32\" or python_version >= \"3.4\" and sys_platform != \"win32\" and (python_version >= \"3.4\" and sys_platform != \"win32\" or sys_platform != \"win32\")"
+marker = "python_version >= \"3.4\" and sys_platform != \"win32\" or sys_platform != \"win32\""
 name = "ptyprocess"
 optional = false
 python-versions = "*"
@@ -438,8 +439,8 @@ category = "main"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 name = "urllib3"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4"
-version = "1.25.7"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4"
+version = "1.25.8"
 
 [package.extras]
 brotli = ["brotlipy (>=0.6.0)"]
@@ -447,7 +448,7 @@ secure = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "cer
 socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7,<2.0)"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Measures number of Terminal column cells of wide-character codes"
 name = "wcwidth"
 optional = false
@@ -455,7 +456,7 @@ python-versions = "*"
 version = "0.1.8"
 
 [metadata]
-content-hash = "49950a354b3b6e2ed75f52af5c0079d1d2b4d1b4f83f2b95cf49ddd8cbbfb8a0"
+content-hash = "c088cd2db9079f4b521636532d155cbf0b154fd9fd0b05bb4d7ac8209b8cca1f"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -534,19 +535,19 @@ decorator = [
     {file = "decorator-4.4.1.tar.gz", hash = "sha256:54c38050039232e1db4ad7375cfce6748d7b41c29e95a081c8a6d2c30364a2ce"},
 ]
 essentia = [
-    {file = "essentia-2.1b6.dev90-cp27-cp27m-manylinux1_i686.whl", hash = "sha256:842e3f5ece67a7450a8ce344d3c60523378e32dcc03ff78408b722376335bda0"},
-    {file = "essentia-2.1b6.dev90-cp27-cp27m-manylinux1_x86_64.whl", hash = "sha256:7866ec7fc528b7285eb26e188936db2ad700d7a05d777abd32c3306cbb989875"},
-    {file = "essentia-2.1b6.dev90-cp27-cp27mu-manylinux1_i686.whl", hash = "sha256:c6901c65915f823911737017b08b3135272c4c5c0ef1512ac52b734228840467"},
-    {file = "essentia-2.1b6.dev90-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:114ee683ba4f2aa8023451e73882cf5c7b61c60a806be5d2a05f499bc968382f"},
-    {file = "essentia-2.1b6.dev90-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:ebd32487efd340f342df0ff50b2b0bcb90731dfa33a5b2dfeb5672b5956baef9"},
-    {file = "essentia-2.1b6.dev90-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:a700dd518e0163d2b678d94722fad36e54dad5019d1fb02324bcea3f890dc0db"},
-    {file = "essentia-2.1b6.dev90-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:099b68c43504d00a00a2c93dad48a8db636a831de98e7e3de09f4013bbd56a1c"},
-    {file = "essentia-2.1b6.dev90-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:379c50e968740819506d27896912021976e7ef7865e05c79ad5d21e4d896768f"},
-    {file = "essentia-2.1b6.dev90-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:df8b2cf114699cdb2c009691647d0f1698f4973ef3635de0ffe1d55c763f4a0c"},
-    {file = "essentia-2.1b6.dev90-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:f6932d2a47ec7ca8d5703b1b1c923b35a9b36f33c83ff2de05e5ebf048677c98"},
-    {file = "essentia-2.1b6.dev90-cp38-cp38-manylinux1_i686.whl", hash = "sha256:f56b61df764ebb0b4628c11246117c7b23e7f609d504fabe99e559c3d6afefbd"},
-    {file = "essentia-2.1b6.dev90-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:e0d9c4a671c12bbe24b0da085bf01e2d4daa8d00d4e4118fef9d1e8de7c6daa6"},
-    {file = "essentia-2.1b6.dev90.tar.gz", hash = "sha256:6df6c143813225b6480f8c2cb5ea9e0463caed31d6c706efd9f73f8dc37fa634"},
+    {file = "essentia-2.1b6.dev184-cp27-cp27m-manylinux1_i686.whl", hash = "sha256:f8eced9f758e42d7f5020a4c63be0d328a16e026e56bb0c772318dfb32289cbd"},
+    {file = "essentia-2.1b6.dev184-cp27-cp27m-manylinux1_x86_64.whl", hash = "sha256:ccc7c3d1210955d6af32541042f7ca30f826a778c942238919b9e2523227adfe"},
+    {file = "essentia-2.1b6.dev184-cp27-cp27mu-manylinux1_i686.whl", hash = "sha256:60c60224501bff13a49b50312a262756df790983c6a1d51de0ed224b7a4261db"},
+    {file = "essentia-2.1b6.dev184-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:62f79cbf82d93c0ac69a13addd65aeb7b2af5c1bcd6273351536c4008c124f2b"},
+    {file = "essentia-2.1b6.dev184-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:dbdf5558fbaedc5f55520224eb7e1f48e8a3461eaa203f5446c02c2ca499de7c"},
+    {file = "essentia-2.1b6.dev184-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:157ba9d3be590f5bb59e9af279a918cf1dfd51473d3bf101f56e9b4fa39ad4d1"},
+    {file = "essentia-2.1b6.dev184-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:26ab4e84123fa0e47d9bc417ffd3305d00511e9b0728ea4c39fcdffc04f69dfb"},
+    {file = "essentia-2.1b6.dev184-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:3e254100149746a7ded3f137b3a4347a7ba38ae029f3f8904030fb55edd45778"},
+    {file = "essentia-2.1b6.dev184-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:c0a2c32a4dbc4b9ef85a6596d2d035a0b83d578770643ddafbf1db5b6c2b75c3"},
+    {file = "essentia-2.1b6.dev184-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:1b6d1ca0571d50b9be53cf67aea494f9ac0c2ab65f342cafa4dc906e95adb1b8"},
+    {file = "essentia-2.1b6.dev184-cp38-cp38-manylinux1_i686.whl", hash = "sha256:484649f0e195e347b2c9aa44e7f64d3a2d08992fb590226ba4c18dbb25637d19"},
+    {file = "essentia-2.1b6.dev184-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:90fed1d73cfb47092a0617b8474084ce0b6996a0574d6bd9e0fb1711408fd93f"},
+    {file = "essentia-2.1b6.dev184.tar.gz", hash = "sha256:30ff4b07282e33dc0b0a601e179b29d4a985d9d64450dad717365a3bc8aa1b53"},
 ]
 executing = [
     {file = "executing-0.4.1.tar.gz", hash = "sha256:b180cd26e6bc23305a20a7cbd228a6bab94ae359e0a304dfc58425e3b0bdf6be"},
@@ -567,8 +568,8 @@ ipython-genutils = [
     {file = "ipython_genutils-0.2.0.tar.gz", hash = "sha256:eb2e116e75ecef9d4d228fdc66af54269afa26ab4463042e33785b887c628ba8"},
 ]
 jedi = [
-    {file = "jedi-0.15.2-py2.py3-none-any.whl", hash = "sha256:1349c1e8c107095a55386628bb3b2a79422f3a2cab8381e34ce19909e0cf5064"},
-    {file = "jedi-0.15.2.tar.gz", hash = "sha256:e909527104a903606dd63bea6e8e888833f0ef087057829b89a18364a856f807"},
+    {file = "jedi-0.16.0-py2.py3-none-any.whl", hash = "sha256:b4f4052551025c6b0b0b193b29a6ff7bdb74c52450631206c262aef9f7159ad2"},
+    {file = "jedi-0.16.0.tar.gz", hash = "sha256:d5c871cb9360b414f981e7072c52c33258d598305280fef91c6cae34739d65d5"},
 ]
 joblib = [
     {file = "joblib-0.14.1-py2.py3-none-any.whl", hash = "sha256:bdb4fd9b72915ffb49fde2229ce482dd7ae79d842ed8c2b4c932441495af1403"},
@@ -602,8 +603,8 @@ numpy = [
     {file = "numpy-1.18.1.zip", hash = "sha256:b6ff59cee96b454516e47e7721098e6ceebef435e3e21ac2d6c3b8b02628eb77"},
 ]
 parso = [
-    {file = "parso-0.5.2-py2.py3-none-any.whl", hash = "sha256:5c1f7791de6bd5dbbeac8db0ef5594b36799de198b3f7f7014643b0c5536b9d3"},
-    {file = "parso-0.5.2.tar.gz", hash = "sha256:55cf25df1a35fd88b878715874d2c4dc1ad3f0eebd1e0266a67e1f55efccfbe1"},
+    {file = "parso-0.6.0-py2.py3-none-any.whl", hash = "sha256:1376bdc8cb81377ca481976933773295218a2df47d3e1182ba76d372b1acb128"},
+    {file = "parso-0.6.0.tar.gz", hash = "sha256:597f36de5102a8db05ffdf7ecdc761838b86565a4a111604c6e78beaedf1b045"},
 ]
 pexpect = [
     {file = "pexpect-4.8.0-py2.py3-none-any.whl", hash = "sha256:0b48a55dcb3c05f3329815901ea4fc1537514d6ba867a152b581d69ae3710937"},
@@ -614,8 +615,8 @@ pickleshare = [
     {file = "pickleshare-0.7.5.tar.gz", hash = "sha256:87683d47965c1da65cdacaf31c8441d12b8044cdec9aca500cd78fc2c683afca"},
 ]
 plotly = [
-    {file = "plotly-4.4.1-py2.py3-none-any.whl", hash = "sha256:582ecdfd0e7db3a6f9e079c43f598280489b97d59f38b4c8f8400dc7eb3a3705"},
-    {file = "plotly-4.4.1.tar.gz", hash = "sha256:acc94f17452471ca3446c2ce491c4d1affb99b9ddd9eac4e05614ac4318f8780"},
+    {file = "plotly-4.5.0-py2.py3-none-any.whl", hash = "sha256:a19ed783bcf094e6207b3699ab261465bf3c7d299403678801de634bf17e2559"},
+    {file = "plotly-4.5.0.tar.gz", hash = "sha256:bb5271f648913cf330a0de4ede3084cda848f8ad8b080330a0678e1b21df97b0"},
 ]
 pretty-midi = [
     {file = "pretty_midi-0.2.8.tar.gz", hash = "sha256:1246439dd74c31abbe2f7a3aef3d28620b1882ece635f0baf88e2c1b491f1432"},
@@ -718,8 +719,8 @@ traitlets = [
     {file = "traitlets-4.3.3.tar.gz", hash = "sha256:d023ee369ddd2763310e4c3eae1ff649689440d4ae59d7485eb4cfbbe3e359f7"},
 ]
 urllib3 = [
-    {file = "urllib3-1.25.7-py2.py3-none-any.whl", hash = "sha256:a8a318824cc77d1fd4b2bec2ded92646630d7fe8619497b142c84a9e6f5a7293"},
-    {file = "urllib3-1.25.7.tar.gz", hash = "sha256:f3c5fd51747d450d4dcf6f923c81f78f811aab8205fda64b0aba34a4e48b0745"},
+    {file = "urllib3-1.25.8-py2.py3-none-any.whl", hash = "sha256:2f3db8b19923a873b3e5256dc9c2dedfa883e33d87c690d9c7913e1f40673cdc"},
+    {file = "urllib3-1.25.8.tar.gz", hash = "sha256:87716c2d2a7121198ebcb7ce7cccf6ce5e9ba539041cfbaeecfb641dc0bf6acc"},
 ]
 wcwidth = [
     {file = "wcwidth-0.1.8-py2.py3-none-any.whl", hash = "sha256:8fd29383f539be45b20bd4df0dc29c20ba48654a41e661925e612311e9f3c603"},

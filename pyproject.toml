@@ -13,18 +13,18 @@ numpy = "^1.18.1"
 requests = "^2.22.0"
 beautifulsoup4 = "^4.8.2"
 cython = "^0.29.14"
-essentia = "^2.1b6.dev90"
 plotly = "^4.4.1"
 pretty_midi = "^0.2.8"
 scikit_learn = "^0.22.1"
 pyfiglet = "^0.8.post1"
 alive-progress = "^1.3.3"
+essentia = "^2.1b5"
+prompt_toolkit = "^3.0.3"
 
 [tool.poetry.dev-dependencies]
 snoop = "^0.2.4"
 ipdb = "*"
 ipython = "*"
-prompt_toolkit = "^3.0.3"
 
 [build-system]
 requires = ["poetry>=0.12"]
