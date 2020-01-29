@@ -12,12 +12,16 @@ from essentia.standard import Resample
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 
 class Dataset:
+    """
+    A class which represent all the datasets that you need
+    """
 
     def __len__(self):
         return len(self.paths)
 
     def __init__(self, paths=[], metadataset_path=joinpath(THISDIR, 'datasets.json')):
-        """
+        """__init__(self, paths=[], metadataset_path=joinpath(THISDIR, 'datasets.json')) -> Dataset
+
         Load the dataset description
 
         Parameters
@@ -51,7 +55,8 @@ class Dataset:
         self._chunks = {}
 
     def filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
-        """
+        """filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]) -> None
+
         Filters the dataset and load the paths of the songs which accomplish
         the filter described in `kwargs`. A field `paths` is added to this
         instance.
@@ -146,7 +151,8 @@ class Dataset:
 
 
     def idx_chunk_to_whole(self, name, idx):
-        """
+        """idx_chunk_to_whole(self, name, idx) -> int
+
         Given a dataset name and an idx or a list of idx relative to the input dataset,
         returns the idx relative to this whole dataset.
         """
@@ -159,7 +165,8 @@ class Dataset:
 
 
     def get_mix(self, idx, sr=None):
-        """
+        """get_mix(self, idx, sr=None) -> numpy.array, int
+
         Returns the audio array of the mixed song
 
         Arguments
@@ -199,7 +206,8 @@ class Dataset:
         return mix, sr
 
     def get_gts(self, idx):
-        """
+        """get_gts(self, idx) -> list
+
         Return the ground-truth of the wanted item
 
         Arguments
@@ -223,7 +231,8 @@ class Dataset:
         return gts
 
     def get_source(self, idx):
-        """
+        """get_source(self, idx) -> list, int
+
         Returns the sources at the specified index
 
         Arguments
@@ -232,6 +241,7 @@ class Dataset:
             the index of the wanted item
 
         Returns
+        -------
         list :
             a list of numpy.ndarray representing the audio of each source
         int :
@@ -246,7 +256,8 @@ class Dataset:
         return sources, sr
 
     def get_item(self, idx):
-        """
+        """get_item(self, idx) -> numpy.array, list
+
         Returns the mixed audio, sources and ground truths of the specified item.
 
         Arguments
@@ -255,6 +266,7 @@ class Dataset:
             the index of the wanted item
 
         Returns
+        -------
         numpy.ndarray :
             audio of the mixed sources
         list :
@@ -268,7 +280,8 @@ class Dataset:
         return mix, sources, gts
 
     def get_beats(self, idx):
-        """
+        """get_beats(self, idx) -> numpy.array
+
         Get a list of beat position in seconds, to be used together with the
         non_aligned data.
 
@@ -290,7 +303,8 @@ class Dataset:
         return np.array(beats)
 
     def get_score(self, idx, score_type=['non_aligned'], truncate=False):
-        """
+        """get_score(self, idx, score_type=['non_aligned'], truncate=False) -> numpy.array
+
         Get the score of a certain score, with times of `score_type`
 
         Arguments
@@ -298,13 +312,13 @@ class Dataset:
         idx : int
             The index of the song to retrieve.
         score_type : list of str
-            The key to retrieve the list of notes from the ground_truths. If multiple keys are provided,
-            only one is retrieved by using the following criteria:
-                if there is `precise_alignment` in the list of keys and in the ground truth, use that;
-                otherwise, if there is `broa_alignment` in the list of keys and in the ground truth, 
-                use that; otherwise use `non_aligned`.
-        truncate : bool
-            If True, truncate mat to the shortest list among ons, offs and pitches,
+            The key to retrieve the list of notes from the ground_truths. If
+            multiple keys are provided, only one is retrieved by using the
+            following criteria: if there is `precise_alignment` in the list of
+            keys and in the ground truth, use that; otherwise, if there is
+            `broa_alignment` in the list of keys and in the ground truth, use
+            that; otherwise use `non_aligned`.  truncate : bool If True,
+            truncate mat to the shortest list among ons, offs and pitches,
             otherwise, insert -255 for missing values (enlarging lists)
 
         Returns
@@ -383,7 +397,8 @@ class Dataset:
         return mat
 
     def get_audio(self, idx, sources=None):
-        """
+        """get_audio(self, idx, sources=None) -> numpy.array, int
+
         Get the mixed audio of certain sources or of the mix
 
         Arguments
@@ -414,7 +429,8 @@ class Dataset:
 
 
 def find_bach10_errors(gt, score_type):
-    """
+    """find_bach10_errors(gt, score_type) -> bool
+
     Fix the ground-truth so that:
         - the extra notes in `score_type` are removed
         - the missing notes are inserted in middle of the last correct note,
@@ -448,7 +464,8 @@ def find_bach10_errors(gt, score_type):
 
 
 def truncate_score(gt):
-    """
+    """truncate_score(gt) -> None
+
     Takes a ground truth and truncates all its lists so that the number of
     pitches is the same of the scoretype with the minimum number of pitches in
     this ground_truth
@@ -471,7 +488,8 @@ def truncate_score(gt):
 
 
 def load_definitions(path):
-    """
+    """load_definitions(path) -> list
+
     Given a `path` to a directory, returns a list of dictionaries containing
     the definitions found in that directory (not recursive search)
     """
