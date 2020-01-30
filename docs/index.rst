@@ -65,13 +65,13 @@ following field:
 2. ``instruments``: the list of the instruments contained in the dataset
 3. ``sources``:
     1. ``format``: the format of the audio recordings of the single
-      source-separated tracks
+    source-separated tracks
 4. ``recording``:
     1. ``format``: the format of the audio recordings of the mixed tracks
 5. ``ground_truth``: *N.B. each ground_truth has an ``int`` value, indicating
-   ``0`` -> false, ``1`` -> true (manual or mechanical - Disklavier -
-   annotation), ``2`` -> true (automatic annotation with state-of-art
-   algorithms)*
+    ``0`` -> false, ``1`` -> true (manual or mechanical - Disklavier -
+    annotation), ``2`` -> true (automatic annotation with state-of-art
+    algorithms)*
     1. ``non_aligned``: ``true`` if non_aligned scores are provided
     2. ``broad_alignment``: ``true`` if broad_alignment scores are provided
     3. ``precise_alignment``: ``true`` if precisely aligned scores are provided
@@ -93,14 +93,15 @@ following field:
            for indicating that violin1 and violin2 are playing exactly the same
            thing).
 7. ``install``: where information for the installation process are
-   stored
+    stored
+    
     1. ``url``: the url to download the dataset including the protocol
     2. ``post-process``: a list of shell commands to be executed to prepare the
-           dataset; they can be lists themselves to allow the use of anchors to
-           install_dir" field with the syntax “&install_dir”
+        dataset; they can be lists themselves to allow the use of anchors to
+        install_dir" field with the syntax “&install_dir”
     3. ``unpack``: ``true`` if the url needs to be unpacked
     4. ``login``: true if you a login is needed - no more used, but maybe
-           useful in future
+        useful in future
 
 In general, I maintained the following principles:
 
@@ -132,13 +133,13 @@ dictionary with the following structure:
     3. ``pitches``: list of midi pitches in onset ascending order
     4. ``note``: list of note names in onsets ascending order
     5. ``velocities``: list of velocities in onsets ascending order
-3. ``broad_alignment``: alignment which does not consider the asynchronies
-   between simultaneous notes
+3. ``broad_alignment``: alignment which does not consider the asynchronies between simultaneous notes
     1. ``onsets``: onsets in ms
     2. ``offsets``: offsets in ms
     3. ``pitches``: list of midi pitches in onset ascending order
     4. ``note``: list of note names in onsets ascending order
     5. ``velocities``: list of velocities in onsets ascending order
+
 4. ``f0``: list of f0 frequencies, frame by frame (frame rate according to the
    source sound file or to the whole recording sound file if sources are not
    available)
@@ -169,18 +170,18 @@ to some specified prerequisites and getting the data in a convenient format.
 Matlab [outdated]
 ~~~~~~~~~~~~~~~~~
 
-Add this directory to your path and create an `AudioScoreDataset` object, giving
-the path of the `datasets.json` file in this directory as argument to the
-constructor. Then, you can use the `filter_data` method to filter data according
+Add this directory to your path and create an ``AudioScoreDataset`` object, giving
+the path of the ``datasets.json`` file in this directory as argument to the
+constructor. Then, you can use the ``filter_data`` method to filter data according
 to your needs (you can also re-filter them later without reloading
-`datasets.json`). After this, you can move the ground truth files (compressed)
-to RAM by using a `tmpfs` file system (if you do not have enough RAM, you can
-use `tmpfs` to just decompress the ground truth files one-by-one).
+``datasets.json``). After this, you can move the ground truth files (compressed)
+to RAM by using a ``tmpfs`` file system (if you do not have enough RAM, you can
+use ``tmpfs`` to just decompress the ground truth files one-by-one).
 
-You will find a value `paths` in your `AudioScoreDataset` instance containing
+You will find a value ``paths`` in your ``AudioScoreDataset`` instance containing
 the correct paths to the files you are requesting.
 
-Moreover, the method `get_item` returns an array of audio values and a
+Moreover, the method ``get_item`` returns an array of audio values and a
 structured_array representing the ground_truth as loaded from the json file.
 
 Example:
@@ -203,7 +204,7 @@ Example:
 Python
 ~~~~~~
 
-Docs available at :doc: `./API`
+Docs available at :doc:`./API`
 
 Import ``audioscoredataset`` and create a ``Dataset`` object, giving the
 path of the ``datasets.json`` file in this directory as argument to the
@@ -349,7 +350,7 @@ instruments already existing (for instance, do not use ``saxophone`` if
 
 Provide a conversion function
 -----------------------------
-Docs available at :doc: `./Converting`
+Docs available at :doc:`./Converting`
 
 The conversion function takes as input the name of the file in the
 original dataset. You can also use the bundled conversion functions (see
