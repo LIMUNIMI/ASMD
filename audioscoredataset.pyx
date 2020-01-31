@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #cython: language_level=3
+#cython: embedsignature=True
 import pyximport; pyximport.install()
 import json
 import gzip
@@ -12,16 +13,12 @@ from essentia.standard import Resample
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 
 class Dataset:
-    """
-    A class which represent all the datasets that you need
-    """
 
     def __len__(self):
         return len(self.paths)
 
     def __init__(self, paths=[], metadataset_path=joinpath(THISDIR, 'datasets.json')):
-        """__init__(self, paths=[], metadataset_path=joinpath(THISDIR, 'datasets.json')) -> Dataset
-
+        """
         Load the dataset description
 
         Parameters
@@ -55,8 +52,7 @@ class Dataset:
         self._chunks = {}
 
     def filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
-        """filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]) -> None
-
+        """
         Filters the dataset and load the paths of the songs which accomplish
         the filter described in `kwargs`. A field `paths` is added to this
         instance.
@@ -91,7 +87,7 @@ class Dataset:
             level_of_truth)`, where `needed_ground_truth_type` is the key of
             the ground_truth dictionary and `level_of_truth` is an int ranging
             from 0 to 2 (0->False, 1->True (manual annotation),
-                         2->True(automatic annotation))
+            2->True(automatic annotation))
         """
         end = 0
         for mydataset in self.datasets:
@@ -151,8 +147,7 @@ class Dataset:
 
 
     def idx_chunk_to_whole(self, name, idx):
-        """idx_chunk_to_whole(self, name, idx) -> int
-
+        """
         Given a dataset name and an idx or a list of idx relative to the input dataset,
         returns the idx relative to this whole dataset.
         """
@@ -165,8 +160,7 @@ class Dataset:
 
 
     def get_mix(self, idx, sr=None):
-        """get_mix(self, idx, sr=None) -> numpy.array, int
-
+        """
         Returns the audio array of the mixed song
 
         Arguments
@@ -206,8 +200,7 @@ class Dataset:
         return mix, sr
 
     def get_gts(self, idx):
-        """get_gts(self, idx) -> list
-
+        """
         Return the ground-truth of the wanted item
 
         Arguments
@@ -231,8 +224,7 @@ class Dataset:
         return gts
 
     def get_source(self, idx):
-        """get_source(self, idx) -> list, int
-
+        """
         Returns the sources at the specified index
 
         Arguments
@@ -256,8 +248,7 @@ class Dataset:
         return sources, sr
 
     def get_item(self, idx):
-        """get_item(self, idx) -> numpy.array, list
-
+        """
         Returns the mixed audio, sources and ground truths of the specified item.
 
         Arguments
@@ -397,8 +388,7 @@ class Dataset:
         return mat
 
     def get_audio(self, idx, sources=None):
-        """get_audio(self, idx, sources=None) -> numpy.array, int
-
+        """
         Get the mixed audio of certain sources or of the mix
 
         Arguments
@@ -429,8 +419,7 @@ class Dataset:
 
 
 def find_bach10_errors(gt, score_type):
-    """find_bach10_errors(gt, score_type) -> bool
-
+    """
     Fix the ground-truth so that:
         - the extra notes in `score_type` are removed
         - the missing notes are inserted in middle of the last correct note,
@@ -464,8 +453,7 @@ def find_bach10_errors(gt, score_type):
 
 
 def truncate_score(gt):
-    """truncate_score(gt) -> None
-
+    """
     Takes a ground truth and truncates all its lists so that the number of
     pitches is the same of the scoretype with the minimum number of pitches in
     this ground_truth
@@ -488,8 +476,7 @@ def truncate_score(gt):
 
 
 def load_definitions(path):
-    """load_definitions(path) -> list
-
+    """
     Given a `path` to a directory, returns a list of dictionaries containing
     the definitions found in that directory (not recursive search)
     """

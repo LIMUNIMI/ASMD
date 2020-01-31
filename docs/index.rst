@@ -4,46 +4,20 @@ ASMD: Audio-Score Meta Dataset
 .. toctree::
    :maxdepth: 2
    :caption: Table of Contents
-   :numbered:
-   :titlesonly:
    
+   Installation
+   Reproduce_from_scratch
    API
+   Adding_datasets
    Converting
-
-
+   Scientific_notes
+   genindex
+   modindex
+   search
+   
 This file describes multiple datasets containing data about music
 performances. All the datasets are described with the same fields, so
 that you can use them easily disregarding their internal structure
-
--  `Usage <#usage>`__
-
-   -  `datasets.json <#datasetsjson>`__
-   -  `Definitions <#definitions>`__
-   -  `Ground-truth json format <#ground-truth-json-format>`__
-   -  `API <#api>`__
-
-      -  `Matlab [outdated] <#matlab--outdated->`__
-      -  `Python <#python>`__
-
-   -  `Installation <#installation>`__
-
-      -  `Using Poetry (recommended) <#using-poetry--recommended->`__
-      -  `Using pip <#using-pip>`__
-      -  `Using pypi (not
-         recommended) <#using-pypi--not-recommended->`__
-
--  `Reproduce from scratch <#reproduce-from-scratch>`__
--  `Adding new datasets <#adding-new-datasets>`__
-
-   -  `Adding new definitions <#adding-new-definitions>`__
-   -  `Provide a conversion function <#provide-a-conversion-function>`__
-   -  `Add your function to the JSON
-      definition <#add-your-function-to-the-json-definition>`__
-   -  `Run generate_ground_truth.py <#run--generate-ground-truthpy->`__
-   -  `Generate misaligned data <#generate-misaligned-data>`__
-
--  `Scientific notes <#scientific-notes>`__
--  `TODO <#todo>`__
 
 Usage
 =====
@@ -53,11 +27,11 @@ datasets.json
 
 The root element is a dictionary with fields:
 
-1. ``author``: string containing the name of the author
-2. ``year``: int containing the year
-3. ``install_dir``: string containing the install directory
-4. ``datasets``: list of datasets object
-5. ``decompress_path``: the path were files are decompressed
+#. ``author``: string containing the name of the author
+#. ``year``: int containing the year
+#. ``install_dir``: string containing the install directory
+#. ``datasets``: list of datasets object
+#. ``decompress_path``: the path were files are decompressed
 
 Definitions
 -----------
@@ -149,326 +123,13 @@ module. Thus, you need to decompress them:
 
 .. code: python
 
-    import lzma import
-    json
+    import gzip
+    import json
 
     ground_truth = json.load(gzip.open(‘ground_truth.json.gz’, ‘rt’))
 
     print(ground_truth)
 
-
-API
----
-
-This project also provides a few API for filtering the datasets according
-to some specified prerequisites and getting the data in a convenient format.
-
-Matlab [outdated]
-~~~~~~~~~~~~~~~~~
-
-Add this directory to your path and create an ``AudioScoreDataset`` object, giving
-the path of the ``datasets.json`` file in this directory as argument to the
-constructor. Then, you can use the ``filter_data`` method to filter data according
-to your needs (you can also re-filter them later without reloading
-``datasets.json``). After this, you can move the ground truth files (compressed)
-to RAM by using a ``tmpfs`` file system (if you do not have enough RAM, you can
-use ``tmpfs`` to just decompress the ground truth files one-by-one).
-
-You will find a value ``paths`` in your ``AudioScoreDataset`` instance containing
-the correct paths to the files you are requesting.
-
-Moreover, the method ``get_item`` returns an array of audio values and a
-structured_array representing the ground_truth as loaded from the json file.
-
-Example:
-
-.. code:: matlab
-
-   d = AudioScoreDataset('datasets.json');
-   d.filter('instrument', 'piano', 'ensemble', false, 'composer', 'Mozart', 'ground_truth', 'precise_alignment');
-   d.move_to_ram('/mnt/tmpfs'); % discouraged but maybe can turn to be useful
-   d.set_decompress_path('/mnt/tmpfs'); % only if you don't have enough space in RAM, discouraged
-
-   audio_array, sources_array, ground_truth_array = d.get_item(1);
-
-   audio_array = d.get_mix(2);
-   source_array = d.get_source(2);
-   ground_truth_array = d.get_gts(2);
-
-   disp(d.paths);
-
-Python
-~~~~~~
-
-Docs available at :doc:`./API`
-
-Import ``audioscoredataset`` and create a ``Dataset`` object, giving the
-path of the ``datasets.json`` file in this directory as argument to the
-constructor. Then, you can use the ``filter`` method to filter data
-according to your needs (you can also re-filter them later without
-reloading ``datasets.json``).
-
-You will find a value ``paths`` in your ``Dataset`` instance containing
-the correct paths to the files you are requesting.
-
-Moreover, the method ``get_item`` returns an array of audio values and a
-structured_array representing the ground_truth as loaded from the json
-file.
-
-Example:
-
-.. code:: python
-
-   import audioscoredataset as asd
-
-   d = asd.Dataset()
-   # d = asd.Dataset(paths=['path_to_my_definitions', 'path_to_default_definitions'])
-   d.filter(instrument='piano', ensemble=False, composer='Mozart', ground_truth=['precise_alignment'])
-
-   audio_array, sources_array, ground_truth_array = d.get_item(1)
-
-   audio_array = d.get_mix(2)
-   source_array = d.get_source(2)
-   ground_truth_list = d.get_gts(2)
-
-   mat = d.get_score(2, score_type=['precise_alignment'])
-
-Note that you can inherit from ``audioscoredataset.Dataset`` and
-``torch.utils.data.Dataset`` to create a PyTorch compatible dataset
-which only load audio files when thay are accessed. You will just need
-to implement the ``__getitem__`` method.
-
-More info in the docs.
-
-Installation
-------------
-
-I suggest to clone this repo and using it with python >= 3.6. If you
-need to use it in multiple projects (or folders) just clone the code and
-fix the ``install_dir`` in ``datasets.json``, so that you can have only
-one copy of the huge datasets.
-
-However, you can also try to install it in your system using
-```poetry`` <https://python-poetry.org/>`__
-
-Using Poetry (recommended)
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Once you have cloned the repo follow these steps:
-
-#. Install ``python 3``
-#. Install ```poetry`` <https://python-poetry.org/docs/#installation>`__
-#. Install ```pyenv`` <https://github.com/pyenv/pyenv#installation>`__ and fix your ``.bashrc``\ (optional)
-#. ``pyenv install 3.6.9`` (optional, recommended python >= 3.6.9)
-#. ``cd myproject``
-#.  ``touch __init__.py``
-#. ``pyenv local 3.6.9`` (optional)
-#.  ``git clone https://framagit.org/sapo/asmd.git``
-#. ``cd amsd``
-#. ``poetry install``
-#. Execute ``poetry run python install.py``
-#. Follow the steps
-
-Now you can start developing in the parent directory (``myproject``) and
-you can use ``from amsd import audioscoredataset as asd``.
-
-Using pip
-~~~~~~~~~
-
-#. Install ``python 3`` (recommended python >= 3.6.9)
-#. ``cd myproject``
-#. ``git clone https://framagit.org/sapo/asmd.git``
-#. ``cd amsd``
-#. Enter the git root directory and run ``pip install -r requirements.txt``
-#. Execute ``poetry run python install.py``
-#. Follow the steps
-
-Now you can start developing in the parent directory (``myproject``) and
-you can use ``from amsd import audioscoredataset as asd``.
-
-Using pypi (not recommended)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Not available at now.
-
-Reproduce from scratch
-======================
-
-If you want, you can also recreate the annotations from scratch by
-running the python 3 script ``convert_gt.py`` after having installed the
-datasets.
-
-**N.B. You should have ``wget`` installed in your system, otherwise SMD
-dataset can’t be downloaded.**
-
-Adding new datasets
-===================
-
-In order to add new datasets, you have to create the correspondent
-definition in a JSON file. The definitions can be in any directory but
-you have to provide this path to the API and to the installation script
-(you will be asked for this, so you can’t be wrong).
-
-The dataset files, instead, should be in the installation directory and
-the paths in the definition should not take into account the
-installation directory.
-
-If you also want to add the new dataset to the installation procedure,
-you should:
-
-#. Provide a conversion function for the ground truth
-#. Add the conversion function with all parameters to the JSON definition (section ``install>conversion``)
-#. Rerun the ``install.py`` and ``convert_gt.py`` scripts
-
-Adding new definitions
-----------------------
-
-The most important thing is that one ground-truth file is provided for
-each instrument.
-
-If you want to add datasets to the installation procedure, add the
-paths, even if they still do not exist, because ``convert_gt.py`` relies
-on that to create them. It is important to provide an index starting
-with ``-`` at the end of the path (see the other sections as example),
-so that it is possible to distinguish among multiple instruments (for
-instance, PHENICX provides one ground-truth file for all the violins of
-a song, even if there are 4 different violins). The index allows
-``convert_gt`` to better handle different files and to pick the
-ground-truth wanted.
-
-It is mandatory to provide a url, a name and so on. Also, provide a
-composer and instrument list. Please, do not use new words for
-instruments already existing (for instance, do not use ``saxophone`` if
-``sax`` already exists in other datasets).
-
-Provide a conversion function
------------------------------
-Docs available at :doc:`./Converting`
-
-The conversion function takes as input the name of the file in the
-original dataset. You can also use the bundled conversion functions (see
-docs).
-
-#. use ``deepcopy(gt)`` to create the output ground truth.
-#. use decorator ``@convert`` to provide the input file extensions and parameters
-
-You should consider three possible cases for creating the conversion
-function:
-
-#. there is a bijective relationship between instruments and ground_truth file you have, that is, you already have a convesion file per each instrument and you should just convert all of them (*1-to-1 relationship*)
-#. in your dataset, all the instruments are inside just one ground-truth   file (*n-to-1 relationship*)
-#. just one ground-truth file is provided that replicates for multiple instruments (one ground-truth for all the ``violins``, as if they   were a single instrument, *1-to-n relationship* )
-
-Here is a brief description of how your conversion function should work
-to tackle these three different situations. - In the 1st case, you can
-just output a list with only one dictionary. - In the 2nd case, you can
-output a list with all the dictionary inside it, in the same order as
-the ground-truth file paths you added to ``datasets.json``. The script
-will repeatly convert them and each times it will pick a different
-element of the list. - In the 3rd case, you can still output a single
-element list.
-
-If you want to output a list with only one dict, you can also output the
-dict itself. The decorator will take care of handling file names and of
-putting the output dict inside a list.
-
-Finally, you can also use multiple conversion functions if your
-ground-truth is splitted among multiple files, but note that the final
-ground-truth is produced as the sum of all the elements of all the
-dictionaries created.
-
-Add your function to the JSON definition
-----------------------------------------
-
-In the JSON definitions, you should declare the functions that should be
-used for converting the ground-truth and their parameters. The section
-where you can do this is in ``install>conversion``.
-
-Here, you should put a list like the following:
-
-.. code:: python
-
-       [
-           [
-               "module1.function1", {
-                   "argument1_name": argument1_value,
-                   "argument2_name": argument2_value
-               }
-       ],
-           [
-               "module2.function2", {
-                   "argument1_name": argument1_value,
-                   "argument2_name": argument2_value
-               }
-           ]
-       ]
-
-Note that you have to provide the *name* of the function, which will be
-evaluated with the ``eval`` python function. Also, you can use any
-function in any module, included the bundled functions - in this case,
-use just the function name w/o the module.
-
-Run ``generate_ground_truth.py``
---------------------------------
-
-You can run the script with ``python 3``. You can also skip the already
-existing datasets by simply add their names as argument. If you do this,
-their ground truth will not be added to the final archive, thus,
-remember to backup the previous one and to merge the archives.
-
-Generate misaligned data
-------------------------
-
-If you want, you can generate misaligned data. First, after having
-created the ground-truth, run ``alignment_stats``, which collects data
-about the datasets with real non-aligned scores and saves stats in
-``_alignment_stats.pkl`` file in the working directory. Then, run
-``generate_ground_truth.py`` again: it will load the pickled file and
-will generate misaligned data by using the same deviation distribution
-of the available non-aligned data.
-
-Note that misaligned data should be annotated as ``2`` in the
-``ground_truth`` value of the dataset description (see
-`datasets.json <#datasetsjson>`__ ), otherwise no misaligned value will
-be added to the ``non_aligned`` field.
-
-Scientific notes
-================
-
-This dataset tries to overcome the problem of needing manual alignment
-of scores to audio for training models which exploit audio and scores at
-the both time. The underlying idea is that we have many scores and a lot
-of audio and users of trained models could easily take advantage of such
-multimodality (the ability of the model to exploit both scores and
-audio). The main problem is the annotation stage: we have quite a lot of
-aligned data, but we miss the corresponding scores, and if we have the
-scores, we almost always miss the aligned performance.
-
-The approach used is to statistical analyze the available manual
-annotations and to reproduce it. Indeed, with ``misaligned`` data I mean
-data which try to reproduce the statistical features of the difference
-between scores and aligned data.
-
-For now, the statistical analysis is damn simple: I compute the mean and
-the standard deviation of offsets and onsets for each piece. Then, I
-take memory of the standardized histogram and of the histograms of means
-and standard deviations. To create new misaligned data, I chose a
-standardized value for each note and a mean and a standard deviation for
-each piece, using the corresponding histograms; with these data, I can
-compute a non-standardized value for each note. Note that the histograms
-are first normalized so that they accomplish to given constraints. In
-the present code, the standardized values are normalized to 1 (that is,
-the maximum value is 1 second), while standard deviations are normalized
-to 0.2 (see ``conversion_tool.pyx`` lines ``17-21``).
-
-One more problem is due to the fact that the unity of measure for time
-in aligned data are seconds, while in scores are note lenghts. Ususally,
-one can translates a note length to seconds by using BPM. During the
-statistical analysis, I always consider the prescripted tempo as 20 BPM
-(see ``convert_from_file.pyx``, line ``11``). This is not the best
-option, but since I do not have the BPM of all the available scorse, I
-found more convenient having all of them scored with a non-usual BPM, in
-the attempt of making the BPM the least influent as possible.
 
 TODO
 ====
@@ -484,14 +145,12 @@ Cite us
 
 Federico Simonetta
 
-https://federicosimonetta.eu.org
-https://lim.di.unimi.org
+* https://federicosimonetta.eu.org
+* https://lim.di.unimi.org
 
 Indices
 =======
 
-* :doc:`./API`
-* :doc:`./Converting`
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
