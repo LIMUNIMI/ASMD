@@ -12,7 +12,7 @@ ASMD: Audio-Score Meta Dataset
    Converting
    Scientific_notes
    License
-   `Source Code and Download <https://framagit.org/sapo/asmd>`
+   `Source Code and Download <https://framagit.org/sapo/asmd>`_
    :ref:`genindex`
    :ref:`modindex`
    :ref:`search`
