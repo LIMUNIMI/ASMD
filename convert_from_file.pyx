@@ -21,8 +21,8 @@ def convert(exts, no_dot=True, remove_player=False):
     Example of usage:
 
     >>> @convert(['.myext'], no_dot=True, remove_player=False)
-        def function_which_converts(...):
-            pass
+    ... def function_which_converts(...):
+    ...     pass
 
     Parameters
     ---
