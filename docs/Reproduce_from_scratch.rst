@@ -1,9 +1,10 @@
 Reproduce from scratch
 ======================
 
-To install the ground-truth in our format you have to convert the annotations.
+To recreate the ground-truth in our format you have to convert the annotations.
 
-#. run ``convert_gt.py`` script after having installed the datasets with the ``install.py`` :doc:`Installation`
+#. run ``generate_ground_truth.py`` script after having installed the datasets
+   with the ``install.py`` (see :doc:`Installation`)
 #. to recreate artificial misalignment estimation, then you should also
 
    #. run ``alignment_stats.py`` 

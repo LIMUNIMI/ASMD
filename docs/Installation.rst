@@ -11,8 +11,9 @@ dataset API. I suggest to use  `poetry <https://python-poetry.org/>`__ to manage
 different versions of python and virtual environments with an efficient
 dependency resolver.
 
-Since we do not have copyrights for distributing ground-truth, you should recreate
-it by yourself. Next paragraph will explain how you can achieve this.
+During the installation, the provided ground-truth will be extracted; however,
+you can recreate them from scratch for tweaking parameters. The next section
+will explain how you can achieve this.
 
 Using Poetry (recommended)
 --------------------------
