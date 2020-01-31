@@ -11,9 +11,11 @@ ASMD: Audio-Score Meta Dataset
    Adding_datasets
    Converting
    Scientific_notes
-   genindex
-   modindex
-   search
+   License
+   `Source Code and Download <https://framagit.org/sapo/asmd>`
+   :ref:`genindex`
+   :ref:`modindex`
+   :ref:`search`
    
 This file describes multiple datasets containing data about music
 performances. All the datasets are described with the same fields, so

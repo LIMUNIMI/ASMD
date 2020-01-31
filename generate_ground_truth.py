@@ -5,7 +5,7 @@ from alignment_stats import Stats
 import os
 import sys
 print("Usage: ")
-print("  python3 convert_gt.py [list of datasets to be excluded]")
+print("  python3 generate_ground_truth.py [list of datasets to be excluded]")
 print()
 
 THISDIR = os.path.dirname(os.path.realpath(__file__))

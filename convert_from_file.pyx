@@ -20,8 +20,7 @@ def convert(exts, no_dot=True, remove_player=False):
 
     Example of usage:
 
-    .. code: python
-        @convert(['.myext'], no_dot=True, remove_player=False)
+    >>> @convert(['.myext'], no_dot=True, remove_player=False)
         def function_which_converts(...):
             pass
 
@@ -68,13 +67,11 @@ def convert(exts, no_dot=True, remove_player=False):
 #: The dictionary prototype for containing the ground_truth.
 #: use:
 #: 
-#: .. code: python
-#:     from copy import deepcopy
+#: >>> from copy import deepcopy
 #:     from convert_from_file import prototype_gt
 #:     deepcopy(prototype_gt)
 #: 
-#: ..code: python
-#:     prototype_gt = {
+#: >>> prototype_gt = {
 #:         "precise_alignment": {
 #:             "onsets": [],
 #:             "offsets": [],
@@ -194,11 +191,11 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
 
     return out
 
-from_midi = convert(['.mid', '.midi'], remove_player=False)(from_midi)
 from_midi_remove_player = convert(['.mid', '.midi'], remove_player=True)(from_midi)
+from_midi = convert(['.mid', '.midi'], remove_player=False)(from_midi)
 
 
-@convert(['txt'])
+@convert(['.txt'])
 def from_phenicx_txt(txt_fn, non_aligned=False):
     """
     Open a txt file `txt_fn` in the PHENICX format and convert it to our
@@ -251,7 +248,7 @@ def from_bach10_mat(mat_fn, sources=range(4)):
     return out_list
 
 
-@convert(['-GTNotes.mat'], no_dot=True)
+@convert(['-GTF0s.mat'], no_dot=True)
 def from_bach10_f0(nmat_fn, sources=range(4)):
     """
     Open a matlab mat file `nmat_fn` in the MIREX format (Bach10) for frame

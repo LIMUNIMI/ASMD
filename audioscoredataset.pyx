@@ -9,15 +9,15 @@ from os.path import join as joinpath
 from utils import io
 import numpy as np
 from essentia.standard import Resample
-
-THISDIR = os.path.dirname(os.path.realpath(__file__))
+# this only for detecting package directory
+from idiot import THISDIR
 
 class Dataset:
 
     def __len__(self):
         return len(self.paths)
 
-    def __init__(self, paths=[], metadataset_path=joinpath(THISDIR, 'datasets.json')):
+    def __init__(self, paths=[joinpath(THISDIR, 'definitions/')], metadataset_path=joinpath(THISDIR, 'datasets.json')):
         """
         Load the dataset description
 
@@ -37,8 +37,6 @@ class Dataset:
         * AudioScoreDataset :
             instance of the class
         """
-        if len(paths) == 0:
-            paths.append(joinpath(THISDIR, 'definitions/'))
 
         self.datasets = []
         for path in paths:
