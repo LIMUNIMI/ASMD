@@ -14,7 +14,8 @@ from alignment_stats import seed, fill_stats
 import multiprocessing as mp
 from convert_from_file import *
 
-THISDIR = os.path.dirname(os.path.realpath(__file__))
+# this is only for detecting the package path
+from idiot import THISDIR
 
 #: if True, run conversion in parallel processes
 PARALLEL = True
