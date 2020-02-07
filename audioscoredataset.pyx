@@ -10,7 +10,8 @@ from utils import io
 import numpy as np
 from essentia.standard import Resample
 # this only for detecting package directory
-from idiot import THISDIR
+from .idiot import THISDIR
+
 
 class Dataset:
 
@@ -39,6 +40,8 @@ class Dataset:
         """
 
         self.datasets = []
+        if len(paths) == 0:
+            paths = [joinpath(THISDIR, 'definitions/')]
         for path in paths:
             self.datasets += load_definitions(path)
 
