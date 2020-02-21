@@ -1,8 +1,8 @@
 License
-=======
+===========
 
 Ground-truth annotations
------------------------
+------------------------
 
 All ground-truth annotations we used are originally released under Creative Commons
 licenses. We release our adaptations under Creative Commons.
@@ -28,7 +28,7 @@ Attribution-NonCommercial-ShareAlike 4.0 International License`_.
    :target: http://creativecommons.org/licenses/by-nc-sa/4.0/
 
 Code
-----
+-------
 
 All the code is released under MIT license:
 
