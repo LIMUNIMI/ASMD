@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-#cython: language_level=3
-#cython: embedsignature=True
-import pyximport; pyximport.install()
 import json
 import gzip
 import os
