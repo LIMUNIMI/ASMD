@@ -2,8 +2,6 @@ from random import choices, uniform
 from sklearn.preprocessing import StandardScaler, minmax_scale
 import numpy as np
 import os.path
-import pyximport
-pyximport.install()
 from audioscoredataset import Dataset
 from utils import utils
 

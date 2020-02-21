@@ -90,3 +90,6 @@ Documentation
 
 .. automodule:: audioscoredataset
    :members:
+
+.. automodule:: alignment_stats
+   :members:

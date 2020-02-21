@@ -7,7 +7,7 @@ from utils import io
 import numpy as np
 from essentia.standard import Resample
 # this only for detecting package directory
-from .idiot import THISDIR
+from idiot import THISDIR
 
 
 class Dataset:
