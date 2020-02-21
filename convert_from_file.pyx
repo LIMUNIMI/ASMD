@@ -1,5 +1,3 @@
-#cython: language_level=3
-#cython: embedsignature=True
 from copy import deepcopy
 import os
 import csv

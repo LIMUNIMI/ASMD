@@ -30,6 +30,7 @@ Once you have cloned the repo follow these steps:
 #.  ``git clone https://framagit.org/sapo/asmd.git``
 #. ``cd amsd``
 #. ``poetry install``
+#. ``poetry run python setup.py build_ext --inplace``
 #. Execute ``poetry run python install.py``
 #. Follow the steps
 
@@ -44,7 +45,8 @@ Using pip
 #. ``git clone https://framagit.org/sapo/asmd.git``
 #. ``cd amsd``
 #. Enter the git root directory and run ``pip install -r requirements.txt``
-#. Execute ``poetry run python install.py``
+#. ``python setup.py build_ext --inplace``
+#. Execute ``python install.py``
 #. Follow the steps
 
 Now you can start developing in the parent directory (``myproject``) and
