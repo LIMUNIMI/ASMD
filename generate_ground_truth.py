@@ -1,7 +1,4 @@
-#cython: language_level=3
-import pyximport; pyximport.install()
 from conversion_tool import create_gt
-from alignment_stats import Stats
 import os
 import sys
 print("Usage: ")

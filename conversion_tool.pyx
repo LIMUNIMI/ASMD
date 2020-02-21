@@ -1,5 +1,3 @@
-#cython: language_level=3
-import pyximport; pyximport.install()
 from audioscoredataset import load_definitions
 import json
 from copy import deepcopy
