@@ -20,8 +20,6 @@ from urllib.request import urlretrieve, urlcleanup
 from urllib.parse import urlparse
 from collections import deque
 from shutil import unpack_archive
-import pyximport
-pyximport.install()
 from audioscoredataset import load_definitions
 
 #: Set to True to skip datasets which already exist
@@ -173,9 +171,7 @@ def download(item, credentials, install_dir):
                                        parsed_url)
     else:
         # http, https
-        with alive_bar(
-            unknown='notes2', spinner='notes_scrolling'
-        ) as bar:
+        with alive_bar(unknown='notes2', spinner='notes_scrolling') as bar:
             temp_fn, _header = urlretrieve(item['install']['url'],
                                            filename=os.path.join(
                                                install_dir, 'temp'),
@@ -236,7 +232,8 @@ def main():
         if d['install']['unpack']:
             print("Unpacking downloaded archive...")
             for temp_fn in downloaded_file:
-                format = ''.join(pathlib.Path(d['install']['url']).suffixes) or '.zip'
+                format = ''.join(pathlib.Path(
+                    d['install']['url']).suffixes) or '.zip'
                 format = [
                     j for i, j in supported_archives.items()
                     if format.endswith(i)
@@ -259,13 +256,12 @@ def main():
             with tempfile.NamedTemporaryFile(mode='w+t', delete=False) as tf:
                 tf.write(command)
                 tf_name = tf.name
-                p = Popen(['/bin/env', 'sh', tf_name], stdout=DEVNULL,
+                p = Popen(['/bin/env', 'sh', tf_name],
+                          stdout=DEVNULL,
                           stderr=DEVNULL)
 
             # progress bar while script runs
-            with alive_bar(
-                unknown='notes_scrolling', spinner='notes'
-            ) as bar:
+            with alive_bar(unknown='notes_scrolling', spinner='notes') as bar:
                 while p.poll() is None:
                     bar()
                     time.sleep(1)
@@ -282,9 +278,8 @@ def main():
     with tarfile.open(gt_archive_fn, mode='r:gz') as tf:
         # taking only paths that we really want
         subdir_and_files = [
-            member
-            for member in tf.getmembers()
-            for d in data if d['name'] in member.name
+            member for member in tf.getmembers() for d in data
+            if d['name'] in member.name
         ]
         tf.extractall(path=json_file['install_dir'], members=subdir_and_files)
 
