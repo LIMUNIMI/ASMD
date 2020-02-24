@@ -20,13 +20,17 @@ pyfiglet = "^0.8.post1"
 alive-progress = "^1.3.3"
 prompt_toolkit = "^3.0.3"
 decorator = "^4.4.1"
-essentia = "^2.1b6.dev184"
+essentia = "2.1b6"
+sphinx = { version = "^2.2", optional = true }
+sphinx_rtd_theme = { version = "^0.4.3", optional = true }
+
+[tool.poetry.extras]
+docs = ["sphinx", "sphinx_rtd_theme"]
 
 [tool.poetry.dev-dependencies]
 snoop = "^0.2.4"
 ipdb = "*"
 ipython = "*"
-sphinx = "^2.4.2"
 
 [build-system]
 requires = ["poetry>=0.12"]

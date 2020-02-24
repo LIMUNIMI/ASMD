@@ -1,19 +1,13 @@
 from distutils.core import setup
-from distutils.extension import Extension
-from Cython.Build import cythonize
+from build import build
+from utils.build import build as utils_build
 
-extensions = [
-    Extension("audioscoredataset", ["audioscoredataset.pyx"]),
-    Extension("convert_from_file", ["convert_from_file.pyx"]),
-    Extension("conversion_tool", ["conversion_tool.pyx"])
-]
+global setup_kwargs
 
-setup(
-    ext_modules=cythonize(
-        extensions,
-        compiler_directives={
-            'language_level': "3",
-            'embedsignature': True
-        }
-    )
-)
+setup_kwargs = {}
+
+utils_build(setup_kwargs)
+setup(**setup_kwargs)
+
+build(setup_kwargs)
+setup(**setup_kwargs)
