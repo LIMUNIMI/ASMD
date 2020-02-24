@@ -125,7 +125,7 @@ use:
 """
 
 def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):
-    """change_ext(input_fn, new_ext, no_dot=False, remove_player=False)
+    """
     Return the input path `input_fn` with `new_ext` as extension and the part
     after the last '-' removed.
     If `no_dot` is True, it will not add a dot before of the extension,
