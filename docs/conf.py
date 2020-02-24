@@ -10,10 +10,22 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import essentia.standard as es
-# import sys
-# sys.path.insert(0, os.path.abspath('../'))
+import os
+import sys
+from shutil import copyfile
+
+# changing extensions of pyx files
+for root, dirs, files in os.walk('../'):
+    for file in files:
+        if file.endswith('.pyx'):
+            fname = os.path.join(root, file)
+            new_file = fname[:-4] + '.py'
+            copyfile(fname, new_file)
+        elif file.endswith('.so'):
+            fname = os.path.join(root, file)
+            os.remove(fname)
+
+sys.path.insert(0, os.path.abspath('../'))
 
 # -- Project information -----------------------------------------------------
 
@@ -34,7 +46,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode'
 ]
-autodoc_docstring_signature = True
+# autodoc_docstring_signature = False
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -42,8 +54,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-autodoc_docstring_signature = True
-exclude_patterns = []
+exclude_patterns = ['*.so', '*.pyx']
 
 # -- Options for HTML output -------------------------------------------------
 
