@@ -6,7 +6,7 @@ from os.path import join as joinpath
 from utils import io
 import numpy as np
 from essentia.standard import Resample
-# this only for detecting package directory
+# this only for detecting package directory but breaks readthedocs
 # from idiot import THISDIR
 THISDIR = './datasets/'
 
@@ -17,7 +17,7 @@ class Dataset:
         return len(self.paths)
 
     def __init__(self, paths=[joinpath(THISDIR, 'definitions/')], metadataset_path=joinpath(THISDIR, 'datasets.json')):
-        """
+        """__init__(self, paths=[joinpath(THISDIR, 'definitions/')], metadataset_path=joinpath(THISDIR, 'datasets.json'))
         Load the dataset description
 
         Parameters
@@ -51,7 +51,7 @@ class Dataset:
         self._chunks = {}
 
     def filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
-        """
+        """filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[])
         Filters the dataset and load the paths of the songs which accomplish
         the filter described in `kwargs`. A field `paths` is added to this
         instance.
@@ -146,7 +146,7 @@ class Dataset:
 
 
     def idx_chunk_to_whole(self, name, idx):
-        """
+        """idx_chunk_to_whole(self, name, idx)
         Given a dataset name and an idx or a list of idx relative to the input dataset,
         returns the idx relative to this whole dataset.
         """
@@ -159,7 +159,7 @@ class Dataset:
 
 
     def get_mix(self, idx, sr=None):
-        """
+        """get_mix(self, idx, sr=None)
         Returns the audio array of the mixed song
 
         Arguments
@@ -199,7 +199,7 @@ class Dataset:
         return mix, sr
 
     def get_gts(self, idx):
-        """
+        """get_gts(self, idx)
         Return the ground-truth of the wanted item
 
         Arguments
@@ -223,7 +223,7 @@ class Dataset:
         return gts
 
     def get_source(self, idx):
-        """
+        """get_source(self, idx)
         Returns the sources at the specified index
 
         Arguments
@@ -247,7 +247,7 @@ class Dataset:
         return sources, sr
 
     def get_item(self, idx):
-        """
+        """get_item(self, idx)
         Returns the mixed audio, sources and ground truths of the specified item.
 
         Arguments
@@ -387,7 +387,7 @@ class Dataset:
         return mat
 
     def get_audio(self, idx, sources=None):
-        """
+        """get_audio(self, idx, sources=None)
         Get the mixed audio of certain sources or of the mix
 
         Arguments
@@ -418,7 +418,7 @@ class Dataset:
 
 
 def find_bach10_errors(gt, score_type):
-    """
+    """find_bach10_errors(gt, score_type
     Fix the ground-truth so that:
         - the extra notes in `score_type` are removed
         - the missing notes are inserted in middle of the last correct note,
@@ -426,7 +426,8 @@ def find_bach10_errors(gt, score_type):
 
     NOTE
     ----
-    NOTE IMPLEMENTED YET [probably never]
+    NOTE IMPLEMENTED YET [probably never]. It only returns if there are errors
+    and print the number of different notes between scores.
 
     Arguments
     ---------
@@ -452,7 +453,7 @@ def find_bach10_errors(gt, score_type):
 
 
 def truncate_score(gt):
-    """
+    """truncate_score(gt)
     Takes a ground truth and truncates all its lists so that the number of
     pitches is the same of the scoretype with the minimum number of pitches in
     this ground_truth
@@ -475,7 +476,7 @@ def truncate_score(gt):
 
 
 def load_definitions(path):
-    """
+    """load_definitions(path)
     Given a `path` to a directory, returns a list of dictionaries containing
     the definitions found in that directory (not recursive search)
     """

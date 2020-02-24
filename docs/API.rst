@@ -90,3 +90,6 @@ Documentation
 
 .. automodule:: audioscoredataset
    :members:
+
+.. autoclass:: audioscoredataset.Dataset
+   :members:
