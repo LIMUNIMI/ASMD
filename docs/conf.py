@@ -21,9 +21,6 @@ for root, dirs, files in os.walk('../'):
             fname = os.path.join(root, file)
             new_file = fname[:-4] + '.py'
             copyfile(fname, new_file)
-        elif file.endswith('.so'):
-            fname = os.path.join(root, file)
-            os.remove(fname)
 
 sys.path.insert(0, os.path.abspath('../'))
 
