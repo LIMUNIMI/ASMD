@@ -8,9 +8,9 @@ ASMD: Audio-Score Meta Dataset
    Installation
    Reproduce_from_scratch
    JSON
-   API
    Adding_datasets
    Converting
+   API
    Utilities
    Scientific_notes
    License
@@ -36,7 +36,7 @@ TODO
 ====
 
 #. move wget to curl
-#. support to Windows for command line post-processing
+#. support Windows systems
 
 
 Cite us

@@ -1,5 +1,7 @@
 Utilities to convert from ground-truth
 ======================================
 
-.. automodule:: convert_from_file
+.. automodule:: asmd.convert_from_file
    :members:
+   :private-members:
+   :special-members:

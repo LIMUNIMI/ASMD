@@ -54,8 +54,12 @@ to implement the ``__getitem__`` method.
 Documentation
 -------------
 
-.. automodule:: audioscoredataset
+.. automodule:: asmd.audioscoredataset
    :members:
+   :private-members:
+   :special-members:
 
-.. autoclass:: audioscoredataset.Dataset(paths=['default_path'], metadataset_path=['default_path'])
+.. autoclass:: asmd.audioscoredataset.Dataset(paths=['default_path'], metadataset_path=['default_path'])
    :members:
+   :private-members:
+   :special-members:

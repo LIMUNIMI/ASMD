@@ -97,10 +97,10 @@ dictionary with the following structure:
 #. ``instrument``: General Midi program number associated with this instrument, starting from 0. 128 indicates a drum kit (should be synthesized on channel 8 with a program number of your choice, usually 0).
 
 Note that json ground_truth files have extension ``.json.gz``,
-indicating that they are compressed using the ``gzip`` Python 3.7
+indicating that they are compressed using the ``gzip`` Python 3.6.9
 module. Thus, you need to decompress them:
 
-.. code: python
+.. code:: python
 
     import gzip
     import json
