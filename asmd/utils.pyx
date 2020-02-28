@@ -84,25 +84,25 @@ def evaluate2d(estimate, ground_truth):
     Arguments
     ---
 
-    * `estimate` : np.array
+    `estimate` : np.array
         The array of estimated timings. 2D array where rows are notes and
         columns are `pitch`, `onsets`, `offsets`
 
-    * `ground_truth` : np.array
+    `ground_truth` : np.array
         The array of ground_truth timings. 2D array where rows are notes and
         columns are `pitch`, `onsets`, `offsets`
 
     Returns
     ---
 
-    * `np.array` :
+    `np.array` :
         A 1D array where the i element is the relative error computed as
         for the `i`-th estimated note onset, after having removed mismatching
         notes and having ordered by pitch and onset. Ordering is performed so that
         the input arrays don't need to be ordered in the same way.
 
 
-    * `np.array` :
+    `np.array` :
         Same as the first output but for offsets.
     """
     ###########
