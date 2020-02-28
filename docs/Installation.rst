@@ -21,8 +21,9 @@ Using Poetry (recommended)
 Once you have cloned the repo follow these steps:
 
 Install poetry, pyenv and python
-___
+^^^^
 
+#. Install ``wget`` if you want SMD dataset (next release will remove this dependency)
 #. Install ``python 3``
 #. Install `poetry <https://python-poetry.org/docs/#installation>`__
 #. Install `pyenv <https://github.com/pyenv/pyenv#installation>`__ and fix your
@@ -33,7 +34,7 @@ ___
 #. ``pyenv local 3.6.9`` (optional, recommended python >= 3.6.9)
 
 Install ASMD
-___
+^^^^
 
 #. ``git clone https://framagit.org/sapo/asmd.git``
 #. ``poetry add asmd/``
@@ -44,11 +45,12 @@ ___
 Now you can start developing in the parent directory (``myproject``) and
 you can use ``from asmd import audioscoredataset as asd``.
 
-Use `poetry` to manage packages of your project.
+Use ``poetry`` to manage packages of your project.
 
 Using pip
 ---------
 
+#. Install ``wget`` if you want SMD dataset (next release will remove this dependency)
 #. Install ``python 3`` (recommended python >= 3.6.9)
 #. ``cd myproject``
 #. ``git clone https://framagit.org/sapo/asmd.git``
@@ -66,8 +68,9 @@ Consider using `pyenv local 3.6.9` in `myproject` and `poetry` (see above).
 Using eggs (not recommended)
 ----------------------------
 
-Not available at now. You can still use a one-line-command if you do not want
-to have the repo directory in your source code, though:
+For now thepackage is still not available on pypi. You can still use a
+one-line-command if you do not want to have the repo directory in your source
+code, though:
 
 ``pip install git+https://framagit.org/sapo/asmd.git`` 
 
@@ -75,3 +78,4 @@ or
 
 ``poetry add git+https://framagit.org/sapo/asmd.git`` 
 
+#. Install ``wget`` if you want SMD dataset (next release will remove this dependency)
