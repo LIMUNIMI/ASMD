@@ -7,3 +7,4 @@ __pycache__
 tags
 docs/_build/*
 *.egg-info
+dist/
