@@ -15,8 +15,24 @@ During the installation, the provided ground-truth will be extracted; however,
 you can recreate them from scratch for tweaking parameters. The next section
 will explain how you can achieve this.
 
-Using Poetry (recommended)
---------------------------
+The easy way
+----
+#. For now thepackage is still not available on pypi. You can still use a
+    one-line-command if you do not want to have the repo directory in your source
+    code, though:
+
+    ``pip install git+https://framagit.org/sapo/asmd.git`` 
+
+    or
+
+    ``poetry add git+https://framagit.org/sapo/asmd.git`` 
+
+#. Install ``wget`` if you want SMD dataset (next release will remove this dependency)
+#. Run ``python -m asmd.install`` and follows the steps
+
+
+The hard way (if you want to contribute)
+----
 
 Once you have cloned the repo follow these steps:
 
@@ -27,7 +43,7 @@ Install poetry, pyenv and python
 #. Install ``python 3``
 #. Install `poetry <https://python-poetry.org/docs/#installation>`__
 #. Install `pyenv <https://github.com/pyenv/pyenv#installation>`__ and fix your
-   ``.bashrc``\ (optional)
+   ``.bashrc`` (optional)
 #. ``pyenv install 3.6.9`` (optional, recommended python >= 3.6.9)
 #. ``poetry new myproject``
 #. ``cd myproject``
@@ -46,36 +62,3 @@ Now you can start developing in the parent directory (``myproject``) and
 you can use ``from asmd import audioscoredataset as asd``.
 
 Use ``poetry`` to manage packages of your project.
-
-Using pip
----------
-
-#. Install ``wget`` if you want SMD dataset (next release will remove this dependency)
-#. Install ``python 3`` (recommended python >= 3.6.9)
-#. ``cd myproject``
-#. ``git clone https://framagit.org/sapo/asmd.git``
-#. ``cd amsd``
-#. Enter the git root directory and run ``pip install -r requirements.txt``
-#. ``python setup.py build_ext --inplace``
-#. Execute ``python install.py``
-#. Follow the steps
-
-Now you can start developing in the parent directory (``myproject``) and
-you can use ``from asmd import audioscoredataset as asd``.
-
-Consider using `pyenv local 3.6.9` in `myproject` and `poetry` (see above).
-
-Using eggs (not recommended)
-----------------------------
-
-For now thepackage is still not available on pypi. You can still use a
-one-line-command if you do not want to have the repo directory in your source
-code, though:
-
-``pip install git+https://framagit.org/sapo/asmd.git`` 
-
-or
-
-``poetry add git+https://framagit.org/sapo/asmd.git`` 
-
-#. Install ``wget`` if you want SMD dataset (next release will remove this dependency)
