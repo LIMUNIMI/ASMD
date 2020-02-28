@@ -20,7 +20,7 @@ from urllib.request import urlretrieve, urlcleanup
 from urllib.parse import urlparse
 from collections import deque
 from shutil import unpack_archive
-from audioscoredataset import load_definitions
+from .audioscoredataset import load_definitions
 
 #: Set to True to skip datasets which already exist
 SKIP_EXISTING_DIR = True

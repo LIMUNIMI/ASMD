@@ -6,3 +6,4 @@ build/
 __pycache__
 tags
 docs/_build/*
+*.egg-info

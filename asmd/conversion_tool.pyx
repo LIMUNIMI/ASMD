@@ -1,19 +1,19 @@
-from audioscoredataset import load_definitions
-import json
-from copy import deepcopy
-import tarfile
-from os.path import join as joinpath
-import os
 import gzip
+import json
+import multiprocessing as mp
+import numpy as np
+import os
+import tarfile
+from .alignment_stats import seed, fill_stats
+from .audioscoredataset import load_definitions
+from .convert_from_file import *
+from copy import deepcopy
 from difflib import SequenceMatcher
 from pretty_midi.constants import INSTRUMENT_MAP
-import numpy as np
-from alignment_stats import seed, fill_stats
-import multiprocessing as mp
-from convert_from_file import *
+from os.path import join as joinpath
 
 # this is only for detecting the package path
-from idiot import THISDIR
+from .idiot import THISDIR
 
 #: if True, run conversion in parallel processes
 PARALLEL = True

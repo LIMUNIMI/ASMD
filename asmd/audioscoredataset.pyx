@@ -1,13 +1,13 @@
-#!/usr/bin/env python
+# cython: language_level=3
 import json
 import gzip
 import os
-from os.path import join as joinpath
-from utils import io
 import numpy as np
+from . import utils
+from os.path import join as joinpath
 from essentia.standard import Resample
 # this only for detecting package directory but breaks readthedocs
-from idiot import THISDIR
+from .idiot import THISDIR
 # THISDIR = './datasets/'
 
 
@@ -182,7 +182,7 @@ class Dataset:
 
         recordings = []
         for recording_fn in recordings_fn:
-            audio, in_sr = io.open_audio(
+            audio, in_sr = utils.open_audio(
                 joinpath(self.install_dir, recording_fn))
             recordings.append(audio)
 
@@ -242,7 +242,7 @@ class Dataset:
 
         sources = []
         for source_fn in sources_fn:
-            audio, sr = io.open_audio(joinpath(self.install_dir, source_fn))
+            audio, sr = utils.open_audio(joinpath(self.install_dir, source_fn))
             sources.append(audio)
         return sources, sr
 
@@ -268,6 +268,57 @@ class Dataset:
         sources = self.get_source(idx)
         gts = self.get_gts(idx)
         return mix, sources, gts
+
+    def get_pianoroll(self, idx, score_type=['non_aligned'], truncate=False, resolution=0.25):
+        """
+        Create pianoroll from list of pitches, onsets and offsets (in this order).
+
+        Arguments
+        ---------
+        idx : int
+            The index of the song to retrieve.
+        score_type : list of str
+            The key to retrieve the list of notes from the ground_truths. see
+            `chose_score_type` for explanation
+        truncate : bool
+            If True, truncate mat to the shortest list among ons, offs and
+            pitches, otherwise, insert -255 for missing values (enlarging
+            lists)
+        resolution : float
+            The number of columns wanted per each second
+
+        Returns
+        -------
+        numpy.ndarray :
+            A (128 x n) array where rows represent pitches and columns are time
+            instants sampled with resolution provided as argument.
+        """
+
+        gts = self.get_gts(idx)
+        score_type = chose_score_type(score_type, gts)
+
+        # computing the maximum offset
+        max_offs = [max(gt[score_type]['offsets']) for gt in gts]
+        pianoroll = np.zeros(128, int(max(max_offs)/resolution) + 1)
+
+        # filling pianoroll
+        for i, gt in enumerate(gts):
+            ons = gt[score_type]['onsets']
+            offs = gt[score_type]['offsets']
+            pitches = gt[score_type]['pitches']
+            # Make pitches and alignments of thesame number of notes
+            if truncate:
+                find_bach10_errors(gt, score_type)
+                truncate_score(gt)
+
+            for i in range(len(pitches)):
+                p = int(pitches[i])
+                on = int(ons[i])
+                off = int(offs[i]) + 1
+
+                pianoroll[p, on:off] = 1
+
+        return pianoroll
 
     def get_beats(self, idx):
         """
@@ -300,14 +351,12 @@ class Dataset:
         idx : int
             The index of the song to retrieve.
         score_type : list of str
-            The key to retrieve the list of notes from the ground_truths. If
-            multiple keys are provided, only one is retrieved by using the
-            following criteria: if there is `precise_alignment` in the list of
-            keys and in the ground truth, use that; otherwise, if there is
-            `broa_alignment` in the list of keys and in the ground truth, use
-            that; otherwise use `non_aligned`.  truncate : bool If True,
-            truncate mat to the shortest list among ons, offs and pitches,
-            otherwise, insert -255 for missing values (enlarging lists)
+            The key to retrieve the list of notes from the ground_truths. see
+            `chose_score_type` for explanation
+        truncate : bool
+            If True, truncate mat to the shortest list among ons, offs and
+            pitches, otherwise, insert -255 for missing values (enlarging
+            lists)
 
         Returns
         -------
@@ -319,15 +368,7 @@ class Dataset:
         """
 
         gts = self.get_gts(idx)
-        if len(score_type) > 1:
-            if 'precise_alignment' in score_type and len(gts[0]['precise_alignment']['pitches']) > 0:
-                score_type = 'precise_alignment'
-            elif 'broad_alignment' in score_type and len(gts[0]['broad_alignment']['pitches']) > 0:
-                score_type = 'broad_alignment'
-            else:
-                score_type = 'non_aligned'
-        else:
-            score_type = score_type[0]
+        score_type = chose_score_type(score_type, gts)
 
         # print("    Loading ground truth " + score_type)
         mat = []
@@ -488,3 +529,33 @@ def load_definitions(path):
             except:
                 print(fullpath)
     return datasets
+
+
+def chose_score_type(score_type, gts):
+    """
+    Return the proper score type according to the following rules:
+
+    Parameters
+    ---
+
+    score_type : list of str
+        The key to retrieve the list of notes from the ground_truths. If
+        multiple keys are provided, only one is retrieved by using the
+        following criteria: if there is `precise_alignment` in the list of
+        keys and in the ground truth, use that; otherwise, if there is
+        `broad_alignment` in the list of keys and in the ground truth, use
+        that; otherwise use `non_aligned`.
+
+    gts : list of dict
+        The list of ground truths from which you want to chose a score_type
+    """
+    if len(score_type) > 1:
+        if 'precise_alignment' in score_type and len(gts[0]['precise_alignment']['pitches']) > 0:
+            score_type = 'precise_alignment'
+        elif 'broad_alignment' in score_type and len(gts[0]['broad_alignment']['pitches']) > 0:
+            score_type = 'broad_alignment'
+        else:
+            score_type = 'non_aligned'
+    else:
+        score_type = score_type[0]
+    return score_type

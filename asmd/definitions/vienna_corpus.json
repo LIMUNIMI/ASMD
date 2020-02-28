@@ -8,7 +8,7 @@
         "unpack" : false,
         "login" : false,
         "post-process" : [
-            "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/midi.zip; unzip midi.zip -d vienna_corpus/; cp my_scores/*.mid vienna_corpus/; rm vienna_corpus/midi/Chopin_op38_1st-3rd_*; mv vienna_corpus/midi/*.mid vienna_corpus/; rm -r vienna_corpus/midi/",
+            "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/midi.zip; unzip midi.zip -d vienna_corpus/; cp asmd/my_scores/*.mid vienna_corpus/; rm vienna_corpus/midi/Chopin_op38_1st-3rd_*; mv vienna_corpus/midi/*.mid vienna_corpus/; rm -r vienna_corpus/midi/",
             "wget http://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/data/audio.zip; unzip audio.zip -d vienna_corpus/; rm -r vienna_corpus/audio/Chopin_Ballade_special-versions/; mv vienna_corpus/audio/*/*.wav vienna_corpus/; rm -r vienna_corpus/audio/",
             "rm audio.zip midi.zip",
             [
