@@ -22,7 +22,7 @@ for root, dirs, files in os.walk('../'):
             new_file = fname[:-4] + '.py'
             copyfile(fname, new_file)
 
-sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../asmd/'))
 
 # -- Project information -----------------------------------------------------
 

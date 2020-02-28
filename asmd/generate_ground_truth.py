@@ -1,4 +1,4 @@
-from conversion_tool import create_gt
+from .conversion_tool import create_gt
 import os
 import sys
 print("Usage: ")

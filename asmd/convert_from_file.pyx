@@ -1,12 +1,13 @@
-from copy import deepcopy
+# cython: language_level=3
 import os
 import csv
 import numpy as np
 import scipy.io
-from utils import io, utils
 import re
 import pretty_midi
+from . import utils
 from functools import wraps
+from copy import deepcopy
 
 BPM = 20
 
@@ -159,7 +160,7 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
     * `from_midi` is the decorated version with `remove_player=False`
     * `from_midi_remove_player` is the decorated version with `remove_player=True`
     """
-    midi_tracks, pm = io.open_midi(midi_fn, merge=merge, pm_object=True)
+    midi_tracks, pm = utils.open_midi(midi_fn, merge=merge, pm_object=True)
 
     out = list()
 

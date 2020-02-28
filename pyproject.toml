@@ -1,11 +1,10 @@
 [tool.poetry]
-name = "datasets"
+name = "asmd"
 version = "0.1.0"
-description = ""
+description = "Audio-Score Meta-Dataset"
 authors = ["Federico Simonetta"]
 license = "MIT"
-# include = ["*.json", "**/*.json", "*.mid", "**/*.mid", "*.pyx", "**/*.pyx"]
-# exclude = ["kunstderfuge/*", ".git*", ".python-version"]
+build = "build.py"
 
 [tool.poetry.dependencies]
 python = "^3.6"
@@ -21,11 +20,6 @@ alive-progress = "^1.3.3"
 prompt_toolkit = "^3.0.3"
 decorator = "^4.4.1"
 essentia = "2.1b6"
-sphinx = { version = "^2.2", optional = true }
-sphinx_rtd_theme = { version = "^0.4.3", optional = true }
-
-[tool.poetry.extras]
-docs = ["sphinx", "sphinx_rtd_theme"]
 
 [tool.poetry.dev-dependencies]
 snoop = "^0.2.4"
