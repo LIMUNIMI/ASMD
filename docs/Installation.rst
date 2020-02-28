@@ -17,16 +17,7 @@ will explain how you can achieve this.
 
 The easy way
 ----
-#. For now thepackage is still not available on pypi. You can still use a
-    one-line-command if you do not want to have the repo directory in your source
-    code, though:
-
-    ``pip install git+https://framagit.org/sapo/asmd.git`` 
-
-    or
-
-    ``poetry add git+https://framagit.org/sapo/asmd.git`` 
-
+#. ``pip install asmd`` 
 #. Install ``wget`` if you want SMD dataset (next release will remove this dependency)
 #. Run ``python -m asmd.install`` and follows the steps
 
