@@ -8,6 +8,7 @@ build = "build.py"
 
 [tool.poetry.dependencies]
 python = "^3.6"
+setuptools = "^45.2.0"
 numpy = "^1.18.1"
 requests = "^2.22.0"
 beautifulsoup4 = "^4.8.2"
