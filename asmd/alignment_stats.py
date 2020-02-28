@@ -2,8 +2,8 @@ from random import choices, uniform
 from sklearn.preprocessing import StandardScaler, minmax_scale
 import numpy as np
 import os.path
-from audioscoredataset import Dataset
-from utils import utils
+from .audioscoredataset import Dataset
+from . import utils
 
 data = Dataset()
 
@@ -116,7 +116,7 @@ def fill_stats(datasets):
                                                    [0, 1, 2]] >= 0, axis=1), :]
             mat_aligned[:, 0] = np.round(mat_aligned[:, 0])
             mat_score[:, 0] = np.round(mat_score[:, 0])
-            ons_diffs, offs_diffs = utils.evaluate(mat_score, mat_aligned)
+            ons_diffs, offs_diffs = utils.evaluate2d(mat_score, mat_aligned)
             stats.add_data(ons_diffs, offs_diffs)
 
     return stats
