@@ -4,6 +4,7 @@ from __future__ import print_function, unicode_literals
 import json
 from prompt_toolkit.completion import PathCompleter
 from prompt_toolkit.validation import Validator
+from prompt_toolkit.shortcuts import confirm
 from prompt_toolkit import prompt
 from os.path import join as joinpath
 import os
@@ -15,6 +16,7 @@ from pyfiglet import Figlet
 from alive_progress import alive_bar
 from subprocess import Popen, DEVNULL
 from getpass import getpass
+from mega import Mega
 from ftplib import FTP
 from urllib.request import urlretrieve, urlcleanup
 from urllib.parse import urlparse
@@ -24,6 +26,8 @@ from .audioscoredataset import load_definitions
 
 #: Set to True to skip datasets which already exist
 SKIP_EXISTING_DIR = True
+
+LINK_GROUND_TRUTH = "https://mega.nz/#!iAElDQ7C!YuwdfVrzvcRwmCP8WVyh4NWdzaawvX-2eyiQJp-DenY"
 
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -36,7 +40,7 @@ supported_archives = {
 }
 
 
-def chose_dataset(data, install_dir):
+def chose_dataset(data,  install_dir):
     """
     Ask for preferred datasets and removes unwanted from data. Also skips
     dataset with existing directories.
@@ -169,6 +173,13 @@ def download(item, credentials, install_dir):
         # at now, no FTP connection is needed
         downloaded_file = ftp_download(item, credential, install_dir,
                                        parsed_url)
+    elif parsed_url.domain == "mega.nz":
+        # mega, using mega.py module
+        print("Downloading from mega.nz...")
+        mega = Mega()
+        temp_fn = mega.download_url(item['install']['url'],
+                                    dest_path=install_dir,
+                                    dest_filename='temp')
     else:
         # http, https
         with alive_bar(unknown='notes2', spinner='notes_scrolling') as bar:
@@ -199,6 +210,10 @@ def chose_install_dir(json_file):
         if not os.path.isdir(default_dir):
             os.mkdir(default_dir)
         install_dir = default_dir
+
+    if install_dir.endswith('/'):
+        install_dir = install_dir[:-1]
+
     json_file['install_dir'] = install_dir
     return install_dir
 
@@ -249,7 +264,7 @@ def main():
             # recursively concatenate commands
             command = '; '.join(
                 list(map(lambda x: ''.join(x), d['install']['post-process'])))
-            command = command.replace('&install_dir', json_file['install_dir'])
+            command = command.replace('&install_dir', install_dir)
 
             # writing commands to temporary file and executing it as a shell
             # script
@@ -272,16 +287,23 @@ def main():
         # just to be sure
         urlcleanup()
 
-    print(f.renderText("\nUnpacking ground-truths"))
-    # unpacking the ground_truth data of only the files of the chosen datasets
-    gt_archive_fn = joinpath(THISDIR, 'ground_truth.tar.gz')
-    with tarfile.open(gt_archive_fn, mode='r:gz') as tf:
-        # taking only paths that we really want
-        subdir_and_files = [
-            member for member in tf.getmembers() for d in data
-            if d['name'] in member.name
-        ]
-        tf.extractall(path=json_file['install_dir'], members=subdir_and_files)
+    # downloading ground-truth and unpacking
+    if confirm("Do you want to download the annotations (about 250MB)?"):
+        print(f.renderText("\nDownloading archive from mega.nz..."))
+        gt_archive_fn = 'ground_truth.tar.gz'
+        # gt_archive_fn = joinpath(THISDIR, 'ground_truth.tar.gz')
+        mega = Mega()
+        mega.download_url(LINK_GROUND_TRUTH, dest_filename=gt_archive_fn)
+        print(f.renderText("\nUnpacking ground-truths"))
+        # unpacking the ground_truth data of only the files of the chosen
+        # datasets
+        with tarfile.open(gt_archive_fn, mode='r:gz') as tf:
+            # taking only paths that we really want
+            subdir_and_files = [
+                member for member in tf.getmembers() for d in data
+                if d['name'] in member.name
+            ]
+            tf.extractall(path=install_dir, members=subdir_and_files)
 
     # saving the Json file as modified
     # not using json.dump beacuse it uses ugly syntax
