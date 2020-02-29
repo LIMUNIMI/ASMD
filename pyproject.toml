@@ -2,12 +2,22 @@
 name = "asmd"
 version = "0.1.0"
 description = "Audio-Score Meta-Dataset"
-authors = ["Federico Simonetta"]
+authors = ["Federico Simonetta <federico.simonetta@unimi.it>"]
+readme = "README.rst"
+homepage = "https://asmd.readthedocs.org"
+documentation = "https://asmd.readthedocs.org"
+repository = "https://framagit.org/sapo/asmd"
 license = "MIT"
+classifiers = [
+    "Topic :: Multimedia :: Sound/Audio",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Other Audience"
+]
 build = "build.py"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.6.9"
 setuptools = "^45.2.0"
 numpy = "^1.18.1"
 requests = "^2.22.0"
@@ -20,10 +30,11 @@ pyfiglet = "^0.8.post1"
 alive-progress = "^1.3.3"
 prompt_toolkit = "^3.0.3"
 decorator = "^4.4.1"
-essentia = "2.1b6"
+essentia = "^2.1b6.dev184"
+"mega.py" = "^1.0.6"
 
 [tool.poetry.dev-dependencies]
-snoop = "^0.2.4"
+snoop = "*"
 ipdb = "*"
 ipython = "*"
 

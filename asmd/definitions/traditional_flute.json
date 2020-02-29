@@ -5,16 +5,11 @@
         "format" : "unknown"
     },
     "install": {
-        "unpack" : false,
+        "unpack" : true,
         "login" : false,
         "post-process" : [
-            "wget https://traditional-flute-firebase.firebaseapp.com/traditional-flute-dataset.zip ; unzip traditional-flute-dataset.zip -d traditional_flute/; rm traditional-flute-dataset.zip",
-            "mv traditional_flute/score/*.midi traditional_flute/ground_truth/",
-            [
-                "mv traditional_flute/ ", "&install_dir"
-            ]
-        ],
-        "url" : "unknown",
+            "mv &install_dir/traditional_flute/score/*.midi &install_dir/traditional_flute/ground_truth/" ],
+        "url" : "https://mega.nz/#!jUVT0CiC!IJgwfGuhG2-sWsoInnucIdkd-GHdrXowCSQ1hOHkEIY",
         "conversion":[
             ["from_midi_remove_player", {
                 "alignment": "non_aligned",

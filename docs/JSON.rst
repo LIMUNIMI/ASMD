@@ -53,9 +53,13 @@ following field:
 #. ``install``: where information for the installation process are stored
 
    #. ``url``: the url to download the dataset including the protocol
-   #. ``post-process``: a list of shell commands to be executed to prepare the   dataset; they can be lists themselves to allow the use of anchors to install_dir" field with the syntax “&install_dir”
-   #. ``unpack``: ``true`` if the url needs to be unpacked
-   #. ``login``: true if you a login is needed - no more used, but maybe useful in future
+   #. ``post-process``: a list of shell commands to be executed to prepare the
+         dataset; they can be lists themselves to allow the use of references
+         to the installation directory with the syntax ``&install_dir``: every
+         occurrence of ``&install_dir`` will be replaced with the value of
+         ``install_dir`` in ``datasets.json``; final slash doesn't matter
+   #. ``unpack``: ``true`` if the url needs to be unpacked (untar, unzip, ...)
+   #. ``login``: true if you a login is needed - not used anymore, but maybe useful in future
 
 In general, I maintained the following principles:
 
