@@ -303,7 +303,7 @@ class Dataset:
 
         # computing the maximum offset
         max_offs = [max(gt[score_type]['offsets']) for gt in gts]
-        pianoroll = np.zeros(128, int(max(max_offs)/resolution) + 1)
+        pianoroll = np.zeros((128, int(max(max_offs)/resolution) + 1))
 
         # filling pianoroll
         for i, gt in enumerate(gts):
@@ -317,8 +317,8 @@ class Dataset:
 
             for i in range(len(pitches)):
                 p = int(pitches[i])
-                on = int(ons[i])
-                off = int(offs[i]) + 1
+                on = int(ons[i] / resolution)
+                off = int(offs[i] / resolution) + 1
 
                 pianoroll[p, on:off] = 1
 
