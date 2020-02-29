@@ -500,8 +500,8 @@ python-versions = "*"
 version = "0.1.8"
 
 [metadata]
-content-hash = "bd37e709008640a0269080129de9b2ae998fd91777f3d5c2c1bed5192ad09fae"
-python-versions = "^3.6"
+content-hash = "c6368f0291170861f8b4f78a545157890496a5092dfcaf13a6dd4ef32713fbcc"
+python-versions = "^3.6.9"
 
 [metadata.files]
 alive-progress = [
