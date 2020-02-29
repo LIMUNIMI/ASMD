@@ -46,6 +46,10 @@ class Dataset:
         # opening medataset json file
         self.metadataset = json.load(open(metadataset_path, 'rt'))
         self.install_dir = self.metadataset['install_dir']
+        if self.install_dir.endswith('/'):
+            # this shouldn't happen actually...
+            self.install_dir = self.install_dir[:-1]
+
         self.decompress_path = self.metadataset['decompress_path']
         self.paths = []
         self._chunks = {}
