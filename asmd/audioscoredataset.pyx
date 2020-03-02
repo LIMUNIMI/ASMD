@@ -82,7 +82,8 @@ class Dataset:
             the surname of the composer to filter
         datasets : list of strings
             a list of strings containing the name of the datasets to be used.
-            If empty, all datasets are used.
+            If empty, all datasets are used. See :doc:`License` for the
+            list of default datasets.
         ground_truth : list of tuples
             a list of tuples representing the type of ground-truths needed
             (logical AND among list elements).
