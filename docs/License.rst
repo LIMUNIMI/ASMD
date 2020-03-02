@@ -8,9 +8,10 @@ All ground-truth annotations we used are originally released under Creative Comm
 licenses. We release our adaptations under Creative Commons.
 
 They are retrieved starting from the following projects:
+
 +-------------------------------------------------------------------------------------------------------+--------------------------------------+
 | Datasets                                                                                              | Name used in the default definitions |
-+-------------------------------------------------------------------------------------------------------+--------------------------------------+
++=======================================================================================================+======================================+
 | `Bach10 <http://www2.ece.rochester.edu/~zduan/resource/Bach10%20Dataset_v1.0.pdf>`_                   | Bach10                               |
 +-------------------------------------------------------------------------------------------------------+--------------------------------------+
 | `Maestro <https://magenta.tensorflow.org/datasets/maestro>`_                                          | Maestro                              |
