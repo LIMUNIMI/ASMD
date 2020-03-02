@@ -8,15 +8,25 @@ All ground-truth annotations we used are originally released under Creative Comm
 licenses. We release our adaptations under Creative Commons.
 
 They are retrieved starting from the following projects:
-
-* `Bach10 <https://doi.org/10.5281/zenodo.776534>`_
-* `Maestro <https://magenta.tensorflow.org/datasets/maestro>`_
-* `MusicNet <https://homes.cs.washington.edu/~thickstn/musicnet.html>`_
-* `PHENICX - Anechoic <https://www.upf.edu/web/mtg/phenicx-anechoic>`_
-* `Saarland Music Dataset (SMD) <http://resources.mpi-inf.mpg.de/SMD/SMD_MIDI-Audio-Piano-Music.html>`_
-* `Traditional flute dataset <https://www.kaggle.com/jbraga/traditional-flute-dataset>`_
-* `TRIOS dataset <https://c4dm.eecs.qmul.ac.uk/rdr/handle/123456789/27>`_
-* `Vienna Corpus <https://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/index.html>`_
++-------------------------------------------------------------------------------------------------------+--------------------------------------+
+| Datasets                                                                                              | Name used in the default definitions |
++-------------------------------------------------------------------------------------------------------+--------------------------------------+
+| `Bach10 <http://www2.ece.rochester.edu/~zduan/resource/Bach10%20Dataset_v1.0.pdf>`_                   | Bach10                               |
++-------------------------------------------------------------------------------------------------------+--------------------------------------+
+| `Maestro <https://magenta.tensorflow.org/datasets/maestro>`_                                          | Maestro                              |
++-------------------------------------------------------------------------------------------------------+--------------------------------------+
+| `MusicNet <https://homes.cs.washington.edu/~thickstn/musicnet.html>`_                                 | MusicNet                             |
++-------------------------------------------------------------------------------------------------------+--------------------------------------+
+| `PHENICX - Anechoic <https://www.upf.edu/web/mtg/phenicx-anechoic>`_                                  | PHENICX                              |
++-------------------------------------------------------------------------------------------------------+--------------------------------------+
+| `Saarland Music Dataset (SMD) <http://resources.mpi-inf.mpg.de/SMD/SMD_MIDI-Audio-Piano-Music.html>`_ | SMD                                  |
++-------------------------------------------------------------------------------------------------------+--------------------------------------+
+| `Traditional flute dataset <https://www.kaggle.com/jbraga/traditional-flute-dataset>`_                | traditional_flute                    |
++-------------------------------------------------------------------------------------------------------+--------------------------------------+
+| `TRIOS dataset <https://c4dm.eecs.qmul.ac.uk/rdr/handle/123456789/27>`_                               | TRIOS                                |
++-------------------------------------------------------------------------------------------------------+--------------------------------------+
+| `Vienna Corpus <https://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/index.html>`_        | vienna_corpus                        |
++-------------------------------------------------------------------------------------------------------+--------------------------------------+
 
 |Creative Commons License|
 This work is licensed under a `Creative Commons
