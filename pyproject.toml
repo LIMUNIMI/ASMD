@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "asmd"
-version = "0.1.0"
+version = "0.1.1"
 description = "Audio-Score Meta-Dataset"
 authors = ["Federico Simonetta <federico.simonetta@unimi.it>"]
 readme = "README.rst"
@@ -22,7 +22,6 @@ setuptools = "^45.2.0"
 numpy = "^1.18.1"
 requests = "^2.22.0"
 beautifulsoup4 = "^4.8.2"
-cython = "^0.29.14"
 plotly = "^4.4.1"
 pretty_midi = "^0.2.8"
 scikit_learn = "^0.22.1"
@@ -39,5 +38,5 @@ ipdb = "*"
 ipython = "*"
 
 [build-system]
-requires = ["poetry>=0.12"]
+requires = ["poetry>=0.12", "cython>=0.29.14"]
 build-backend = "poetry.masonry.api"
