@@ -171,15 +171,13 @@ def download(item, credentials, install_dir):
     if parsed_url.scheme == 'ftp':
         # FTP
         # at now, no FTP connection is needed
-        downloaded_file = ftp_download(item, credential, install_dir,
-                                       parsed_url)
+        downloaded_files = ftp_download(
+            item, credential, install_dir, parsed_url)
     elif parsed_url.netloc == "mega.nz":
         # mega, using mega.py module
         print("Downloading from mega.nz...")
         mega = Mega()
-        temp_fn = mega.download_url(item['install']['url'],
-                                    dest_path=install_dir,
-                                    dest_filename='temp')
+        downloaded_files = [mega.download_url(item['install']['url'])]
     else:
         # http, https
         with alive_bar(unknown='notes2', spinner='notes_scrolling') as bar:
@@ -187,8 +185,8 @@ def download(item, credentials, install_dir):
                                            filename=os.path.join(
                                                install_dir, 'temp'),
                                            reporthook=lambda x, y, z: bar)
-        downloaded_file = [temp_fn]
-    return downloaded_file
+        downloaded_files = [temp_fn]
+    return downloaded_files
 
 
 def chose_install_dir(json_file):
