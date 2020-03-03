@@ -262,9 +262,9 @@ def main():
             # the following line is only for POSIX!!!
             print("Post-processing (this could take a biiiiiiiiiiiiiiit)...")
             # recursively concatenate commands
-            command = '; '.join(
-                list(map(lambda x: ''.join(x), d['install']['post-process'])))
+            command = '; '.join(d['install']['post-process'])
             command = command.replace('&install_dir', install_dir)
+            command = command.replace('&asmd_dir', THISDIR)
 
             # writing commands to temporary file and executing it as a shell
             # script
