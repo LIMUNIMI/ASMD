@@ -58,7 +58,7 @@ they will be skipped. Empty to select all of them.")
             # apply `int` function to each element in answer (characters) and
             # convert to list
             if answer == '':
-                answer = list(range(len(data)))
+                datalist = list(range(len(data)))
                 flag = True
             else:
                 datalist = list(map(int, answer.split(', ')))
@@ -173,7 +173,7 @@ def download(item, credentials, install_dir):
         # at now, no FTP connection is needed
         downloaded_file = ftp_download(item, credential, install_dir,
                                        parsed_url)
-    elif parsed_url.domain == "mega.nz":
+    elif parsed_url.netloc == "mega.nz":
         # mega, using mega.py module
         print("Downloading from mega.nz...")
         mega = Mega()

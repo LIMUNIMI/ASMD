@@ -530,9 +530,10 @@ def load_definitions(path):
         if os.path.isfile(fullpath) and fullpath.endswith('.json'):
             # add this dataset
             try:
+                print("Opening " + fullpath)
                 datasets.append(json.load(open(fullpath, 'rt')))
             except:
-                print(fullpath)
+                print("Error opening " + fullpath)
     return datasets
 
 
