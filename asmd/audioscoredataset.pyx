@@ -54,7 +54,7 @@ class Dataset:
         self.paths = []
         self._chunks = {}
 
-    def filter(self, instrument='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
+    def filter(self, instruments='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
         """
         Filters the dataset and load the paths of the songs which accomplish
         the filter described in `kwargs`. A field `paths` is added to this
@@ -62,12 +62,13 @@ class Dataset:
 
         Arguments
         ---------
-        instrument : str
-            a string representing the instrument that you
-            want to select (only one supported for now)
+        instruments : list of str
+            a list of strings representing the instruments that you
+            want to select (exact match with song)
         ensemble : bool
             if loading songs which are composed for an ensemble of
-            instrument. If None, ensemble field will not be checked (default  None )
+            instrument. If None, ensemble field will not be checked and will
+            select both (default None)
         mixed : bool
             if returning the mixed track for ensemble song
             (default  True )
@@ -77,7 +78,7 @@ class Dataset:
         all : bool
             only valid if  sources  is  True : if  True , all
             sources (audio and ground-truth) are returned, if
-            False , only the target instrument is returned. Default False.
+            False, only the first target instrument is returned. Default False.
         composer : string
             the surname of the composer to filter
         datasets : list of strings
@@ -107,10 +108,6 @@ class Dataset:
                 if ensemble != mydataset['ensemble']:
                     FLAG = False
 
-            if instrument:
-                if instrument not in mydataset['instruments']:
-                    FLAG = False
-
             for gt in ground_truth:
                 if mydataset['ground_truth'][gt[0]] != gt[1]:
                     FLAG = False
@@ -119,9 +116,10 @@ class Dataset:
             if FLAG:
                 self._chunks[mydataset['name']] = [end, end]
                 for song in mydataset['songs']:
+                    FLAG = True
                     # checking song levels filters
-                    if instrument:
-                        if instrument not in song['instruments']:
+                    if instruments:
+                        if instruments != song['instruments']:
                             FLAG = False
 
                     if composer:
@@ -137,6 +135,7 @@ class Dataset:
                                 source = song['sources']['path']
                             else:
                                 # find the index of the instrument
+                                instrument = instruments[0]
                                 idx = song['instruments'].index(instrument)
 
                                 # take index of the target instrument
