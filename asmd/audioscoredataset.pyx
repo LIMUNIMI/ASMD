@@ -296,7 +296,8 @@ class Dataset:
         -------
         numpy.ndarray :
             A (128 x n) array where rows represent pitches and columns are time
-            instants sampled with resolution provided as argument.
+            instants sampled with resolution provided as argument. Values are
+            the velocity of that note.
         """
 
         gts = self.get_gts(idx)
@@ -311,6 +312,10 @@ class Dataset:
             ons = gt[score_type]['onsets']
             offs = gt[score_type]['offsets']
             pitches = gt[score_type]['pitches']
+            velocities = gt[score_type]['velocities']
+            if not velocities:
+                velocities = [1] * len(pitches)
+
             # Make pitches and alignments of thesame number of notes
             if truncate:
                 find_bach10_errors(gt, score_type)
@@ -321,7 +326,7 @@ class Dataset:
                 on = int(ons[i] / resolution)
                 off = int(offs[i] / resolution) + 1
 
-                pianoroll[p, on:off] = 1
+                pianoroll[p, on:off] = velocities[i]
 
         return pianoroll
 
