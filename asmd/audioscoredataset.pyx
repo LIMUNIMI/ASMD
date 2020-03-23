@@ -80,7 +80,8 @@ class Dataset:
             The list of objects returned by each `func`
         """
 
-        return Parallel(n_jobs)(delayed(func_wrapper)(func, self.paths[i]) for i in range(len(self.paths)))
+        return Parallel(n_jobs, backend="multiprocessing")(
+            delayed(func_wrapper)(func, self.paths[i]) for i in range(len(self.paths)))
 
 
     def filter(self, instruments='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
