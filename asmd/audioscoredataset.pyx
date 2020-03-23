@@ -3,6 +3,7 @@ import json
 import gzip
 import os
 import numpy as np
+from joblib import Parallel, delayed
 from . import utils
 from os.path import join as joinpath
 from essentia.standard import Resample
@@ -16,7 +17,7 @@ class Dataset:
     def __len__(self):
         return len(self.paths)
 
-    def __init__(self, paths=[joinpath(THISDIR, 'definitions/')], metadataset_path=joinpath(THISDIR, 'datasets.json')):
+    def __init__(self, paths=[joinpath(THISDIR, 'definitions/')], metadataset_path=joinpath(THISDIR, 'datasets.json'), empty=False):
         """
         Load the dataset description
 
@@ -31,6 +32,9 @@ class Dataset:
             the path were the generic information about where this datetimeis
             installed are stored
 
+        * empty : bool
+            if True, no definition is loaded
+
         Returns
         -------
         * AudioScoreDataset :
@@ -38,10 +42,11 @@ class Dataset:
         """
 
         self.datasets = []
-        if len(paths) == 0:
-            paths = [joinpath(THISDIR, 'definitions/')]
-        for path in paths:
-            self.datasets += load_definitions(path)
+        if not empty:
+            if len(paths) == 0:
+                paths = [joinpath(THISDIR, 'definitions/')]
+            for path in paths:
+                self.datasets += load_definitions(path)
 
         # opening medataset json file
         self.metadataset = json.load(open(metadataset_path, 'rt'))
@@ -53,6 +58,30 @@ class Dataset:
         self.decompress_path = self.metadataset['decompress_path']
         self.paths = []
         self._chunks = {}
+
+
+    def parallel(self, func, n_jobs=-2):
+        """
+        Applies a function to all items in `paths` in parallel using `joblib.Parallel`.
+
+        Arguments
+        ---------
+        func : callable
+            the function that will be called; it must accept two arguments
+            that are the index of the song and the dataset. `filter` and
+            `chunks` shouldn't be used
+
+        n_jobs : int
+            see `joblib.Parallel`
+
+        Returns
+        -------
+        list:
+            The list of objects returned by each `func`
+        """
+
+        return Parallel(n_jobs)(delayed(func_wrapper)(func, self.paths[i]) for i in range(len(self.paths)))
+
 
     def filter(self, instruments='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
         """
@@ -569,3 +598,9 @@ def chose_score_type(score_type, gts):
     else:
         score_type = score_type[0]
     return score_type
+
+
+def func_wrapper(func, path):
+    d = Dataset(empty=True)
+    d.paths = [path]
+    return func(0, d)
