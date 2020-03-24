@@ -32,6 +32,7 @@ decorator = "^4.4.1"
 essentia = "^2.1b6.dev184"
 "mega.py" = "^1.0.6"
 joblib = "^0.14.1"
+tqdm = "^4.43.0"
 
 [tool.poetry.dev-dependencies]
 snoop = "*"

@@ -3,6 +3,7 @@ import json
 import gzip
 import os
 import numpy as np
+from tqdm import tqdm
 from joblib import Parallel, delayed
 from . import utils
 from os.path import join as joinpath
@@ -81,7 +82,7 @@ class Dataset:
         """
 
         return Parallel(n_jobs, backend="multiprocessing")(
-            delayed(func_wrapper)(func, self.paths[i]) for i in range(len(self.paths)))
+            delayed(func_wrapper)(func, self.paths[i]) for i in tqdm(range(len(self.paths))))
 
 
     def filter(self, instruments='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
@@ -485,7 +486,6 @@ class Dataset:
             The sampling rate of the audio array
         """
 
-        print("    Loading audio")
         if sources is not None:
             audio, sr = self.get_source(idx)
             audio = np.mean(audio, axis=0)
