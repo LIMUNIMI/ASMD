@@ -98,7 +98,7 @@ class Dataset:
             delayed(func_wrapper)(func, self.paths[i], args, kwargs) for i in tqdm(range(len(self.paths))))
 
 
-    def filter(self, instruments=[''], ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
+    def filter(self, instruments=[], ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
         """
         Filters the dataset and load the paths of the songs which accomplish
         the filter described in `kwargs`. A field `paths` is added to this
