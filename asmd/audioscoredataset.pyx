@@ -61,7 +61,7 @@ class Dataset:
         self._chunks = {}
 
 
-    def parallel(self, func, n_jobs=-2):
+    def parallel(self, func, *args, n_jobs=-2, backend="multiprocessing", **kwargs):
         """
         Applies a function to all items in `paths` in parallel using `joblib.Parallel`.
 
@@ -69,11 +69,24 @@ class Dataset:
         ---------
         func : callable
             the function that will be called; it must accept two arguments
-            that are the index of the song and the dataset. `filter` and
-            `chunks` shouldn't be used
+            that are the index of the song and the dataset. Then, it can
+            accept all `args` and `kwargs` that are passed to this function:
+            >>>  def myfunc(i, dataset, pinco, pal=lino):
+                    # do not use `filter` and `chunks` here
+                    print(pinco, pal)
+                    print(dataset.paths[i])
+                marco, etto = 4, 5
+                d = Dataset().filter(datasets='Bach10')
+                d.parallel(myfunc, marco, n_jobs=8, pal=etto)
+
+            `filter` and `chunks` shouldn't be used.
 
         n_jobs : int
             see `joblib.Parallel`
+
+        backend : str
+            see `joblib.Parallel`; "multiprocessing" is suggested if you want
+            preserve the order of the results
 
         Returns
         -------
@@ -81,11 +94,11 @@ class Dataset:
             The list of objects returned by each `func`
         """
 
-        return Parallel(n_jobs, backend="multiprocessing")(
-            delayed(func_wrapper)(func, self.paths[i]) for i in tqdm(range(len(self.paths))))
+        return Parallel(n_jobs, backend=backend)(
+            delayed(func_wrapper)(func, self.paths[i], args, kwargs) for i in tqdm(range(len(self.paths))))
 
 
-    def filter(self, instruments='', ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
+    def filter(self, instruments=[''], ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
         """
         Filters the dataset and load the paths of the songs which accomplish
         the filter described in `kwargs`. A field `paths` is added to this
@@ -124,6 +137,10 @@ class Dataset:
             the ground_truth dictionary and `level_of_truth` is an int ranging
             from 0 to 2 (0->False, 1->True (manual annotation),
             2->True(automatic annotation))
+
+        Returns
+        -------
+        This dataset as modified: `d = Dataset().filter(...)`
         """
         end = 0
         for mydataset in self.datasets:
@@ -178,6 +195,8 @@ class Dataset:
                         self.paths.append([mix, source, gts])
                         end += 1
                 self._chunks[mydataset['name']][1] = end
+
+        return self
 
 
     def idx_chunk_to_whole(self, name, idx):
@@ -601,7 +620,7 @@ def chose_score_type(score_type, gts):
     return score_type
 
 
-def func_wrapper(func, path):
+def func_wrapper(func, path, args, kwargs):
     d = Dataset(empty=True)
     d.paths = [path]
-    return func(0, d)
+    return func(0, d, *args, **kwargs)
