@@ -340,7 +340,7 @@ class Dataset:
             pitches, otherwise, insert -255 for missing values (enlarging
             lists)
         resolution : float
-            The number of columns wanted per each second
+            The duration of each column (in seconds)
 
         Returns
         -------
