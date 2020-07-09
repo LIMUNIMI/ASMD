@@ -324,7 +324,7 @@ class Dataset:
         gts = self.get_gts(idx)
         return mix, sources, gts
 
-    def get_pianoroll(self, idx, score_type=['non_aligned'], truncate=False, resolution=0.25):
+    def get_pianoroll(self, idx, score_type=['non_aligned'], truncate=False, resolution=0.25, onsets=False, velocity=True):
         """
         Create pianoroll from list of pitches, onsets and offsets (in this order).
 
@@ -341,13 +341,17 @@ class Dataset:
             lists)
         resolution : float
             The duration of each column (in seconds)
+        onsets : bool
+            If True, the value '-1' is put sn each onset
+        velocity : bool
+            if True, values of each note is the velocity (except the first
+            frame if `onsets` is used)
 
         Returns
         -------
         numpy.ndarray :
             A (128 x n) array where rows represent pitches and columns are time
-            instants sampled with resolution provided as argument. Values are
-            the velocity of that note.
+            instants sampled with resolution provided as argument.
         """
 
         gts = self.get_gts(idx)
@@ -363,7 +367,7 @@ class Dataset:
             offs = gt[score_type]['offsets']
             pitches = gt[score_type]['pitches']
             velocities = gt[score_type]['velocities']
-            if not velocities:
+            if not velocities or not velocity:
                 velocities = [1] * len(pitches)
 
             # Make pitches and alignments of thesame number of notes
@@ -377,6 +381,8 @@ class Dataset:
                 off = int(offs[i] / resolution) + 1
 
                 pianoroll[p, on:off] = velocities[i]
+                if onsets:
+                    pianoroll[p, on] = -1
 
         return pianoroll
 
