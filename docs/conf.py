@@ -12,15 +12,24 @@
 #
 import os
 import sys
-from shutil import copyfile
 
-# changing extensions of pyx files
+# changing extensions of pyx files and removing cython specific syntax
 for root, dirs, files in os.walk('../'):
     for file in files:
+        # change 'pyx' to 'py' if needed
+        old_fname = os.path.join(root, file)
         if file.endswith('.pyx'):
-            fname = os.path.join(root, file)
-            new_file = fname[:-4] + '.py'
-            copyfile(fname, new_file)
+            new_fname = old_fname[:-4] + '.py'
+        elif file.endswith('.py'):
+            new_fname = old_fname
+        else:
+            continue
+
+        # change all 'cimport' to 'import'
+        with open(old_fname, 'rt') as old_file:
+            text = old_file.read().replace('cimport', 'import')
+        with open(new_fname, 'wt') as new_file:
+            new_file.write(text)
 
 sys.path.insert(0, os.path.abspath('../'))
 

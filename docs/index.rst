@@ -29,7 +29,7 @@ one can build, convert, and extend one's own collection as well as distribute
 it by means of a compliant format to take advantage of the API. All code and
 ground-truth are released under suitable open licenses.
 
-For a gentle introduction, see our paper: [...]
+For a gentle introduction, see our paper [1]
    
 
 TODO
@@ -42,7 +42,11 @@ TODO
 Cite us
 =======
 
-[…]
+[1]  Simonetta, Federico ; Ntalampiras, Stavros ; Avanzini, Federico: *ASMD: an automatic framework for compiling multimodal datasets*. In: Proceedings of the 17th Sound and Music Computing Conference. Torino, 2020 arXiv:2003.01958_
+
+.. _arXiv:2003.01958: https://arxiv.org/abs/2003.01958
+
+---
 
 Federico Simonetta
 

@@ -16,19 +16,19 @@ you can recreate them from scratch for tweaking parameters. The next section
 will explain how you can achieve this.
 
 The easy way
-----
+------------
 #. ``pip install asmd`` 
 #. Install ``wget`` if you want SMD dataset (next release will remove this dependency)
 #. Run ``python -m asmd.install`` and follows the steps
 
 
 The hard way (if you want to contribute)
-----
+----------------------------------------
 
 Once you have cloned the repo follow these steps:
 
 Install poetry, pyenv and python
-^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Install ``wget`` if you want SMD dataset (next release will remove this dependency)
 #. Install ``python 3``
@@ -41,7 +41,7 @@ Install poetry, pyenv and python
 #. ``pyenv local 3.6.9`` (optional, recommended python >= 3.6.9)
 
 Install ASMD
-^^^^
+^^^^^^^^^^^^
 
 #. ``git clone https://framagit.org/sapo/asmd.git``
 #. ``poetry add asmd/``
