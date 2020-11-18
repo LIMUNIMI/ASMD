@@ -8,7 +8,7 @@ To recreate the ground-truth in our format you have to convert the annotations.
 #. to recreate artificial misalignment estimation, then you should also
 
    #. run ``alignment_stats.py`` 
-   #. ``convert_gt.py`` again.
+   #. ``generate_ground_truth.py`` again.
 
 **N.B. You should have ``wget`` installed in your system, otherwise SMD
 dataset can’t be downloaded.**
@@ -32,7 +32,9 @@ about the datasets with real non-aligned scores and saves stats in
 ``_alignment_stats.pkl`` file in the working directory. Then, run
 ``generate_ground_truth.py`` again: it will load the pickled file and
 will generate misaligned data by using the same deviation distribution
-of the available non-aligned data.
+of the available non-aligned data. If you don't delete the
+``_alignment_stats.pkl`` file, every time you run ``generate_ground_truth.py``
+it will create artificial misalignments.
 
 Note that misaligned data should be annotated as ``2`` in the
 ``ground_truth`` value of the dataset description (see
