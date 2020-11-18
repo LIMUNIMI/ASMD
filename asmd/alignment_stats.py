@@ -1,9 +1,11 @@
-from random import choices, uniform
-from sklearn.preprocessing import StandardScaler, minmax_scale
-import numpy as np
 import os.path
-from .audioscoredataset import Dataset
+from random import choices, uniform
+
+import numpy as np
+from sklearn.preprocessing import StandardScaler, minmax_scale
+
 from . import utils
+from .audioscoredataset import Dataset
 
 data = Dataset()
 
@@ -122,11 +124,12 @@ def fill_stats(datasets):
     return stats
 
 
-if __name__ == '__main__':
+def main():
+    """
+    Computes statistics, histogram, dumps the object to file and returns it
+    """
     import os
     import pickle
-    import plotly.graph_objects as go
-    import plotly.offline as plt
     stats = fill_stats([
         ('vienna_corpus', 'precise_alignment'),
         # ('PHENICX', 'broad_alignment'),
@@ -134,7 +137,20 @@ if __name__ == '__main__':
         ('traditional_flute', 'precise_alignment')
     ])
     stats.compute_hist()
+
+    file_stats = os.path.join(THISDIR, "_alignment_stats.pkl")
+    if os.path.exists(file_stats):
+        os.remove(file_stats)
+    pickle.dump(stats, open(file_stats, 'wb'))
+    return stats
+
+
+if __name__ == '__main__':
+    import plotly.graph_objects as go
+    import plotly.offline as plt
+    stats = main()
     seed()
+
     v1 = stats.get_random_onset_dev()
     v2 = stats.get_random_offset_dev()
     v3 = stats.get_random_mean()
@@ -142,11 +158,6 @@ if __name__ == '__main__':
     v5 = stats.get_random_onset_diff()
     print("Testing getting random value")
     print(v1, v2, v3, v4, v5)
-
-    file_stats = os.path.join(THISDIR, "_alignment_stats.pkl")
-    if os.path.exists(file_stats):
-        os.remove(file_stats)
-    pickle.dump(stats, open(file_stats, 'wb'))
 
     fig1 = go.Figure(
         data=[go.Scatter(y=stats.ons_hist[0], x=stats.ons_hist[1])])
