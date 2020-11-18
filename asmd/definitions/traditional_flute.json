@@ -24,6 +24,9 @@
     "ground_truth" : {
         "broad_alignment" : 0,
         "f0" : 0,
+        "sustain": 0,
+        "soft": 0,
+        "sostenuto": 0,
         "non_aligned" : 2,
         "precise_alignment" : 1,
         "velocities" : 0,

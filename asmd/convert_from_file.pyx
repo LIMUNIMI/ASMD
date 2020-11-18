@@ -86,7 +86,18 @@ prototype_gt = {
         "velocities": []
     },
     "f0": [],
-    "sustain": [],
+    "soft": {
+        "values": [],
+        "times": []
+    },
+    "sostenuto": {
+        "values": [],
+        "times": []
+    },
+    "sustain": {
+        "values": [],
+        "times": []
+    },
     "instrument": 255,
     "beats_non_aligned": []
 }
@@ -121,7 +132,18 @@ use:
 ...         "velocities": []
 ...     },
 ...     "f0": [],
-...     "sustain": [],
+...     "soft": {
+...         "values": [],
+...         "times": []
+...     },
+...     "sostenuto": {
+...         "values": [],
+...         "times": []
+...     },
+...     "sustain": {
+...         "values": [],
+...         "times": []
+...     },
 ...     "instrument": 255,
 ...     "beats_non_aligned": []
 ... }
@@ -148,14 +170,15 @@ def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):
     return root + new_ext
 
 
-def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, beats=False, sustain=False):
+def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, beats=False):
     """
     Open a midi file `midi_fn` and convert it to our ground_truth
-    representation. This fills velocities, pitches, beats, sustain and alignment (default:
-    `precise_alignment`). Returns a list containing a dictionary. `alignment`
-    can also be `None` or `False`, in that case no alignment is filled. If `merge` is
-    True, the returned list will contain a dictionary for each track.
-    Beats are filled according to tempo changes.
+    representation. This fills velocities, pitches, beats, sustain, soft,
+    sostenuto and alignment (default: `precise_alignment`). Returns a list
+    containing a dictionary. `alignment` can also be `None` or `False`, in that
+    case no alignment is filled. If `merge` is True, the returned list will
+    contain a dictionary for each track.  Beats are filled according to tempo
+    changes.
 
     This functions is decorated with two different sets of parameters:
 
@@ -175,9 +198,18 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
     else:
         bpm_ratio = 1
 
-    # TODO: implement sustain
-    for track in midi_tracks:
+    for i, track in enumerate(midi_tracks):
         data = deepcopy(prototype_gt)
+        for cc in pm.instruments[i].control_changes:
+            if cc.number == 64:
+                data['sustain']['value'].append(cc.value)
+                data['sustain']['time'].append(cc.time)
+            elif cc.number == 66:
+                data['sostenuto']['value'].append(cc.value)
+                data['sostenuto']['time'].append(cc.time)
+            elif cc.number == 67:
+                data['soft']['value'].append(cc.value)
+                data['soft']['time'].append(cc.time)
 
         for note_group in track:
             for note in note_group:

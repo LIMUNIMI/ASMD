@@ -30,12 +30,14 @@ following field:
 
 #. ``ground_truth``: *N.B. each ground_truth has an ``int`` value, indicating ``0`` -> false, ``1`` -> true (manual or mechanical - Disklavier - annotation), ``2`` -> true (automatic annotation with state-of-art algorithms)*
 
-   #. ``non_aligned``: ``true`` if non_aligned scores are provided
-   #. ``broad_alignment``: ``true`` if broad_alignment scores are provided
-   #. ``precise_alignment``: ``true`` if precisely aligned scores are provided
-   #. ``velocities``: ``true`` if velocities are provided
-   #. ``f0``: ``true`` if f0 values are provided
-   #. ``sustain``: ``true`` if sustain values are provided
+   #. ``non_aligned``: if non_aligned scores are provided
+   #. ``broad_alignment``: if broad_alignment scores are provided
+   #. ``precise_alignment``: if precisely aligned scores are provided
+   #. ``velocities``: if velocities are provided
+   #. ``f0``: if f0 values are provided
+   #. ``sustain``: if sustain values are provided
+   #. ``soft``: if sustain values are provided
+   #. ``sostenuto``: if sustain values are provided
 
 #. ``songs``: the list of songs in the dataset
 
@@ -111,9 +113,34 @@ dictionary with the following structure:
 
 #. ``f0``: list of f0 frequencies, frame by frame; duration of each frame
    should be 46 ms with 10 ms of hop.
-#. ``sustain``: list of pedaling levels; duration of each frame should be 46 ms
-   with 10 ms of hop. Each pedaling value is a number between 0 and 127, where
-   values < 63 mean sustain OFF and values >= 63 mean sustain ON.
+
+#. ``sustain``:
+
+   #. ``values``: list of sustain changes; each susvalue is a number
+      between 0 and 127, where values < 63 mean sustain OFF and values >= 63
+      mean sustain ON, but intermediate values can be used (e.g. for
+      half-pedaling).
+   #. ``times``: list of floats representing the time of each sustain change in
+         seconds.
+
+#. ``soft``:
+
+   #. ``values``: list of soft-pedal changes; each value is a number between 0
+      and 127, where values < 63 mean soft pedal OFF and values >= 63 mean
+      soft edal ON, but intermediate values can be used (e.g. for
+      half-pedaling).
+   #. ``times``: list of floats representing the time of each soft pedal change
+      in seconds.
+
+#. ``sostenuto``:
+
+   #. ``values``: list of sostenuto-pedal changes; each value is a number between 0
+      and 127, where values < 63 mean sostenuto pedal OFF and values >= 63 mean
+      sostenuto edal ON, but intermediate values can be used (e.g. for
+      half-pedaling).
+   #. ``times``: list of floats representing the time of each sostenuto pedal change
+      in seconds.
+
 #. ``instrument``: General Midi program number associated with this instrument,
    starting from 0. 128 indicates a drum kit (should be synthesized on channel
    8 with a program number of your choice, usually 0).
