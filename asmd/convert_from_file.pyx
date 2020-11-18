@@ -94,35 +94,35 @@ The dictionary prototype for containing the ground_truth.
 use:
 
 >>> from copy import deepcopy
-    from convert_from_file import prototype_gt
-    deepcopy(prototype_gt)
+... from convert_from_file import prototype_gt
+... deepcopy(prototype_gt)
 
 >>> prototype_gt = {
-        "precise_alignment": {
-            "onsets": [],
-            "offsets": [],
-            "pitches": [],
-            "notes": [],
-            "velocities": []
-        },
-        "non_aligned": {
-            "onsets": [],
-            "offsets": [],
-            "pitches": [],
-            "notes": [],
-            "velocities": []
-        },
-        "broad_alignment": {
-            "onsets": [],
-            "offsets": [],
-            "pitches": [],
-            "notes": [],
-            "velocities": []
-        },
-        "f0": [],
-        "instrument": 255,
-        "beats_non_aligned": []
-    }
+...     "precise_alignment": {
+...         "onsets": [],
+...         "offsets": [],
+...         "pitches": [],
+...         "notes": [],
+...         "velocities": []
+...     },
+...     "non_aligned": {
+...         "onsets": [],
+...         "offsets": [],
+...         "pitches": [],
+...         "notes": [],
+...         "velocities": []
+...     },
+...     "broad_alignment": {
+...         "onsets": [],
+...         "offsets": [],
+...         "pitches": [],
+...         "notes": [],
+...         "velocities": []
+...     },
+...     "f0": [],
+...     "instrument": 255,
+...     "beats_non_aligned": []
+... }
 """
 
 def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):

@@ -72,13 +72,14 @@ class Dataset:
             the function that will be called; it must accept two arguments
             that are the index of the song and the dataset. Then, it can
             accept all `args` and `kwargs` that are passed to this function:
+
             >>>  def myfunc(i, dataset, pinco, pal=lino):
-                    # do not use `filter` and `chunks` here
-                    print(pinco, pal)
-                    print(dataset.paths[i])
-                marco, etto = 4, 5
-                d = Dataset().filter(datasets='Bach10')
-                d.parallel(myfunc, marco, n_jobs=8, pal=etto)
+            ...     # do not use `filter` and `chunks` here
+            ...     print(pinco, pal)
+            ...     print(dataset.paths[i])
+            ... marco, etto = 4, 5
+            ... d = Dataset().filter(datasets='Bach10')
+            ... d.parallel(myfunc, marco, n_jobs=8, pal=etto)
 
             `filter` and `chunks` shouldn't be used.
 

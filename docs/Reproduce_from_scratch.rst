@@ -3,12 +3,11 @@ Reproduce from scratch
 
 To recreate the ground-truth in our format you have to convert the annotations.
 
-#. run ``generate_ground_truth.py`` script after having installed the datasets
-   with the ``install.py`` (see :doc:`Installation`)
-#. to recreate artificial misalignment estimation, then you should also
-
-   #. run ``alignment_stats.py`` 
-   #. ``convert_gt.py`` again.
+#. to create data converted from original sources, run
+   ``generate_ground_truth.py`` script after having installed the datasets with
+   the ``install.py`` (see :doc:`Installation`)
+#. to recreate artificial misalignment estimation, run ``generate_ground_truth.py --misalign``
+#. to only create statistics, and plot histograms, run ``alignment_stats.py`` 
 
 **N.B. You should have ``wget`` installed in your system, otherwise SMD
 dataset can’t be downloaded.**
@@ -26,13 +25,14 @@ remember to backup the previous one and to merge the archives.
 Generate misaligned data
 ------------------------
 
-If you want, you can generate misaligned data. First, after having
-created the ground-truth, run ``alignment_stats.py``, which collects data
-about the datasets with real non-aligned scores and saves stats in
-``_alignment_stats.pkl`` file in the working directory. Then, run
-``generate_ground_truth.py`` again: it will load the pickled file and
-will generate misaligned data by using the same deviation distribution
-of the available non-aligned data.
+If you want, you can generate misaligned data using the ``--misalign`` option
+of ``generate_ground_truth.py``. It will first run the usual
+``generate_ground_truth.py`` without options, then it will run
+``alignment_stats.py``, which collects data about the datasets with real
+non-aligned scores and saves stats in ``_alignment_stats.pkl`` file in the
+working directory. Then, run ``generate_ground_truth.py`` again using the
+collected statistics:  it will generate misaligned data by using the same
+deviation distribution of the available non-aligned data. 
 
 Note that misaligned data should be annotated as ``2`` in the
 ``ground_truth`` value of the dataset description (see

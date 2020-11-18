@@ -174,25 +174,21 @@ def conversion(arg):
     return to_be_included_in_the_archive
 
 
-def create_gt(data_fn, args, gztar=False):
+def create_gt(data_fn, args, gztar=False, alignment_stats=None):
     """
     Parse the json file `data_fn` and convert all ground_truth to our
     representation. Then dump it according to the specified paths. Finally,
     if `gztar` is True, create a gztar archive called 'ground_truth.tar.gz' in
     this directory containing only the ground truth file in their final
     positions.
+
+    If ``alignment_stats`` is not None, it should be an object of type
+    ``alignment_stats.Stats`` as the one returned by ``alignment_stats.main``
     """
 
     print("Opening JSON file: " + data_fn)
 
     json_file = json.load(open(data_fn, 'r'))
-    if os.path.exists(joinpath(THISDIR, '_alignment_stats.pkl')):
-        import pickle
-        stats = pickle.load(open('_alignment_stats.pkl', 'rb'))
-    else:
-        stats = None
-    #     stats = fill_stats(['precise_alignment', 'broad_alignment'])
-    #     stats.compute_hist()
 
     to_be_included_in_the_archive = []
     datasets = load_definitions(joinpath(THISDIR, 'definitions'))
@@ -208,14 +204,17 @@ def create_gt(data_fn, args, gztar=False):
 
         print("\n------------------------\n")
         print("Starting processing " + dataset['name'])
-        if dataset['ground_truth']['non_aligned'] == 2 and stats:
+        if dataset['ground_truth']['non_aligned'] == 2 and alignment_stats is not None:
             # computing means and std deviations for each song in the dataset
-            mean = stats.get_random_mean(k=len(dataset['songs']), max_value=MEAN_MAX)
+            mean = alignment_stats.get_random_mean(k=len(dataset['songs']),
+                                                   max_value=MEAN_MAX)
             seed()
-            ons_dev = stats.get_random_onset_dev(k=len(dataset['songs']), max_value=ONS_DEV_MAX)
+            ons_dev = alignment_stats.get_random_onset_dev(k=len(dataset['songs']),
+                                                 max_value=ONS_DEV_MAX)
             seed()
-            offs_dev = stats.get_random_offset_dev(k=len(dataset['songs']), max_value=OFFS_DEV_MAX)
-            arg = [(i, song, json_file, dataset, stats, ons_dev, offs_dev, mean)
+            offs_dev = alignment_stats.get_random_offset_dev(k=len(dataset['songs']),
+                                                  max_value=OFFS_DEV_MAX)
+            arg = [(i, song, json_file, dataset, alignment_stats, ons_dev, offs_dev, mean)
                    for i, song in enumerate(dataset['songs'])]
         else:
             arg = [(i, song, json_file, dataset, None, None, None, None)
