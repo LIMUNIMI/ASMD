@@ -86,6 +86,7 @@ prototype_gt = {
         "velocities": []
     },
     "f0": [],
+    "sustain": [],
     "instrument": 255,
     "beats_non_aligned": []
 }
@@ -120,6 +121,7 @@ use:
 ...         "velocities": []
 ...     },
 ...     "f0": [],
+...     "sustain": [],
 ...     "instrument": 255,
 ...     "beats_non_aligned": []
 ... }
@@ -146,10 +148,10 @@ def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):
     return root + new_ext
 
 
-def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, beats=False):
+def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, beats=False, sustain=False):
     """
     Open a midi file `midi_fn` and convert it to our ground_truth
-    representation. This fills velocities, pitches, beats and alignment (default:
+    representation. This fills velocities, pitches, beats, sustain and alignment (default:
     `precise_alignment`). Returns a list containing a dictionary. `alignment`
     can also be `None` or `False`, in that case no alignment is filled. If `merge` is
     True, the returned list will contain a dictionary for each track.
@@ -173,6 +175,7 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
     else:
         bpm_ratio = 1
 
+    # TODO: implement sustain
     for track in midi_tracks:
         data = deepcopy(prototype_gt)
 
@@ -269,15 +272,15 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
 
 
 @convert(['.csv'])
-def from_musicnet_csv(csv_fn, fr=44100.0):
+def from_musicnet_csv(csv_fn, sr=44100.0):
     """
     Open a csv file `csv_fn` and convert it to our ground_truth representation.
     This fills: `broad_alignment`, `non_aligned`, `pitches`.
-    This returns a list containing only one dict. `fr` is the framerate of the
-    audio files (MusicNet csv contains the frame number as onset and offsets of
+    This returns a list containing only one dict. `sr` is the samplerate of the
+    audio files (MusicNet csv contains the sample number as onset and offsets of
     each note) and it shold be a float.
 
-    N.B. MusicNet contains wav files at 44100 Hz as framerate.
+    N.B. MusicNet contains wav files at 44100 Hz as samplerate.
     """
     data = csv.reader(open(csv_fn), delimiter=',')
     out = deepcopy(prototype_gt)
@@ -290,8 +293,8 @@ def from_musicnet_csv(csv_fn, fr=44100.0):
         # duration name as string
         row = list(map(float, row[:-1]))
 
-        out["broad_alignment"]["onsets"].append(int(row[0]) / fr)
-        out["broad_alignment"]["offsets"].append(int(row[1]) / fr)
+        out["broad_alignment"]["onsets"].append(int(row[0]) / sr)
+        out["broad_alignment"]["offsets"].append(int(row[1]) / sr)
         out["instrument"] = int(row[2])
         out["broad_alignment"]["pitches"].append(int(row[3]))
         out["non_aligned"]["pitches"].append(int(row[3]))

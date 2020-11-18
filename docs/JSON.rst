@@ -35,6 +35,7 @@ following field:
    #. ``precise_alignment``: ``true`` if precisely aligned scores are provided
    #. ``velocities``: ``true`` if velocities are provided
    #. ``f0``: ``true`` if f0 values are provided
+   #. ``sustain``: ``true`` if sustain values are provided
 
 #. ``songs``: the list of songs in the dataset
 
@@ -108,8 +109,14 @@ dictionary with the following structure:
    #. ``note``: list of note names in onsets ascending order
    #. ``velocities``: list of velocities in onsets ascending order
 
-#. ``f0``: list of f0 frequencies, frame by frame (frame rate according to the source sound file or to the whole recording sound file if sources are not  available)
-#. ``instrument``: General Midi program number associated with this instrument, starting from 0. 128 indicates a drum kit (should be synthesized on channel 8 with a program number of your choice, usually 0).
+#. ``f0``: list of f0 frequencies, frame by frame; duration of each frame
+   should be 46 ms with 10 ms of hop.
+#. ``sustain``: list of pedaling levels; duration of each frame should be 46 ms
+   with 10 ms of hop. Each pedaling value is a number between 0 and 127, where
+   values < 63 mean sustain OFF and values >= 63 mean sustain ON.
+#. ``instrument``: General Midi program number associated with this instrument,
+   starting from 0. 128 indicates a drum kit (should be synthesized on channel
+   8 with a program number of your choice, usually 0).
 
 Note that json ground_truth files have extension ``.json.gz``,
 indicating that they are compressed using the ``gzip`` Python 3.6.9
