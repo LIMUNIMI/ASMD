@@ -48,23 +48,34 @@ following field:
    
       #. ``path``: a list of paths to the single instrument tracks in the same order as ``instruments``
       
-   #. ``ground_truth``: list of paths to the ground_truth json files.  One ground_truth path per instrument is always provided. The order of the ground_truth path is the same of sources and of the instruments. Note that some ground_truth paths can be identical (as in PHENICX for indicating that violin1 and violin2 are playing exactly the same thing).
+   #. ``ground_truth``: list of paths to the ground_truth json files.  One
+      ground_truth path per instrument is always provided. The order of the
+      ground_truth path is the same of sources and of the instruments. Note
+      that some ground_truth paths can be identical (as in PHENICX for
+      indicating that violin1 and violin2 are playing exactly the same
+      thing).
    
 #. ``install``: where information for the installation process are stored
 
    #. ``url``: the url to download the dataset including the protocol
    #. ``post-process``: a list of shell commands to be executed to prepare the
-         dataset; they can be lists themselves to allow the use of references
-         to the installation directory with the syntax ``&install_dir``: every
-         occurrence of ``&install_dir`` will be replaced with the value of
-         ``install_dir`` in ``datasets.json``; final slash doesn't matter
+      dataset; they can be lists themselves to allow the use of references
+      to the installation directory with the syntax ``&install_dir``: every
+      occurrence of ``&install_dir`` will be replaced with the value of
+      ``install_dir`` in ``datasets.json``; final slash doesn't matter
    #. ``unpack``: ``true`` if the url needs to be unpacked (untar, unzip, ...)
    #. ``login``: true if you a login is needed - not used anymore, but maybe useful in future
 
 In general, I maintained the following principles:
 
-#. if a list of files is provided where you would logically expect one file, you should ‘sum’ the files in the list, whatever this means according to that type of file; this typically happens in the ``ground_truth`` files. or in the recording where only the single sources are available.
-#. all the fields can have the value ‘unknown’ to indicate that it is not available in that dataset; if you treat ‘unknown’ with the meaning of unavailable everything will be fine; however, in some cases it can mean that the data are available but that information is not documented.
+#. if a list of files is provided where you would logically expect one file,
+   you should ‘sum’ the files in the list, whatever this means according to
+   that type of file; this typically happens in the ``ground_truth`` files. or
+   in the recording where only the single sources are available.
+#. all the fields can have the value ‘unknown’ to indicate that it is not
+   available in that dataset; if you treat ‘unknown’ with the meaning of
+   unavailable everything will be fine; however, in some cases it can mean that
+   the data are available but that information is not documented.
 
 Ground-truth json format
 ------------------------
