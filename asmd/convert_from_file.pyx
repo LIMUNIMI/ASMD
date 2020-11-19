@@ -202,14 +202,14 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
         data = deepcopy(prototype_gt)
         for cc in pm.instruments[i].control_changes:
             if cc.number == 64:
-                data['sustain']['value'].append(cc.value)
-                data['sustain']['time'].append(cc.time)
+                data['sustain']['values'].append(cc.value)
+                data['sustain']['times'].append(cc.time)
             elif cc.number == 66:
-                data['sostenuto']['value'].append(cc.value)
-                data['sostenuto']['time'].append(cc.time)
+                data['sostenuto']['values'].append(cc.value)
+                data['sostenuto']['times'].append(cc.time)
             elif cc.number == 67:
-                data['soft']['value'].append(cc.value)
-                data['soft']['time'].append(cc.time)
+                data['soft']['values'].append(cc.value)
+                data['soft']['times'].append(cc.time)
 
         for note_group in track:
             for note in note_group:

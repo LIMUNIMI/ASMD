@@ -530,25 +530,25 @@ class Dataset:
             # take all cc...
             cc_track_pedaling = []
             for pedal in ['sustain', 'sostenuto', 'soft']:
-                l = len(gt[pedal]['value'])
+                l = len(gt[pedal]['values'])
                 if pedal == 'sustain':
                     cc_track_pedaling += list(zip(
-                        gt[pedal]['time'],
-                        gt[pedal]['value'],
+                        gt[pedal]['times'],
+                        gt[pedal]['values'],
                         [-1]*l,
                         [-1]*l))
                 elif pedal == 'sostenuto':
                     cc_track_pedaling += list(zip(
-                        gt[pedal]['time'],
+                        gt[pedal]['times'],
                         [-1]*l,
-                        gt[pedal]['value'],
+                        gt[pedal]['values'],
                         [-1]*l))
                 elif pedal == 'soft':
                     cc_track_pedaling += list(zip(
-                        gt[pedal]['time'],
+                        gt[pedal]['times'],
                         [-1]*l,
                         [-1]*l,
-                        gt[pedal]['value']))
+                        gt[pedal]['values']))
             # sort cc according to time...
             cc_track_pedaling.sort(lambda row: row[0])
             cc_track_pedaling = np.array(cc_track_pedaling)

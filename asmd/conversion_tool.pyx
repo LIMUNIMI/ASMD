@@ -195,12 +195,12 @@ def create_gt(data_fn, gztar=False, alignment_stats=None, whitelist=[], blacklis
     for dataset in datasets:
         if blacklist:
             if dataset['name'] in blacklist:
-                print(dataset['name'] + "in blacklist!")
+                print(dataset['name'] + " in blacklist!")
                 continue
 
         if whitelist:
             if dataset['name'] not in whitelist:
-                print(dataset['name'] + "not in whitelist!")
+                print(dataset['name'] + " not in whitelist!")
                 continue
 
         if not os.path.exists(os.path.join(json_file["install_dir"], dataset["name"])):
