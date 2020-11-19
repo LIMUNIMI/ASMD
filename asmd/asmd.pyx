@@ -298,6 +298,7 @@ class Dataset:
         sources_fn = self.paths[idx][1]
 
         sources = []
+        sr = -1
         for source_fn in sources_fn:
             audio, sr = utils.open_audio(joinpath(self.install_dir, source_fn))
             sources.append(audio)
@@ -493,7 +494,7 @@ class Dataset:
         mat = mat[mat[:, 1].argsort()]
         return mat
 
-    def get_pedaling(self, idx, frame_based=False, winlen=0.046, hop=0.010):
+    def get_pedaling(self, idx, frame_based=False, winlen=0.046, hop=0.01):
         """
         Get data about pedaling
 
@@ -518,12 +519,17 @@ class Dataset:
             list of 2d-arrays each listing all the control changes events in a
             track. Rows represent control changes or frames (according to
             `frame_based_option`) while columns represent (time, sustain value,
-            soft value, sostenuto value). If `frame_based` is used, time is the
-            central time of the frame and frames are computed using the most
-            aligned core available. Value -1 is used for pedaling type not
-            affected from a row (e.g. a control change affects one type of
-            pedaling, so the other two will have value -1). The output is
-            sorted by time.
+            soft value, sostenuto value).
+
+            If `frame_based` is used, time is the central time of the frame and
+            frames are computed using the most aligned score available for this
+            item.
+
+            If `frame_based` is False, value -1 is used for pedaling type not
+            affected in a certain control change (i.e. a control change affects
+            one type of pedaling, so the other two will have value -1).
+
+            The output is sorted by time.
         """
         pedaling = []
         for gt in self.get_gts(idx):
@@ -550,7 +556,7 @@ class Dataset:
                         [-1]*l,
                         gt[pedal]['values']))
             # sort cc according to time...
-            cc_track_pedaling.sort(lambda row: row[0])
+            cc_track_pedaling.sort(key=lambda row: row[0])
             cc_track_pedaling = np.array(cc_track_pedaling)
 
             if not frame_based:
@@ -558,13 +564,15 @@ class Dataset:
             else:
                 # construct the frame-based output
                 # compute the number of frames
-                dur = self.get_duration(idx)
-                n_frames = (dur - winlen) // hop + 1
+                dur = self.get_score_duration(idx)
+                n_frames = int((dur - winlen) / hop + 1)
 
                 # set up initial matrix that will be output
-                frame_track_pedaling = np.empty(n_frames, 4)
+                frame_track_pedaling = np.empty((n_frames, 4), dtype=float)
                 frame_track_pedaling[:, 0] = np.arange(winlen / 2, hop*n_frames
-                                                       + winlen//2, hop)
+                                                       + winlen/2, hop)
+                print(frame_track_pedaling.dtype)
+
                 # fill the matrix
                 # rember the last value used for each column index:
                 last_values = {
@@ -603,7 +611,7 @@ class Dataset:
                                        'non_aligned'], gts)
 
         gts_m = 0
-        for gt in enumerate(gts):
+        for gt in gts:
             gt_m = max(gt[score_type]['offsets'])
             if gt_m > gts_m:
                 gts_m = gt_m
@@ -618,6 +626,9 @@ class Dataset:
         Returns
         -------
 
+        list of tuples :
+            each tuple is referred to a source and contains the following
+
         int :
             duration in seconds
         int :
@@ -627,9 +638,14 @@ class Dataset:
         int :
             number of channels
         """
-        recordings_fn = joinpath(self.install_dir, self.paths[idx][0])
-        reader = MetadataReader(filename=str(recordings_fn), filterMetadata=True)
-        return reader()[-4:]
+        recordings_fn = self.paths[idx][0]
+
+        metadata = []
+        for recording_fn in recordings_fn:
+            recording_fn = joinpath(self.install_dir, recording_fn)
+            reader = MetadataReader(filename=str(recording_fn), filterMetadata=True)
+            metadata.append(reader()[-4:])
+        return metadata
 
     def get_audio(self, idx, sources=None):
         """

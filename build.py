@@ -3,7 +3,7 @@ from Cython.Build import cythonize
 import numpy
 
 extensions = [
-    Extension("asmd.audioscoredataset", ["asmd/audioscoredataset.pyx"],
+    Extension("asmd.asmd", ["asmd/asmd.pyx"],
               include_dirs=[numpy.get_include()]),
     Extension("asmd.convert_from_file", ["asmd/convert_from_file.pyx"]),
     Extension("asmd.conversion_tool", ["asmd/conversion_tool.pyx"]),

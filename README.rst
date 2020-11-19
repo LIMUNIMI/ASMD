@@ -29,7 +29,10 @@ Version 0.2
 #. Added ``get_audio_data`` to get data about audio without loading it
 #. Added ``get_score_duration`` to get the full duration of a score without
    loading it
+#. Added another name for the API: ``from asmd import asmd``
+#. Deprecated ``from asmd import audioscoredataset``
 #. Changed the ``generate_ground_truth`` command line options
+#. Easier to generate misaligned data
 #. Improved documentation
 
 Roadmap
