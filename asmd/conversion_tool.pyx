@@ -174,7 +174,7 @@ def conversion(arg):
     return to_be_included_in_the_archive
 
 
-def create_gt(data_fn, args, gztar=False, alignment_stats=None):
+def create_gt(data_fn, gztar=False, alignment_stats=None, whitelist=[], blacklist=[]):
     """
     Parse the json file `data_fn` and convert all ground_truth to our
     representation. Then dump it according to the specified paths. Finally,
@@ -193,9 +193,14 @@ def create_gt(data_fn, args, gztar=False, alignment_stats=None):
     to_be_included_in_the_archive = []
     datasets = load_definitions(joinpath(THISDIR, 'definitions'))
     for dataset in datasets:
-        if len(args) > 1:
-            if dataset['name'] not in args:
-                print("Skipping", dataset['name'])
+        if blacklist:
+            if dataset['name'] in blacklist:
+                print(dataset['name'] + "in blacklist!")
+                continue
+
+        if whitelist:
+            if dataset['name'] not in whitelist:
+                print(dataset['name'] + "not in whitelist!")
                 continue
 
         if not os.path.exists(os.path.join(json_file["install_dir"], dataset["name"])):
