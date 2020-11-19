@@ -16,6 +16,30 @@ Other examples in the paper!
 
 .. _docs: https://asmd.readthedocs.org
 
+Changelog
+=========
+
+Version 0.2
+^^^^^^^^^^^
+
+#. Added ``parallel`` utility to run code in paralle over a while dataset
+#. Added ``get_pianoroll`` utility to get score as pianoroll
+#. Added ``sustain``, ``sostenuto``, and ``soft`` to model pedaling information
+#. Added utilities ``frame2time`` and ``time2frame`` to ease the development
+#. Added ``get_audio_data`` to get data about audio without loading it
+#. Added ``get_score_duration`` to get the full duration of a score without
+   loading it
+#. Changed the ``generate_ground_truth`` command line options
+#. Improved documentation
+
+Roadmap
+=======
+
+#. Add new modalities (video, images)
+#. Improve the artificial misalignment
+#. Add datasets for the artificial misalignment (e.g. ASAP, Giant-Midi Piano)
+#. Add other datasets
+
 Cite us
 =======
 
