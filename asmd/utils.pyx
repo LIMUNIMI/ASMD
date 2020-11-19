@@ -5,6 +5,24 @@ from essentia.standard import EasyLoader as Loader
 from essentia.standard import MetadataReader
 
 
+def frame2time(frame, hop_size=3072, win_len=4096):
+    """
+    Takes frame index (int) and returns the corresponding central sample
+    The output will use the same unity of measure as ``hop_size`` and
+    ``win_len`` (e.g. samples or seconds).
+    Indices start from 0.
+    """
+    return frame * hop_size + win_len / 2
+
+def time2frame(time, hop_size=3072, win_len=4096):
+    """
+    Takes a time position and outputs the best frame representing it.
+    The input must use the same unity of measure for ``time``, ``hop_size``, and
+    ``win_len`` (e.g. samples or seconds).
+    Indices start from 0.
+    """
+    return round((time - win_len / 2) / hop_size)
+
 def open_audio(audio_fn):
     """
     Open the audio file in `audio_fn` and returns a numpy array containing it,
