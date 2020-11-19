@@ -40,10 +40,10 @@ Install poetry, pyenv and python
 #. ``cd myproject``
 #. ``pyenv local 3.6.9`` (optional, recommended python >= 3.6.9)
 
-Install ASMD
-^^^^^^^^^^^^
+Setup new project or testing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. ``git clone https://framagit.org/sapo/asmd.git``
+#. ``git clone https://gitlab.di.unimi.it/federicosimonetta/asmd/``
 #. ``poetry add asmd/``
 #. Execute ``poetry run python -m asmd.install``; alternatively run ``poetry
    shell`` and then ``python -m asmd.install``
@@ -53,3 +53,19 @@ Now you can start developing in the parent directory (``myproject``) and
 you can use ``from asmd import audioscoredataset as asd``.
 
 Use ``poetry`` to manage packages of your project.
+
+Alternative way
+^^^^^^^^^^^^^^^
+
+#. clone the project.
+#. to build the modules in place, run ``poetry run python setup.py build_ext --inplace``
+#. create an ad-hoc directory for testing anywhere:
+   
+   #. copy there the original ``pyproject.toml``
+   #. install the needed dependencies with ``poetry update``
+   #. export the ``PYTHONPATH`` environment variable: e.g.
+      ``export PYTHONPATH="path/to/asmd"``.
+
+You're now ready to use ASMD without downloading it from PyPI.
+
+To create the python package, just run ``poetry build``.
