@@ -9,6 +9,7 @@ from joblib import Parallel, delayed
 from . import utils
 from os.path import join as joinpath
 from essentia.standard import Resample
+from essentia.standard import MetadataReader
 # this only for detecting package directory but breaks readthedocs
 from .idiot import THISDIR
 # THISDIR = './datasets/'
@@ -363,7 +364,7 @@ class Dataset:
         pianoroll = np.zeros((128, int(max(max_offs)/resolution) + 1))
 
         # filling pianoroll
-        for i, gt in enumerate(gts):
+        for gt in gts:
             ons = gt[score_type]['onsets']
             offs = gt[score_type]['offsets']
             pitches = gt[score_type]['pitches']
@@ -492,6 +493,144 @@ class Dataset:
         mat = mat[mat[:, 1].argsort()]
         return mat
 
+    def get_pedaling(self, idx, frame_based=False, winlen=0.046, hop=0.010):
+        """
+        Get data about pedaling
+
+        Arguments
+        ---------
+        idx : int
+            The index of the song to retrieve.
+        frame_based : bool
+            If True, the output will contain one row per frame, otherwise one
+            row per control changes event.  Frames are deduced from `winlen` and
+            `hop`.
+        winlen : float
+            The duration of a frame in seconds; only used if `frame_based` is
+            True.
+        hop : float
+            The amount of hop-size in seconds; only used if `frame_based` is
+            True.
+
+        Returns
+        -------
+        list[np.ndarry] :
+            list of 2d-arrays each listing all the control changes events in a
+            track. Rows represent control changes or frames (according to
+            `frame_based_option`) while columns represent (time, sustain value,
+            soft value, sostenuto value). If `frame_based` is used, time is the
+            central time of the frame and frames are computed using the most
+            aligned core available. Value -1 is used for pedaling type not
+            affected from a row (e.g. a control change affects one type of
+            pedaling, so the other two will have value -1). The output is
+            sorted by time.
+        """
+        pedaling = []
+        for gt in self.get_gts(idx):
+            # take all cc...
+            cc_track_pedaling = []
+            for pedal in ['sustain', 'sostenuto', 'soft']:
+                l = len(gt[pedal]['value'])
+                if pedal == 'sustain':
+                    cc_track_pedaling += list(zip(
+                        gt[pedal]['time'],
+                        gt[pedal]['value'],
+                        [-1]*l,
+                        [-1]*l))
+                elif pedal == 'sostenuto':
+                    cc_track_pedaling += list(zip(
+                        gt[pedal]['time'],
+                        [-1]*l,
+                        gt[pedal]['value'],
+                        [-1]*l))
+                elif pedal == 'soft':
+                    cc_track_pedaling += list(zip(
+                        gt[pedal]['time'],
+                        [-1]*l,
+                        [-1]*l,
+                        gt[pedal]['value']))
+            # sort cc according to time...
+            cc_track_pedaling.sort(lambda row: row[0])
+            cc_track_pedaling = np.array(cc_track_pedaling)
+
+            if not frame_based:
+                pedaling.append(cc_track_pedaling)
+            else:
+                # construct the frame-based output
+                # compute the number of frames
+                dur = self.get_duration(idx)
+                n_frames = (dur - winlen) // hop + 1
+
+                # set up initial matrix that will be output
+                frame_track_pedaling = np.empty(n_frames, 4)
+                frame_track_pedaling[:, 0] = np.arange(winlen / 2, hop*n_frames
+                                                       + winlen//2, hop)
+                # fill the matrix
+                # rember the last value used for each column index:
+                last_values = {
+                    1: {"time": 0, "value": 0},
+                    2: {"time": 0, "value": 0},
+                    3: {"time": 0, "value": 0},
+                }
+                # parse the control changes
+                for cc in cc_track_pedaling:
+                    # compute the frame relative to this cc
+                    frame_idx = utils.time2frame(cc[0], hop, winlen)
+                    # put all values from last cc to this one equal to the last value
+                    type_of_cc = np.argmax(cc[1:]) + 1
+                    frame_track_pedaling[
+                        last_values[type_of_cc]["time"]:frame_idx, type_of_cc] =\
+                        last_values[type_of_cc]["value"]
+                    # update the last value
+                    last_values[type_of_cc]["time"] = frame_idx
+                    last_values[type_of_cc]["value"] = cc[type_of_cc]
+
+                # put all values from last cc to the end equal to the last value
+                for type_of_cc in range(1, 4):
+                    frame_track_pedaling[
+                        last_values[type_of_cc]["time"]:frame_idx, type_of_cc] =\
+                        last_values[type_of_cc]["value"]
+                pedaling.append(np.array(frame_track_pedaling))
+        return pedaling
+
+    def get_score_duration(self, idx):
+        """
+        Returns the duration of the most aligned score available for a specific
+        item
+        """
+        gts = self.get_gts(idx)
+        score_type = chose_score_type(['precise_alignment', 'broad_alignment',
+                                       'non_aligned'], gts)
+
+        gts_m = 0
+        for gt in enumerate(gts):
+            gt_m = max(gt[score_type]['offsets'])
+            if gt_m > gts_m:
+                gts_m = gt_m
+        return gts_m
+
+    def get_audio_data(self, idx):
+        """
+        Returns audio data of a specific item without loading the full audio.
+
+        N.B. see essentia.standard.MetadataReader!
+
+        Returns
+        -------
+
+        int :
+            duration in seconds
+        int :
+            bitrate (kb/s)
+        int :
+            sample rate
+        int :
+            number of channels
+        """
+        recordings_fn = joinpath(self.install_dir, self.paths[idx][0])
+        reader = MetadataReader(filename=str(recordings_fn), filterMetadata=True)
+        return reader()[-4:]
+
     def get_audio(self, idx, sources=None):
         """
         Get the mixed audio of certain sources or of the mix
@@ -505,8 +644,8 @@ class Dataset:
             If `None`, no sources will be mixed and the global mix will be
             returned.
 
-        Arguments
-        ---------
+        Returns
+        -------
         numpy.ndarray :
             A (n x 1) array which represents the mixed audio.
         int :
