@@ -565,7 +565,7 @@ class Dataset:
                 # construct the frame-based output
                 # compute the number of frames
                 dur = self.get_score_duration(idx)
-                n_frames = int((dur - winlen) / hop + 1)
+                n_frames = int(utils.nframes(dur, hop, winlen)) + 1
 
                 # set up initial matrix that will be output
                 frame_track_pedaling = np.empty((n_frames, 4), dtype=float)
