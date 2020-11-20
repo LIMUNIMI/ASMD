@@ -20,7 +20,7 @@ Changelog
 =========
 
 Version 0.2.1
-^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 #. Added ``nframes`` utility to compute the number of frames in a given time lapse
 #. Added ``group`` attribute to each track to create splits in a dataset
