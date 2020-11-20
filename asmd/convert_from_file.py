@@ -1,4 +1,3 @@
-# cython: language_level=3
 import os
 import csv
 import numpy as np

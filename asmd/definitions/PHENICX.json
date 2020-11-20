@@ -1,18 +1,29 @@
 {
-    "name" : "PHENICX",
-    "ensemble" : true,
-    "ground_truth" : {
-        "broad_alignment" : 1,
-        "f0" : 0,
-        "sustain": 0,
+    "ensemble": true,
+    "ground_truth": {
+        "beats_non_aligned": 0,
+        "broad_alignment": 1,
+        "f0": 0,
+        "non_aligned": 2,
+        "precise_alignment": 0,
         "soft": 0,
         "sostenuto": 0,
-        "non_aligned" : 2,
-        "precise_alignment" : 0,
-        "velocities" : 0,
-        "beats_non_aligned" : 0
+        "sustain": 0,
+        "velocities": 0
     },
-    "instruments" : [
+    "install": {
+        "conversion": [
+            [
+                "from_phenicx_txt",
+                {}
+            ]
+        ],
+        "login": false,
+        "post-process": "unknown",
+        "unpack": true,
+        "url": "https://zenodo.org/record/1289821/files/PHENICX-Anechoic_1.zip"
+    },
+    "instruments": [
         "violin",
         "viola",
         "cello",
@@ -24,13 +35,14 @@
         "trumpet",
         "bassoon"
     ],
-    "recording" : {
-        "format" : "wav"
+    "name": "PHENICX",
+    "recording": {
+        "format": "wav"
     },
-    "songs" : [
+    "songs": [
         {
-            "composer" : "Beethoven",
-            "ground_truth" : [
+            "composer": "Beethoven",
+            "ground_truth": [
                 "PHENICX/PHENICX-Anechoic/annotations/beethoven/bassoon-0.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/beethoven/bassoon-1.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/beethoven/cello-0.json.gz",
@@ -52,7 +64,8 @@
                 "PHENICX/PHENICX-Anechoic/annotations/beethoven/violin-2.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/beethoven/violin-3.json.gz"
             ],
-            "instruments" : [
+            "groups": [],
+            "instruments": [
                 "bassoon",
                 "bassoon",
                 "cello",
@@ -74,8 +87,8 @@
                 "violin",
                 "violin"
             ],
-            "recording" : {
-                "path" : [
+            "recording": {
+                "path": [
                     "PHENICX/PHENICX-Anechoic/audio/beethoven/violin4.wav",
                     "PHENICX/PHENICX-Anechoic/audio/beethoven/violin3.wav",
                     "PHENICX/PHENICX-Anechoic/audio/beethoven/violin2.wav",
@@ -98,8 +111,8 @@
                     "PHENICX/PHENICX-Anechoic/audio/beethoven/bassoon1.wav"
                 ]
             },
-            "sources" : {
-                "path" : [
+            "sources": {
+                "path": [
                     "PHENICX/PHENICX-Anechoic/audio/beethoven/violin4.wav",
                     "PHENICX/PHENICX-Anechoic/audio/beethoven/violin3.wav",
                     "PHENICX/PHENICX-Anechoic/audio/beethoven/violin2.wav",
@@ -122,11 +135,11 @@
                     "PHENICX/PHENICX-Anechoic/audio/beethoven/bassoon1.wav"
                 ]
             },
-            "title" : "Symphony no. 7, I mov."
+            "title": "Symphony no. 7, I mov."
         },
         {
-            "composer" : "Bruckner",
-            "ground_truth" : [
+            "composer": "Bruckner",
+            "ground_truth": [
                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/bassoon-0.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/bassoon-1.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/bassoon-2.json.gz",
@@ -167,7 +180,8 @@
                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-7.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-8.json.gz"
             ],
-            "instruments" : [
+            "groups": [],
+            "instruments": [
                 "bassoon",
                 "bassoon",
                 "bassoon",
@@ -208,8 +222,8 @@
                 "violin",
                 "violin"
             ],
-            "recording" : {
-                "path" : [
+            "recording": {
+                "path": [
                     "PHENICX/PHENICX-Anechoic/audio/bruckner/bassoon1.wav",
                     "PHENICX/PHENICX-Anechoic/audio/bruckner/bassoon2.wav",
                     "PHENICX/PHENICX-Anechoic/audio/bruckner/bassoon3.wav",
@@ -251,8 +265,8 @@
                     "PHENICX/PHENICX-Anechoic/audio/bruckner/violin9.wav"
                 ]
             },
-            "sources" : {
-                "path" : [
+            "sources": {
+                "path": [
                     "PHENICX/PHENICX-Anechoic/audio/bruckner/bassoon1.wav",
                     "PHENICX/PHENICX-Anechoic/audio/bruckner/bassoon2.wav",
                     "PHENICX/PHENICX-Anechoic/audio/bruckner/bassoon3.wav",
@@ -294,11 +308,11 @@
                     "PHENICX/PHENICX-Anechoic/audio/bruckner/violin9.wav"
                 ]
             },
-            "title" : "Symphony no. 8, II mov."
+            "title": "Symphony no. 8, II mov."
         },
         {
-            "composer" : "Mahler",
-            "ground_truth" : [
+            "composer": "Mahler",
+            "ground_truth": [
                 "PHENICX/PHENICX-Anechoic/annotations/mahler/bassoon-0.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/mahler/bassoon-1.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/mahler/bassoon-2.json.gz",
@@ -330,7 +344,8 @@
                 "PHENICX/PHENICX-Anechoic/annotations/mahler/violin-2.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/mahler/violin-3.json.gz"
             ],
-            "instruments" : [
+            "groups": [],
+            "instruments": [
                 "bassoon",
                 "bassoon",
                 "bassoon",
@@ -362,8 +377,8 @@
                 "violin",
                 "violin"
             ],
-            "recording" : {
-                "path" : [
+            "recording": {
+                "path": [
                     "PHENICX/PHENICX-Anechoic/audio/mahler/bassoon1.wav",
                     "PHENICX/PHENICX-Anechoic/audio/mahler/bassoon2.wav",
                     "PHENICX/PHENICX-Anechoic/audio/mahler/bassoon3.wav",
@@ -396,8 +411,8 @@
                     "PHENICX/PHENICX-Anechoic/audio/mahler/violin4.wav"
                 ]
             },
-            "sources" : {
-                "path" : [
+            "sources": {
+                "path": [
                     "PHENICX/PHENICX-Anechoic/audio/mahler/bassoon1.wav",
                     "PHENICX/PHENICX-Anechoic/audio/mahler/bassoon2.wav",
                     "PHENICX/PHENICX-Anechoic/audio/mahler/bassoon3.wav",
@@ -430,11 +445,11 @@
                     "PHENICX/PHENICX-Anechoic/audio/mahler/violin4.wav"
                 ]
             },
-            "title" : "Symphony no. 1, IV mov."
+            "title": "Symphony no. 1, IV mov."
         },
         {
-            "composer" : "Mozart",
-            "ground_truth" : [
+            "composer": "Mozart",
+            "ground_truth": [
                 "PHENICX/PHENICX-Anechoic/annotations/mozart/bassoon-0.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/mozart/cello-0.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/mozart/clarinet-0.json.gz",
@@ -446,7 +461,8 @@
                 "PHENICX/PHENICX-Anechoic/annotations/mozart/violin-0.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/mozart/violin-1.json.gz"
             ],
-            "instruments" : [
+            "groups": [],
+            "instruments": [
                 "bassoon",
                 "cello",
                 "clarinet",
@@ -458,8 +474,8 @@
                 "violin",
                 "violin"
             ],
-            "recording" : {
-                "path" : [
+            "recording": {
+                "path": [
                     "PHENICX/PHENICX-Anechoic/audio/mozart/bassoon.wav",
                     "PHENICX/PHENICX-Anechoic/audio/mozart/cello.wav",
                     "PHENICX/PHENICX-Anechoic/audio/mozart/clarinet.wav",
@@ -472,8 +488,8 @@
                     "PHENICX/PHENICX-Anechoic/audio/mozart/violin2.wav"
                 ]
             },
-            "sources" : {
-                "path" : [
+            "sources": {
+                "path": [
                     "PHENICX/PHENICX-Anechoic/audio/mozart/bassoon.wav",
                     "PHENICX/PHENICX-Anechoic/audio/mozart/cello.wav",
                     "PHENICX/PHENICX-Anechoic/audio/mozart/clarinet.wav",
@@ -486,17 +502,10 @@
                     "PHENICX/PHENICX-Anechoic/audio/mozart/violin2.wav"
                 ]
             },
-            "title" : "Don Giovanni"
+            "title": "Don Giovanni"
         }
     ],
-    "sources" : {
-        "format" : "wav"
-    },
-    "install": {
-        "unpack" : true,
-        "login" : false,
-        "post-process" : "unknown",
-        "url" : "https://zenodo.org/record/1289821/files/PHENICX-Anechoic_1.zip",
-        "conversion": [["from_phenicx_txt", {}]]
+    "sources": {
+        "format": "wav"
     }
 }

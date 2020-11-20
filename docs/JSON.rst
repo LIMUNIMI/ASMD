@@ -57,6 +57,8 @@ following field:
       that some ground_truth paths can be identical (as in PHENICX for
       indicating that violin1 and violin2 are playing exactly the same
       thing).
+   #. ``groups``: list of strings representing a group of the dataset.
+      Recommended names for groups are: 'train', 'validation', 'test'.
    
 #. ``install``: where information for the installation process are stored
 

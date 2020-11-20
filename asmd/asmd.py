@@ -1,26 +1,28 @@
-# cython: language_level=3
-import json
 import gzip
+import json
 import os
-cimport numpy
-import numpy as np
-from tqdm import tqdm
-from joblib import Parallel, delayed
-from . import utils
 from os.path import join as joinpath
-from essentia.standard import Resample
-from essentia.standard import MetadataReader
+
+import numpy as np
+from essentia.standard import MetadataReader, Resample
+from joblib import Parallel, delayed
+from tqdm import tqdm
+
+from . import utils
 # this only for detecting package directory but breaks readthedocs
 from .idiot import THISDIR
+
 # THISDIR = './datasets/'
 
 
 class Dataset:
-
     def __len__(self):
         return len(self.paths)
 
-    def __init__(self, paths=[joinpath(THISDIR, 'definitions/')], metadataset_path=joinpath(THISDIR, 'datasets.json'), empty=False):
+    def __init__(self,
+                 paths=[joinpath(THISDIR, 'definitions/')],
+                 metadataset_path=joinpath(THISDIR, 'datasets.json'),
+                 empty=False):
         """
         Load the dataset description
 
@@ -62,8 +64,12 @@ class Dataset:
         self.paths = []
         self._chunks = {}
 
-
-    def parallel(self, func, *args, n_jobs=-2, backend="multiprocessing", **kwargs):
+    def parallel(self,
+                 func,
+                 *args,
+                 n_jobs=-2,
+                 backend="multiprocessing",
+                 **kwargs):
         """
         Applies a function to all items in `paths` in parallel using `joblib.Parallel`.
 
@@ -98,10 +104,19 @@ class Dataset:
         """
 
         return Parallel(n_jobs, backend=backend)(
-            delayed(func_wrapper)(func, self.paths[i], args, kwargs) for i in tqdm(range(len(self.paths))))
+            delayed(func_wrapper)(func, self.paths[i], args, kwargs)
+            for i in tqdm(range(len(self.paths))))
 
-
-    def filter(self, instruments=[], ensemble=None, mixed=True, sources=False, all=False, composer='', datasets=[], ground_truth=[]):
+    def filter(self,
+               instruments=[],
+               ensemble=None,
+               mixed=True,
+               sources=False,
+               all=False,
+               composer='',
+               datasets=[],
+               groups=[],
+               ground_truth=[]):
         """
         Filters the dataset and load the paths of the songs which accomplish
         the filter described in `kwargs`. A field `paths` is added to this
@@ -128,6 +143,11 @@ class Dataset:
             False, only the first target instrument is returned. Default False.
         composer : string
             the surname of the composer to filter
+        groups : list of strings
+            a list of strings containing the name of the groups that you want
+            to retrieve. If empty, all groups are used. Example of groups are:
+            'training', 'validation', 'test'. The available groups depend on
+            the dataset. Only Maestro dataset supported for now.
         datasets : list of strings
             a list of strings containing the name of the datasets to be used.
             If empty, all datasets are used. See :doc:`License` for the
@@ -177,6 +197,14 @@ class Dataset:
                         if composer not in song['composer']:
                             FLAG = False
 
+                    if groups:
+                        for group in song['groups']:
+                            if group in groups:
+                                FLAG = True
+                                break
+                            else:
+                                FLAG = False
+
                     if FLAG:
                         gts = song['ground_truth']
                         source = []
@@ -201,11 +229,10 @@ class Dataset:
 
         return self
 
-
     def idx_chunk_to_whole(self, name, idx):
         """
-        Given a dataset name and an idx or a list of idx relative to the input dataset,
-        returns the idx relative to this whole dataset.
+        Given a dataset name and an idx or a list of idx relative to the input
+        dataset, returns the idx relative to this whole dataset.
         """
         if type(idx) is int:
             return idx + self._chunks[name][0]
@@ -213,7 +240,6 @@ class Dataset:
             return [i + self._chunks[name][0] for i in idx]
         else:
             raise Exception('idx should be int or list of int!')
-
 
     def get_mix(self, idx, sr=None):
         """
@@ -327,7 +353,13 @@ class Dataset:
         gts = self.get_gts(idx)
         return mix, sources, gts
 
-    def get_pianoroll(self, idx, score_type=['non_aligned'], truncate=False, resolution=0.25, onsets=False, velocity=True):
+    def get_pianoroll(self,
+                      idx,
+                      score_type=['non_aligned'],
+                      truncate=False,
+                      resolution=0.25,
+                      onsets=False,
+                      velocity=True):
         """
         Create pianoroll from list of pitches, onsets and offsets (in this order).
 
@@ -362,7 +394,7 @@ class Dataset:
 
         # computing the maximum offset
         max_offs = [max(gt[score_type]['offsets']) for gt in gts]
-        pianoroll = np.zeros((128, int(max(max_offs)/resolution) + 1))
+        pianoroll = np.zeros((128, int(max(max_offs) / resolution) + 1))
 
         # filling pianoroll
         for gt in gts:
@@ -538,23 +570,17 @@ class Dataset:
             for pedal in ['sustain', 'sostenuto', 'soft']:
                 l = len(gt[pedal]['values'])
                 if pedal == 'sustain':
-                    cc_track_pedaling += list(zip(
-                        gt[pedal]['times'],
-                        gt[pedal]['values'],
-                        [-1]*l,
-                        [-1]*l))
+                    cc_track_pedaling += list(
+                        zip(gt[pedal]['times'], gt[pedal]['values'], [-1] * l,
+                            [-1] * l))
                 elif pedal == 'sostenuto':
-                    cc_track_pedaling += list(zip(
-                        gt[pedal]['times'],
-                        [-1]*l,
-                        gt[pedal]['values'],
-                        [-1]*l))
+                    cc_track_pedaling += list(
+                        zip(gt[pedal]['times'], [-1] * l, gt[pedal]['values'],
+                            [-1] * l))
                 elif pedal == 'soft':
-                    cc_track_pedaling += list(zip(
-                        gt[pedal]['times'],
-                        [-1]*l,
-                        [-1]*l,
-                        gt[pedal]['values']))
+                    cc_track_pedaling += list(
+                        zip(gt[pedal]['times'], [-1] * l, [-1] * l,
+                            gt[pedal]['values']))
             # sort cc according to time...
             cc_track_pedaling.sort(key=lambda row: row[0])
             cc_track_pedaling = np.array(cc_track_pedaling)
@@ -569,16 +595,25 @@ class Dataset:
 
                 # set up initial matrix that will be output
                 frame_track_pedaling = np.empty((n_frames, 4), dtype=float)
-                frame_track_pedaling[:, 0] = np.arange(winlen / 2, hop*n_frames
-                                                       + winlen/2, hop)
+                frame_track_pedaling[:, 0] = np.arange(
+                    winlen / 2, hop * n_frames + winlen / 2, hop)
                 print(frame_track_pedaling.dtype)
 
                 # fill the matrix
                 # rember the last value used for each column index:
                 last_values = {
-                    1: {"time": 0, "value": 0},
-                    2: {"time": 0, "value": 0},
-                    3: {"time": 0, "value": 0},
+                    1: {
+                        "time": 0,
+                        "value": 0
+                    },
+                    2: {
+                        "time": 0,
+                        "value": 0
+                    },
+                    3: {
+                        "time": 0,
+                        "value": 0
+                    },
                 }
                 # parse the control changes
                 for cc in cc_track_pedaling:
@@ -607,8 +642,8 @@ class Dataset:
         item
         """
         gts = self.get_gts(idx)
-        score_type = chose_score_type(['precise_alignment', 'broad_alignment',
-                                       'non_aligned'], gts)
+        score_type = chose_score_type(
+            ['precise_alignment', 'broad_alignment', 'non_aligned'], gts)
 
         gts_m = 0
         for gt in gts:
@@ -643,7 +678,8 @@ class Dataset:
         metadata = []
         for recording_fn in recordings_fn:
             recording_fn = joinpath(self.install_dir, recording_fn)
-            reader = MetadataReader(filename=str(recording_fn), filterMetadata=True)
+            reader = MetadataReader(filename=str(recording_fn),
+                                    filterMetadata=True)
             metadata.append(reader()[-4:])
         return metadata
 
@@ -705,8 +741,8 @@ def find_bach10_errors(gt, score_type):
     if len(gt[score_type]['pitches']) != len(gt[score_type]['onsets']):
         diff_notes = len(gt[score_type]['pitches']) - \
             len(gt[score_type]['onsets'])
-        print('---- This file contains different data in ' +
-              score_type+' and number of pitches!')
+        print('---- This file contains different data in ' + score_type +
+              ' and number of pitches!')
         print('----', diff_notes, 'different notes')
         return True
     return False
@@ -724,15 +760,21 @@ def truncate_score(gt):
     # look for the length of the final lists
     for score_type in score_types:
         if len(gt[score_type]['onsets']) > 0:
-            length_to_truncate = min(
-                [len(gt[score_type]['onsets']), length_to_truncate, len(gt[score_type]['pitches'])])
+            length_to_truncate = min([
+                len(gt[score_type]['onsets']), length_to_truncate,
+                len(gt[score_type]['pitches'])
+            ])
 
     # truncating lists
     for score_type in score_types:
-        gt[score_type]['pitches'] = gt[score_type]['pitches'][:length_to_truncate]
-        gt[score_type]['velocities'] = gt[score_type]['velocities'][:length_to_truncate]
-        gt[score_type]['onsets'] = gt[score_type]['onsets'][:length_to_truncate]
-        gt[score_type]['offsets'] = gt[score_type]['offsets'][:length_to_truncate]
+        gt[score_type]['pitches'] = gt[score_type][
+            'pitches'][:length_to_truncate]
+        gt[score_type]['velocities'] = gt[score_type][
+            'velocities'][:length_to_truncate]
+        gt[score_type]['onsets'] = gt[score_type][
+            'onsets'][:length_to_truncate]
+        gt[score_type]['offsets'] = gt[score_type][
+            'offsets'][:length_to_truncate]
 
 
 def load_definitions(path):
@@ -772,9 +814,11 @@ def chose_score_type(score_type, gts):
         The list of ground truths from which you want to chose a score_type
     """
     if len(score_type) > 1:
-        if 'precise_alignment' in score_type and len(gts[0]['precise_alignment']['pitches']) > 0:
+        if 'precise_alignment' in score_type and len(
+                gts[0]['precise_alignment']['pitches']) > 0:
             score_type = 'precise_alignment'
-        elif 'broad_alignment' in score_type and len(gts[0]['broad_alignment']['pitches']) > 0:
+        elif 'broad_alignment' in score_type and len(
+                gts[0]['broad_alignment']['pitches']) > 0:
             score_type = 'broad_alignment'
         else:
             score_type = 'non_aligned'

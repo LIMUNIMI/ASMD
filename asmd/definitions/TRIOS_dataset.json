@@ -1,18 +1,29 @@
 {
-    "name" : "TRIOS_dataset",
-    "ensemble" : true,
-    "ground_truth" : {
-        "broad_alignment" : 0,
-        "f0" : 0,
-        "sustain": 0,
+    "ensemble": true,
+    "ground_truth": {
+        "beats_non_aligned": 0,
+        "broad_alignment": 0,
+        "f0": 0,
+        "non_aligned": 2,
+        "precise_alignment": 1,
         "soft": 0,
         "sostenuto": 0,
-        "non_aligned" : 2,
-        "precise_alignment" : 1,
-        "velocities" : 1,
-        "beats_non_aligned" : 0
+        "sustain": 0,
+        "velocities": 1
     },
-    "instruments" : [
+    "install": {
+        "conversion": [
+            [
+                "from_midi",
+                {}
+            ]
+        ],
+        "login": false,
+        "post-process": "unknown",
+        "unpack": true,
+        "url": "https://c4dm.eecs.qmul.ac.uk/rdr/bitstream/handle/123456789/27/TRIOS_dataset.zip"
+    },
+    "instruments": [
         "clarinet",
         "viola",
         "piano",
@@ -24,137 +35,143 @@
         "alto sax",
         "drum kit"
     ],
-    "recording" : {
-        "format" : "wav"
+    "name": "TRIOS_dataset",
+    "recording": {
+        "format": "wav"
     },
-    "songs" : [
+    "songs": [
         {
-            "composer" : "Mozart",
-            "ground_truth" : [
+            "composer": "Mozart",
+            "ground_truth": [
                 "TRIOS_dataset/TRIOS_dataset/mozart/clarinet-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/mozart/viola-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/mozart/piano-0.json.gz"
             ],
-            "instruments" : [
+            "groups": [],
+            "instruments": [
                 "clarinet",
                 "viola",
                 "piano"
             ],
-            "recording" : {
-                "path" : [
+            "recording": {
+                "path": [
                     "TRIOS_dataset/TRIOS_dataset/mozart/mix.wav"
                 ]
             },
-            "sources" : {
-                "path" : [
+            "sources": {
+                "path": [
                     "TRIOS_dataset/TRIOS_dataset/mozart/clarinet.wav",
                     "TRIOS_dataset/TRIOS_dataset/mozart/viola.wav",
                     "TRIOS_dataset/TRIOS_dataset/mozart/piano.wav"
                 ]
             },
-            "title" : "K498"
+            "title": "K498"
         },
         {
-            "composer" : "Schubert",
-            "ground_truth" : [
+            "composer": "Schubert",
+            "ground_truth": [
                 "TRIOS_dataset/TRIOS_dataset/schubert/violin-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/schubert/cello-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/schubert/piano-0.json.gz"
             ],
-            "instruments" : [
+            "groups": [],
+            "instruments": [
                 "violin",
                 "cello",
                 "piano"
             ],
-            "recording" : {
-                "path" : [
+            "recording": {
+                "path": [
                     "TRIOS_dataset/TRIOS_dataset/schubert/mix.wav"
                 ]
             },
-            "sources" : {
-                "path" : [
+            "sources": {
+                "path": [
                     "TRIOS_dataset/TRIOS_dataset/schubert/violin.wav",
                     "TRIOS_dataset/TRIOS_dataset/schubert/cello.wav",
                     "TRIOS_dataset/TRIOS_dataset/schubert/piano.wav"
                 ]
             },
-            "title" : "D929"
+            "title": "D929"
         },
         {
-            "composer" : "Brahms",
-            "ground_truth" : [
+            "composer": "Brahms",
+            "ground_truth": [
                 "TRIOS_dataset/TRIOS_dataset/brahms/violin-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/brahms/horn-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/brahms/piano-0.json.gz"
             ],
-            "instruments" : [
+            "groups": [],
+            "instruments": [
                 "violin",
                 "french horn",
                 "piano"
             ],
-            "recording" : {
-                "path" : [
+            "recording": {
+                "path": [
                     "TRIOS_dataset/TRIOS_dataset/brahms/mix.wav"
                 ]
             },
-            "sources" : {
-                "path" : [
+            "sources": {
+                "path": [
                     "TRIOS_dataset/TRIOS_dataset/brahms/violin.wav",
                     "TRIOS_dataset/TRIOS_dataset/brahms/horn.wav",
                     "TRIOS_dataset/TRIOS_dataset/brahms/piano.wav"
                 ]
             },
-            "title" : "Brahms_Op40"
+            "title": "Brahms_Op40"
         },
         {
-            "composer" : "Lussier",
-            "ground_truth" : [
+            "composer": "Lussier",
+            "ground_truth": [
                 "TRIOS_dataset/TRIOS_dataset/lussier/trumpet-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/lussier/bassoon-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/lussier/piano-0.json.gz"
             ],
-            "instruments" : [
+            "groups": [],
+            "instruments": [
                 "trumpet",
                 "bassoon",
                 "piano"
             ],
-            "recording" : {
-                "path" : [
+            "recording": {
+                "path": [
                     "TRIOS_dataset/TRIOS_dataset/lussier/mix.wav"
                 ]
             },
-            "sources" : {
-                "path" : [
+            "sources": {
+                "path": [
                     "TRIOS_dataset/TRIOS_dataset/lussier/trumpet.wav",
                     "TRIOS_dataset/TRIOS_dataset/lussier/bassoon.wav",
                     "TRIOS_dataset/TRIOS_dataset/lussier/piano.wav"
                 ]
             },
-            "title" : "Lussier_Op08"
+            "title": "Lussier_Op08"
         },
         {
-            "composer" : "Desmond",
-            "ground_truth" : [
+            "composer": "Desmond",
+            "ground_truth": [
                 "TRIOS_dataset/TRIOS_dataset/take_five/saxophone-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/take_five/piano-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/take_five/kick-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/take_five/ride-0.json.gz",
                 "TRIOS_dataset/TRIOS_dataset/take_five/snare-0.json.gz"
             ],
-            "instruments" : [
+            "groups": [],
+            "instruments": [
                 "alto sax",
                 "piano",
                 "drum kit",
                 "drum kit",
                 "drum kit"
             ],
-            "recording" : {
-                "path" : [
+            "recording": {
+                "path": [
                     "TRIOS_dataset/TRIOS_dataset/take_five/mix.wav"
                 ]
             },
-            "sources" : {
-                "path" : [
+            "sources": {
+                "path": [
                     "TRIOS_dataset/TRIOS_dataset/take_five/saxophone.wav",
                     "TRIOS_dataset/TRIOS_dataset/take_five/piano.wav",
                     "TRIOS_dataset/TRIOS_dataset/take_five/kick.wav",
@@ -162,17 +179,10 @@
                     "TRIOS_dataset/TRIOS_dataset/take_five/snare.wav"
                 ]
             },
-            "title" : "Take Five"
+            "title": "Take Five"
         }
     ],
-    "sources" : {
-        "format" : "wav"
-    },
-    "install": {
-        "unpack" : true,
-        "login" : false,
-        "post-process" : "unknown",
-        "url" : "https://c4dm.eecs.qmul.ac.uk/rdr/bitstream/handle/123456789/27/TRIOS_dataset.zip",
-        "conversion": [["from_midi", {}]]
+    "sources": {
+        "format": "wav"
     }
 }

@@ -1,27 +1,31 @@
 #! /usr/bin/env python3
 
 from __future__ import print_function, unicode_literals
+
 import json
-from prompt_toolkit.completion import PathCompleter
-from prompt_toolkit.validation import Validator
-from prompt_toolkit.shortcuts import confirm
-from prompt_toolkit import prompt
-from os.path import join as joinpath
 import os
 import pathlib
 import tarfile
 import tempfile
 import time
-from pyfiglet import Figlet
-from alive_progress import alive_bar
-from subprocess import Popen, DEVNULL
-from getpass import getpass
-from mega import Mega
-from ftplib import FTP
-from urllib.request import urlretrieve, urlcleanup
-from urllib.parse import urlparse
 from collections import deque
+from ftplib import FTP
+from getpass import getpass
+from os.path import join as joinpath
 from shutil import unpack_archive
+from subprocess import DEVNULL, Popen
+from urllib.parse import urlparse
+from urllib.request import urlcleanup, urlretrieve
+
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import PathCompleter
+from prompt_toolkit.shortcuts import confirm
+from prompt_toolkit.validation import Validator
+
+from alive_progress import alive_bar
+from mega import Mega
+from pyfiglet import Figlet
+
 from .audioscoredataset import load_definitions
 
 #: Set to True to skip datasets which already exist
@@ -40,7 +44,7 @@ supported_archives = {
 }
 
 
-def chose_dataset(data,  install_dir):
+def chose_dataset(data, install_dir):
     """
     Ask for preferred datasets and removes unwanted from data. Also skips
     dataset with existing directories.
@@ -171,8 +175,8 @@ def download(item, credentials, install_dir):
     if parsed_url.scheme == 'ftp':
         # FTP
         # at now, no FTP connection is needed
-        downloaded_files = ftp_download(
-            item, credential, install_dir, parsed_url)
+        downloaded_files = ftp_download(item, credential, install_dir,
+                                        parsed_url)
     elif parsed_url.netloc == "mega.nz":
         # mega, using mega.py module
         print("Downloading from mega.nz...")

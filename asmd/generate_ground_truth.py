@@ -1,7 +1,8 @@
-from .conversion_tool import create_gt
-from . import alignment_stats
-import os
 import argparse
+import os
+
+from . import alignment_stats
+from .conversion_tool import create_gt
 
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -11,7 +12,8 @@ argparser = argparse.ArgumentParser(
 argparser.add_argument(
     '--misalign',
     action='store_true',
-    help="Generate ground-truth, compute alignment stats, regenerate groundtruth with artificial misalignment")
+    help="Generate ground-truth, compute alignment stats, regenerate groundtruth with artificial misalignment"
+)
 
 argparser.add_argument(
     '--whitelist',
@@ -25,12 +27,16 @@ argparser.add_argument(
 
 args = argparser.parse_args()
 
-create_gt(os.path.join(THISDIR, 'datasets.json'), gztar=True,
-          alignment_stats=None, whitelist=args.whitelist,
+create_gt(os.path.join(THISDIR, 'datasets.json'),
+          gztar=True,
+          alignment_stats=None,
+          whitelist=args.whitelist,
           blacklist=args.blacklist)
 
 if args.misalign:
     stats = alignment_stats.main()
-    create_gt(os.path.join(THISDIR, 'datasets.json'), gztar=True,
-              alignment_stats=stats, whitelist=args.whitelist,
+    create_gt(os.path.join(THISDIR, 'datasets.json'),
+              gztar=True,
+              alignment_stats=stats,
+              whitelist=args.whitelist,
               blacklist=args.blacklist)

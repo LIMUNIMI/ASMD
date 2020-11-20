@@ -8,3 +8,4 @@ tags
 docs/_build/*
 *.egg-info
 dist/
+.python-version

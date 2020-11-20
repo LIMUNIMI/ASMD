@@ -19,10 +19,18 @@ Other examples in the paper!
 Changelog
 =========
 
+Version 0.2.1
+^^^^^^^^^^^
+
+#. Added ``nframes`` utility to compute the number of frames in a given time lapse
+#. Added ``group`` attribute to each track to create splits in a dataset
+   (supported in only Maestro for now)
+#. Changed ``.pyx`` to ``.py`` with cython in pure-python mode
+
 Version 0.2
 ^^^^^^^^^^^
 
-#. Added ``parallel`` utility to run code in paralle over a while dataset
+#. Added ``parallel`` utility to run code in parallel over a while dataset
 #. Added ``get_pianoroll`` utility to get score as pianoroll
 #. Added ``sustain``, ``sostenuto``, and ``soft`` to model pedaling information
 #. Added utilities ``frame2time`` and ``time2frame`` to ease the development
@@ -42,6 +50,7 @@ Roadmap
 #. Improve the artificial misalignment
 #. Add datasets for the artificial misalignment (e.g. ASAP, Giant-Midi Piano)
 #. Add other datasets
+#. Refactoring of the API (it's a bit long now...)
 
 Cite us
 =======

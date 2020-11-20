@@ -1,8 +1,8 @@
-# cython: language_level=3
 import numpy as np
 import pretty_midi as pm
 from essentia.standard import EasyLoader as Loader
 from essentia.standard import MetadataReader
+
 
 def nframes(dur, hop_size=3072, win_len=4096) -> float:
     """
@@ -13,6 +13,7 @@ def nframes(dur, hop_size=3072, win_len=4096) -> float:
     N.B. This returns a float!
     """
     return (dur - win_len) / hop_size + 1
+
 
 def frame2time(frame: int, hop_size=3072, win_len=4096) -> float:
     """
@@ -25,6 +26,7 @@ def frame2time(frame: int, hop_size=3072, win_len=4096) -> float:
     """
     return frame * hop_size + win_len / 2
 
+
 def time2frame(time, hop_size=3072, win_len=4096) -> int:
     """
     Takes a time position and outputs the best frame representing it.
@@ -36,6 +38,7 @@ def time2frame(time, hop_size=3072, win_len=4096) -> int:
     """
     return round((time - win_len / 2) / hop_size)
 
+
 def open_audio(audio_fn):
     """
     Open the audio file in `audio_fn` and returns a numpy array containing it,
@@ -45,11 +48,16 @@ def open_audio(audio_fn):
     reader = MetadataReader(filename=str(audio_fn), filterMetadata=True)
     sample_rate = reader()[-2]
 
-    loader = Loader(filename=str(audio_fn), sampleRate=sample_rate, endTime=1e+07)
+    loader = Loader(filename=str(audio_fn),
+                    sampleRate=sample_rate,
+                    endTime=1e+07)
     return loader(), sample_rate
 
 
-def open_midi(midi_fn, considered_tracks=slice(None), merge=True, pm_object=False):
+def open_midi(midi_fn,
+              considered_tracks=slice(None),
+              merge=True,
+              pm_object=False):
     """
     Open file `midi_fn` and returns a list of `pretty_midi.Note` existing in
     `considered_tracks`. The output list contains lists, each one containingh:
@@ -99,6 +107,7 @@ def group_notes_by_onest(notes):
             inner_list = [n]
             last_onset = n.start
     return output
+
 
 def evaluate2d(estimate, ground_truth):
     """
@@ -158,8 +167,8 @@ def evaluate2d(estimate, ground_truth):
             continue
 
         # taking indices of notes with this pitch in remove_from that are not in not_remove_from
-        remove_from_idx = np.where(remove_from[:, 0] == pitch)[
-            0][pitch_not_remove_from:]
+        remove_from_idx = np.where(
+            remove_from[:, 0] == pitch)[0][pitch_not_remove_from:]
 
         # remove from remove_from
         remove_from = np.delete(remove_from, remove_from_idx, 0)
@@ -192,11 +201,11 @@ def f0_to_midi_pitch(f0):
     """
     Return a midi pitch given a frequency value in Hz
     """
-    return 12*np.log2(f0 / 440)+69
+    return 12 * np.log2(f0 / 440) + 69
 
 
 def midi_pitch_to_f0(midi_pitch):
     """
     Return a frequency given a midi pitch
     """
-    return 440 * 2**((midi_pitch-69)/12)
+    return 440 * 2**((midi_pitch - 69) / 12)

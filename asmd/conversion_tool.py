@@ -1,17 +1,18 @@
 import gzip
 import json
 import multiprocessing as mp
-import numpy as np
 import os
 import tarfile
-from .alignment_stats import seed, fill_stats
-from .audioscoredataset import load_definitions
-from .convert_from_file import *
 from copy import deepcopy
 from difflib import SequenceMatcher
-from pretty_midi.constants import INSTRUMENT_MAP
 from os.path import join as joinpath
 
+import numpy as np
+from pretty_midi.constants import INSTRUMENT_MAP
+
+from .alignment_stats import seed
+from .audioscoredataset import load_definitions
+from .convert_from_file import *
 # this is only for detecting the package path
 from .idiot import THISDIR
 
@@ -30,7 +31,8 @@ def normalize_text(text):
 
 
 def text_similarity(a, b):
-    return SequenceMatcher(None, a, b).find_longest_match(0, len(a), 0, len(b)).size
+    return SequenceMatcher(None, a,
+                           b).find_longest_match(0, len(a), 0, len(b)).size
 
 
 # normalizing MIDI instrument names
@@ -47,8 +49,8 @@ def merge_dicts(idx, *args):
 
     assert all(type(x) is list for x in args), "Input types must be lists"
 
-    assert all(len(x) == len(args[0]) for x in args[1:]
-               ), "Cannot merge list with different lenghts"
+    assert all(len(x) == len(args[0])
+               for x in args[1:]), "Cannot merge list with different lenghts"
 
     idx = min(idx, len(args[0]) - 1)  # For PHENICX
 
@@ -110,7 +112,7 @@ def misalign(ons_dev, offs_dev, mean, out, stats):
 
         ret = offsets[i]
         if offsets[i] <= onsets[i]:
-            ret = 2*onsets[i] - offsets[i]
+            ret = 2 * onsets[i] - offsets[i]
 
         # search next note with same pitch
         j = None
@@ -144,37 +146,44 @@ def conversion(arg):
     for i, path in enumerate(paths):
         final_path = os.path.join(json_file['install_dir'], path)
         # get the index of the track from the path
-        idx = path[path.rfind('-') + 1: path.rfind('.json.gz')]
+        idx = path[path.rfind('-') + 1:path.rfind('.json.gz')]
 
         # calling each function listed in the map and merge everything
 
-        out = merge_dicts(int(idx), *[eval(func)(final_path, **params) for func, params in dataset["install"]["conversion"]])
+        out = merge_dicts(
+            int(idx), *[
+                eval(func)(final_path, **params)
+                for func, params in dataset["install"]["conversion"]
+            ])
 
         # take the General Midi program number associated with the most
         # similar instrument name
         instrument = normalize_text(song['instruments'][i])
         out['instrument'] = max(
             range(len(INSTRUMENT_MAP)),
-            key=lambda x: text_similarity(
-                INSTRUMENT_MAP[x], instrument)
-        )
+            key=lambda x: text_similarity(INSTRUMENT_MAP[x], instrument))
 
         if dataset['ground_truth']['non_aligned'] == 2 and stats:
             # computing deviations for each pitch
-            pitches, onsets, offsets = misalign(
-                ons_dev[l], offs_dev[l], mean[l], out, stats)
+            pitches, onsets, offsets = misalign(ons_dev[l], offs_dev[l],
+                                                mean[l], out, stats)
             out['non_aligned']['onsets'] = onsets
             out['non_aligned']['offsets'] = offsets
             out['non_aligned']['pitches'] = pitches
 
         print("   saving " + final_path)
-        json.dump(out, gzip.open(final_path, 'wt'))
+        # pretty printing stolen from official docs
+        json.dump(out, gzip.open(final_path, 'wt'), sort_keys=True, indent=4)
 
         to_be_included_in_the_archive.append(final_path)
     return to_be_included_in_the_archive
 
 
-def create_gt(data_fn, gztar=False, alignment_stats=None, whitelist=[], blacklist=[]):
+def create_gt(data_fn,
+              gztar=False,
+              alignment_stats=None,
+              whitelist=[],
+              blacklist=[]):
     """
     Parse the json file `data_fn` and convert all ground_truth to our
     representation. Then dump it according to the specified paths. Finally,
@@ -203,24 +212,26 @@ def create_gt(data_fn, gztar=False, alignment_stats=None, whitelist=[], blacklis
                 print(dataset['name'] + " not in whitelist!")
                 continue
 
-        if not os.path.exists(os.path.join(json_file["install_dir"], dataset["name"])):
+        if not os.path.exists(
+                os.path.join(json_file["install_dir"], dataset["name"])):
             print(dataset["name"] + " not installed, skipping it")
             continue
 
         print("\n------------------------\n")
         print("Starting processing " + dataset['name'])
-        if dataset['ground_truth']['non_aligned'] == 2 and alignment_stats is not None:
+        if dataset['ground_truth'][
+                'non_aligned'] == 2 and alignment_stats is not None:
             # computing means and std deviations for each song in the dataset
             mean = alignment_stats.get_random_mean(k=len(dataset['songs']),
                                                    max_value=MEAN_MAX)
             seed()
-            ons_dev = alignment_stats.get_random_onset_dev(k=len(dataset['songs']),
-                                                 max_value=ONS_DEV_MAX)
+            ons_dev = alignment_stats.get_random_onset_dev(
+                k=len(dataset['songs']), max_value=ONS_DEV_MAX)
             seed()
-            offs_dev = alignment_stats.get_random_offset_dev(k=len(dataset['songs']),
-                                                  max_value=OFFS_DEV_MAX)
-            arg = [(i, song, json_file, dataset, alignment_stats, ons_dev, offs_dev, mean)
-                   for i, song in enumerate(dataset['songs'])]
+            offs_dev = alignment_stats.get_random_offset_dev(
+                k=len(dataset['songs']), max_value=OFFS_DEV_MAX)
+            arg = [(i, song, json_file, dataset, alignment_stats, ons_dev,
+                    offs_dev, mean) for i, song in enumerate(dataset['songs'])]
         else:
             arg = [(i, song, json_file, dataset, None, None, None, None)
                    for i, song in enumerate(dataset['songs'])]
@@ -230,22 +241,19 @@ def create_gt(data_fn, gztar=False, alignment_stats=None, whitelist=[], blacklis
         else:
             CPU = os.cpu_count() - 1
             p = mp.Pool(CPU)
-            result = p.map_async(
-                conversion,
-                arg,
-                len(dataset['songs']) // CPU + 1
-            )
+            result = p.map_async(conversion, arg,
+                                 len(dataset['songs']) // CPU + 1)
             to_be_included_in_the_archive += sum(result.get(), [])
 
-
     def _remove_basedir(x):
-        x.name = x.name.replace(json_file['install_dir'][1:]+'/', '')
+        x.name = x.name.replace(json_file['install_dir'][1:] + '/', '')
         return x
 
     # creating the archive
     if gztar:
         print("\n\nCreating the final archive")
-        with tarfile.open(joinpath(THISDIR, 'ground_truth.tar.gz'), mode='w:gz') as tf:
+        with tarfile.open(joinpath(THISDIR, 'ground_truth.tar.gz'),
+                          mode='w:gz') as tf:
             for fname in to_be_included_in_the_archive:
                 # adding file with relative path
                 tf.add(fname, filter=_remove_basedir)
