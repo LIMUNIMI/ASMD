@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler, minmax_scale
 
 from . import utils
-from .audioscoredataset import Dataset
+from .asmd import Dataset
 
 data = Dataset()
 
