@@ -5,7 +5,7 @@ General Utilities
    :members:
 
 Utilities for statistical analysis
-----
+----------------------------------
 
 .. automodule:: asmd.alignment_stats
    :members:

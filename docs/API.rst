@@ -31,9 +31,9 @@ Example:
 
 .. code:: python
 
-   import audioscoredataset as asd
+   from asmd import asmd
 
-   d = asd.Dataset()
+   d = asmd.Dataset()
    # d = asd.Dataset(paths=['path_to_my_definitions', 'path_to_default_definitions'])
    d.filter(instrument='piano', ensemble=False, composer='Mozart', ground_truth=['precise_alignment'])
 
@@ -45,21 +45,21 @@ Example:
 
    mat = d.get_score(2, score_type=['precise_alignment'])
 
-Note that you can inherit from ``audioscoredataset.Dataset`` and
-``torch.utils.data.Dataset`` to create a PyTorch compatible dataset
-which only load audio files when thay are accessed. You will just need
-to implement the ``__getitem__`` method.
+Note that you can inherit from ``asmd.Dataset`` and
+``torch.utils.data.Dataset`` to create a PyTorch compatible dataset which only
+load audio files when thay are accessed. You will just need to implement the
+``__getitem__`` method.
 
 
 Documentation
 -------------
 
-.. automodule:: asmd.audioscoredataset
+.. automodule:: asmd.asmd
    :members:
    :private-members:
    :special-members:
 
-.. autoclass:: asmd.audioscoredataset.Dataset(paths=['default_path'], metadataset_path=['default_path'])
+.. autoclass:: asmd.asmd.Dataset(paths=['default_path'], metadataset_path=['default_path'])
    :members:
    :private-members:
    :special-members:
