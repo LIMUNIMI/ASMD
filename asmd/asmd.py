@@ -597,7 +597,6 @@ class Dataset:
                 frame_track_pedaling = np.empty((n_frames, 4), dtype=float)
                 frame_track_pedaling[:, 0] = np.arange(
                     winlen / 2, hop * n_frames + winlen / 2, hop)
-                print(frame_track_pedaling.dtype)
 
                 # fill the matrix
                 # rember the last value used for each column index:
@@ -619,20 +618,22 @@ class Dataset:
                 for cc in cc_track_pedaling:
                     # compute the frame relative to this cc
                     frame_idx = utils.time2frame(cc[0], hop, winlen)
-                    # put all values from last cc to this one equal to the last value
+                    # put all values from last cc to this one equal to the last
+                    # value
                     type_of_cc = np.argmax(cc[1:]) + 1
                     frame_track_pedaling[
-                        last_values[type_of_cc]["time"]:frame_idx, type_of_cc] =\
-                        last_values[type_of_cc]["value"]
+                        last_values[type_of_cc]["time"]:frame_idx,
+                        type_of_cc] = last_values[type_of_cc]["value"]
                     # update the last value
                     last_values[type_of_cc]["time"] = frame_idx
                     last_values[type_of_cc]["value"] = cc[type_of_cc]
 
-                # put all values from last cc to the end equal to the last value
+                # put all values from last cc to the end equal to the last
+                # value
                 for type_of_cc in range(1, 4):
                     frame_track_pedaling[
-                        last_values[type_of_cc]["time"]:frame_idx, type_of_cc] =\
-                        last_values[type_of_cc]["value"]
+                        last_values[type_of_cc]["time"]:frame_idx,
+                        type_of_cc] = last_values[type_of_cc]["value"]
                 pedaling.append(np.array(frame_track_pedaling))
         return pedaling
 
