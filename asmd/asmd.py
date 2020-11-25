@@ -1,4 +1,5 @@
 import gzip
+import inspect
 import json
 import os
 from os.path import join as joinpath
@@ -67,11 +68,13 @@ class Dataset:
     def parallel(self,
                  func,
                  *args,
-                 n_jobs=-2,
-                 backend="multiprocessing",
                  **kwargs):
         """
-        Applies a function to all items in `paths` in parallel using `joblib.Parallel`.
+        Applies a function to all items in `paths` in parallel using
+        `joblib.Parallel`.
+
+        You can pass any argument to `joblib.Parallel` by using keyword
+        arguments.
 
         Arguments
         ---------
@@ -90,20 +93,20 @@ class Dataset:
 
             `filter` and `chunks` shouldn't be used.
 
-        n_jobs : int
-            see `joblib.Parallel`
-
-        backend : str
-            see `joblib.Parallel`; "multiprocessing" is suggested if you want
-            preserve the order of the results
-
         Returns
         -------
         list:
             The list of objects returned by each `func`
         """
+        joblib_args = [
+            k for k, v in inspect.signature(Parallel).parameters.items()
+        ]
+        joblib_dict = {
+            k: kwargs.pop(k)
+            for k in dict(kwargs) if k in joblib_args
+        }
 
-        return Parallel(n_jobs, backend=backend)(
+        return Parallel(**joblib_dict)(
             delayed(func_wrapper)(func, self.paths[i], args, kwargs)
             for i in tqdm(range(len(self.paths))))
 
