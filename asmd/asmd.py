@@ -65,10 +65,7 @@ class Dataset:
         self.paths = []
         self._chunks = {}
 
-    def parallel(self,
-                 func,
-                 *args,
-                 **kwargs):
+    def parallel(self, func, *args, **kwargs):
         """
         Applies a function to all items in `paths` in parallel using
         `joblib.Parallel`.
@@ -598,8 +595,11 @@ class Dataset:
 
                 # set up initial matrix that will be output
                 frame_track_pedaling = np.empty((n_frames, 4), dtype=float)
+                # doesn't work because shape suffers from precisions problems
+                # frame_track_pedaling[:, 0] = np.arange(winlen / 2, hop *
+                # n_frames + winlen / 2, hop)
                 frame_track_pedaling[:, 0] = np.arange(
-                    winlen / 2, hop * n_frames + winlen / 2, hop)
+                    n_frames) * hop + winlen / 2
 
                 # fill the matrix
                 # rember the last value used for each column index:
