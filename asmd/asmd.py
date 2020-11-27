@@ -104,8 +104,11 @@ class Dataset:
         }
 
         return Parallel(**joblib_dict)(
-            delayed(func_wrapper)(func, self.paths[i], args, kwargs)
+            delayed(func)(i, self, *args, **kwargs)
             for i in tqdm(range(len(self.paths))))
+        # return Parallel(**joblib_dict)(
+        #     delayed(func_wrapper)(func, self.paths[i], args, kwargs)
+        #     for i in tqdm(range(len(self.paths))))
 
     def filter(self,
                instruments=[],
@@ -831,7 +834,7 @@ def chose_score_type(score_type, gts):
     return score_type
 
 
-def func_wrapper(func, path, args, kwargs):
+def func_wrapper(func, path, *args, **kwargs):
     d = Dataset(empty=True)
     d.paths = [path]
     return func(0, d, *args, **kwargs)
