@@ -636,10 +636,11 @@ class Dataset:
 
                 # put all values from last cc to the end equal to the last
                 # value
-                for type_of_cc in range(1, 4):
-                    frame_track_pedaling[
-                        last_values[type_of_cc]["time"]:frame_idx,
-                        type_of_cc] = last_values[type_of_cc]["value"]
+                if len(cc_track_pedaling) > 0:
+                    for type_of_cc in range(1, 4):
+                        frame_track_pedaling[
+                            last_values[type_of_cc]["time"]:,
+                            type_of_cc] = last_values[type_of_cc]["value"]
                 pedaling.append(np.array(frame_track_pedaling))
         return pedaling
 
