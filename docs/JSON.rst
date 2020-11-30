@@ -123,7 +123,7 @@ dictionary with the following structure:
       mean sustain ON, but intermediate values can be used (e.g. for
       half-pedaling).
    #. ``times``: list of floats representing the time of each sustain change in
-         seconds.
+      seconds.
 
 #. ``soft``:
 
