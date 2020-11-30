@@ -19,6 +19,13 @@ Other examples in the paper!
 Changelog
 =========
 
+Version 0.2.2
+^^^^^^^^^^^^^
+
+#. Improved `parallel` function
+#. Improved documentation
+#. Various fixings in `get_pedaling`
+
 Version 0.2.1
 ^^^^^^^^^^^^^
 
@@ -46,6 +53,7 @@ Version 0.2
 Roadmap
 =======
 
+#. Added `torch.DatasetDump` for preprocessing datasets and use them in pytorch
 #. Add new modalities (video, images)
 #. Improve the artificial misalignment
 #. Add datasets for the artificial misalignment (e.g. ASAP, Giant-Midi Piano)
