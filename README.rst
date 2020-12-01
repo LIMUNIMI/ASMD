@@ -19,6 +19,13 @@ Other examples in the paper!
 Changelog
 =========
 
+Version 0.2.2-1
+^^^^^^^^^^^^^
+
+# Fixed major bug in install script
+# Fixed bug in conversion tool
+# Removed TRIOS dataset because no longer available
+
 Version 0.2.2
 ^^^^^^^^^^^^^
 

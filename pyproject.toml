@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "asmd"
-version = "0.2.2"
+version = "0.2.2-1"
 description = "Audio-Score Meta-Dataset"
 authors = ["Federico Simonetta <federico.simonetta@unimi.it>"]
 readme = "README.rst"
