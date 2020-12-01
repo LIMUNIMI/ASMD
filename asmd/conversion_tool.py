@@ -11,7 +11,7 @@ import numpy as np
 from pretty_midi.constants import INSTRUMENT_MAP
 
 from .alignment_stats import seed
-from .audioscoredataset import load_definitions
+from .asmd import load_definitions
 from .convert_from_file import *
 # this is only for detecting the package path
 from .idiot import THISDIR
