@@ -20,18 +20,18 @@ Changelog
 =========
 
 Version 0.2.2-1
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
-# Fixed major bug in install script
-# Fixed bug in conversion tool
-# Removed TRIOS dataset because no longer available
+#. Fixed major bug in install script
+#. Fixed bug in conversion tool
+#. Removed TRIOS dataset because no longer available
 
 Version 0.2.2
 ^^^^^^^^^^^^^
 
-#. Improved `parallel` function
+#. Improved ``parallel`` function
 #. Improved documentation
-#. Various fixings in `get_pedaling`
+#. Various fixings in ``get_pedaling``
 
 Version 0.2.1
 ^^^^^^^^^^^^^
