@@ -24,7 +24,7 @@ They are retrieved starting from the following projects:
 +-------------------------------------------------------------------------------------------------------+--------------------------------------+
 | `Traditional flute dataset <https://www.kaggle.com/jbraga/traditional-flute-dataset>`_                | traditional_flute                    |
 +-------------------------------------------------------------------------------------------------------+--------------------------------------+
-| `TRIOS dataset <https://c4dm.eecs.qmul.ac.uk/rdr/handle/123456789/27>`_                               | TRIOS                                |
+| `TRIOS dataset <https://c4dm.eecs.qmul.ac.uk/rdr/handle/123456789/27>`_                               | TRIOS **(removed: link is dead)**    |
 +-------------------------------------------------------------------------------------------------------+--------------------------------------+
 | `Vienna Corpus <https://repo.mdw.ac.at/projects/IWK/the_vienna_4x22_piano_corpus/index.html>`_        | vienna_corpus                        |
 +-------------------------------------------------------------------------------------------------------+--------------------------------------+
