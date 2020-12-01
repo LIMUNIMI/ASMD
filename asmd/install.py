@@ -26,7 +26,7 @@ from alive_progress import alive_bar
 from mega import Mega
 from pyfiglet import Figlet
 
-from .audioscoredataset import load_definitions
+from .asmd import load_definitions
 
 #: Set to True to skip datasets which already exist
 SKIP_EXISTING_DIR = True
