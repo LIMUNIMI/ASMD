@@ -19,12 +19,13 @@ Other examples in the paper!
 Changelog
 =========
 
-Version 0.2.2-1
+Version 0.2.2-2
 ^^^^^^^^^^^^^^^
 
 #. Fixed major bug in install script
 #. Fixed bug in conversion tool
 #. Removed TRIOS dataset because no longer available
+#. Updated ground_truth
 
 Version 0.2.2
 ^^^^^^^^^^^^^
