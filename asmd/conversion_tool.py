@@ -252,8 +252,7 @@ def create_gt(data_fn,
     # creating the archive
     if gztar:
         print("\n\nCreating the final archive")
-        with tarfile.open(joinpath(THISDIR, 'ground_truth.tar.gz'),
-                          mode='w:gz') as tf:
+        with tarfile.open('ground_truth.tar.gz', mode='w:gz') as tf:
             for fname in to_be_included_in_the_archive:
                 # adding file with relative path
                 tf.add(fname, filter=_remove_basedir)
