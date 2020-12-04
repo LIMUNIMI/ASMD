@@ -394,10 +394,13 @@ class Dataset:
         Note
         ----
 
-        In the GM standard, pitches start counting from 1; however, sometimes
-        people use to count pitches from 0. Depending on the dataset that you
-        are using, verify how pitches are counted. TODO: make conversion script
-        handle this issue correctly.
+        In the midi.org standard, pitches start counting from 1; however,
+        sometimes people use to count pitches from 0. Depending on the dataset
+        that you are using, verify how pitches are counted. In the ASMD default
+        ground-truths, pitches are set with 0-based indexing.
+
+        In case your dataset does not start counting pitches from 0, you should
+        correct the output of this function.
         """
 
         gts = self.get_gts(idx)

@@ -93,25 +93,25 @@ dictionary with the following structure:
 
    #. ``onsets``: onsets in seconds at 20 bpm
    #. ``offsets``: offsets in seconds at 20 bpm
-   #. ``pitches``: list of midi pitches in onset ascending order
+   #. ``pitches``: list of midi pitches in onset ascending order and range [0-127]
    #. ``note``: list of note names in onsets ascending order
-   #. ``velocities``: list of velocities in onsets ascending order
+   #. ``velocities``: list of velocities in onsets ascending order and range [0-127]
 
 #. ``precise_alignment``:
 
    #. ``onsets``: onsets in ms
    #. ``offsets``: offsets in ms
-   #. ``pitches``: list of midi pitches in onset ascending order
+   #. ``pitches``: list of midi pitches in onset ascending order and range [0-127]
    #. ``note``: list of note names in onsets ascending order
-   #. ``velocities``: list of velocities in onsets ascending order
+   #. ``velocities``: list of velocities in onsets ascending order and range [0-127]
 
 #. ``broad_alignment``: alignment which does not consider the asynchronies between simultaneous notes
 
    #. ``onsets``: onsets in ms
    #. ``offsets``: offsets in ms
-   #. ``pitches``: list of midi pitches in onset ascending order
+   #. ``pitches``: list of midi pitches in onset ascending order and range [0-127]
    #. ``note``: list of note names in onsets ascending order
-   #. ``velocities``: list of velocities in onsets ascending order
+   #. ``velocities``: list of velocities in onsets ascending order and range [0-127]
 
 #. ``f0``: list of f0 frequencies, frame by frame; duration of each frame
    should be 46 ms with 10 ms of hop.
@@ -145,7 +145,8 @@ dictionary with the following structure:
 
 #. ``instrument``: General Midi program number associated with this instrument,
    starting from 0. 128 indicates a drum kit (should be synthesized on channel
-   8 with a program number of your choice, usually 0).
+   8 with a program number of your choice, usually 0). 255 indicates no
+   instrument specified.
 
 Note that json ground_truth files have extension ``.json.gz``,
 indicating that they are compressed using the ``gzip`` Python 3.6.9

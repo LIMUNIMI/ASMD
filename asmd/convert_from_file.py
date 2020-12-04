@@ -1,12 +1,14 @@
-import os
 import csv
-import numpy as np
-import scipy.io
+import os
 import re
-import pretty_midi
-from . import utils
-from functools import wraps
 from copy import deepcopy
+from functools import wraps
+
+import numpy as np
+import pretty_midi
+import scipy.io
+
+from . import utils
 
 BPM = 20
 
@@ -40,10 +42,7 @@ def convert(exts, no_dot=True, remove_player=False):
         name: use this for the `traditional_flute` dataset; it will remove the
         part after the last '_'.
     """
-
-
     def _convert(user_convert):
-
         @wraps(user_convert)
         def func(input_fn, *args, **kwargs):
             for ext in exts:
@@ -146,7 +145,11 @@ use:
 ...     "instrument": 255,
 ...     "beats_non_aligned": []
 ... }
+
+Note: ``pitches``, ``velocities``, ``sustain``, ``sostenuto``, ``soft``, and
+(if available) ``instrument`` must be in range [0, 127].
 """
+
 
 def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):
     """
@@ -169,7 +172,12 @@ def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):
     return root + new_ext
 
 
-def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=True, merge=True, beats=False):
+def from_midi(midi_fn,
+              alignment='precise_alignment',
+              pitches=True,
+              velocities=True,
+              merge=True,
+              beats=False):
     """
     Open a midi file `midi_fn` and convert it to our ground_truth
     representation. This fills velocities, pitches, beats, sustain, soft,
@@ -217,15 +225,19 @@ def from_midi(midi_fn, alignment='precise_alignment', pitches=True, velocities=T
                 if velocities:
                     data[alignment]["velocities"].append(note.velocity)
                 if alignment:
-                    data[alignment]["onsets"].append(float(note.start) * bpm_ratio)
-                    data[alignment]["offsets"].append(float(note.end) * bpm_ratio)
+                    data[alignment]["onsets"].append(
+                        float(note.start) * bpm_ratio)
+                    data[alignment]["offsets"].append(
+                        float(note.end) * bpm_ratio)
         if beats:
             data["beats_non_aligned"] = (pm.get_beats() * bpm_ratio).tolist()
         out.append(data)
 
     return out
 
-from_midi_remove_player = convert(['.mid', '.midi'], remove_player=True)(from_midi)
+
+from_midi_remove_player = convert(['.mid', '.midi'],
+                                  remove_player=True)(from_midi)
 from_midi = convert(['.mid', '.midi'], remove_player=False)(from_midi)
 
 
@@ -245,9 +257,11 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
     for line in lines:
         fields = re.split(',|\n', line)
         out["non_aligned"]["notes"].append(fields[2])
-        out["non_aligned"]["pitches"].append(pretty_midi.note_name_to_number(fields[2]))
+        out["non_aligned"]["pitches"].append(
+            pretty_midi.note_name_to_number(fields[2]))
         out["broad_alignment"]["notes"].append(fields[2])
-        out["broad_alignment"]["pitches"].append(pretty_midi.note_name_to_number(fields[2]))
+        out["broad_alignment"]["pitches"].append(
+            pretty_midi.note_name_to_number(fields[2]))
         out["broad_alignment"]["onsets"].append(float(fields[0]))
         out["broad_alignment"]["offsets"].append(float(fields[1]))
     out_list.append(out)
@@ -272,7 +286,8 @@ def from_bach10_mat(mat_fn, sources=range(4)):
         source = mat[i, 0]
         for j in range(len(source)):
             note = source[j, 0]
-            out["precise_alignment"]["pitches"].append(np.median(np.rint(note[1, :])))
+            out["precise_alignment"]["pitches"].append(
+                np.median(np.rint(note[1, :])))
             out["precise_alignment"]["onsets"].append(
                 (note[0, 0] - 2) * 10 / 1000.)
             out["precise_alignment"]["offsets"].append(
@@ -312,6 +327,8 @@ def from_musicnet_csv(csv_fn, sr=44100.0):
     each note) and it shold be a float.
 
     N.B. MusicNet contains wav files at 44100 Hz as samplerate.
+    N.B. Lowest in pitch in musicnet is 21, so we assume that they count pitch
+    starting with 0 as in midi.org standard.
     """
     data = csv.reader(open(csv_fn), delimiter=',')
     out = deepcopy(prototype_gt)
@@ -330,9 +347,12 @@ def from_musicnet_csv(csv_fn, sr=44100.0):
         out["broad_alignment"]["pitches"].append(int(row[3]))
         out["non_aligned"]["pitches"].append(int(row[3]))
         out["non_aligned"]["onsets"].append(float(row[4]) * 60 / BPM)
-        out["non_aligned"]["offsets"].append(float(row[4] * 60 / BPM) + float(row[5]) * 60 / BPM)
+        out["non_aligned"]["offsets"].append(
+            float(row[4] * 60 / BPM) + float(row[5]) * 60 / BPM)
 
-    out["beats_non_aligned"] = [i for i in range(int(max(out["non_aligned"]["offsets"])) + 1)]
+    out["beats_non_aligned"] = [
+        i for i in range(int(max(out["non_aligned"]["offsets"])) + 1)
+    ]
     return out
 
 

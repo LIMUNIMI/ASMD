@@ -61,8 +61,6 @@ Version 0.2
 Roadmap
 =======
 
-#. Checking conversion scripts midi pitch: it should *always* start from 0 or
-   1... what are we doing?
 #. Added `torch.DatasetDump` for preprocessing datasets and use them in pytorch
 #. Add new modalities (video, images)
 #. Improve the artificial misalignment

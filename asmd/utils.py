@@ -199,13 +199,13 @@ def evaluate2d(estimate, ground_truth):
 
 def f0_to_midi_pitch(f0):
     """
-    Return a midi pitch given a frequency value in Hz
+    Return a midi pitch (in 0-127) given a frequency value in Hz
     """
     return 12 * np.log2(f0 / 440) + 69
 
 
 def midi_pitch_to_f0(midi_pitch):
     """
-    Return a frequency given a midi pitch
+    Return a frequency given a midi pitch (in 0-127)
     """
     return 440 * 2**((midi_pitch - 69) / 12)
