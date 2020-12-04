@@ -390,6 +390,14 @@ class Dataset:
         numpy.ndarray :
             A (128 x n) array where rows represent pitches and columns are time
             instants sampled with resolution provided as argument.
+
+        Note
+        ----
+
+        In the GM standard, pitches start counting from 1; however, sometimes
+        people use to count pitches from 0. Depending on the dataset that you
+        are using, verify how pitches are counted. TODO: make conversion script
+        handle this issue correctly.
         """
 
         gts = self.get_gts(idx)
