@@ -2,6 +2,7 @@ import gzip
 import inspect
 import json
 import os
+from copy import deepcopy
 from os.path import join as joinpath
 
 import numpy as np
@@ -16,9 +17,7 @@ from .idiot import THISDIR
 # THISDIR = './datasets/'
 
 
-class Dataset:
-    def __len__(self):
-        return len(self.paths)
+class Dataset(object):
 
     def __init__(self,
                  paths=[joinpath(THISDIR, 'definitions/')],
@@ -65,6 +64,9 @@ class Dataset:
         self.paths = []
         self._chunks = {}
 
+    def __len__(self):
+        return len(self.paths)
+
     def parallel(self, func, *args, **kwargs):
         """
         Applies a function to all items in `paths` in parallel using
@@ -103,9 +105,8 @@ class Dataset:
             for k in dict(kwargs) if k in joblib_args
         }
 
-        return Parallel(**joblib_dict)(
-            delayed(func)(i, self, *args, **kwargs)
-            for i in tqdm(range(len(self.paths))))
+        return Parallel(**joblib_dict)(delayed(func)(i, self, *args, **kwargs)
+                                       for i in tqdm(range(len(self.paths))))
         # return Parallel(**joblib_dict)(
         #     delayed(func_wrapper)(func, self.paths[i], args, kwargs)
         #     for i in tqdm(range(len(self.paths))))
@@ -119,11 +120,13 @@ class Dataset:
                composer='',
                datasets=[],
                groups=[],
-               ground_truth=[]):
+               ground_truth=[],
+               copy=False):
         """
-        Filters the dataset and load the paths of the songs which accomplish
-        the filter described in `kwargs`. A field `paths` is added to this
-        instance.
+        Filter the paths of the songs which accomplish the filter described
+        in `kwargs`. If this dataset was already fltered, only filters those
+        paths that are already included.
+        If the dataset was never filtered, this also populates the paths.
 
         Arguments
         ---------
@@ -149,7 +152,7 @@ class Dataset:
         groups : list of strings
             a list of strings containing the name of the groups that you want
             to retrieve. If empty, all groups are used. Example of groups are:
-            'training', 'validation', 'test'. The available groups depend on
+            'train', 'validation', 'test'. The available groups depend on
             the dataset. Only Maestro dataset supported for now.
         datasets : list of strings
             a list of strings containing the name of the datasets to be used.
@@ -163,14 +166,36 @@ class Dataset:
             the ground_truth dictionary and `level_of_truth` is an int ranging
             from 0 to 2 (0->False, 1->True (manual annotation),
             2->True(automatic annotation))
+        copy : bool
+            If True, a new Dataset object is returned, and the calling one is
+            leaved untouched
 
         Returns
         -------
         This dataset as modified: `d = Dataset().filter(...)`
+        If ``copy`` is False, return a new Dataset object.
         """
+        if copy:
+            ret = deepcopy(self)
+        else:
+            ret = self
+        if len(ret.paths) == 0:
+            # this is the first filter, let's include everything:
+            # set all songs as included
+            for d in ret.datasets:
+                d['included'] = True
+                for s in d['songs']:
+                    s['included'] = True
+        else:
+            # already filtered, let's remove everything and put only the
+            # wanted ones
+            ret.paths = []
+
         end = 0
-        for mydataset in self.datasets:
+        for mydataset in ret.datasets:
             FLAG = True
+            if not mydataset['included']:
+                FLAG = False
             if len(datasets) > 0:
                 if mydataset['name'] in datasets:
                     FLAG = True
@@ -188,9 +213,12 @@ class Dataset:
                     break
 
             if FLAG:
-                self._chunks[mydataset['name']] = [end, end]
+                ret._chunks[mydataset['name']] = [end, end]
                 for song in mydataset['songs']:
                     FLAG = True
+                    if not song['included']:
+                        FLAG = False
+
                     # checking song levels filters
                     if instruments:
                         if instruments != song['instruments']:
@@ -226,11 +254,15 @@ class Dataset:
 
                         if mixed:
                             mix = song['recording']['path']
-                        self.paths.append([mix, source, gts])
+                        ret.paths.append([mix, source, gts])
                         end += 1
-                self._chunks[mydataset['name']][1] = end
+                    else:
+                        song['included'] = False
+                ret._chunks[mydataset['name']][1] = end
+            else:
+                mydataset['included'] = False
 
-        return self
+        return ret
 
     def idx_chunk_to_whole(self, name, idx):
         """
