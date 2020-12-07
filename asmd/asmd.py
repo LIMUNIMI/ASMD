@@ -268,6 +268,9 @@ class Dataset(object):
         """
         Given a dataset name and an idx or a list of idx relative to the input
         dataset, returns the idx relative to this whole dataset.
+
+        Use this method if you need, for instance the index of a song for which
+        you have the index in a single dataset.
         """
         if type(idx) is int:
             return idx + self._chunks[name][0]
