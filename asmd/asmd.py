@@ -128,6 +128,22 @@ class Dataset(object):
         paths that are already included.
         If the dataset was never filtered, this also populates the paths.
 
+        So that a dataset can be filtered, it must have the following keys:
+
+        * songs
+        * name
+        * included
+
+        Optionally, the following dataset-level filters can be applied if the
+        corresponding keys are present:
+
+        * ensemble
+        * ground_truth
+
+        Similarly, each song must have the key ``included`` and optionally the
+        other keys that you want to filter, as described by the arguments of
+        this function.
+
         Arguments
         ---------
         instruments : list of str
