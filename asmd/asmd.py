@@ -264,6 +264,19 @@ class Dataset(object):
 
         return ret
 
+    def get_songs(self):
+        """
+        Returns a list of dict, each representing a song
+        """
+
+        songs = []
+        for dataset in self.datasets:
+            if dataset['included']:
+                for song in dataset['songs']:
+                    if song['included']:
+                        songs.append(song)
+        return songs
+
     def idx_chunk_to_whole(self, name, idx):
         """
         Given a dataset name and an idx or a list of idx relative to the input
