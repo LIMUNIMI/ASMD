@@ -60,9 +60,16 @@ class Dataset(object):
             # this shouldn't happen actually...
             self.install_dir = self.install_dir[:-1]
 
-        self.decompress_path = self.metadataset['decompress_path']
+        # self.decompress_path = self.metadataset['decompress_path']
         self.paths = []
         self._chunks = {}
+
+        # let's include all the songs and datasets
+        # set all songs as included
+        for d in self.datasets:
+            d['included'] = True
+            for s in d['songs']:
+                s['included'] = True
 
     def __len__(self):
         return len(self.paths)
@@ -195,17 +202,9 @@ class Dataset(object):
             ret = deepcopy(self)
         else:
             ret = self
-        if len(ret.paths) == 0:
-            # this is the first filter, let's include everything:
-            # set all songs as included
-            for d in ret.datasets:
-                d['included'] = True
-                for s in d['songs']:
-                    s['included'] = True
-        else:
-            # already filtered, let's remove everything and put only the
-            # wanted ones
-            ret.paths = []
+
+        # let's remove everything and put only the wanted ones
+        ret.paths = []
 
         end = 0
         for mydataset in ret.datasets:
