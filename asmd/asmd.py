@@ -24,7 +24,7 @@ class Dataset(object):
                  metadataset_path=joinpath(THISDIR, 'datasets.json'),
                  empty=False):
         """
-        Load the dataset description
+        Load the dataset description and populate the paths
 
         Parameters
         ----------
@@ -65,11 +65,11 @@ class Dataset(object):
         self._chunks = {}
 
         # let's include all the songs and datasets
-        # set all songs as included
         for d in self.datasets:
             d['included'] = True
             for s in d['songs']:
                 s['included'] = True
+        self.filter()
 
     def __len__(self):
         return len(self.paths)
@@ -133,7 +133,6 @@ class Dataset(object):
         Filter the paths of the songs which accomplish the filter described
         in `kwargs`. If this dataset was already fltered, only filters those
         paths that are already included.
-        If the dataset was never filtered, this also populates the paths.
 
         So that a dataset can be filtered, it must have the following keys:
 
