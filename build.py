@@ -1,10 +1,10 @@
 from distutils.extension import Extension
 from Cython.Build import cythonize
-import numpy
+# import numpy
 
 extensions = [
-    Extension("asmd.asmd", ["asmd/asmd.py"],
-              include_dirs=[numpy.get_include()]),
+    # Extension("asmd.asmd", ["asmd/asmd.py"],
+    #           include_dirs=[numpy.get_include()]),
     Extension("asmd.convert_from_file", ["asmd/convert_from_file.py"]),
     Extension("asmd.conversion_tool", ["asmd/conversion_tool.py"]),
     Extension("asmd.utils", ["asmd/utils.py"])
