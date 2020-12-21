@@ -1,5 +1,4 @@
 import numpy as np
-import pretty_midi as pm
 from essentia.standard import EasyLoader as Loader
 from essentia.standard import MetadataReader
 
@@ -66,6 +65,7 @@ def open_midi(midi_fn,
     a list of tracks will be returned. If `pm` is True, the original
     PrettyMidi object will also be returned.
     """
+    import pretty_midi as pm
     midi_multitrack = pm.PrettyMIDI(midi_fn)
 
     if type(considered_tracks) is int:
