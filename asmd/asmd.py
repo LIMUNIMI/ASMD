@@ -173,9 +173,10 @@ class Dataset(object):
             the surname of the composer to filter
         groups : list of strings
             a list of strings containing the name of the groups that you want
-            to retrieve. If empty, all groups are used. Example of groups are:
-            'train', 'validation', 'test'. The available groups depend on
-            the dataset. Only Maestro dataset supported for now.
+            to retrieve with a logic 'AND' among them. If empty, all groups are
+            used. Example of groups are: 'train', 'validation', 'test'. The
+            available groups depend on the dataset. Only Maestro dataset
+            supported for now.
         datasets : list of strings
             a list of strings containing the name of the datasets to be used.
             If empty, all datasets are used. See :doc:`License` for the
@@ -243,12 +244,10 @@ class Dataset(object):
                             FLAG = False
 
                     if groups:
-                        for group in song['groups']:
-                            if group in groups:
-                                FLAG = True
-                                break
-                            else:
+                        for group in groups:
+                            if group not in song['groups']:
                                 FLAG = False
+                                break
 
                     if FLAG:
                         gts = song['ground_truth']
