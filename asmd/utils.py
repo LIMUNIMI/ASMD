@@ -46,6 +46,8 @@ def open_audio(audio_fn):
 
     reader = MetadataReader(filename=str(audio_fn), filterMetadata=True)
     sample_rate = reader()[-2]
+    if sample_rate == 0:
+        raise RuntimeError("No sample rate metadata in file " + audio_fn)
 
     loader = Loader(filename=str(audio_fn),
                     sampleRate=sample_rate,
