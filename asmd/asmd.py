@@ -669,7 +669,7 @@ class Dataset(object):
                 n_frames = int(utils.nframes(dur, hop, winlen)) + 1
 
                 # set up initial matrix that will be output
-                frame_track_pedaling = np.empty((n_frames, 4), dtype=float)
+                frame_track_pedaling = np.zeros((n_frames, 4), dtype=float)
                 # doesn't work because shape suffers from precisions problems
                 # frame_track_pedaling[:, 0] = np.arange(winlen / 2, hop *
                 # n_frames + winlen / 2, hop)
