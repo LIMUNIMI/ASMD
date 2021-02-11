@@ -19,6 +19,17 @@ Other examples in the paper!
 Changelog
 =========
 
+Version 0.3
+^^^^^^^^^^^
+
+#. Fixed MIDI values ([0, 128) for control changes, (0, 128] for pitches)
+#. Fixed metadata error while reading audio files
+#. Fixed pedaling for tracks that have no pedaling
+#. Fixed group selection
+#. Added `get_songs`
+#. Improved initialization of `Dataset` objects
+#. Improved documentation
+
 Version 0.2.2-2
 ^^^^^^^^^^^^^^^
 
