@@ -626,7 +626,7 @@ class Dataset(object):
             list of 2d-arrays each listing all the control changes events in a
             track. Rows represent control changes or frames (according to
             `frame_based_option`) while columns represent (time, sustain value,
-            soft value, sostenuto value).
+            sostenuto value, soft value).
 
             If `frame_based` is used, time is the central time of the frame and
             frames are computed using the most aligned score available for this
