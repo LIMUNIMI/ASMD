@@ -1,3 +1,5 @@
+import pathlib
+from typing import Union, Tuple
 import numpy as np
 from essentia.standard import EasyLoader as Loader
 from essentia.standard import MetadataReader
@@ -29,25 +31,25 @@ def frame2time(frame: int, hop_size=3072, win_len=4096) -> float:
 def time2frame(time, hop_size=3072, win_len=4096) -> int:
     """
     Takes a time position and outputs the best frame representing it.
-    The input must use the same unity of measure for ``time``, ``hop_size``, and
-    ``win_len`` (e.g. samples or seconds).
-    Indices start from 0.
+    The input must use the same unity of measure for ``time``, ``hop_size``,
+    and ``win_len`` (e.g. samples or seconds).  Indices start from 0.
 
     Returns and int!
     """
     return round((time - win_len / 2) / hop_size)
 
 
-def open_audio(audio_fn):
+def open_audio(audio_fn: Union[str, pathlib.Path]) -> Tuple[np.ndarray, int]:
     """
     Open the audio file in `audio_fn` and returns a numpy array containing it,
-    one row for each channel. (only Mono supported for now)
+    one row for each channel (only Mono supported for now) and the orginal
+    sample_rate
     """
 
     reader = MetadataReader(filename=str(audio_fn), filterMetadata=True)
     sample_rate = reader()[-2]
     if sample_rate == 0:
-        raise RuntimeError("No sample rate metadata in file " + audio_fn)
+        raise RuntimeError("No sample rate metadata in file " + str(audio_fn))
 
     loader = Loader(filename=str(audio_fn),
                     sampleRate=sample_rate,
@@ -113,14 +115,16 @@ def group_notes_by_onest(notes):
 
 def evaluate2d(estimate, ground_truth):
     """
-    Evaluate two 2D arrays in which rows are notes and columns are `pitch`, `onset` and `offset`.
+    Evaluate two 2D arrays in which rows are notes and columns are `pitch`,
+    `onset` and `offset`.
 
-    This function first compare the number of notes in the two arrays for all the pitches and
-    removes notes in excess, so that the two arrays have the same number of pitches.
-    Then, it returns two arrays with onsets and offsets relative errors,
-    computed as `estimate - ground_truth` for all correspondend pitches, after
-    having sorted by pitch and onset. Ordering is performed so that the input
-    arrays don't need to be ordered in the same way.
+    This function first compare the number of notes in the two arrays for all
+    the pitches and removes notes in excess, so that the two arrays have the
+    same number of pitches.  Then, it returns two arrays with onsets and
+    offsets relative errors, computed as `estimate - ground_truth` for all
+    correspondend pitches, after having sorted by pitch and onset. Ordering is
+    performed so that the input arrays don't need to be ordered in the same
+    way.
 
 
     Arguments
@@ -138,9 +142,9 @@ def evaluate2d(estimate, ground_truth):
     ---
 
     `np.array` :
-        A 1D array where the i element is the relative error computed as
-        for the `i`-th estimated note onset, after having removed mismatching
-        notes and having ordered by pitch and onset. Ordering is performed so that
+        A 1D array where the i element is the relative error computed as for
+        the `i`-th estimated note onset, after having removed mismatching notes
+        and having ordered by pitch and onset. Ordering is performed so that
         the input arrays don't need to be ordered in the same way.
 
 
@@ -149,12 +153,14 @@ def evaluate2d(estimate, ground_truth):
     """
     ###########
     # removing last k pitches that create mismatch
-    # after this operation all the pitches have the same cardinality in both lists
+    # after this operation all the pitches have the same cardinality in both
+    # lists
     pitches_est = np.unique(estimate[:, 0])
     pitches_gt = np.unique(ground_truth[:, 0])
     pitches = np.union1d(pitches_est, pitches_gt)
     for pitch in pitches:
-        # computing how many notes for this pitch there are in estimate and ground_truth
+        # computing how many notes for this pitch there are in estimate and
+        # ground_truth
         pitch_est = np.count_nonzero(estimate[:, 0] == pitch)
         pitch_gt = np.count_nonzero(ground_truth[:, 0] == pitch)
 
@@ -168,7 +174,8 @@ def evaluate2d(estimate, ground_truth):
         else:
             continue
 
-        # taking indices of notes with this pitch in remove_from that are not in not_remove_from
+        # taking indices of notes with this pitch in remove_from that are not
+        # in not_remove_from
         remove_from_idx = np.where(
             remove_from[:, 0] == pitch)[0][pitch_not_remove_from:]
 
