@@ -99,16 +99,16 @@ dictionary with the following structure:
 
 #. ``precise_alignment``:
 
-   #. ``onsets``: onsets in ms
-   #. ``offsets``: offsets in ms
+   #. ``onsets``: onsets in seconds
+   #. ``offsets``: offsets in seconds
    #. ``pitches``: list of midi pitches in onset ascending order and range [0-127]
    #. ``note``: list of note names in onsets ascending order
    #. ``velocities``: list of velocities in onsets ascending order and range [0-127]
 
 #. ``broad_alignment``: alignment which does not consider the asynchronies between simultaneous notes
 
-   #. ``onsets``: onsets in ms
-   #. ``offsets``: offsets in ms
+   #. ``onsets``: onsets in seconds
+   #. ``offsets``: offsets in seconds
    #. ``pitches``: list of midi pitches in onset ascending order and range [0-127]
    #. ``note``: list of note names in onsets ascending order
    #. ``velocities``: list of velocities in onsets ascending order and range [0-127]
@@ -129,7 +129,7 @@ dictionary with the following structure:
 
    #. ``values``: list of soft-pedal changes; each value is a number between 0
       and 127, where values < 63 mean soft pedal OFF and values >= 63 mean
-      soft edal ON, but intermediate values can be used (e.g. for
+      soft pedal ON, but intermediate values can be used (e.g. for
       half-pedaling).
    #. ``times``: list of floats representing the time of each soft pedal change
       in seconds.
@@ -138,7 +138,7 @@ dictionary with the following structure:
 
    #. ``values``: list of sostenuto-pedal changes; each value is a number between 0
       and 127, where values < 63 mean sostenuto pedal OFF and values >= 63 mean
-      sostenuto edal ON, but intermediate values can be used (e.g. for
+      sostenuto pedal ON, but intermediate values can be used (e.g. for
       half-pedaling).
    #. ``times``: list of floats representing the time of each sostenuto pedal change
       in seconds.
@@ -147,6 +147,9 @@ dictionary with the following structure:
    starting from 0. 128 indicates a drum kit (should be synthesized on channel
    8 with a program number of your choice, usually 0). 255 indicates no
    instrument specified.
+
+#. ``beats_non_aligned``: list of beat positions in seconds according to some
+   MIDI score (the ones used for statistics)
 
 Note that json ground_truth files have extension ``.json.gz``,
 indicating that they are compressed using the ``gzip`` Python 3.6.9
