@@ -30,7 +30,8 @@ following field:
 
 #. ``ground_truth``: *N.B. each ground_truth has an ``int`` value, indicating ``0`` -> false, ``1`` -> true (manual or mechanical - Disklavier - annotation), ``2`` -> true (automatic annotation with state-of-art algorithms)*
 
-   #. ``non_aligned``: if non_aligned scores are provided
+   #. ``misaligned``: if artificially misaligned scores are provided
+   #. ``score``: if original scores are provided
    #. ``broad_alignment``: if broad_alignment scores are provided
    #. ``precise_alignment``: if precisely aligned scores are provided
    #. ``velocities``: if velocities are provided
@@ -89,10 +90,20 @@ The ground_truth is contained in JSON files indexed in each definition
 file. Each ground truth file contains only one isntrument in a
 dictionary with the following structure:
 
-#. ``non_aligned``:
+#. ``score``:
 
    #. ``onsets``: onsets in seconds at 20 bpm
    #. ``offsets``: offsets in seconds at 20 bpm
+   #. ``pitches``: list of midi pitches in onset ascending order and range [0-127]
+   #. ``note``: list of note names in onsets ascending order
+   #. ``velocities``: list of velocities in onsets ascending order and range [0-127]
+   #. ``beats``: list of times in which there was a beat in the original score;
+         use this to reconstruct instant BPM
+
+#. ``misaligned``:
+
+   #. ``onsets``: onsets in seconds
+   #. ``offsets``: offsets in seconds
    #. ``pitches``: list of midi pitches in onset ascending order and range [0-127]
    #. ``note``: list of note names in onsets ascending order
    #. ``velocities``: list of velocities in onsets ascending order and range [0-127]
@@ -148,11 +159,8 @@ dictionary with the following structure:
    8 with a program number of your choice, usually 0). 255 indicates no
    instrument specified.
 
-#. ``beats_non_aligned``: list of beat positions in seconds according to some
-   MIDI score (the ones used for statistics)
-
 Note that json ground_truth files have extension ``.json.gz``,
-indicating that they are compressed using the ``gzip`` Python 3.6.9
+indicating that they are compressed using the ``gzip`` Python
 module. Thus, you need to decompress them:
 
 .. code:: python
