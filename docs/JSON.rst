@@ -40,6 +40,8 @@ following field:
    #. ``soft``: if sustain values are provided
    #. ``sostenuto``: if sustain values are provided
 
+   A true value (`1` or `2`) can be used even if only part of the dataset has that type of annotation.
+
 #. ``songs``: the list of songs in the dataset
 
    #. ``composer``: the composer family name

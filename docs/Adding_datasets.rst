@@ -23,15 +23,15 @@ Adding new definitions
 The most important thing is that one ground-truth file is provided for
 each instrument.
 
-If you want to add datasets to the installation procedure, add the
-paths, even if they still do not exist, because ``convert_gt.py`` relies
-on that to create them. It is important to provide an index starting
-with ``-`` at the end of the path (see the other sections as example),
-so that it is possible to distinguish among multiple instruments (for
-instance, PHENICX provides one ground-truth file for all the violins of
-a song, even if there are 4 different violins). The index allows
-``convert_gt`` to better handle different files and to pick the
-ground-truth wanted.
+If you want to add datasets to the installation procedure, taking advantage of
+the artificially misalignment, add the paths to the files (ground-truth, audio,
+etc.), even if they still do not exist, because ``convert_gt.py`` relies on
+those paths to create the files. It is important to provide an index starting
+with ``-`` at the end of the path (see the other sections as example), so that
+it is possible to distinguish among multiple instruments (for instance, PHENICX
+provides one ground-truth file for all the violins of a song, even if there are
+4 different violins). The index allows ``convert_gt`` to better handle
+different files and to pick the ground-truth wanted.
 
 It is mandatory to provide a url, a name and so on. Also, provide a
 composer and instrument list. Please, do not use new words for
@@ -52,9 +52,14 @@ docs).
 You should consider three possible cases for creating the conversion
 function:
 
-#. there is a bijective relationship between instruments and ground_truth file you have, that is, you already have a convesion file per each instrument and you should just convert all of them (*1-to-1 relationship*)
-#. in your dataset, all the instruments are inside just one ground-truth   file (*n-to-1 relationship*)
-#. just one ground-truth file is provided that replicates for multiple instruments (one ground-truth for all the ``violins``, as if they   were a single instrument, *1-to-n relationship* )
+#. there is a bijective relationship between instruments and ground_truth file
+   you have, that is, you already have a convesion file per each instrument and
+   you should just convert all of them (*1-to-1 relationship*)
+#. in your dataset, all the instruments are inside just one ground-truth   file
+   (*n-to-1 relationship*)
+#. just one ground-truth file is provided that replicates for multiple
+   instruments (one ground-truth for all the ``violins``, as if they   were a
+   single instrument, *1-to-n relationship* )
 
 Here is a brief description of how your conversion function should work
 to tackle these three different situations. - In the 1st case, you can

@@ -65,14 +65,16 @@ def filter(dataset,
         a list of strings containing the name of the datasets to be used.
         If empty, all datasets are used. See :doc:`License` for the
         list of default datasets.
-    ground_truth : list of tuples
-        a list of tuples representing the type of ground-truths needed
+    ground_truth : dict[str, int]
+        a dictionary (string, int) representing the type of ground-truths needed
         (logical AND among list elements).
-        Each tuple has the form `('needed_ground_truth_type',
-        level_of_truth)`, where `needed_ground_truth_type` is the key of
-        the ground_truth dictionary and `level_of_truth` is an int ranging
-        from 0 to 2 (0->False, 1->True (manual annotation),
-        2->True(automatic annotation))
+        Each entry has the form `needed_ground_truth_type` as key
+        and `level_of_truth` as value, where `needed_ground_truth_type` is the
+        key of the ground_truth dictionary and `level_of_truth` is an int
+        ranging from 0 to 2 (0->False, 1->True (manual annotation),
+        2->True(automatic annotation)).
+        If only part of a dataset contains a certain ground-truth type, you
+        should use the `group` attribute to only select those songs.
     copy : bool
         If True, a new Dataset object is returned, and the calling one is
         leaved untouched
@@ -106,8 +108,8 @@ def filter(dataset,
             if ensemble != mydataset['ensemble']:
                 FLAG = False
 
-        for gt in ground_truth:
-            if mydataset['ground_truth'][gt[0]] != gt[1]:
+        for gt, val in ground_truth:
+            if mydataset['ground_truth'][gt] != val:
                 FLAG = False
                 break
 
