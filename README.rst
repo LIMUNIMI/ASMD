@@ -22,7 +22,7 @@ Changelog
 Version 0.3
 ^^^^^^^^^^^
 
-#. Fixed MIDI values ([0, 128) for control changes, (0, 128] for pitches)
+#. Fixed MIDI values ([0, 128) for control changes and pitches)
 #. Fixed metadata error while reading audio files
 #. Fixed pedaling for tracks that have no pedaling
 #. Fixed group selection

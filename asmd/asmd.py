@@ -295,8 +295,8 @@ class Dataset(object):
         Note
         ----
 
-        In the midi.org standard, pitches start counting from 1; however,
-        sometimes people use to count pitches from 0. Depending on the dataset
+        In the midi.org standard, pitches start counting from 0; however,
+        sometimes people use to count pitches from 1. Depending on the dataset
         that you are using, verify how pitches are counted. In the ASMD default
         ground-truths, pitches are set with 0-based indexing.
 
