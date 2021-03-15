@@ -249,11 +249,10 @@ from_midi = convert(['.mid', '.midi'], remove_player=False)(from_midi)
 
 
 @convert(['.txt'])
-def from_phenicx_txt(txt_fn, score=False):
+def from_phenicx_txt(txt_fn):
     """
     Open a txt file `txt_fn` in the PHENICX format and convert it to our
-    ground_truth representation. This fills: `broad_alignment` and
-    `pitches` and `notes` of `score`.
+    ground_truth representation. This fills: `broad_alignment`.
     """
     out_list = list()
 
@@ -263,9 +262,6 @@ def from_phenicx_txt(txt_fn, score=False):
     out = deepcopy(prototype_gt)
     for line in lines:
         fields = re.split(',|\n', line)
-        out["score"]["notes"].append(fields[2])
-        out["score"]["pitches"].append(
-            pretty_midi.note_name_to_number(fields[2]))
         out["broad_alignment"]["notes"].append(fields[2])
         out["broad_alignment"]["pitches"].append(
             pretty_midi.note_name_to_number(fields[2]))
@@ -336,6 +332,7 @@ def from_musicnet_csv(csv_fn, sr=44100.0):
     N.B. MusicNet contains wav files at 44100 Hz as samplerate.
     N.B. Lowest in pitch in musicnet is 21, so we assume that they count pitch
     starting with 0 as in midi.org standard.
+    N.B. `score` times are provided with BPM 60 for all the scores
     """
     data = csv.reader(open(csv_fn), delimiter=',')
     out = deepcopy(prototype_gt)
@@ -353,13 +350,13 @@ def from_musicnet_csv(csv_fn, sr=44100.0):
         out["instrument"] = int(row[2])
         out["broad_alignment"]["pitches"].append(int(row[3]))
         out["score"]["pitches"].append(int(row[3]))
-        out["score"]["onsets"].append(float(row[4]) * 60 / BPM)
+        out["score"]["onsets"].append(float(row[4]))
         out["score"]["offsets"].append(
-            float(row[4] * 60 / BPM) + float(row[5]) * 60 / BPM)
+            float(row[4]) + float(row[5]))
 
-    out["beats_score"] = [
-        i for i in range(int(max(out["score"]["offsets"])) + 1)
-    ]
+        out["score"]["beats"] = [
+            i for i in range(int(max(out["score"]["offsets"])) + 1)
+        ]
     return out
 
 

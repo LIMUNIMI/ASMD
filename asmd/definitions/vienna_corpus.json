@@ -1,10 +1,10 @@
 {
     "ensemble": false,
     "ground_truth": {
-        "beats_non_aligned": 1,
         "broad_alignment": 0,
         "f0": 0,
-        "non_aligned": 2,
+        "misaligned": 2,
+        "score": 1,
         "precise_alignment": 1,
         "soft": 1,
         "sostenuto": 1,
@@ -16,7 +16,7 @@
             [
                 "from_midi_remove_player",
                 {
-                    "alignment": "non_aligned",
+                    "alignment": "score",
                     "beats": true,
                     "merge": true,
                     "pitches": true,

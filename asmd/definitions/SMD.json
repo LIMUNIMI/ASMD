@@ -1,11 +1,11 @@
 {
     "ensemble": false,
     "ground_truth": {
-        "beats_non_aligned": 0,
         "broad_alignment": 0,
         "errors": 0,
         "f0": 0,
-        "non_aligned": 2,
+        "misaligned": 2,
+        "score": 0,
         "precise_alignment": 1,
         "soft": 1,
         "sostenuto": 1,
