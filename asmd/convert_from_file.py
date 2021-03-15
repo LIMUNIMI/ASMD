@@ -10,8 +10,6 @@ import scipy.io
 
 from . import utils
 
-BPM = 20
-
 
 def convert(exts, no_dot=True, remove_player=False):
     """
@@ -69,12 +67,20 @@ prototype_gt = {
         "notes": [],
         "velocities": []
     },
-    "non_aligned": {
+    "misaligned": {
         "onsets": [],
         "offsets": [],
         "pitches": [],
         "notes": [],
         "velocities": []
+    },
+    "score": {
+        "onsets": [],
+        "offsets": [],
+        "pitches": [],
+        "notes": [],
+        "velocities": [],
+        "beats": []
     },
     "broad_alignment": {
         "onsets": [],
@@ -97,7 +103,6 @@ prototype_gt = {
         "times": []
     },
     "instrument": 255,
-    "beats_non_aligned": []
 }
 """
 The dictionary prototype for containing the ground_truth.
@@ -105,49 +110,57 @@ use:
 
 >>> from copy import deepcopy
 ... from convert_from_file import prototype_gt
-... deepcopy(prototype_gt)
+... prototype_gt = deepcopy(prototype_gt)
 
->>> prototype_gt = {
-...     "precise_alignment": {
-...         "onsets": [],
-...         "offsets": [],
-...         "pitches": [],
-...         "notes": [],
-...         "velocities": []
-...     },
-...     "non_aligned": {
-...         "onsets": [],
-...         "offsets": [],
-...         "pitches": [],
-...         "notes": [],
-...         "velocities": []
-...     },
-...     "broad_alignment": {
-...         "onsets": [],
-...         "offsets": [],
-...         "pitches": [],
-...         "notes": [],
-...         "velocities": []
-...     },
-...     "f0": [],
-...     "soft": {
-...         "values": [],
-...         "times": []
-...     },
-...     "sostenuto": {
-...         "values": [],
-...         "times": []
-...     },
-...     "sustain": {
-...         "values": [],
-...         "times": []
-...     },
-...     "instrument": 255,
-...     "beats_non_aligned": []
-... }
+>>> prototype_gt
+{
+    "precise_alignment": {
+        "onsets": [],
+        "offsets": [],
+        "pitches": [],
+        "notes": [],
+        "velocities": []
+    },
+    "misaligned": {
+        "onsets": [],
+        "offsets": [],
+        "pitches": [],
+        "notes": [],
+        "velocities": []
+    },
+    "score": {
+        "onsets": [],
+        "offsets": [],
+        "pitches": [],
+        "notes": [],
+        "velocities": [],
+        "beats": []
+    },
+    "broad_alignment": {
+        "onsets": [],
+        "offsets": [],
+        "pitches": [],
+        "notes": [],
+        "velocities": []
+    },
+    "f0": [],
+    "soft": {
+        "values": [],
+        "times": []
+    },
+    "sostenuto": {
+        "values": [],
+        "times": []
+    },
+    "sustain": {
+        "values": [],
+        "times": []
+    },
+    "instrument": 255,
+}
 
 Note: ``pitches``, ``velocities``, ``sustain``, ``sostenuto``, ``soft``, and
-(if available) ``instrument`` must be in range [0, 127].
+(if available) ``instrument`` must be in range [0, 128)
 """
 
 
@@ -199,12 +212,6 @@ def from_midi(midi_fn,
     if merge:
         midi_tracks = [midi_tracks]
 
-    this_bpm = pm.get_tempo_changes()[1][0]
-    if alignment == 'non_aligned':
-        bpm_ratio = this_bpm / BPM
-    else:
-        bpm_ratio = 1
-
     for i, track in enumerate(midi_tracks):
         data = deepcopy(prototype_gt)
         for cc in pm.instruments[i].control_changes:
@@ -226,11 +233,11 @@ def from_midi(midi_fn,
                     data[alignment]["velocities"].append(note.velocity)
                 if alignment:
                     data[alignment]["onsets"].append(
-                        float(note.start) * bpm_ratio)
+                        float(note.start))
                     data[alignment]["offsets"].append(
-                        float(note.end) * bpm_ratio)
-        if beats:
-            data["beats_non_aligned"] = (pm.get_beats() * bpm_ratio).tolist()
+                        float(note.end))
+                if beats and alignment == 'score':
+                    data[alignment]["beats"] = pm.get_beats().tolist()
         out.append(data)
 
     return out
@@ -242,11 +249,11 @@ from_midi = convert(['.mid', '.midi'], remove_player=False)(from_midi)
 
 
 @convert(['.txt'])
-def from_phenicx_txt(txt_fn, non_aligned=False):
+def from_phenicx_txt(txt_fn, score=False):
     """
     Open a txt file `txt_fn` in the PHENICX format and convert it to our
     ground_truth representation. This fills: `broad_alignment` and
-    `pitches` and `notes` of `non_aligned`.
+    `pitches` and `notes` of `score`.
     """
     out_list = list()
 
@@ -256,8 +263,8 @@ def from_phenicx_txt(txt_fn, non_aligned=False):
     out = deepcopy(prototype_gt)
     for line in lines:
         fields = re.split(',|\n', line)
-        out["non_aligned"]["notes"].append(fields[2])
-        out["non_aligned"]["pitches"].append(
+        out["score"]["notes"].append(fields[2])
+        out["score"]["pitches"].append(
             pretty_midi.note_name_to_number(fields[2]))
         out["broad_alignment"]["notes"].append(fields[2])
         out["broad_alignment"]["pitches"].append(
@@ -321,7 +328,7 @@ def from_bach10_f0(nmat_fn, sources=range(4)):
 def from_musicnet_csv(csv_fn, sr=44100.0):
     """
     Open a csv file `csv_fn` and convert it to our ground_truth representation.
-    This fills: `broad_alignment`, `non_aligned`, `pitches`.
+    This fills: `broad_alignment`, `score`, `pitches`.
     This returns a list containing only one dict. `sr` is the samplerate of the
     audio files (MusicNet csv contains the sample number as onset and offsets of
     each note) and it shold be a float.
@@ -345,13 +352,13 @@ def from_musicnet_csv(csv_fn, sr=44100.0):
         out["broad_alignment"]["offsets"].append(int(row[1]) / sr)
         out["instrument"] = int(row[2])
         out["broad_alignment"]["pitches"].append(int(row[3]))
-        out["non_aligned"]["pitches"].append(int(row[3]))
-        out["non_aligned"]["onsets"].append(float(row[4]) * 60 / BPM)
-        out["non_aligned"]["offsets"].append(
+        out["score"]["pitches"].append(int(row[3]))
+        out["score"]["onsets"].append(float(row[4]) * 60 / BPM)
+        out["score"]["offsets"].append(
             float(row[4] * 60 / BPM) + float(row[5]) * 60 / BPM)
 
-    out["beats_non_aligned"] = [
-        i for i in range(int(max(out["non_aligned"]["offsets"])) + 1)
+    out["beats_score"] = [
+        i for i in range(int(max(out["score"]["offsets"])) + 1)
     ]
     return out
 

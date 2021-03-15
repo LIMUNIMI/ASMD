@@ -264,7 +264,7 @@ class Dataset(object):
 
     def get_pianoroll(self,
                       idx,
-                      score_type=['non_aligned'],
+                      score_type=['misaligned'],
                       resolution=0.25,
                       onsets=False,
                       velocity=True):
@@ -334,7 +334,7 @@ class Dataset(object):
     def get_beats(self, idx):
         """
         Get a list of beat position in seconds, to be used together with the
-        non_aligned data.
+        score data.
 
         Arguments
         ---------
@@ -349,7 +349,7 @@ class Dataset(object):
         gts = self.get_gts(idx)
         beats = []
         for gt in gts:
-            beats.append(gt['beats_non_aligned'])
+            beats.append(gt['score']['beats'])
 
         return np.array(beats)
 
@@ -360,7 +360,7 @@ class Dataset(object):
         """
         gts = self.get_gts(idx)
         score_type = chose_score_type(
-            ['precise_alignment', 'broad_alignment', 'non_aligned'], gts)
+            ['precise_alignment', 'broad_alignment', 'misaligned', 'score'], gts)
 
         gts_m = 0
         for gt in gts:
@@ -486,7 +486,8 @@ def chose_score_type(score_type, gts):
         following criteria: if there is `precise_alignment` in the list of
         keys and in the ground truth, use that; otherwise, if there is
         `broad_alignment` in the list of keys and in the ground truth, use
-        that; otherwise use `non_aligned`.
+        that; otherwise if `misaligned` in the list of keys and in the ground
+        truth, use use `score`.
 
     gts : list of dict
         The list of ground truths from which you want to chose a score_type
@@ -498,8 +499,12 @@ def chose_score_type(score_type, gts):
         elif 'broad_alignment' in score_type and len(
                 gts[0]['broad_alignment']['pitches']) > 0:
             score_type = 'broad_alignment'
+        elif 'misaligned' in score_type and len(
+                gts[0]['misaligned']['pitches']) > 0:
+            score_type = 'misaligned'
         else:
-            score_type = 'non_aligned'
+            score_type = 'score'
+
     else:
         score_type = score_type[0]
     return score_type

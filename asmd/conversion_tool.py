@@ -163,13 +163,13 @@ def conversion(arg):
             range(len(INSTRUMENT_MAP)),
             key=lambda x: text_similarity(INSTRUMENT_MAP[x], instrument))
 
-        if dataset['ground_truth']['non_aligned'] == 2 and stats:
+        if dataset['ground_truth']['misaligned'] == 2 and stats:
             # computing deviations for each pitch
             pitches, onsets, offsets = misalign(ons_dev[l], offs_dev[l],
                                                 mean[l], out, stats)
-            out['non_aligned']['onsets'] = onsets
-            out['non_aligned']['offsets'] = offsets
-            out['non_aligned']['pitches'] = pitches
+            out['misaligned']['onsets'] = onsets
+            out['misaligned']['offsets'] = offsets
+            out['misaligned']['pitches'] = pitches
 
         print("   saving " + final_path)
         # pretty printing stolen from official docs
@@ -220,7 +220,7 @@ def create_gt(data_fn,
         print("\n------------------------\n")
         print("Starting processing " + dataset['name'])
         if dataset['ground_truth'][
-                'non_aligned'] == 2 and alignment_stats is not None:
+                'misaligned'] == 2 and alignment_stats is not None:
             # computing means and std deviations for each song in the dataset
             mean = alignment_stats.get_random_mean(k=len(dataset['songs']),
                                                    max_value=MEAN_MAX)

@@ -162,7 +162,7 @@ def filter(dataset,
     return ret
 
 
-def get_score_mat(dataset, idx, score_type=['non_aligned']):
+def get_score_mat(dataset, idx, score_type=['misaligned']):
     """
     Get the score of a certain score, with times of `score_type`
 
