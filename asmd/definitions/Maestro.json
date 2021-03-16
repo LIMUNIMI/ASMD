@@ -716,60 +716,6 @@
             "title": "Waltz, Op. 38"
         },
         {
-            "composer": "Arensky",
-            "ground_truth": [
-                "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber2_MID--AUDIO_09_R3_2018_wav--3-0.json.gz"
-            ],
-            "groups": [
-                "train"
-            ],
-            "instruments": [
-                "piano"
-            ],
-            "recording": {
-                "path": [
-                    "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber2_MID--AUDIO_09_R3_2018_wav--3.wav"
-                ]
-            },
-            "title": "Piano Trio in D Minor, Op. 32"
-        },
-        {
-            "composer": "Arensky",
-            "ground_truth": [
-                "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber4_MID--AUDIO_11_R3_2018_wav--3-0.json.gz"
-            ],
-            "groups": [
-                "train"
-            ],
-            "instruments": [
-                "piano"
-            ],
-            "recording": {
-                "path": [
-                    "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber4_MID--AUDIO_11_R3_2018_wav--3.wav"
-                ]
-            },
-            "title": "Piano Trio in D Minor, Op. 32"
-        },
-        {
-            "composer": "Arensky",
-            "ground_truth": [
-                "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber6_MID--AUDIO_20_R3_2018_wav--3-0.json.gz"
-            ],
-            "groups": [
-                "train"
-            ],
-            "instruments": [
-                "piano"
-            ],
-            "recording": {
-                "path": [
-                    "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber6_MID--AUDIO_20_R3_2018_wav--3.wav"
-                ]
-            },
-            "title": "Piano Trio in D Minor, Op. 32"
-        },
-        {
             "composer": "Soler",
             "ground_truth": [
                 "Maestro/maestro-v3.0.0/2009/MIDI-Unprocessed_09_R1_2009_01-04_ORIG_MID--AUDIO_09_R1_2009_09_R1_2009_01_WAV-0.json.gz"
@@ -2370,24 +2316,6 @@
                 ]
             },
             "title": "Fantasy in F-sharp Minor, Op. 28 (Complete)"
-        },
-        {
-            "composer": "Mendelssohn",
-            "ground_truth": [
-                "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber5_MID--AUDIO_18_R3_2018_wav--2-0.json.gz"
-            ],
-            "groups": [
-                "test"
-            ],
-            "instruments": [
-                "piano"
-            ],
-            "recording": {
-                "path": [
-                    "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber5_MID--AUDIO_18_R3_2018_wav--2.wav"
-                ]
-            },
-            "title": "Piano Trio No. 1 in D Major, Op. 49"
         },
         {
             "composer": "Mendelssohn",
@@ -17112,42 +17040,6 @@
                 ]
             },
             "title": "Fantasia, Op. 77"
-        },
-        {
-            "composer": "Beethoven",
-            "ground_truth": [
-                "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber1_MID--AUDIO_07_R3_2018_wav--2-0.json.gz"
-            ],
-            "groups": [
-                "train"
-            ],
-            "instruments": [
-                "piano"
-            ],
-            "recording": {
-                "path": [
-                    "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber1_MID--AUDIO_07_R3_2018_wav--2.wav"
-                ]
-            },
-            "title": "Piano Trio in D Major, Op. 70 No. 1"
-        },
-        {
-            "composer": "Beethoven",
-            "ground_truth": [
-                "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber3_MID--AUDIO_10_R3_2018_wav--3-0.json.gz"
-            ],
-            "groups": [
-                "train"
-            ],
-            "instruments": [
-                "piano"
-            ],
-            "recording": {
-                "path": [
-                    "Maestro/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber3_MID--AUDIO_10_R3_2018_wav--3.wav"
-                ]
-            },
-            "title": "Piano Trio in D Major, Op. 70 No. 1"
         },
         {
             "composer": "Beethoven",
