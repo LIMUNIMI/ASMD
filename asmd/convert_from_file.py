@@ -13,7 +13,7 @@ from . import utils
 
 def convert(exts, no_dot=True, remove_player=False):
     """
-    This function that is designed to be used as decorators for functions which
+    This function is designed to be used as decorators for functions which
     converts from a filetype to our JSON format.
 
     Example of usage:
@@ -203,7 +203,10 @@ def from_midi(midi_fn,
     This functions is decorated with two different sets of parameters:
 
     * `from_midi` is the decorated version with `remove_player=False`
-    * `from_midi_remove_player` is the decorated version with `remove_player=True`
+    * `from_midi_remove_player` is the decorated version with
+      `remove_player=True`
+    * `from_midi_asap` is the decorated version which accept extension
+      '.score.mid' which is used in the script to import scores from ASAP
     """
     midi_tracks, pm = utils.open_midi(midi_fn, merge=merge, pm_object=True)
 
@@ -246,6 +249,7 @@ def from_midi(midi_fn,
 from_midi_remove_player = convert(['.mid', '.midi'],
                                   remove_player=True)(from_midi)
 from_midi = convert(['.mid', '.midi'], remove_player=False)(from_midi)
+from_midi_asap = convert(['.score.mid'], remove_player=False)(from_midi)
 
 
 @convert(['.txt'])

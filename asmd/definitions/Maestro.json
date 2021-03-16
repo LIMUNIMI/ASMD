@@ -15,11 +15,27 @@
         "conversion": [
             [
                 "from_midi",
-                {}
+                {
+                    "alignment": "precise_alignment",
+                    "beats": false,
+                    "merge": true,
+                    "pitches": true,
+                    "velocities": true
+                }
+            ],
+            [
+                "from_midi_asap",
+                {
+                    "alignment": "score",
+                    "beats": true,
+                    "merge": true,
+                    "pitches": true,
+                    "velocities": false
+                }
             ]
         ],
         "login": false,
-        "post-process": "unknown",
+        "post-process": "python -m asmd.asap",
         "unpack": true,
         "url": "https://storage.googleapis.com/magentadata/datasets/maestro/v3.0.0/maestro-v3.0.0.zip"
     },
