@@ -3,7 +3,43 @@ from copy import deepcopy
 import numpy as np
 
 from . import utils
-from .asmd import chose_score_type
+
+
+def chose_score_type(score_type, gts):
+    """
+    Return the proper score type according to the following rules
+
+    Parameters
+    ---
+
+    score_type : list of str
+        The key to retrieve the list of notes from the ground_truths. If
+        multiple keys are provided, only one is retrieved by using the
+        following criteria: if there is `precise_alignment` in the list of
+        keys and in the ground truth, use that; otherwise, if there is
+        `broad_alignment` in the list of keys and in the ground truth, use
+        that; otherwise if `misaligned` in the list of keys and in the ground
+        truth, use use `score`.
+
+    gts : list of dict
+        The list of ground truths from which you want to chose a score_type
+    """
+    if len(score_type) > 1:
+        if 'precise_alignment' in score_type and len(
+                gts[0]['precise_alignment']['pitches']) > 0:
+            score_type = 'precise_alignment'
+        elif 'broad_alignment' in score_type and len(
+                gts[0]['broad_alignment']['pitches']) > 0:
+            score_type = 'broad_alignment'
+        elif 'misaligned' in score_type and len(
+                gts[0]['misaligned']['pitches']) > 0:
+            score_type = 'misaligned'
+        else:
+            score_type = 'score'
+
+    else:
+        score_type = score_type[0]
+    return score_type
 
 
 def filter(dataset,
