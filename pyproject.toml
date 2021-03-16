@@ -17,7 +17,7 @@ classifiers = [
 build = "build.py"
 
 [tool.poetry.dependencies]
-python = "^3.6.9"
+python = "^3.8.5"
 setuptools = "^45.2.0"
 numpy = "^1.18.1"
 requests = "^2.22.0"
@@ -29,13 +29,12 @@ pyfiglet = "^0.8.post1"
 alive-progress = "^1.3.3"
 prompt_toolkit = "^3.0.3"
 decorator = "^4.4.1"
-essentia = "^2.1b6.dev184"
+essentia = "^2.1b6.dev374"
 "mega.py" = "^1.0.6"
 joblib = "^0.14.1"
 tqdm = "^4.43.0"
 
 [tool.poetry.dev-dependencies]
-snoop = "*"
 ipdb = "*"
 ipython = "*"
 cython = "^0.29.21"
