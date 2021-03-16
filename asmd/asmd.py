@@ -2,8 +2,8 @@ import gzip
 import inspect
 import json
 import os
-from copy import deepcopy
 from os.path import join as joinpath
+from typing import List
 
 import numpy as np
 from essentia.standard import MetadataReader, Resample
@@ -11,15 +11,16 @@ from joblib import Parallel, delayed
 from tqdm import tqdm
 
 from . import utils
-# this only for detecting package directory but breaks readthedocs
+from .dataset_utils import filter
 from .idiot import THISDIR
+
+# this only for detecting package directory but breaks readthedocs
 # import to expose these functions from here for convenience
-from .dataset_utils import filter, get_score_mat, get_pedaling_mat
 
 # THISDIR = './datasets/'
 
-class Dataset(object):
 
+class Dataset(object):
     def __init__(self,
                  definitions=[joinpath(THISDIR, 'definitions/')],
                  metadataset_path=joinpath(THISDIR, 'datasets.json'),
@@ -360,7 +361,8 @@ class Dataset(object):
         """
         gts = self.get_gts(idx)
         score_type = chose_score_type(
-            ['precise_alignment', 'broad_alignment', 'misaligned', 'score'], gts)
+            ['precise_alignment', 'broad_alignment', 'misaligned', 'score'],
+            gts)
 
         gts_m = 0
         for gt in gts:
@@ -429,7 +431,7 @@ class Dataset(object):
 
         return audio, sr
 
-    def get_sources_paths(self, idx):
+    def get_sources_paths(self, idx) -> List[str]:
         """
         Return paths to single-sources audio recordings, one for each audio
 
@@ -437,7 +439,7 @@ class Dataset(object):
         """
         return self.paths[idx][1]
 
-    def get_mix_paths(self, idx):
+    def get_mix_paths(self, idx) -> List[str]:
         """
         Return paths to the mixed recording if available
 
@@ -445,14 +447,13 @@ class Dataset(object):
         """
         return self.paths[idx][0]
 
-    def get_gts_paths(self, idx):
+    def get_gts_paths(self, idx) -> List[str]:
         """
         Return paths to the ground-truth files, one for each source
 
         Returns list of string
         """
         return self.paths[idx][2]
-
 
 
 def load_definitions(path):

@@ -1,4 +1,10 @@
+from copy import deepcopy
+
 import numpy as np
+
+from . import utils
+from .asmd import chose_score_type
+
 
 def filter(dataset,
            instruments=[],
@@ -66,8 +72,8 @@ def filter(dataset,
         If empty, all datasets are used. See :doc:`License` for the
         list of default datasets.
     ground_truth : dict[str, int]
-        a dictionary (string, int) representing the type of ground-truths needed
-        (logical AND among list elements).
+        a dictionary (string, int) representing the type of ground-truths
+        needed (logical AND among list elements).
         Each entry has the form `needed_ground_truth_type` as key
         and `level_of_truth` as value, where `needed_ground_truth_type` is the
         key of the ground_truth dictionary and `level_of_truth` is an int
@@ -312,8 +318,7 @@ def get_pedaling_mat(dataset, idx, frame_based=False, winlen=0.046, hop=0.01):
             # doesn't work because shape suffers from precisions problems
             # frame_track_pedaling[:, 0] = np.arange(winlen / 2, hop *
             # n_frames + winlen / 2, hop)
-            frame_track_pedaling[:, 0] = np.arange(
-                n_frames) * hop + winlen / 2
+            frame_track_pedaling[:, 0] = np.arange(n_frames) * hop + winlen / 2
 
             # fill the matrix
             # rember the last value used for each column index:
