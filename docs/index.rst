@@ -35,6 +35,10 @@ For a gentle introduction, see our paper [1]
 TODO
 ====
 
+#. describe datasets provided by default
+#. generic description of the framework
+#. improve "adding_datasets" with a full example
+#. add section "examples"
 #. move wget to curl
 #. support Windows systems
 
