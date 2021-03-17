@@ -248,8 +248,10 @@ def from_midi(midi_fn,
 
 from_midi_remove_player = convert(['.mid', '.midi'],
                                   remove_player=True)(from_midi)
-from_midi = convert(['.mid', '.midi'], remove_player=False)(from_midi)
 from_midi_asap = convert(['.score.mid'], remove_player=False)(from_midi)
+
+# N.B. this one must be the last one, otherwise the previous modify the already decorated function!
+from_midi = convert(['.mid', '.midi'], remove_player=False)(from_midi)
 
 
 @convert(['.txt'])

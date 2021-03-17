@@ -91,7 +91,7 @@ def make_index(asap_path: Path) -> List[Tuple[Path, Path]]:
                     out.append(
                         (Path(maestro_path.replace('{maestro}',
                                                    str(asmd_maestro))).with_suffix(''),
-                         asap_path / row['midi_score']))
+                         fname.parent / row['midi_score']))
 
     return out
 
@@ -104,7 +104,7 @@ def copy_scores(index: List[Tuple[Path, Path]]):
 
     # moving files
     for maestro, asap in index:
-        asap.rename(maestro.with_suffix('.score.mid'))
+        shutil.copy(asap, maestro.with_suffix('.score.mid'))
 
 
 if __name__ == '__main__':

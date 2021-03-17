@@ -35,7 +35,12 @@
             ]
         ],
         "login": false,
-        "post-process": "python -m asmd.asap",
+        "post-process": [
+            "cd &asmd_dir",
+            "cd ..",
+            "python -m asmd.asap",
+            "# here `cd` command is needed to allow the execution even if asmd is not installed"
+        ],
         "unpack": true,
         "url": "https://storage.googleapis.com/magentadata/datasets/maestro/v3.0.0/maestro-v3.0.0.zip"
     },
