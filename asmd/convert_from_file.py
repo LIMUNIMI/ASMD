@@ -207,8 +207,16 @@ def from_midi(midi_fn,
       `remove_player=True`
     * `from_midi_asap` is the decorated version which accept extension
       '.score.mid' which is used in the script to import scores from ASAP
+
+    N.B. To allow having some annotation for subgroups of a datset, this
+    function returns None when it cannot find the specified midi file; in this
+    way, that file is not taken into account while merging the various
+    annotations (e.g. asap group inside Maestro dataset)
     """
-    midi_tracks, pm = utils.open_midi(midi_fn, merge=merge, pm_object=True)
+    try:
+        midi_tracks, pm = utils.open_midi(midi_fn, merge=merge, pm_object=True)
+    except FileNotFoundError:
+        return None
 
     out = list()
 

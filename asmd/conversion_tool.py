@@ -45,6 +45,11 @@ def merge_dicts(idx, *args):
     """
     Merges lists of dictionaries, by adding each other the values of
     corresponding dictionaries
+
+    `args` can contain `None` values (except for the first one); in such case,
+    that argument will be skipped; this is useful if a dataset contains
+    annotations not for all the files (e.g. ASAP annotations for Maestro
+    dataset)
     """
 
     assert all(type(x) is list for x in args), "Input types must be lists"
@@ -60,16 +65,17 @@ def merge_dicts(idx, *args):
     obj1_copy = deepcopy(args[0][idx])
 
     for arg in args[1:]:
-        arg = arg[idx]
-        for key in obj1_copy.keys():
-            d1_element = obj1_copy[key]
-            if type(d1_element) is dict:
-                obj1_copy[key] = merge_dicts(0, [d1_element], [arg[key]])
-            elif type(d1_element) is int:
-                obj1_copy[key] = min(d1_element, arg[key])
-            else:
-                obj1_copy[key] = d1_element + arg[key]
-        del arg
+        if arg is not None:
+            arg = arg[idx]
+            for key in obj1_copy.keys():
+                d1_element = obj1_copy[key]
+                if type(d1_element) is dict:
+                    obj1_copy[key] = merge_dicts(0, [d1_element], [arg[key]])
+                elif type(d1_element) is int:
+                    obj1_copy[key] = min(d1_element, arg[key])
+                else:
+                    obj1_copy[key] = d1_element + arg[key]
+        # del arg
 
     return obj1_copy
 
