@@ -10,20 +10,16 @@ from os.path import join as joinpath
 import numpy as np
 from pretty_midi.constants import INSTRUMENT_MAP
 
-from .alignment_stats import seed
+from .alignment_stats import Stats
 from .asmd import load_definitions
 from .convert_from_file import *
-# this is only for detecting the package path
 from .idiot import THISDIR
+
+# this is only for detecting the package path
 
 #: if True, run conversion in parallel processes
 PARALLEL = True
 # PARALLEL = False
-ONS_MAX = 1
-OFFS_MAX = 1
-ONS_DEV_MAX = 0.2
-OFFS_DEV_MAX = 0.2
-MEAN_MAX = None
 
 
 def normalize_text(text):
@@ -52,10 +48,11 @@ def merge_dicts(idx, *args):
     dataset)
     """
 
-    assert all(type(x) is list or x is None for x in args), "Input types must be lists or None"
+    assert all(type(x) is list or x is None
+               for x in args), "Input types must be lists or None"
 
-    assert all(len(x) == len(args[0])
-               for x in args[1:] if x is not None), "Cannot merge list with different lenghts"
+    assert all(len(x) == len(args[0]) for x in args[1:]
+               if x is not None), "Cannot merge list with different lenghts"
 
     idx = min(idx, len(args[0]) - 1)  # For PHENICX
 
@@ -80,25 +77,18 @@ def merge_dicts(idx, *args):
     return obj1_copy
 
 
-def misalign(ons_dev, offs_dev, mean, out, stats):
+def misalign(out, stats):
     """
-    Given an onset deviation, an offset deviation, a mean, a ground truth
-    dictionary and a `alignment_stats.Stats` object, computes onsets and
-    offsets misaligned. Return 3 lists (pitches, onsets, offsets).
+    Given a ground truth dictionary and a `alignment_stats.Stats` object,
+    computes onsets and offsets misaligned. Return 3 lists (pitches, onsets,
+    offsets).
     """
     if len(out['precise_alignment']['onsets']) > 0:
         aligned = 'precise_alignment'
     else:
         aligned = 'broad_alignment'
-    length = len(out[aligned]['onsets'])
-    seed()
-    onsets = stats.get_random_onset_diff(k=length, max_value=ONS_MAX)
-    seed()
-    offsets = stats.get_random_offset_diff(k=length, max_value=OFFS_MAX)
-    onsets = np.array(out[aligned]['onsets']) + \
-        np.array(onsets) * ons_dev + mean
-    offsets = np.array(out[aligned]['offsets']) + \
-        np.array(offsets) * offs_dev + mean
+    onsets = stats.get_random_onsets(np.array(out[aligned['onsets']]))
+    offsets = stats.get_random_offets(np.array(out[aligned['offsets']]))
     pitches = out[aligned]['pitches']
 
     # set first onset to 0
@@ -143,7 +133,7 @@ def conversion(arg):
     A function that is run on each song to convert its ground_truth.
     Intended to be run in parallel.
     """
-    l, song, json_file, dataset, stats, ons_dev, offs_dev, mean = arg
+    l, song, json_file, dataset, stats = arg
     print(" elaborating " + song['title'])
     paths = song['ground_truth']
 
@@ -171,8 +161,8 @@ def conversion(arg):
 
         if dataset['ground_truth']['misaligned'] == 2 and stats:
             # computing deviations for each pitch
-            pitches, onsets, offsets = misalign(ons_dev[l], offs_dev[l],
-                                                mean[l], out, stats)
+            stats.new_song(seed=l)
+            pitches, onsets, offsets = misalign(out, stats)
             out['misaligned']['onsets'] = onsets
             out['misaligned']['offsets'] = offsets
             out['misaligned']['pitches'] = pitches
@@ -187,7 +177,7 @@ def conversion(arg):
 
 def create_gt(data_fn,
               gztar=False,
-              alignment_stats=None,
+              alignment_stats: Stats = None,
               whitelist=[],
               blacklist=[]):
     """
@@ -227,25 +217,18 @@ def create_gt(data_fn,
         print("Starting processing " + dataset['name'])
         if dataset['ground_truth'][
                 'misaligned'] == 2 and alignment_stats is not None:
-            # computing means and std deviations for each song in the dataset
-            mean = alignment_stats.get_random_mean(k=len(dataset['songs']),
-                                                   max_value=MEAN_MAX)
-            seed()
-            ons_dev = alignment_stats.get_random_onset_dev(
-                k=len(dataset['songs']), max_value=ONS_DEV_MAX)
-            seed()
-            offs_dev = alignment_stats.get_random_offset_dev(
-                k=len(dataset['songs']), max_value=OFFS_DEV_MAX)
-            arg = [(i, song, json_file, dataset, alignment_stats, ons_dev,
-                    offs_dev, mean) for i, song in enumerate(dataset['songs'])]
-        else:
-            arg = [(i, song, json_file, dataset, None, None, None, None)
+            arg = [(i, song, json_file, dataset, alignment_stats)
                    for i, song in enumerate(dataset['songs'])]
-        if not PARALLEL:
-            for l in range(len(dataset['songs'])):
-                to_be_included_in_the_archive += conversion(arg[l])
         else:
-            CPU = os.cpu_count() - 1
+            arg = [
+                (i, song, json_file, dataset, None)  # type: ignore
+                for i, song in enumerate(dataset['songs'])
+            ]
+        if not PARALLEL:
+            for i in range(len(dataset['songs'])):
+                to_be_included_in_the_archive += conversion(arg[i])
+        else:
+            CPU = os.cpu_count() - 1  # type: ignore
             p = mp.Pool(CPU)
             result = p.map_async(conversion, arg,
                                  len(dataset['songs']) // CPU + 1)

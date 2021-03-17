@@ -34,7 +34,7 @@ create_gt(os.path.join(THISDIR, 'datasets.json'),
           blacklist=args.blacklist)
 
 if args.misalign:
-    stats = alignment_stats.main()
+    stats = alignment_stats.get_stats()
     create_gt(os.path.join(THISDIR, 'datasets.json'),
               gztar=True,
               alignment_stats=stats,
