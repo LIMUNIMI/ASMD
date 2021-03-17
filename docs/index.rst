@@ -35,6 +35,7 @@ For a gentle introduction, see our paper [1]
 TODO
 ====
 
+#. add automatic matching of songs among multiple datasets based on metadata (and maybe audio ID?)
 #. describe datasets provided by default
 #. generic description of the framework
 #. improve "adding_datasets" with a full example

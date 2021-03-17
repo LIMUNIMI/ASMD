@@ -290,6 +290,87 @@ def get_score_mat(dataset, idx, score_type=['misaligned']):
     return mat
 
 
+def intersect(dataset1, dataset2, **kwargs):
+    """
+    Takes two datasets and returns a new dataset representing the intersection of the two
+    The two datasets must have the same order in the `datasets` and `songs`
+    (e.g. two datasets initialized in the same way and only filtered)
+
+    This functions calls `filter` to populate the paths and returns them woth
+    all the sources. However, you can pass any argument to `filter`, e.g.
+    the `sources` argument
+    """
+    return _compare_dataset(_and_func, dataset1, dataset2, **kwargs)
+
+
+def union(dataset1, dataset2, **kwargs):
+    """
+    Takes two datasets and returns a new dataset representing the union of the two
+    The two datasets must have the same order in the `datasets` and `songs`
+    (e.g. two datasets initialized in the same way and only filtered)
+
+    This functions calls `filter` to populate the paths and returns them woth
+    all the sources. However, you can pass any argument to `filter`, e.g.
+    the `sources` argument
+    """
+    return _compare_dataset(_or_func, dataset1, dataset2, **kwargs)
+
+
+def _compare_dataset(compare_func, dataset1, dataset2, **kwargs):
+    """
+    Returns a new dataset where each song and dataset are included only if
+    `compare_func` is True for each corresponding couplke of songs and datasets
+    """
+    out = deepcopy(dataset1)
+    out.paths = []
+    for i, d1 in enumerate(dataset1['datasets']):
+        d2 = dataset2['datasets'][i]
+        if compare_func(d1['included'], d2['included']):
+            out['datasets'][i]['included'] = True
+            for j, s1 in enumerate(d1['songs']):
+                s2 = d2['songs'][j]
+                if compare_func(s1['included'], s2['included']):
+                    out['datasets'][i]['songs'][j]['included'] = True
+                else:
+                    out['datasets'][i]['songs'][j]['included'] = False
+
+        else:
+            out['datasets'][i]['included'] = False
+    # populate paths
+    return filter(out **kwargs)
+
+
+def _or_func(a, b):
+    return a or b
+
+def _and_func(a, b):
+    return a and b
+
+def complement(dataset):
+    """
+    Takes one dataset and returns a new dataset representing the complement of the input
+
+    This functions calls `filter` to populate the paths and returns them woth
+    all the sources. However, you can pass any argument to `filter`, e.g.
+    the `sources` argument
+    """
+    out = deepcopy(dataset1, **kwargs)
+    out.paths = []
+    for i, d in enumerate(dataset['datasets']):
+        if d['included']:
+            out['datasets'][i]['included'] = False
+        else:
+            out['datasets'][i]['included'] = True
+            for j, s in enumerate(d['songs']):
+                if s['included']:
+                    out['datasets'][i]['songs'][j] = False
+                else:
+                    out['datasets'][i]['songs'][j] = True
+
+    # populate paths
+    return filter(out **kwargs)
+
+
 def get_pedaling_mat(dataset, idx, frame_based=False, winlen=0.046, hop=0.01):
     """
     Get data about pedaling

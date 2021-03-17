@@ -3,7 +3,7 @@ import inspect
 import json
 import os
 from os.path import join as joinpath
-from typing import List
+from typing import List, Optional
 
 import numpy as np
 from essentia.standard import MetadataReader, Resample
@@ -11,7 +11,7 @@ from joblib import Parallel, delayed
 from tqdm import tqdm
 
 from . import utils
-from .dataset_utils import filter, chose_score_type
+from .dataset_utils import chose_score_type, filter
 from .idiot import THISDIR
 
 # this only for detecting package directory but breaks readthedocs
@@ -453,6 +453,18 @@ class Dataset(object):
         Returns list of string
         """
         return self.paths[idx][2]
+
+    def get_initial_bpm(self, idx) -> Optional[float]:
+        """
+        Return the initial bpm of the first source if `score` alignment type is available at index
+        `idx`, otherwise returns None
+        """
+        beats = self.get_beats(idx)
+        if len(beats[0]) < 2:
+            return None
+
+        delta = beats[0][1] - beats[0][0]
+        return 60. / delta
 
 
 def load_definitions(path):

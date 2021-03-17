@@ -63,3 +63,8 @@ Documentation
    :members:
    :private-members:
    :special-members:
+
+.. automodule:: asmd.dataset_utils
+   :members:
+   :private-members:
+   :special-members:
