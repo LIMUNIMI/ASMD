@@ -1,15 +1,18 @@
 {
     "ensemble": true,
+    "groups": ["all"],
     "ground_truth": {
-        "broad_alignment": 1,
-        "f0": 0,
-        "misaligned": 2,
-        "score": 0,
-        "precise_alignment": 0,
-        "soft": 0,
-        "sostenuto": 0,
-        "sustain": 0,
-        "velocities": 0
+        "all": {
+            "broad_alignment": 1,
+            "f0": 0,
+            "misaligned": 2,
+            "score": 0,
+            "precise_alignment": 0,
+            "soft": 0,
+            "sostenuto": 0,
+            "sustain": 0,
+            "velocities": 0
+        }
     },
     "install": {
         "conversion": [
@@ -64,7 +67,7 @@
                 "PHENICX/PHENICX-Anechoic/annotations/beethoven/violin-2.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/beethoven/violin-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "bassoon",
                 "bassoon",
@@ -180,7 +183,7 @@
                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-7.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/bruckner/violin-8.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "bassoon",
                 "bassoon",
@@ -344,7 +347,7 @@
                 "PHENICX/PHENICX-Anechoic/annotations/mahler/violin-2.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/mahler/violin-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "bassoon",
                 "bassoon",
@@ -461,7 +464,7 @@
                 "PHENICX/PHENICX-Anechoic/annotations/mozart/violin-0.json.gz",
                 "PHENICX/PHENICX-Anechoic/annotations/mozart/violin-1.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "bassoon",
                 "cello",

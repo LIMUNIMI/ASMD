@@ -66,11 +66,12 @@ def filter(dataset,
     * name
     * included
 
-    Optionally, the following dataset-level filters can be applied if the
-    corresponding keys are present:
+    All the attributes are checked at the song level, except for:
 
-    * ensemble
-    * ground_truth
+    * `ensemble`: this is checked at the dataset-level (i.e. each dataset can
+      be for ensembel or not) This may change in future releases
+    * `ground_truth`: this is checked at group level (i.e. each subgroup can
+      have different annotations)
 
     Similarly, each song must have the key ``included`` and optionally the
     other keys that you want to filter, as described by the arguments of
@@ -150,10 +151,12 @@ def filter(dataset,
             if ensemble != mydataset['ensemble']:
                 FLAG = False
 
+        # adding groups if ground_truth is checked
+        groups_gt = set()
         for gt, val in ground_truth:
-            if mydataset['ground_truth'][gt] != val:
-                FLAG = False
-                break
+            for group, group_gt in mydataset['ground_truth']:
+                if group_gt[gt] == val:
+                    groups_gt.add(group)
 
         if FLAG:
             ret._chunks[mydataset['name']] = [end, end]
@@ -176,6 +179,11 @@ def filter(dataset,
                         if group not in song['groups']:
                             FLAG = False
                             break
+
+                # checking groups taken for group-level filtering
+                if groups_gt:
+                    if len(groups_gt.intersection(song['groups'])) == 0:
+                        FLAG = False
 
                 if FLAG:
                     gts = song['ground_truth']

@@ -1,15 +1,18 @@
 {
     "ensemble": false,
+    "groups": ["all"],
     "ground_truth": {
-        "broad_alignment": 0,
-        "f0": 0,
-        "misaligned": 2,
-        "score": 1,
-        "precise_alignment": 1,
-        "soft": 1,
-        "sostenuto": 1,
-        "sustain": 1,
-        "velocities": 1
+        "all": {
+            "broad_alignment": 0,
+            "f0": 0,
+            "misaligned": 2,
+            "score": 1,
+            "precise_alignment": 1,
+            "soft": 1,
+            "sostenuto": 1,
+            "sustain": 1,
+            "velocities": 1
+        }
     },
     "install": {
         "conversion": [
@@ -56,7 +59,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p01-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -72,7 +75,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p02-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -88,7 +91,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p03-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -104,7 +107,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p04-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -120,7 +123,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p05-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -136,7 +139,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p06-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -152,7 +155,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p07-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -168,7 +171,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p08-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -184,7 +187,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p09-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -200,7 +203,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p10-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -216,7 +219,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p11-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -232,7 +235,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p12-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -248,7 +251,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p13-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -264,7 +267,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p14-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -280,7 +283,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p15-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -296,7 +299,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p16-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -312,7 +315,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p17-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -328,7 +331,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p18-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -344,7 +347,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p19-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -360,7 +363,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p20-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -376,7 +379,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p21-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -392,7 +395,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op10_no3_p22-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -408,7 +411,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p01-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -424,7 +427,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p02-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -440,7 +443,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p03-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -456,7 +459,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p04-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -472,7 +475,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p05-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -488,7 +491,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p06-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -504,7 +507,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p07-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -520,7 +523,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p08-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -536,7 +539,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p09-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -552,7 +555,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p10-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -568,7 +571,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p11-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -584,7 +587,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p12-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -600,7 +603,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p13-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -616,7 +619,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p14-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -632,7 +635,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p15-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -648,7 +651,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p16-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -664,7 +667,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p17-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -680,7 +683,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p18-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -696,7 +699,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p19-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -712,7 +715,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p20-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -728,7 +731,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p21-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -744,7 +747,7 @@
             "ground_truth": [
                 "vienna_corpus/Chopin_op38_p22-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -760,7 +763,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p01-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -776,7 +779,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p02-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -792,7 +795,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p03-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -808,7 +811,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p04-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -824,7 +827,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p05-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -840,7 +843,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p06-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -856,7 +859,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p07-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -872,7 +875,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p08-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -888,7 +891,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p09-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -904,7 +907,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p10-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -920,7 +923,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p11-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -936,7 +939,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p12-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -952,7 +955,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p13-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -968,7 +971,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p14-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -984,7 +987,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p15-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1000,7 +1003,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p16-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1016,7 +1019,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p17-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1032,7 +1035,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p18-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1048,7 +1051,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p19-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1064,7 +1067,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p20-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1080,7 +1083,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p21-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1096,7 +1099,7 @@
             "ground_truth": [
                 "vienna_corpus/Schubert_D783_no15_p22-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1112,7 +1115,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p01-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1128,7 +1131,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p02-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1144,7 +1147,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p03-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1160,7 +1163,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p04-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1176,7 +1179,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p05-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1192,7 +1195,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p06-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1208,7 +1211,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p07-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1224,7 +1227,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p08-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1240,7 +1243,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p09-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1256,7 +1259,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p10-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1272,7 +1275,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p11-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1288,7 +1291,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p12-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1304,7 +1307,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p13-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1320,7 +1323,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p14-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1336,7 +1339,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p15-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1352,7 +1355,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p16-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1368,7 +1371,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p17-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1384,7 +1387,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p18-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1400,7 +1403,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p19-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1416,7 +1419,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p20-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1432,7 +1435,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p21-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1448,7 +1451,7 @@
             "ground_truth": [
                 "vienna_corpus/Mozart_K331_1st-mov_p22-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],

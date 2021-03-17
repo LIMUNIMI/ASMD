@@ -19,6 +19,8 @@ Each dataset is described by a JSON file which. Each dataset has the
 following field:
 
 #. ``ensemble``: ``true`` if contains multiple instruments, ``false`` otherwise
+#. ``groups``: list of strings representing the groups contained in this
+   dataset; the default name ``all`` must be always present
 #. ``instruments``: the list of the instruments contained in the dataset
 #. ``sources``:
 
@@ -30,15 +32,17 @@ following field:
 
 #. ``ground_truth``: *N.B. each ground_truth has an ``int`` value, indicating ``0`` -> false, ``1`` -> true (manual or mechanical - Disklavier - annotation), ``2`` -> true (automatic annotation with state-of-art algorithms)*
 
-   #. ``misaligned``: if artificially misaligned scores are provided
-   #. ``score``: if original scores are provided
-   #. ``broad_alignment``: if broad_alignment scores are provided
-   #. ``precise_alignment``: if precisely aligned scores are provided
-   #. ``velocities``: if velocities are provided
-   #. ``f0``: if f0 values are provided
-   #. ``sustain``: if sustain values are provided
-   #. ``soft``: if sustain values are provided
-   #. ``sostenuto``: if sustain values are provided
+   #. ``[group-name]`` : a dictionary representing the ground-truth contained by each dataset group
+
+       #. ``misaligned``: if artificially misaligned scores are provided
+       #. ``score``: if original scores are provided
+       #. ``broad_alignment``: if broad_alignment scores are provided
+       #. ``precise_alignment``: if precisely aligned scores are provided
+       #. ``velocities``: if velocities are provided
+       #. ``f0``: if f0 values are provided
+       #. ``sustain``: if sustain values are provided
+       #. ``soft``: if sustain values are provided
+       #. ``sostenuto``: if sustain values are provided
 
    A true value (`1` or `2`) can be used even if only part of the dataset has that type of annotation.
 
@@ -60,8 +64,9 @@ following field:
       that some ground_truth paths can be identical (as in PHENICX for
       indicating that violin1 and violin2 are playing exactly the same
       thing).
-   #. ``groups``: list of strings representing a group of the dataset.
-      Recommended names for groups are: 'train', 'validation', 'test'.
+   #. ``groups``: list of strings representing a group of the dataset. The
+         group ``all`` must always be there; any other string is possible and
+         should be exposed in the ``groups`` field at dataset-level
    
 #. ``install``: where information for the installation process are stored
 

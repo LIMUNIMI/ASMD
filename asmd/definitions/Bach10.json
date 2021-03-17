@@ -1,15 +1,18 @@
 {
     "ensemble": true,
+    "groups": ["all"],
     "ground_truth": {
-        "broad_alignment": 0,
-        "f0": 2,
-        "misaligned": 2,
-        "score": 1,
-        "precise_alignment": 1,
-        "soft": 0,
-        "sostenuto": 0,
-        "sustain": 0,
-        "velocities": 0
+        "all": {
+            "broad_alignment": 0,
+            "f0": 2,
+            "misaligned": 2,
+            "score": 1,
+            "precise_alignment": 1,
+            "soft": 0,
+            "sostenuto": 0,
+            "sustain": 0,
+            "velocities": 0
+        }
     },
     "install": {
         "conversion": [
@@ -56,7 +59,7 @@
                 "Bach10/Bach10_v1.1/01-AchGottundHerr/01-AchGottundHerr-2.json.gz",
                 "Bach10/Bach10_v1.1/01-AchGottundHerr/01-AchGottundHerr-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "clarinet",
@@ -86,7 +89,7 @@
                 "Bach10/Bach10_v1.1/02-AchLiebenChristen/02-AchLiebenChristen-2.json.gz",
                 "Bach10/Bach10_v1.1/02-AchLiebenChristen/02-AchLiebenChristen-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "clarinet",
@@ -116,7 +119,7 @@
                 "Bach10/Bach10_v1.1/03-ChristederdubistTagundLicht/03-ChristederdubistTagundLicht-2.json.gz",
                 "Bach10/Bach10_v1.1/03-ChristederdubistTagundLicht/03-ChristederdubistTagundLicht-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "clarinet",
@@ -146,7 +149,7 @@
                 "Bach10/Bach10_v1.1/04-ChristeDuBeistand/04-ChristeDuBeistand-2.json.gz",
                 "Bach10/Bach10_v1.1/04-ChristeDuBeistand/04-ChristeDuBeistand-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "clarinet",
@@ -176,7 +179,7 @@
                 "Bach10/Bach10_v1.1/05-DieNacht/05-DieNacht-2.json.gz",
                 "Bach10/Bach10_v1.1/05-DieNacht/05-DieNacht-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "clarinet",
@@ -206,7 +209,7 @@
                 "Bach10/Bach10_v1.1/06-DieSonne/06-DieSonne-2.json.gz",
                 "Bach10/Bach10_v1.1/06-DieSonne/06-DieSonne-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "clarinet",
@@ -236,7 +239,7 @@
                 "Bach10/Bach10_v1.1/07-HerrGott/07-HerrGott-2.json.gz",
                 "Bach10/Bach10_v1.1/07-HerrGott/07-HerrGott-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "clarinet",
@@ -266,7 +269,7 @@
                 "Bach10/Bach10_v1.1/08-FuerDeinenThron/08-FuerDeinenThron-2.json.gz",
                 "Bach10/Bach10_v1.1/08-FuerDeinenThron/08-FuerDeinenThron-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "clarinet",
@@ -296,7 +299,7 @@
                 "Bach10/Bach10_v1.1/09-Jesus/09-Jesus-2.json.gz",
                 "Bach10/Bach10_v1.1/09-Jesus/09-Jesus-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "clarinet",
@@ -326,7 +329,7 @@
                 "Bach10/Bach10_v1.1/10-NunBitten/10-NunBitten-2.json.gz",
                 "Bach10/Bach10_v1.1/10-NunBitten/10-NunBitten-3.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "clarinet",

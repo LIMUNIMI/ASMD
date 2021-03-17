@@ -1,15 +1,18 @@
 {
     "ensemble": false,
+    "groups": ["all"],
     "ground_truth": {
-        "broad_alignment": 0,
-        "f0": 0,
-        "misaligned": 2,
-        "score": 1,
-        "precise_alignment": 1,
-        "soft": 0,
-        "sostenuto": 0,
-        "sustain": 0,
-        "velocities": 0
+        "all": {
+            "broad_alignment": 0,
+            "f0": 0,
+            "misaligned": 2,
+            "score": 1,
+            "precise_alignment": 1,
+            "soft": 0,
+            "sostenuto": 0,
+            "sustain": 0,
+            "velocities": 0
+        }
     },
     "install": {
         "conversion": [
@@ -48,7 +51,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/allemande_fifth_fragment_preston-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -64,7 +67,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/allemande_fifth_fragment_rampal-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -80,7 +83,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/allemande_first_fragment_larrieu-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -96,7 +99,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/allemande_first_fragment_nicolet-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -112,7 +115,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/allemande_fourth_fragment_gerard-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -128,7 +131,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/allemande_fourth_fragment_larrieu-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -144,7 +147,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/allemande_second_fragment_gerard-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -160,7 +163,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/allemande_second_fragment_preston-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -176,7 +179,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/allemande_third_fragment_nicolet-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -192,7 +195,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/allemande_third_fragment_rampal-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -208,7 +211,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/density_fifth_fragment_beauregard-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -224,7 +227,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/density_first_fragment_zoon-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -240,7 +243,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/density_second_fragment_zoon-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -256,7 +259,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/density_sixth_fragment_beauregard-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -272,7 +275,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/density_third_fragment_zoon-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -288,7 +291,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/sequenza_first_fragment_robison-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -304,7 +307,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/sequenza_fourth_fragment_robison-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -320,7 +323,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/sequenza_second_fragment_robison-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -336,7 +339,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/sequenza_sixth_fragment_robison-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -352,7 +355,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/syrinx_fifth_fragment_bourdin-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -368,7 +371,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/syrinx_fifth_fragment_rhodes-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -384,7 +387,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/syrinx_first_fragment_bernold-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -400,7 +403,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/syrinx_first_fragment_douglas-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -416,7 +419,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/syrinx_fourth_fragment_bernold-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -432,7 +435,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/syrinx_fourth_fragment_dwyer-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -448,7 +451,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/syrinx_second_fragment_bourdin-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -464,7 +467,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/syrinx_second_fragment_dwyer-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -480,7 +483,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/syrinx_third_fragment_douglas-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -496,7 +499,7 @@
             "ground_truth": [
                 "traditional_flute/ground_truth/syrinx_third_fragment_rhodes-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],

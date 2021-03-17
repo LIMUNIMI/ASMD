@@ -1,15 +1,18 @@
 {
     "ensemble": true,
+    "groups": ["all"],
     "ground_truth": {
-        "broad_alignment": 2,
-        "f0": 0,
-        "score": 1,
-        "misaligned": 2,
-        "precise_alignment": 0,
-        "soft": 0,
-        "sostenuto": 0,
-        "sustain": 0,
-        "velocities": 0
+        "all": {
+            "broad_alignment": 2,
+            "f0": 0,
+            "score": 1,
+            "misaligned": 2,
+            "precise_alignment": 0,
+            "soft": 0,
+            "sostenuto": 0,
+            "sustain": 0,
+            "velocities": 0
+        }
     },
     "install": {
         "conversion": [
@@ -46,7 +49,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1727-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -62,7 +65,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1728-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -78,7 +81,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1729-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -94,7 +97,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1730-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -110,7 +113,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1733-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -126,7 +129,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1734-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -142,7 +145,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1735-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -158,7 +161,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1739-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -175,7 +178,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1742-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "viola",
                 "unknown"
@@ -192,7 +195,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1749-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -208,7 +211,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1750-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -224,7 +227,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1751-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -240,7 +243,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1752-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -256,7 +259,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1755-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -272,7 +275,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1756-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -288,7 +291,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1757-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -304,7 +307,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1758-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -320,7 +323,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/test_labels/1759-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -336,7 +339,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1760-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -352,7 +355,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1763-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -368,7 +371,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1764-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -384,7 +387,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1765-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -400,7 +403,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1766-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -416,7 +419,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1768-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -432,7 +435,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1771-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -448,7 +451,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1772-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -464,7 +467,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1773-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -480,7 +483,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1775-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -496,7 +499,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1776-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -512,7 +515,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1777-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -528,7 +531,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1788-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -546,7 +549,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1789-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -564,7 +567,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1790-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -582,7 +585,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1791-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -600,7 +603,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1792-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -618,7 +621,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1793-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -636,7 +639,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1805-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -654,7 +657,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1807-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -672,7 +675,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1811-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "unknown"
@@ -689,7 +692,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1812-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "unknown"
@@ -706,7 +709,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1813-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "unknown"
@@ -723,7 +726,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1817-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "french horn",
@@ -741,7 +744,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1818-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "french horn",
@@ -759,7 +762,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/test_labels/1819-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "french horn",
@@ -777,7 +780,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1822-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -795,7 +798,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1824-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -813,7 +816,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1828-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -830,7 +833,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1829-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -847,7 +850,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1835-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -865,7 +868,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1859-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -883,7 +886,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1872-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -900,7 +903,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1873-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -917,7 +920,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1876-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -934,7 +937,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1893-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -951,7 +954,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1916-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -969,7 +972,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1918-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -987,7 +990,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1919-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1005,7 +1008,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1922-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1023,7 +1026,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1923-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1041,7 +1044,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1931-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1059,7 +1062,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1932-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1077,7 +1080,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/1933-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1095,7 +1098,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2075-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1111,7 +1114,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2076-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1127,7 +1130,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2077-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1143,7 +1146,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2078-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1159,7 +1162,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2079-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1175,7 +1178,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2080-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1191,7 +1194,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2081-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1207,7 +1210,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2082-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1223,7 +1226,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2083-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1239,7 +1242,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2104-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1257,7 +1260,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2105-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1275,7 +1278,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/test_labels/2106-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1293,7 +1296,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2112-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello",
                 "unknown"
@@ -1310,7 +1313,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2113-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello",
                 "unknown"
@@ -1327,7 +1330,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2114-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello",
                 "unknown"
@@ -1344,7 +1347,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2116-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "unknown"
@@ -1361,7 +1364,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2117-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "unknown"
@@ -1378,7 +1381,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2118-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "unknown"
@@ -1395,7 +1398,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2119-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "unknown"
@@ -1412,7 +1415,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2127-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1428,7 +1431,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2131-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1444,7 +1447,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2138-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1462,7 +1465,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2140-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1480,7 +1483,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2147-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1496,7 +1499,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2148-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -1513,7 +1516,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2149-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -1530,7 +1533,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2150-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -1547,7 +1550,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2151-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -1564,7 +1567,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2154-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1580,7 +1583,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2155-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1596,7 +1599,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2156-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1612,7 +1615,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2157-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -1628,7 +1631,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2158-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "french horn",
                 "piano",
@@ -1646,7 +1649,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2159-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "french horn",
                 "piano",
@@ -1664,7 +1667,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2160-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "french horn",
                 "piano",
@@ -1682,7 +1685,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2161-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "french horn",
                 "piano",
@@ -1700,7 +1703,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2166-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -1717,7 +1720,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2167-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -1734,7 +1737,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2168-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -1751,7 +1754,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2169-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano",
                 "unknown"
@@ -1768,7 +1771,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2177-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1786,7 +1789,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2178-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1804,7 +1807,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2179-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1822,7 +1825,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2180-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -1840,7 +1843,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2186-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin"
             ],
@@ -1856,7 +1859,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/test_labels/2191-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin"
             ],
@@ -1872,7 +1875,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2194-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1888,7 +1891,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2195-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1904,7 +1907,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2196-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1920,7 +1923,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2198-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1936,7 +1939,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2200-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1952,7 +1955,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2201-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -1968,7 +1971,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2202-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -1984,7 +1987,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2203-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -2000,7 +2003,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2204-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "flute"
             ],
@@ -2016,7 +2019,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2207-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2032,7 +2035,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2208-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2048,7 +2051,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2209-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2064,7 +2067,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2210-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2080,7 +2083,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2211-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2096,7 +2099,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2212-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2112,7 +2115,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2213-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2128,7 +2131,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2214-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2144,7 +2147,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2215-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2160,7 +2163,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2217-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2176,7 +2179,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2218-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2192,7 +2195,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2219-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2208,7 +2211,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2220-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2224,7 +2227,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2221-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2240,7 +2243,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2222-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2256,7 +2259,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2224-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2272,7 +2275,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2225-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2288,7 +2291,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2227-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2304,7 +2307,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2228-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2320,7 +2323,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2229-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2336,7 +2339,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2230-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2352,7 +2355,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2231-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2368,7 +2371,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2232-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2384,7 +2387,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2234-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2400,7 +2403,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2237-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2416,7 +2419,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2238-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2432,7 +2435,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2239-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2448,7 +2451,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2240-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2464,7 +2467,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2241-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin"
             ],
@@ -2480,7 +2483,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2242-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin"
             ],
@@ -2496,7 +2499,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2243-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin"
             ],
@@ -2512,7 +2515,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2244-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin"
             ],
@@ -2528,7 +2531,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2247-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2544,7 +2547,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2248-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2560,7 +2563,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2282-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "harpsicord"
@@ -2577,7 +2580,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2283-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "harpsicord"
@@ -2594,7 +2597,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2284-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "harpsicord"
@@ -2611,7 +2614,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2285-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "harpsicord"
@@ -2628,7 +2631,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2288-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin"
             ],
@@ -2644,7 +2647,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2289-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin"
             ],
@@ -2660,7 +2663,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2292-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2676,7 +2679,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2293-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2692,7 +2695,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2294-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2708,7 +2711,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2295-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2724,7 +2727,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2296-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2740,7 +2743,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2297-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2756,7 +2759,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/test_labels/2298-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello"
             ],
@@ -2772,7 +2775,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2300-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2788,7 +2791,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2302-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2804,7 +2807,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/test_labels/2303-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2820,7 +2823,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2304-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2836,7 +2839,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2305-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2852,7 +2855,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2307-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2868,7 +2871,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2308-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2884,7 +2887,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2310-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -2900,7 +2903,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2313-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -2918,7 +2921,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2314-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -2936,7 +2939,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2315-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -2954,7 +2957,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2318-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "cello",
@@ -2972,7 +2975,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2319-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "cello",
@@ -2990,7 +2993,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2320-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "cello",
@@ -3008,7 +3011,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2322-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3024,7 +3027,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2325-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3040,7 +3043,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2330-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -3057,7 +3060,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2334-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -3074,7 +3077,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2335-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -3091,7 +3094,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2336-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -3108,7 +3111,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2341-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -3125,7 +3128,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2342-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -3142,7 +3145,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2343-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3158,7 +3161,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2345-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3174,7 +3177,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2346-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3190,7 +3193,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2348-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3206,7 +3209,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2350-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3222,7 +3225,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2357-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3238,7 +3241,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2358-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3254,7 +3257,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2359-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3270,7 +3273,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2364-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3286,7 +3289,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2365-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3304,7 +3307,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2366-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3322,7 +3325,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2368-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3340,7 +3343,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2371-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3356,7 +3359,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2372-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3372,7 +3375,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2373-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3388,7 +3391,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2374-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3404,7 +3407,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2376-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3422,7 +3425,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2377-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3440,7 +3443,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2379-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3458,7 +3461,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2381-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3476,7 +3479,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/test_labels/2382-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3494,7 +3497,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2383-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3512,7 +3515,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2384-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3530,7 +3533,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2388-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3546,7 +3549,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2389-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3562,7 +3565,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2390-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3578,7 +3581,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2391-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3594,7 +3597,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2392-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3610,7 +3613,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2393-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3626,7 +3629,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2397-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -3643,7 +3646,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2398-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -3660,7 +3663,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2403-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3678,7 +3681,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2404-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3694,7 +3697,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2405-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3710,7 +3713,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2406-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3726,7 +3729,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2410-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3742,7 +3745,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2411-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3758,7 +3761,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2415-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "french horn",
@@ -3776,7 +3779,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/test_labels/2416-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "french horn",
@@ -3794,7 +3797,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2417-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "clarinet",
                 "french horn",
@@ -3812,7 +3815,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2420-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -3829,7 +3832,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2422-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3845,7 +3848,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2423-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3861,7 +3864,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2424-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3877,7 +3880,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2431-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3895,7 +3898,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2432-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3913,7 +3916,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2433-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -3931,7 +3934,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2436-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3947,7 +3950,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2441-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3963,7 +3966,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2442-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3979,7 +3982,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2443-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -3995,7 +3998,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2444-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4011,7 +4014,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2451-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -4029,7 +4032,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2462-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -4046,7 +4049,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2463-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -4063,7 +4066,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2466-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -4080,7 +4083,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2471-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4096,7 +4099,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2472-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4112,7 +4115,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2473-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4128,7 +4131,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2476-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4144,7 +4147,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2477-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4160,7 +4163,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2478-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4176,7 +4179,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2480-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -4194,7 +4197,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2481-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -4212,7 +4215,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2482-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -4230,7 +4233,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2483-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -4248,7 +4251,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2486-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4264,7 +4267,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2487-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4280,7 +4283,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2488-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4296,7 +4299,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2490-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4312,7 +4315,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2491-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4328,7 +4331,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2492-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4344,7 +4347,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2494-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -4362,7 +4365,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2497-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -4380,7 +4383,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2501-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -4397,7 +4400,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2502-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -4414,7 +4417,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2504-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -4430,7 +4433,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2505-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -4446,7 +4449,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2506-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -4462,7 +4465,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2507-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "unknown"
             ],
@@ -4478,7 +4481,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2509-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4494,7 +4497,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2510-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4510,7 +4513,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2512-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4526,7 +4529,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2514-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4542,7 +4545,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2516-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4558,7 +4561,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2521-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello",
                 "unknown"
@@ -4575,7 +4578,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2522-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello",
                 "unknown"
@@ -4592,7 +4595,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2523-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello",
                 "unknown"
@@ -4609,7 +4612,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2527-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4625,7 +4628,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2528-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4641,7 +4644,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2529-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4657,7 +4660,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2530-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4673,7 +4676,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2531-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4689,7 +4692,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2532-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4705,7 +4708,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2533-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4721,7 +4724,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2537-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4737,7 +4740,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2538-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4753,7 +4756,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2540-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4769,7 +4772,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2542-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4785,7 +4788,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2550-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4801,7 +4804,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2555-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4817,7 +4820,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/test_labels/2556-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4833,7 +4836,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2557-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4849,7 +4852,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2560-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -4867,7 +4870,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2562-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -4885,7 +4888,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2564-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4901,7 +4904,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2566-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4917,7 +4920,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2567-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4933,7 +4936,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2568-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -4949,7 +4952,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2570-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -4966,7 +4969,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2571-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -4983,7 +4986,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2572-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -5000,7 +5003,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2573-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -5017,7 +5020,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2575-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5033,7 +5036,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2576-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5049,7 +5052,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2581-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5065,7 +5068,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2582-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5081,7 +5084,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2586-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "cello",
                 "unknown"
@@ -5098,7 +5101,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2588-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5114,7 +5117,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2590-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5130,7 +5133,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2591-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5146,7 +5149,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2593-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5162,7 +5165,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2594-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5178,7 +5181,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2595-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5194,7 +5197,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2596-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5210,7 +5213,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2603-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5226,7 +5229,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2607-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5242,7 +5245,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2608-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5258,7 +5261,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2611-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5274,7 +5277,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2614-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5290,7 +5293,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2618-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5306,7 +5309,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2619-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5322,7 +5325,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2620-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5338,7 +5341,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2621-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -5356,7 +5359,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2622-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "viola",
@@ -5374,7 +5377,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2626-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -5391,7 +5394,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2627-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -5408,7 +5411,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/test_labels/2628-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -5425,7 +5428,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2629-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin",
                 "unknown"
@@ -5442,7 +5445,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2632-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5458,7 +5461,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2633-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5474,7 +5477,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2659-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "violin"
             ],
@@ -5490,7 +5493,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2677-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -5506,7 +5509,7 @@
             "ground_truth": [
                 "MusicNet/musicnet/train_labels/2678-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],

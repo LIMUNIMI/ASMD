@@ -1,16 +1,18 @@
 {
     "ensemble": false,
+    "groups": ["all"],
     "ground_truth": {
-        "broad_alignment": 0,
-        "errors": 0,
-        "f0": 0,
-        "misaligned": 2,
-        "score": 0,
-        "precise_alignment": 1,
-        "soft": 1,
-        "sostenuto": 1,
-        "sustain": 1,
-        "velocities": 1
+        "all": {
+            "broad_alignment": 0,
+            "f0": 0,
+            "misaligned": 2,
+            "score": 0,
+            "precise_alignment": 1,
+            "soft": 1,
+            "sostenuto": 1,
+            "sustain": 1,
+            "velocities": 1
+        }
     },
     "install": {
         "conversion": [
@@ -40,7 +42,7 @@
             "ground_truth": [
                 "SMD/Bach_BWV849-01_001_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -56,7 +58,7 @@
             "ground_truth": [
                 "SMD/Bach_BWV849-02_001_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -72,7 +74,7 @@
             "ground_truth": [
                 "SMD/Bach_BWV871-01_002_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -88,7 +90,7 @@
             "ground_truth": [
                 "SMD/Bach_BWV871-02_002_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -104,7 +106,7 @@
             "ground_truth": [
                 "SMD/Bach_BWV875-01_002_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -120,7 +122,7 @@
             "ground_truth": [
                 "SMD/Bach_BWV875-02_002_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -136,7 +138,7 @@
             "ground_truth": [
                 "SMD/Bach_BWV888-01_008_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -152,7 +154,7 @@
             "ground_truth": [
                 "SMD/Bach_BWV888-02_008_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -168,7 +170,7 @@
             "ground_truth": [
                 "SMD/Bartok_SZ080-01_002_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -184,7 +186,7 @@
             "ground_truth": [
                 "SMD/Bartok_SZ080-02_002_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -200,7 +202,7 @@
             "ground_truth": [
                 "SMD/Bartok_SZ080-03_002_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -216,7 +218,7 @@
             "ground_truth": [
                 "SMD/Beethoven_Op027No1-01_003_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -232,7 +234,7 @@
             "ground_truth": [
                 "SMD/Beethoven_Op027No1-02_003_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -248,7 +250,7 @@
             "ground_truth": [
                 "SMD/Beethoven_Op027No1-03_003_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -264,7 +266,7 @@
             "ground_truth": [
                 "SMD/Beethoven_Op031No2-01_002_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -280,7 +282,7 @@
             "ground_truth": [
                 "SMD/Beethoven_Op031No2-02_002_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -296,7 +298,7 @@
             "ground_truth": [
                 "SMD/Beethoven_Op031No2-03_002_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -312,7 +314,7 @@
             "ground_truth": [
                 "SMD/Beethoven_WoO080_001_20081107-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -328,7 +330,7 @@
             "ground_truth": [
                 "SMD/Brahms_Op005-01_002_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -344,7 +346,7 @@
             "ground_truth": [
                 "SMD/Brahms_Op010No1_003_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -360,7 +362,7 @@
             "ground_truth": [
                 "SMD/Brahms_Op010No2_003_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -376,7 +378,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op010-03_007_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -392,7 +394,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op010-04_007_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -408,7 +410,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op026No1_003_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -424,7 +426,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op026No2_005_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -440,7 +442,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op028-01_003_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -456,7 +458,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op028-03_003_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -472,7 +474,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op028-04_003_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -488,7 +490,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op028-11_003_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -504,7 +506,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op028-15_006_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -520,7 +522,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op028-17_005_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -536,7 +538,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op029_004_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -552,7 +554,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op048No1_007_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -568,7 +570,7 @@
             "ground_truth": [
                 "SMD/Chopin_Op066_006_20100611-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -584,7 +586,7 @@
             "ground_truth": [
                 "SMD/Haydn_Hob017No4_003_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -600,7 +602,7 @@
             "ground_truth": [
                 "SMD/Haydn_HobXVINo52-01_008_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -616,7 +618,7 @@
             "ground_truth": [
                 "SMD/Haydn_HobXVINo52-02_008_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -632,7 +634,7 @@
             "ground_truth": [
                 "SMD/Haydn_HobXVINo52-03_008_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -648,7 +650,7 @@
             "ground_truth": [
                 "SMD/Liszt_AnnesDePelerinage-LectureDante_002_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -664,7 +666,7 @@
             "ground_truth": [
                 "SMD/Liszt_KonzertetuedeNo2LaLeggierezza_003_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -680,7 +682,7 @@
             "ground_truth": [
                 "SMD/Liszt_VariationenBachmotivWeinenKlagenSorgenZagen_001_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -696,7 +698,7 @@
             "ground_truth": [
                 "SMD/Mozart_KV265_006_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -712,7 +714,7 @@
             "ground_truth": [
                 "SMD/Mozart_KV398_002_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -728,7 +730,7 @@
             "ground_truth": [
                 "SMD/Rachmaninoff_Op036-01_007_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -744,7 +746,7 @@
             "ground_truth": [
                 "SMD/Rachmaninoff_Op036-02_007_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -760,7 +762,7 @@
             "ground_truth": [
                 "SMD/Rachmaninoff_Op036-03_007_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -776,7 +778,7 @@
             "ground_truth": [
                 "SMD/Rachmaninov_Op039No1_002_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -792,7 +794,7 @@
             "ground_truth": [
                 "SMD/Ravel_JeuxDEau_008_20110315-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -808,7 +810,7 @@
             "ground_truth": [
                 "SMD/Ravel_ValsesNoblesEtSentimentales_003_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
@@ -824,7 +826,7 @@
             "ground_truth": [
                 "SMD/Skryabin_Op008No8_003_20090916-SMD-0.json.gz"
             ],
-            "groups": [],
+            "groups": ["all"],
             "instruments": [
                 "piano"
             ],
