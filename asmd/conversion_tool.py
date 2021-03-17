@@ -52,10 +52,10 @@ def merge_dicts(idx, *args):
     dataset)
     """
 
-    assert all(type(x) is list for x in args), "Input types must be lists"
+    assert all(type(x) is list or x is None for x in args), "Input types must be lists or None"
 
     assert all(len(x) == len(args[0])
-               for x in args[1:]), "Cannot merge list with different lenghts"
+               for x in args[1:] if x is not None), "Cannot merge list with different lenghts"
 
     idx = min(idx, len(args[0]) - 1)  # For PHENICX
 
