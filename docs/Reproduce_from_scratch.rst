@@ -25,8 +25,10 @@ collected statistics:  it will generate misaligned data by using the same
 deviation distribution of the available non-aligned data. 
 
 Note that misaligned data should be annotated as ``2`` in the ``ground_truth``
-value of the dataset description (see :doc:`./index` ), otherwise no misaligned
-value will be added to the ``misaligned`` field.
+value of the dataset groups description (see :doc:`./index` ), otherwise no misaligned
+value will be added to the ``misaligned`` field. Moreover, the dataset group
+data should have `precise_alignment` or `broad_alignment` filled by the
+annotation conversion.
 
 ``generate_ground_truth.py`` help page
 --------------------------------------
