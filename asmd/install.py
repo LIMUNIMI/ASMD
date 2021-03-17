@@ -308,11 +308,8 @@ def main():
             tf.extractall(path=install_dir, members=subdir_and_files)
 
     # saving the Json file as modified
-    # not using json.dump beacuse it uses ugly syntax
-    with open(joinpath(THISDIR, 'datasets.json'), 'r+') as fd:
-        contents = fd.readlines()
-        fd.seek(0)
-        fd.writelines(contents)
+    with open(joinpath(THISDIR, 'datasets.json'), 'w') as fd:
+        json.dump(json_file, fd, indent=4)
 
 
 if __name__ == '__main__':
