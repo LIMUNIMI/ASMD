@@ -290,30 +290,42 @@ def get_score_mat(dataset, idx, score_type=['misaligned']):
     return mat
 
 
-def intersect(dataset1, dataset2, **kwargs):
+def intersect(*datasets, **kwargs):
     """
-    Takes two datasets and returns a new dataset representing the intersection of the two
-    The two datasets must have the same order in the `datasets` and `songs`
+    Takes datasets and returns a new dataset representing the intersection of them
+    The datasets must have the same order in the `datasets` and `songs`
     (e.g. two datasets initialized in the same way and only filtered)
 
     This functions calls `filter` to populate the paths and returns them woth
     all the sources. However, you can pass any argument to `filter`, e.g.
     the `sources` argument
     """
-    return _compare_dataset(_and_func, dataset1, dataset2, **kwargs)
+    assert len(datasets) > 0, "Cannot intersect no datasets"
+    if len(datasets) == 1:
+        return copy(datasets[0])
+    out = datasets[0]
+    for i in range(1, len(datasets)):
+        out = _compare_dataset(_and_func, out, datasets[i], **kwargs)
+    return out
 
 
-def union(dataset1, dataset2, **kwargs):
+def union(*datasets, **kwargs):
     """
-    Takes two datasets and returns a new dataset representing the union of the two
-    The two datasets must have the same order in the `datasets` and `songs`
+    Takes datasets and returns a new dataset representing the union of them
+    The datasets must have the same order in the `datasets` and `songs`
     (e.g. two datasets initialized in the same way and only filtered)
 
     This functions calls `filter` to populate the paths and returns them woth
     all the sources. However, you can pass any argument to `filter`, e.g.
     the `sources` argument
     """
-    return _compare_dataset(_or_func, dataset1, dataset2, **kwargs)
+    assert len(datasets) > 0, "Cannot intersect no datasets"
+    if len(datasets) == 1:
+        return copy(datasets[0])
+    out = datasets[0]
+    for i in range(1, len(datasets)):
+        out = _compare_dataset(_or_func, out, datasets[i], **kwargs)
+    return out
 
 
 def _compare_dataset(compare_func, dataset1, dataset2, **kwargs):
