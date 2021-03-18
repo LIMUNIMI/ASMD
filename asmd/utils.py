@@ -125,3 +125,30 @@ def midi_pitch_to_f0(midi_pitch):
     Return a frequency given a midi pitch (in 0-127)
     """
     return 440 * 2**((midi_pitch - 69) / 12)
+
+
+def mat2midipath(mat, path):
+    """
+    Writes a midi file from a mat like asmd:
+
+    pitch, start (sec), end (sec), velocity
+
+    If `mat` is empty, just do nothing.
+    """
+    import pretty_midi as pm
+    if len(mat) > 0:
+        # creating pretty_midi.PrettyMIDI object and inserting notes
+        midi = pm.PrettyMIDI()
+        midi.instruments = [pm.Instrument(0)]
+        for row in mat:
+            velocity = int(row[3])
+            if velocity < 0:
+                velocity = 80
+            midi.instruments[0].notes.append(
+                pm.Note(velocity, int(row[0]), float(row[1]), float(row[2])))
+
+        # writing to file
+        try:
+            midi.write(path)
+        except:
+            __import__('ipdb').set_trace()

@@ -6,13 +6,12 @@ from random import choices, uniform
 from typing import List, Tuple
 
 import numpy as np
-import plotly.graph_objects as go
-import plotly.offline as plt
 from sklearn.preprocessing import StandardScaler, minmax_scale
 
 from .asmd import Dataset
 from .dataset_utils import filter, get_score_mat, union
 from .idiot import THISDIR
+from .eita.alignment_eita import get_matching_notes
 
 
 class Stats(object):
@@ -155,7 +154,7 @@ class HistStats(Stats):
         """
 
         for i in range(len(dataset)):
-            aligned, score = get_matching_scores(dataset, i)
+            score, aligned = get_matching_scores(dataset, i)
 
             # computing diffs
             ons_diffs = score[:, 1] - aligned[:, 1]
@@ -199,9 +198,9 @@ def get_matching_scores(dataset: Dataset,
     mat_aligned[:, 0] = np.round(mat_aligned[:, 0])
     mat_score[:, 0] = np.round(mat_score[:, 0])
 
-    # TODO: apply Eita method
-    matching_notes = np.zeros()
-    return mat_aligned[matching_notes], mat_score[matching_notes]
+    # apply Eita method
+    matching_notes = get_matching_notes(mat_score, mat_aligned)
+    return mat_score[matching_notes[:, 0]], mat_aligned[matching_notes[:, 1]]
 
 
 def _get_random_value_from_hist(hist, k=1, max_value=None, hmm=False):
@@ -268,9 +267,6 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
         print(f"Statics for {stat} and {onsoffs}")
         print(f"Avg: {np.mean(distances):.2e}")
         print(f"Std {np.std(distances):.2e}")
-
-
-# TODO: add evaluate to main
 
 
 def get_stats(method='histogram', save=True):

@@ -233,6 +233,7 @@ def get_score_mat(dataset, idx, score_type=['misaligned']):
         offsets (seconds), velocities, MIDI program instrument and number of
         the instrument. Ordered by onsets. If some information is not
         available, value -255 is used.
+        The array is sorted by onset, pitch and offset (in this order)
     """
 
     gts = dataset.get_gts(idx)
@@ -285,15 +286,15 @@ def get_score_mat(dataset, idx, score_type=['misaligned']):
         mat = np.array(mat[0])
     # transposing: one row per note
     mat = mat.T
-    # ordering by onset
-    mat = mat[mat[:, 1].argsort()]
-    return mat
+    # ordering by onset, pitch and offset (in this order)
+    ind = np.lexsort([mat[:, 2], mat[:, 0], mat[:, 1]])
+    return mat[ind]
 
 
 def intersect(*datasets, **kwargs):
     """
-    Takes datasets and returns a new dataset representing the intersection of them
-    The datasets must have the same order in the `datasets` and `songs`
+    Takes datasets and returns a new dataset representing the intersection of
+    them The datasets must have the same order in the `datasets` and `songs`
     (e.g. two datasets initialized in the same way and only filtered)
 
     This functions calls `filter` to populate the paths and returns them woth
@@ -302,7 +303,7 @@ def intersect(*datasets, **kwargs):
     """
     assert len(datasets) > 0, "Cannot intersect no datasets"
     if len(datasets) == 1:
-        return copy(datasets[0])
+        return deepcopy(datasets[0])
     out = datasets[0]
     for i in range(1, len(datasets)):
         out = _compare_dataset(_and_func, out, datasets[i], **kwargs)
@@ -321,7 +322,7 @@ def union(*datasets, **kwargs):
     """
     assert len(datasets) > 0, "Cannot intersect no datasets"
     if len(datasets) == 1:
-        return copy(datasets[0])
+        return deepcopy(datasets[0])
     out = datasets[0]
     for i in range(1, len(datasets)):
         out = _compare_dataset(_or_func, out, datasets[i], **kwargs)
@@ -335,38 +336,41 @@ def _compare_dataset(compare_func, dataset1, dataset2, **kwargs):
     """
     out = deepcopy(dataset1)
     out.paths = []
-    for i, d1 in enumerate(dataset1['datasets']):
-        d2 = dataset2['datasets'][i]
+    for i, d1 in enumerate(dataset1.datasets):
+        d2 = dataset2.datasets[i]
         if compare_func(d1['included'], d2['included']):
-            out['datasets'][i]['included'] = True
+            out.datasets[i]['included'] = True
             for j, s1 in enumerate(d1['songs']):
                 s2 = d2['songs'][j]
                 if compare_func(s1['included'], s2['included']):
-                    out['datasets'][i]['songs'][j]['included'] = True
+                    out.datasets[i]['songs'][j]['included'] = True
                 else:
-                    out['datasets'][i]['songs'][j]['included'] = False
+                    out.datasets[i]['songs'][j]['included'] = False
 
         else:
-            out['datasets'][i]['included'] = False
+            out.datasets[i]['included'] = False
     # populate paths
-    return filter(out **kwargs)
+    return filter(out, **kwargs)
 
 
 def _or_func(a, b):
     return a or b
 
+
 def _and_func(a, b):
     return a and b
 
-def complement(dataset):
+
+def complement(dataset, **kwargs):
     """
-    Takes one dataset and returns a new dataset representing the complement of the input
+    Takes one dataset and returns a new dataset representing the complement of
+    the input
 
     This functions calls `filter` to populate the paths and returns them woth
     all the sources. However, you can pass any argument to `filter`, e.g.
     the `sources` argument
     """
-    out = deepcopy(dataset1, **kwargs)
+    out = deepcopy(dataset)
     out.paths = []
     for i, d in enumerate(dataset['datasets']):
         if d['included']:
@@ -380,7 +384,7 @@ def complement(dataset):
                     out['datasets'][i]['songs'][j] = True
 
     # populate paths
-    return filter(out **kwargs)
+    return filter(out, **kwargs)
 
 
 def get_pedaling_mat(dataset, idx, frame_based=False, winlen=0.046, hop=0.01):
@@ -425,18 +429,18 @@ def get_pedaling_mat(dataset, idx, frame_based=False, winlen=0.046, hop=0.01):
         # take all cc...
         cc_track_pedaling = []
         for pedal in ['sustain', 'sostenuto', 'soft']:
-            l = len(gt[pedal]['values'])
+            L = len(gt[pedal]['values'])
             if pedal == 'sustain':
                 cc_track_pedaling += list(
-                    zip(gt[pedal]['times'], gt[pedal]['values'], [-1] * l,
-                        [-1] * l))
+                    zip(gt[pedal]['times'], gt[pedal]['values'], [-1] * L,
+                        [-1] * L))
             elif pedal == 'sostenuto':
                 cc_track_pedaling += list(
-                    zip(gt[pedal]['times'], [-1] * l, gt[pedal]['values'],
-                        [-1] * l))
+                    zip(gt[pedal]['times'], [-1] * L, gt[pedal]['values'],
+                        [-1] * L))
             elif pedal == 'soft':
                 cc_track_pedaling += list(
-                    zip(gt[pedal]['times'], [-1] * l, [-1] * l,
+                    zip(gt[pedal]['times'], [-1] * L, [-1] * L,
                         gt[pedal]['values']))
         # sort cc according to time...
         cc_track_pedaling.sort(key=lambda row: row[0])
