@@ -36,6 +36,8 @@ TODO
 ====
 
 #. add automatic matching of songs among multiple datasets based on metadata (and maybe audio ID?)
+#. change the `filter` function for each level of filtering which takes keyword
+   and value and filter that keyword at that level
 #. describe datasets provided by default
 #. generic description of the framework
 #. improve "adding_datasets" with a full example
