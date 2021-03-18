@@ -159,7 +159,15 @@ def conversion(arg):
             range(len(INSTRUMENT_MAP)),
             key=lambda x: text_similarity(INSTRUMENT_MAP[x], instrument))
 
-        if dataset['ground_truth']['misaligned'] == 2 and stats:
+        # check if at least one group to which this song belongs to has
+        # `misaligned` set to 2
+        misaligned = False
+        for group in song['groups']:
+            dataset['ground_truth'][group]['misaligned'] == 2
+            misaligned = True
+            break
+
+        if misaligned and stats:
             # computing deviations for each pitch
             stats.new_song(seed=l)
             pitches, onsets, offsets = misalign(out, stats)
@@ -215,15 +223,10 @@ def create_gt(data_fn,
 
         print("\n------------------------\n")
         print("Starting processing " + dataset['name'])
-        if dataset['ground_truth'][
-                'misaligned'] == 2 and alignment_stats is not None:
-            arg = [(i, song, json_file, dataset, alignment_stats)
-                   for i, song in enumerate(dataset['songs'])]
-        else:
-            arg = [
-                (i, song, json_file, dataset, None)  # type: ignore
-                for i, song in enumerate(dataset['songs'])
-            ]
+        arg = [
+            (i, song, json_file, dataset, alignment_stats)
+            for i, song in enumerate(dataset['songs'])
+        ]
         if not PARALLEL:
             for i in range(len(dataset['songs'])):
                 to_be_included_in_the_archive += conversion(arg[i])
