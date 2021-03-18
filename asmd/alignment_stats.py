@@ -9,7 +9,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler, minmax_scale
 
 from .asmd import Dataset
-from .dataset_utils import filter, get_score_mat
+from .dataset_utils import filter, get_score_mat, union
 from .eita.alignment_eita import get_matching_notes
 from .idiot import THISDIR
 
@@ -167,7 +167,10 @@ class HistStats(Stats):
             offs_diffs = score[:, 2] - aligned[:, 2]
             return ons_diffs, offs_diffs
 
-        data = dataset.parallel(process_, n_jobs=-1, backend="multiprocessing")
+        data = dataset.parallel(
+            process_,  # type: ignore
+            n_jobs=-1,
+            backend="multiprocessing")
         count = 0
         for res in data:
             if res is not None:
@@ -215,7 +218,7 @@ def get_matching_scores(dataset: Dataset,
     mat_score[:, 0] = np.round(mat_score[:, 0])
 
     # apply Eita method
-    matching_notes = get_matching_notes(mat_score, mat_aligned)
+    matching_notes = get_matching_notes(mat_score, mat_aligned, timeout=None)
     if matching_notes is None:
         raise RuntimeError("Cannot match notes for this score!")
     return mat_score[matching_notes[:, 0]], mat_aligned[matching_notes[:, 1]]
@@ -236,7 +239,7 @@ def _get_random_value_from_hist(hist, k=1, max_value=None, hmm=False):
     start = choices(values[:-1], weights=hist[0], k=k)
     bin_w = abs(values[1] - values[0])
     end = np.array(start) + bin_w
-    return [uniform(start[i], end[i]) for i in range(len(start))]
+    return np.asarray([uniform(start[i], end[i]) for i in range(len(start))])
 
 
 def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
@@ -246,14 +249,15 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
 
     This function will also need to install the dtw-python module separately
     """
-    try:
-        from dtw import dtw  # noqa: autoimport
-    except ImportError:
-        print(
-            "Please install dtw-python by yourself before of running this function"
-        )
+    global process_
 
-    def process(i: int, dataset: Dataset, stat: Stats):
+    def process_(i: int, dataset: Dataset, stat: Stats):
+        try:
+            from dtw import dtw  # noqa: autoimport
+        except ImportError:
+            print(
+                "Please install dtw-python by yourself before of running this function"
+            )
 
         # reset the stats for a new song
         stat.new_song()
@@ -279,15 +283,23 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
         std = np.std(diff)
 
         # DTW between score and affinely transformed new times
-        dtw_res = dtw(score[:, col],
-                      aligned + aligned_diff * std + mean,
-                      distance_only=True)
-        return dtw_res.distance
+        dtw_res = dtw(
+            score[:, col],
+            aligned[:, col] + aligned_diff * std + mean,
+            # window_type='slantedband',
+            # window_args=dict(window_size=10),
+            distance_only=True)
+        return dtw_res.normalizedDistance
 
     for stat in stats:
         print(f"Evaluating {stat}")
-        distances = dataset.parallel(process, stat, n_jobs=-1, backend="multiprocessing")
+        distances = dataset.parallel(
+            process_,  # type: ignore
+            stat,
+            n_jobs=-1,
+            backend="multiprocessing")
         # removing scores where we couldn't match notes
+        distances = np.asarray(distances)
         distances = distances[distances >= 0]
         print(f"Statics for {stat} and {onsoffs}")
         print(f"Avg: {np.mean(distances):.2e}")
@@ -303,18 +315,18 @@ def get_stats(method='histogram', save=True):
 
 def _get_dataset():
     dataset = Dataset()
-    dataset = filter(
-        dataset,
-        datasets=['vienna_corpus', 'Bach10', 'traditional_flute', 'MusicNet'],
-        copy=True)
+    # dataset = filter(
+    #     dataset,
+    #     datasets=['vienna_corpus', 'Bach10', 'traditional_flute', 'MusicNet'],
+    #     copy=True)
 
-    # dataset = union(
-    #     filter(dataset,
-    #            datasets=[
-    #                'vienna_corpus', 'Bach10', 'traditional_flute', 'MusicNet'
-    #            ],
-    #            copy=True),
-    #     filter(dataset, datasets=['Maestro'], groups=['asap'], copy=True))
+    dataset = union(
+        filter(dataset,
+               datasets=[
+                   'vienna_corpus', 'Bach10', 'traditional_flute', 'MusicNet'
+               ],
+               copy=True),
+        filter(dataset, datasets=['Maestro'], groups=['asap'], copy=True))
     return dataset
 
 
@@ -339,8 +351,9 @@ def _get_stats_from_dataset(dataset: Dataset, method: str, save: bool):
 
 if __name__ == '__main__':
     dataset = _get_dataset()
-    stat = _get_stats_from_dataset(dataset, 'histogram', True)
-    # stat = pickle.load(open("_alignment_stats.pkl", "rb"))
+    stat = _get_stats_from_dataset(dataset, 'histogram', False)
+    # stat = pickle.load(
+    #     open(os.path.join(THISDIR, "_alignment_stats.pkl"), "rb"))
     evaluate(dataset, [
         stat,
     ], 'ons')
