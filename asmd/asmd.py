@@ -456,8 +456,8 @@ class Dataset(object):
 
     def get_initial_bpm(self, idx) -> Optional[float]:
         """
-        Return the initial bpm of the first source if `score` alignment type is available at index
-        `idx`, otherwise returns None
+        Return the initial bpm of the first source if `score` alignment type is
+        available at index `idx`, otherwise returns None
         """
         beats = self.get_beats(idx)
         if len(beats[0]) < 2:

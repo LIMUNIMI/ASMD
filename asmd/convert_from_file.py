@@ -200,7 +200,7 @@ def from_midi(midi_fn,
     contain a dictionary for each track.  Beats are filled according to tempo
     changes.
 
-    This functions is decorated with two different sets of parameters:
+    This functions is decorated with 3 different sets of parameters:
 
     * `from_midi` is the decorated version with `remove_player=False`
     * `from_midi_remove_player` is the decorated version with
