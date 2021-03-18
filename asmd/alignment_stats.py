@@ -9,9 +9,9 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler, minmax_scale
 
 from .asmd import Dataset
-from .dataset_utils import filter, get_score_mat, union
-from .idiot import THISDIR
+from .dataset_utils import filter, get_score_mat
 from .eita.alignment_eita import get_matching_notes
+from .idiot import THISDIR
 
 
 class Stats(object):
@@ -153,13 +153,29 @@ class HistStats(Stats):
         Fills this object with data from `datasets`
         """
 
-        for i in range(len(dataset)):
-            score, aligned = get_matching_scores(dataset, i)
+        global process_
+
+        def process_(i, dataset):
+            try:
+                score, aligned = get_matching_scores(dataset, i)
+            except RuntimeError:
+                # skipping if we cannot match the notes for this score
+                return None
 
             # computing diffs
             ons_diffs = score[:, 1] - aligned[:, 1]
             offs_diffs = score[:, 2] - aligned[:, 2]
-            self.add_data(ons_diffs, offs_diffs)
+            return ons_diffs, offs_diffs
+
+        data = dataset.parallel(process_, n_jobs=-1, backend="multiprocessing")
+        count = 0
+        for res in data:
+            if res is not None:
+                count += 1
+                ons_diffs, offs_diffs = res
+                self.add_data(ons_diffs, offs_diffs)
+
+        print(f"Using {count / len(data):.2f} songs ({count} / {len(data)})")
 
     def __repr__(self):
         return str(type(self))
@@ -200,6 +216,8 @@ def get_matching_scores(dataset: Dataset,
 
     # apply Eita method
     matching_notes = get_matching_notes(mat_score, mat_aligned)
+    if matching_notes is None:
+        raise RuntimeError("Cannot match notes for this score!")
     return mat_score[matching_notes[:, 0]], mat_aligned[matching_notes[:, 1]]
 
 
@@ -240,8 +258,12 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
         # reset the stats for a new song
         stat.new_song()
 
-        # take he matching nootes in the score
-        score, aligned = get_matching_scores(dataset, i)
+        try:
+            # take the matching notes in the score
+            score, aligned = get_matching_scores(dataset, i)
+        except RuntimeError:
+            # skipping if cannot match notes
+            return -1
 
         # take random standardized differences
         if onsoffs == 'ons':
@@ -263,7 +285,10 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
         return dtw_res.distance
 
     for stat in stats:
-        distances = dataset.parallel(process, stat, n_jobs=-1)
+        print(f"Evaluating {stat}")
+        distances = dataset.parallel(process, stat, n_jobs=-1, backend="multiprocessing")
+        # removing scores where we couldn't match notes
+        distances = distances[distances >= 0]
         print(f"Statics for {stat} and {onsoffs}")
         print(f"Avg: {np.mean(distances):.2e}")
         print(f"Std {np.std(distances):.2e}")
@@ -278,13 +303,18 @@ def get_stats(method='histogram', save=True):
 
 def _get_dataset():
     dataset = Dataset()
-    dataset = union(
-        filter(dataset,
-               datasets=[
-                   'vienna_corpus', 'Bach10', 'traditional_flute', 'MusicNet'
-               ],
-               copy=True),
-        filter(dataset, datasets=['Maestro'], groups=['asap'], copy=True))
+    dataset = filter(
+        dataset,
+        datasets=['vienna_corpus', 'Bach10', 'traditional_flute', 'MusicNet'],
+        copy=True)
+
+    # dataset = union(
+    #     filter(dataset,
+    #            datasets=[
+    #                'vienna_corpus', 'Bach10', 'traditional_flute', 'MusicNet'
+    #            ],
+    #            copy=True),
+    #     filter(dataset, datasets=['Maestro'], groups=['asap'], copy=True))
     return dataset
 
 
@@ -294,9 +324,11 @@ def _get_stats_from_dataset(dataset: Dataset, method: str, save: bool):
         stats: Stats = HistStats()
     elif method == 'hmm':
         stats = HMMStats()
+    print("Computing statistics")
     stats.fill_stats(dataset)
     stats.compute_hist()
 
+    print("Saving statistical model")
     if save:
         file_stats = os.path.join(THISDIR, "_alignment_stats.pkl")
         if os.path.exists(file_stats):
@@ -307,6 +339,11 @@ def _get_stats_from_dataset(dataset: Dataset, method: str, save: bool):
 
 if __name__ == '__main__':
     dataset = _get_dataset()
-    stat = _get_stats_from_dataset(dataset, 'histogram', False)
-    evaluate(dataset, [stat, ], 'ons')
-    evaluate(dataset, [stat, ], 'offs')
+    stat = _get_stats_from_dataset(dataset, 'histogram', True)
+    # stat = pickle.load(open("_alignment_stats.pkl", "rb"))
+    evaluate(dataset, [
+        stat,
+    ], 'ons')
+    evaluate(dataset, [
+        stat,
+    ], 'offs')
