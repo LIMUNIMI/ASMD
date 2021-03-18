@@ -1,8 +1,8 @@
 import csv
 import os
-import random
 import signal
 import sys
+import uuid
 from pathlib import Path
 from subprocess import Popen, TimeoutExpired
 from typing import Union
@@ -85,9 +85,7 @@ def remove_temp_files(path: Union[str, Path]):
 #     return matscore[:, 1], matscore[:, 2]
 
 
-def get_matching_notes(matscore: np.ndarray,
-                       matperfm: np.ndarray,
-                       timeout=10):
+def get_matching_notes(matscore: np.ndarray, matperfm: np.ndarray, timeout=10):
     """
     Returns a mapping of indices between notes in `matscore` and in `matperfm`
     with shape (N, 2), where N is the number of matching notes.
@@ -95,45 +93,49 @@ def get_matching_notes(matscore: np.ndarray,
     Performs Eita Nakamura alignment in a separate process and waits for it.
     This cleans all the output files. Returns None if the separate process
     fails.
-   ta """
-
-    p1 = random.randint(10**6, 10**7)
-    p2 = p1 + 1
-    path1 = str(p1) + '.mid'
-    path2 = str(p2) + '.mid'
-
-    # writing music data to midi files
-    # the first argument is the reference signal
-    utils.mat2midipath(matperfm, path1)
-    utils.mat2midipath(matscore, path2)
-
-    # Launch the external process
-    popen = Popen([f"{EITA_PATH}/MIDIToMIDIAlign.sh", path1[:-4], path2[:-4]],
-                  preexec_fn=os.setsid)
+    """
 
     try:
-        popen.wait(timeout=timeout)
-    except TimeoutExpired:
-        os.killpg(os.getpgid(popen.pid), signal.SIGTERM)
+        p1 = uuid.uuid1(clock_seq=os.getpid())
+        p2 = uuid.uuid1(clock_seq=os.getpid())
+        path1 = str(p1) + '.mid'
+        path2 = str(p2) + '.mid'
 
-    if popen.returncode == 0:
-        success = True
-    else:
-        success = False
+        # writing music data to midi files
+        # the first argument is the reference signal
+        utils.mat2midipath(matperfm, path1)
+        utils.mat2midipath(matscore, path2)
 
-    # load the output
-    if success:
-        eita_data = []
-        with open(path2[:-4] + "_corresp.txt", newline='') as f:
-            csv_reader = csv.reader(f, delimiter='\t')
-            next(csv_reader)  # skip first row (the file is not a real csv file...)
-            for row in csv_reader:
-                if row[1] != '-1' and row[6] != '-1':
-                    eita_data.append((int(row[0]), int(row[5])))
+        # Launch the external process
+        popen = Popen(
+            [f"{EITA_PATH}/MIDIToMIDIAlign.sh", path1[:-4], path2[:-4]],
+            preexec_fn=os.setsid)
 
-    # remove files created by eita code
-    remove_temp_files(path1)
-    remove_temp_files(path2)
+        try:
+            popen.wait(timeout=timeout)
+        except TimeoutExpired:
+            os.killpg(os.getpgid(popen.pid), signal.SIGTERM)
+
+        if popen.returncode == 0:
+            success = True
+        else:
+            success = False
+
+        # load the output
+        if success:
+            eita_data = []
+            with open(path2[:-4] + "_corresp.txt", newline='') as f:
+                csv_reader = csv.reader(f, delimiter='\t')
+                # skip first row (the file is not a real csv file...)
+                next(csv_reader)
+                for row in csv_reader:
+                    if row[1] != '-1' and row[6] != '-1':
+                        eita_data.append((int(row[0]), int(row[5])))
+
+    finally:
+        # remove files created by eita code
+        remove_temp_files(path1)
+        remove_temp_files(path2)
 
     if success:
         return np.array(eita_data, dtype=np.int)
