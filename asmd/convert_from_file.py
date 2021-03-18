@@ -377,18 +377,19 @@ def from_musicnet_csv(csv_fn, sr=44100.0):
 @convert(['.gt'])
 def from_sonic_visualizer(gt_fn, alignment='precise_alignment'):
     """
-    Takes a filename of a sonic visualizer output file  exported as 'csv' and fills the
-    'alignment' specified
+    Takes a filename of a sonic visualizer output file  exported as 'csv' and
+    fills the 'alignment' specified
     """
 
+    min_midi_freq = utils.midi_pitch_to_f0(0)
     data = csv.reader(open(gt_fn), delimiter=',')
     out = deepcopy(prototype_gt)
     for row in data:
+        p = float(row[1])
+        if p < min_midi_freq:
+            continue
         out[alignment]["onsets"].append(float(row[0]))
         out[alignment]["offsets"].append(float(row[0]) + float(row[2]))
-        p = float(row[1])
-        if p == 0:
-            p += 1
         pitch = utils.f0_to_midi_pitch(p)
         out[alignment]["pitches"].append(pitch)
 
