@@ -2,22 +2,31 @@ import os
 import os.path
 import pickle
 import random
+from copy import deepcopy
 from random import choices, uniform
 from typing import List, Tuple
 
 import numpy as np
 from sklearn.preprocessing import StandardScaler, minmax_scale
 
+from hmmlearn.hmm import GMMHMM
+
 from .asmd import Dataset
 from .dataset_utils import filter, get_score_mat, union
 from .eita.alignment_eita import get_matching_notes
 from .idiot import THISDIR
+from .utils import mat_stretch
+
+NJOBS = -1
 
 
+# TODO: refactoring: most of the stuffs are repeated twice for onsets and offsets
 class Stats(object):
     def __init__(self, ons_dev_max=0.2, offs_dev_max=0.2, mean_max=None):
-        self.ons_diffs = []
         self.offs_diffs = []
+        self.ons_diffs = []
+        self.ons_lengths = []
+        self.offs_lengths = []
         self.means = []
         self.ons_dev = []
         self.offs_dev = []
@@ -35,39 +44,23 @@ class Stats(object):
         """
         random.seed(self._seed)
         self._seed += 1
+        return self._seed
 
-    def add_data(self, ons_diffs, offs_diffs):
+    def add_data_to_histograms(self, ons_diffs, offs_diffs):
         """
         Method to add data, then you should still compute histograms
         """
         self.ons_dev.append(np.std(ons_diffs))
         self.offs_dev.append(np.std(offs_diffs))
         self.means.append(np.mean([offs_diffs, ons_diffs]))
+
         self.ons_diffs += StandardScaler().fit_transform(
             ons_diffs.reshape(-1, 1)).tolist()
         self.offs_diffs += StandardScaler().fit_transform(
             offs_diffs.reshape(-1, 1)).tolist()
 
-    def compute_hist(self):
-        """
-        Compute all the histograms in tuples (histogram, bin_edges):
-        self.ons_hist
-        self.offs_hist
-        self.means_hist
-        self.ons_dev_hist
-        self.offs_dev_hist
-        """
-        self.ons_hist = np.histogram(self.ons_diffs, bins='auto', density=True)
-        self.offs_hist = np.histogram(self.offs_diffs,
-                                      bins='auto',
-                                      density=True)
-        self.means_hist = np.histogram(self.means, bins='auto', density=True)
-        self.ons_dev_hist = np.histogram(self.ons_dev,
-                                         bins='auto',
-                                         density=True)
-        self.offs_dev_hist = np.histogram(self.offs_dev,
-                                          bins='auto',
-                                          density=True)
+        self.ons_lengths.append(len(ons_diffs))
+        self.offs_lengths.append(len(offs_diffs))
 
     def get_random_onset_dev(self, k=1):
         self.seed()
@@ -98,56 +91,6 @@ class Stats(object):
         self.seed()
         self._song_mean = self.get_random_mean()
 
-    def get_random_onset_diff(self, k=1):
-        pass
-
-    def get_random_offset_diff(self, k=1):
-        pass
-
-    def get_random_onsets(self, aligned):
-        pass
-
-    def get_random_offsets(self, aligned):
-        pass
-
-    def fill_stats(self, dataset: Dataset):
-        pass
-
-
-class HistStats(Stats):
-    def __init__(
-        self,
-        ons_max=None,
-        offs_max=None,
-    ):
-        super().__init__()
-        self.ons_max = ons_max
-        self.offs_max = offs_max
-
-    def get_random_onset_diff(self, k=1):
-        self.seed()
-        return _get_random_value_from_hist(self.ons_hist,
-                                           k,
-                                           max_value=self.ons_max)
-
-    def get_random_offset_diff(self, k=1):
-        self.seed()
-        return _get_random_value_from_hist(self.offs_hist,
-                                           k,
-                                           max_value=self.offs_max)
-
-    def get_random_offsets(self, aligned):
-        self.seed()
-        return _get_random_value_from_hist(
-            self.offs_hist, len(aligned), max_value=self.offs_max
-        ) * self._song_offset_dev + aligned + self._song_mean
-
-    def get_random_onsets(self, aligned):
-        self.seed()
-        return _get_random_value_from_hist(
-            self.ons_hist, len(aligned), max_value=self.ons_max
-        ) * self._song_onset_dev + aligned + self._song_mean
-
     def fill_stats(self, dataset: Dataset):
         """
         Fills this object with data from `datasets`
@@ -167,35 +110,139 @@ class HistStats(Stats):
             offs_diffs = score[:, 2] - aligned[:, 2]
             return ons_diffs, offs_diffs
 
-        data = dataset.parallel(
+        # puts in `self._data` onset and offset diffs
+        self._data = dataset.parallel(
             process_,  # type: ignore
-            n_jobs=-1,
+            n_jobs=NJOBS,
             backend="multiprocessing")
+
         count = 0
-        for res in data:
+        for res in self._data:
             if res is not None:
                 count += 1
                 ons_diffs, offs_diffs = res
-                self.add_data(ons_diffs, offs_diffs)
+                self.add_data_to_histograms(ons_diffs, offs_diffs)
 
-        print(f"Using {count / len(data):.2f} songs ({count} / {len(data)})")
+        print(
+            f"Using {count / len(self._data):.2f} songs ({count} / {len(self._data)})"
+        )
+
+    def get_random_offsets(self, aligned):
+        self.seed()
+        return self.get_random_offset_diff(
+            len(aligned)) * self._song_offset_dev + aligned + self._song_mean
+
+    def get_random_onsets(self, aligned):
+        self.seed()
+        return self.get_random_onset_diff(
+            len(aligned)) * self._song_onset_dev + aligned + self._song_mean
+
+    def get_random_onset_diff(self, k=1):
+        pass
+
+    def get_random_offset_diff(self, k=1):
+        pass
+
+    def train_on_filled_stats(self):
+        """
+        Compute all the histograms in tuples (histogram, bin_edges):
+        self.means_hist
+        self.ons_dev_hist
+        self.offs_dev_hist
+        """
+        self.means_hist = np.histogram(self.means, bins='auto', density=True)
+        self.ons_dev_hist = np.histogram(self.ons_dev,
+                                         bins='auto',
+                                         density=True)
+        self.offs_dev_hist = np.histogram(self.offs_dev,
+                                          bins='auto',
+                                          density=True)
+
+
+class HistStats(Stats):
+    def __init__(self, ons_max=None, offs_max=None, stats: Stats = None):
+        super().__init__()
+        if stats:
+            self.__dict__.update(deepcopy(stats.__dict__))
+        self.ons_max = ons_max
+        self.offs_max = offs_max
+
+    def train_on_filled_stats(self):
+        super().train_on_filled_stats()
+        # computing onset and offset histograms
+        self.ons_hist = np.histogram(self.ons_diffs, bins='auto', density=True)
+        self.offs_hist = np.histogram(self.offs_diffs,
+                                      bins='auto',
+                                      density=True)
+
+    def get_random_onset_diff(self, k=1):
+        self.seed()
+        return _get_random_value_from_hist(self.ons_hist,
+                                           k,
+                                           max_value=self.ons_max)
+
+    def get_random_offset_diff(self, k=1):
+        self.seed()
+        return _get_random_value_from_hist(self.offs_hist,
+                                           k,
+                                           max_value=self.offs_max)
 
     def __repr__(self):
         return str(type(self))
 
 
 class HMMStats(Stats):
-    def __init__(self):
+    def __init__(self, stats: Stats = None):
         super().__init__()
 
+        if stats:
+            self.__dict__.update(deepcopy(stats.__dict__))
+
+        n_mix = 10  # the number of gaussian mixtures
+        n_components = 10  # the number of hidden states
+        n_iter = 1000  # maximum number of iterations
+        tol = 1e-5  # minimum value of log-likelyhood
+        covariance_type = 'diag'
+        self.onshmm = GMMHMM(
+            n_components=n_components,
+            n_mix=n_mix,
+            covariance_type=covariance_type,
+            n_iter=n_iter,
+            tol=tol,
+            # verbose=True,
+            random_state=self.seed())
+        self.offshmm = GMMHMM(
+            n_components=n_components,
+            n_mix=n_mix,
+            covariance_type=covariance_type,
+            n_iter=n_iter,
+            tol=tol,
+            # verbose=True,
+            random_state=self.seed())
+
     def get_random_onset_diff(self, k=1):
-        raise NotImplementedError()
+        x, _state_seq = self.onshmm.sample(k, random_state=self.seed())
+        return x[:, 0]
 
     def get_random_offset_diff(self, k=1):
-        raise NotImplementedError()
+        x, _state_seq = self.offshmm.sample(k, random_state=self.seed())
+        return x[:, 0]
 
-    def fill_stats(self, dataset: Dataset):
-        raise NotImplementedError()
+    def train_on_filled_stats(self):
+        super().train_on_filled_stats()
+
+        # train the hmms
+        def train(hmm, data, lengths):
+            hmm.fit(data, lengths)
+            if (hmm.monitor_.converged):
+                print("hmm converged!")
+            else:
+                print("hmm did not converge!")
+
+        print("Training onset hmm...")
+        train(self.onshmm, self.ons_diffs, self.ons_lengths)
+        print("Training offset hmm...")
+        train(self.offshmm, self.offs_diffs, self.offs_lengths)
 
     def __repr__(self):
         return str(type(self))
@@ -213,12 +260,15 @@ def get_matching_scores(dataset: Dataset,
         dataset, i, score_type=['precise_alignment', 'broad_alignment'])
     mat_score = get_score_mat(dataset, i, score_type=['score'])
 
+    # stretch to the same average BPM
+    mat_stretch(mat_score, mat_aligned)
+
     # changing float pitches to nearest pitch
     mat_aligned[:, 0] = np.round(mat_aligned[:, 0])
     mat_score[:, 0] = np.round(mat_score[:, 0])
 
     # apply Eita method
-    matching_notes = get_matching_notes(mat_score, mat_aligned, timeout=None)
+    matching_notes = get_matching_notes(mat_score, mat_aligned, timeout=20)
     if matching_notes is None:
         raise RuntimeError("Cannot match notes for this score!")
     return mat_score[matching_notes[:, 0]], mat_aligned[matching_notes[:, 1]]
@@ -296,7 +346,7 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
         distances = dataset.parallel(
             process_,  # type: ignore
             stat,
-            n_jobs=-1,
+            n_jobs=NJOBS,
             backend="multiprocessing")
         # removing scores where we couldn't match notes
         distances = np.asarray(distances)
@@ -310,15 +360,18 @@ def get_stats(method='histogram', save=True):
     """
     Computes statistics, histogram, dumps the object to file and returns it
     """
-    return _get_stats_from_dataset(_get_dataset(), method, save)
+    dataset = _get_dataset()
+    print("Computing statistics")
+    stats = Stats()
+    stats.fill_stats(dataset)
+    return _train_model(stats, method, save)
 
 
 def _get_dataset():
     dataset = Dataset()
-    # dataset = filter(
-    #     dataset,
-    #     datasets=['vienna_corpus', 'Bach10', 'traditional_flute', 'MusicNet'],
-    #     copy=True)
+    # dataset = filter(dataset,
+    #                  datasets=['Bach10', 'traditional_flute', 'MusicNet'],
+    #                  copy=True)
 
     dataset = union(
         filter(dataset,
@@ -330,18 +383,17 @@ def _get_dataset():
     return dataset
 
 
-def _get_stats_from_dataset(dataset: Dataset, method: str, save: bool):
+def _train_model(stats: Stats, method: str, save: bool):
 
     if method == 'histogram':
-        stats: Stats = HistStats()
+        stats = HistStats(stats=stats)
     elif method == 'hmm':
-        stats = HMMStats()
-    print("Computing statistics")
-    stats.fill_stats(dataset)
-    stats.compute_hist()
+        stats = HMMStats(stats=stats)
 
-    print("Saving statistical model")
+    stats.train_on_filled_stats()
+
     if save:
+        print("Saving statistical model")
         file_stats = os.path.join(THISDIR, "_alignment_stats.pkl")
         if os.path.exists(file_stats):
             os.remove(file_stats)
@@ -351,12 +403,17 @@ def _get_stats_from_dataset(dataset: Dataset, method: str, save: bool):
 
 if __name__ == '__main__':
     dataset = _get_dataset()
-    stat = _get_stats_from_dataset(dataset, 'histogram', False)
-    # stat = pickle.load(
-    #     open(os.path.join(THISDIR, "_alignment_stats.pkl"), "rb"))
-    evaluate(dataset, [
-        stat,
-    ], 'ons')
-    evaluate(dataset, [
-        stat,
-    ], 'offs')
+    print("Computing statistics")
+    stats = Stats()
+    stats.fill_stats(dataset)
+
+    for method in ['hmm', 'histogram']:
+        stats = _train_model(stats, method, False)
+        # stat = pickle.load(
+        #     open(os.path.join(THISDIR, "_alignment_stats.pkl"), "rb"))
+        evaluate(dataset, [
+            stats,
+        ], 'ons')
+        evaluate(dataset, [
+            stats,
+        ], 'offs')

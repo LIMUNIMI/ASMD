@@ -152,3 +152,47 @@ def mat2midipath(mat, path):
             midi.write(path)
         except:
             __import__('ipdb').set_trace()
+
+
+def midipath2mat(path):
+    """
+    Open a midi file  with one instrument track and construct a mat like asmd:
+
+    pitch, start (sec), end (sec), velocity
+
+    Rows are sorted by onset, pitch and offset (in this order)
+    """
+    import pretty_midi as pm
+
+    out = []
+    for instrument in pm.PrettyMIDI(midi_file=path).instruments:
+        for note in instrument.notes:
+            out.append([note.pitch, note.start, note.end, note.velocity])
+
+    # sort by onset, pitch and offset
+    out = np.array(out)
+    ind = np.lexsort([out[:, 2], out[:, 0], out[:, 1]])
+
+    return out[ind]
+
+
+def mat_stretch(mat, target):
+    """
+    Changes times of `mat` in-place so that it has the same average BPM and
+    initial time as target. 
+
+    Returns `mat` changed in-place.
+    """
+    in_times = mat[:, 1:3]
+    out_times = target[:, 1:3]
+
+    # normalize in [0, 1]
+    in_times -= in_times.min()
+    in_times /= in_times.max()
+
+    # restretch
+    new_start = out_times.min()
+    in_times *= (out_times.max() - new_start)
+    in_times += new_start
+
+    return mat
