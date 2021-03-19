@@ -43,12 +43,12 @@ matched notes; it will then compute the distance between the misaligned score
 onset sequence and the real score onset sequence, considering only the matchng
 notes, using the classical DTW symmetric step-pattern and the euclidean distance.
 The evaluation uses `vienna_corpus`, `traditional_flute`, `MusicNet`, `Bach10`
-and `asap` group from `Maestro` dataset for a total of 1733 scores. However,
+and `asap` group from `Maestro` dataset for a total of 875 scores. However,
 since Eita's method takes a long time on some scores, I removed the scores for
-which Eita's method doesn't end before of 20 seconds; this resulted in a total
-of TODO scores
+which Eita's method ends after 20 seconds; this resulted in a total of 473
+songs (54% of the total number of songs with an available score).
 
-Both the compared methods are based on the random choice of a standard
+Both the two compared methods are based on the random choice of a standard
 deviation and a mean for the whole song according to the collected
 distributions of standard deviations and means. They instead differ in how they
 chose the standardized misalignment:
@@ -61,6 +61,10 @@ Moreover, the misaligned data are computed with models trained on the stretched
 scores, so that the training data consists of scores at the same average BPM as
 the performance; the misaligned data, then, consists of times at the same
 average BPM.
+
+Misaligned data are therefore more similar to a new performance than to a
+symbolic score; for most of MIR applications, however, misaligned data are
+enough for both training and evaluation.
 
 BPM for `score` alignment
 -------------------------
