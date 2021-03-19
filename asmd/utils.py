@@ -148,10 +148,7 @@ def mat2midipath(mat, path):
                 pm.Note(velocity, int(row[0]), float(row[1]), float(row[2])))
 
         # writing to file
-        try:
-            midi.write(path)
-        except:
-            __import__('ipdb').set_trace()
+        midi.write(path)
 
 
 def midipath2mat(path):

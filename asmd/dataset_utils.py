@@ -209,7 +209,10 @@ def filter(dataset,
                     song['included'] = False
             ret._chunks[mydataset['name']][1] = end
         else:
+            # exclude dataset and all its songs
             mydataset['included'] = False
+            for song in mydataset['songs']:
+                song['included'] = False
 
     return ret
 
@@ -320,7 +323,7 @@ def union(*datasets, **kwargs):
     all the sources. However, you can pass any argument to `filter`, e.g.
     the `sources` argument
     """
-    assert len(datasets) > 0, "Cannot intersect no datasets"
+    assert len(datasets) > 0, "Cannot unify no datasets"
     if len(datasets) == 1:
         return deepcopy(datasets[0])
     out = datasets[0]
