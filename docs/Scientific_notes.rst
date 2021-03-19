@@ -45,8 +45,8 @@ notes, using the classical DTW symmetric step-pattern and the euclidean distance
 The evaluation uses `vienna_corpus`, `traditional_flute`, `MusicNet`, `Bach10`
 and `asap` group from `Maestro` dataset for a total of 875 scores. However,
 since Eita's method takes a long time on some scores, I removed the scores for
-which Eita's method ends after 20 seconds; this resulted in a total of 473
-songs (54% of the total number of songs with an available score).
+which Eita's method ends after 20 seconds; this resulted in a total of ~ 465
+songs (~53% of the total number of songs with an available score).
 
 Both the two compared methods are based on the random choice of a standard
 deviation and a mean for the whole song according to the collected

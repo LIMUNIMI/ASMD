@@ -198,8 +198,8 @@ class HMMStats(Stats):
         if stats:
             self.__dict__.update(deepcopy(stats.__dict__))
 
-        n_mix = 10  # the number of gaussian mixtures
-        n_components = 10  # the number of hidden states
+        n_mix = 30  # the number of gaussian mixtures
+        n_components = 25  # the number of hidden states
         n_iter = 1000  # maximum number of iterations
         tol = 1e-5  # minimum value of log-likelyhood
         covariance_type = 'diag'
