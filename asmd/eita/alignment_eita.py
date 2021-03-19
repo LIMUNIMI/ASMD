@@ -4,7 +4,7 @@ import signal
 import sys
 import uuid
 from pathlib import Path
-from subprocess import Popen, TimeoutExpired
+from subprocess import Popen, TimeoutExpired, DEVNULL
 from typing import Union
 
 import numpy as np
@@ -109,6 +109,8 @@ def get_matching_notes(matscore: np.ndarray, matperfm: np.ndarray, timeout=10):
         # Launch the external process
         popen = Popen(
             [f"{EITA_PATH}/MIDIToMIDIAlign.sh", path1[:-4], path2[:-4]],
+            stderr=DEVNULL,
+            stdout=DEVNULL,
             preexec_fn=os.setsid)
 
         try:
