@@ -89,4 +89,5 @@ average performance BPM are given by:
 where `t_old` is an original time instant in the score and `t_new` is the new time
 instant after the stretching. Applying this formula to the beat times can help
 you to compute the new instant BPM while keeping the same average BPM as the
-performance. This functionality is provided by ``asmd.utils.mat_stretch``.
+performance. This functionality is provided by ``asmd.utils.mat_stretch`` for
+onsets and offsets, but not for beats yet.
