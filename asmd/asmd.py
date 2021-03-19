@@ -466,6 +466,44 @@ class Dataset(object):
         delta = beats[0][1] - beats[0][0]
         return 60. / delta
 
+    def get_missing_extra_notes(self, idx, kind: str) -> List[np.ndarray]:
+        """
+        Returns the missing or extra notes of a song. For each source, an array
+        of boolean values is returned; you can use it to mask the
+        score/performance to get a score where some played notes are missing
+        and a performance where some written notes are not played:
+
+        >>> # get the misaligned score with missing notes:
+        >>> missing = dataset.get_missing_extra_notes(0, 'missing')[0]
+        >>> score = get_mat_score(dataset, 0, score_type=['misaligned'])
+        >>> score = score[~missing]
+        >>> # same as
+        >>> score = get_mat_score(
+        ...     dataset, 0,
+        ...     score_type=['misaligned'],
+        ...     remove_notes='missing')
+
+        >>> # get the misaligned score with missing notes:
+        >>> extra = dataset.get_missing_extra_notes(0, 'extra')[0]
+        >>> perfm = get_mat_score(
+        ...     dataset, 0,
+        ...     score_type=['precise_alignment', 'broad_alignment'])
+        >>> perfm = perfm[~extra]
+        >>> # same as
+        >>> score = get_mat_score(
+        ...     dataset, 0,
+        ...     score_type=['precise_alignment', 'broad_alignment'],
+        ...     remove_notes='extra')
+
+        `kind` can be 'extra' or 'missing'
+
+        """
+        gts = self.get_gts(idx)
+        out = []
+        for gt in gts:
+            out.append(np.asarray(gt[kind], dtype=np.bool8))
+        return out
+
 
 def load_definitions(path):
     """

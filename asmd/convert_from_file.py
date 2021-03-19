@@ -89,6 +89,8 @@ prototype_gt = {
         "notes": [],
         "velocities": []
     },
+    "missing": [],
+    "extra": [],
     "f0": [],
     "soft": {
         "values": [],

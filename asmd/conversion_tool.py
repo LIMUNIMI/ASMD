@@ -174,6 +174,13 @@ def conversion(arg):
             out['misaligned']['onsets'] = onsets
             out['misaligned']['offsets'] = offsets
             out['misaligned']['pitches'] = pitches
+            # computing the percentage of missing and extra notes (between 0.05
+            # and 0.15)
+            m = np.random.rand() % 0.1 + 0.05
+            e = np.random.rand() % 0.1 + 0.05
+            mask = np.random.choice([0, 1, 2], p=[m, e, 1-e-m], size=pitches.shape)
+            out['missing'] = mask == 0
+            out['extra'] = mask == 1
 
         print("   saving " + final_path)
         # pretty printing stolen from official docs
