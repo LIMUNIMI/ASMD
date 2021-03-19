@@ -59,8 +59,18 @@ chose the standardized misalignment:
 
 Moreover, the misaligned data are computed with models trained on the stretched
 scores, so that the training data consists of scores at the same average BPM as
-the performance; the misaligned data, then, consists of times at the same
+the performance; the misaligned data, then, consists of times at the at that
 average BPM.
+
+The following table resumes the results of the comparison:
+
++------+-------------+-------------+
+|      | Ons         | Offs        |
++------+-------------+-------------+
+| HMM  | 6.63 ± 17.7 | 6.14 ± 20.5 |
++------+-------------+-------------+
+| Hist | 8.97 ± 26.1 | 9.01 ± 26.2 |
++------+-------------+-------------+
 
 Misaligned data are therefore more similar to a new performance than to a
 symbolic score; for most of MIR applications, however, misaligned data are
