@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler, minmax_scale
 from hmmlearn.hmm import GMMHMM
 
 from .asmd import Dataset
-from .dataset_utils import filter, get_score_mat, union
+from .dataset_utils import filter, get_score_mat, union, choice
 from .eita.alignment_eita import get_matching_notes
 from .idiot import THISDIR
 from .utils import mat_stretch
@@ -199,7 +199,7 @@ class HMMStats(Stats):
             self.__dict__.update(deepcopy(stats.__dict__))
 
         n_mix = 30  # the number of gaussian mixtures
-        n_components = 25  # the number of hidden states
+        n_components = 20  # the number of hidden states
         n_iter = 1000  # maximum number of iterations
         tol = 1e-5  # minimum value of log-likelyhood
         covariance_type = 'diag'
@@ -405,15 +405,16 @@ if __name__ == '__main__':
     dataset = _get_dataset()
     print("Computing statistics")
     stats = Stats()
-    stats.fill_stats(dataset)
+    trainset, testset = choice(dataset, p=[0.7, 0.3], random_state=stats.seed())
+    stats.fill_stats(trainset)
 
     for method in ['hmm', 'histogram']:
         stats = _train_model(stats, method, False)
         # stat = pickle.load(
         #     open(os.path.join(THISDIR, "_alignment_stats.pkl"), "rb"))
-        evaluate(dataset, [
+        evaluate(testset, [
             stats,
         ], 'ons')
-        evaluate(dataset, [
+        evaluate(testset, [
             stats,
         ], 'offs')

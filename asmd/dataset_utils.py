@@ -2,7 +2,41 @@ from copy import deepcopy
 
 import numpy as np
 
+from sklearn.utils import check_random_state
 from . import utils
+
+
+def choice(dataset, p=[0.6, 0.2, 0.2], random_state=None):
+    """
+    Returns N non-overlapping datasets randomply sampled from `dataset`, where
+    N is `len(p)`; each song belong to a dataset according to the distribution
+    probability `p`. Note that `p` is always normalized to sum to 1.
+
+    `random_state` is an int or a np.random.RandomState object.
+    """
+    # normalize p
+    p = np.asarray(p)
+    p /= p.sum()
+
+    # generating non-overlapping splits
+    random_state = check_random_state(random_state)
+    random_state.seed()
+    splits = np.random.choice(np.arange(len(p)), p=p, size=(len(dataset), ))
+
+    # creating output datasets
+    out = []
+    for i in range(len(p)):
+        d = deepcopy(dataset)
+        d.paths = np.asarray(dataset.paths, dtype=object)[splits == i].tolist()
+
+        # excluding/including songs
+        for j, song in enumerate(d.get_songs()):
+            if splits[j] == i:
+                song['included'] = True
+            else:
+                song['included'] = False
+        out.append(d)
+    return tuple(out)
 
 
 def chose_score_type(score_type, gts):

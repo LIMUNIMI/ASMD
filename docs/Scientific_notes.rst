@@ -41,12 +41,15 @@ asmd.alignment_stats``. The script will use Eita Nakamura method to match notes
 between the score and the performance and will collect statistics only on the
 matched notes; it will then compute the distance between the misaligned score
 onset sequence and the real score onset sequence, considering only the matchng
-notes, using the classical DTW symmetric step-pattern and the euclidean distance.
-The evaluation uses `vienna_corpus`, `traditional_flute`, `MusicNet`, `Bach10`
-and `asap` group from `Maestro` dataset for a total of 875 scores. However,
-since Eita's method takes a long time on some scores, I removed the scores for
-which Eita's method ends after 20 seconds; this resulted in a total of ~ 465
-songs (~53% of the total number of songs with an available score).
+notes, using the classical DTW symmetric step-pattern and the euclidean
+distance.  The evaluation uses `vienna_corpus`, `traditional_flute`,
+`MusicNet`, `Bach10` and `asap` group from `Maestro` dataset for a total of 875
+scores, split in train-set and test-set with 70-30 proportion, resulting in
+610 songs for training and 265 songs for testing.
+
+However, since Eita's method takes a long time on some scores, I removed the
+scores for which Eita's method ends after 20 seconds; this resulted in a total
+of 471 songs (54% of the total number of songs with an available score).
 
 Both the two compared methods are based on the random choice of a standard
 deviation and a mean for the whole song according to the collected
@@ -72,15 +75,17 @@ The following table resumes the results of the comparison:
 | Hist | 8.97 ± 26.1 | 9.01 ± 26.2 |
 +------+-------------+-------------+
 
-Misaligned data are therefore more similar to a new performance than to a
-symbolic score; for most of MIR applications, however, misaligned data are
-enough for both training and evaluation.
+Misaligned data are finally created by training GMM-HMM on all the 875 scores
+(471 considering songs where Eita's method takes less than 20 sec).  Misaligned
+data are more similar to a new performance than to a symbolic score; for most
+of MIR applications, however, misaligned data are enough for both training and
+evaluation.
 
 BPM for `score` alignment
 -------------------------
 
 Previously, the BPM was always forced to 20, so that, if the BPM is not
-available, notes duration can still be expressed in seconds. 
+available, notes duration can still be expressed in seconds.
 
 Since 0.4, the BPM is simply set to 60 if not available; however, positions of
 beats are always provided, so that the user can reconstruct the instant BPM.
