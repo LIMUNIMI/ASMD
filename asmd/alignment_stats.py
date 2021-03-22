@@ -467,5 +467,5 @@ if __name__ == '__main__':
             model,
         ], 'offs')
         evaluate(testset, [
-            stats,
+            model,
         ], 'ons')
