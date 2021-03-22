@@ -87,8 +87,9 @@ def misalign(out, stats):
         aligned = 'precise_alignment'
     else:
         aligned = 'broad_alignment'
-    onsets = stats.get_random_onsets(np.array(out[aligned['onsets']]))
-    offsets = stats.get_random_offets(np.array(out[aligned['offsets']]))
+    onsets = stats.get_random_onsets(out[aligned['onsets']])
+    offsets = stats.get_random_offsets(out[aligned['offsets']],
+                                       out[aligned['onsets']])
     pitches = out[aligned]['pitches']
 
     # set first onset to 0
@@ -178,7 +179,9 @@ def conversion(arg):
             # and 0.15)
             m = np.random.rand() % 0.1 + 0.05
             e = np.random.rand() % 0.1 + 0.05
-            mask = np.random.choice([0, 1, 2], p=[m, e, 1-e-m], size=pitches.shape)
+            mask = np.random.choice([0, 1, 2],
+                                    p=[m, e, 1 - e - m],
+                                    size=pitches.shape)
             out['missing'] = mask == 0
             out['extra'] = mask == 1
 
@@ -230,10 +233,8 @@ def create_gt(data_fn,
 
         print("\n------------------------\n")
         print("Starting processing " + dataset['name'])
-        arg = [
-            (i, song, json_file, dataset, alignment_stats)
-            for i, song in enumerate(dataset['songs'])
-        ]
+        arg = [(i, song, json_file, dataset, alignment_stats)
+               for i, song in enumerate(dataset['songs'])]
         if not PARALLEL:
             for i in range(len(dataset['songs'])):
                 to_be_included_in_the_archive += conversion(arg[i])
