@@ -27,13 +27,16 @@ argparser.add_argument(
 
 args = argparser.parse_args()
 
-if args.misalign:
-    stats = alignment_stats.get_stats()
-else:
-    stats = None
-
 create_gt(os.path.join(THISDIR, 'datasets.json'),
           gztar=True,
-          alignment_stats=stats,
+          alignment_stats=None,
           whitelist=args.whitelist,
           blacklist=args.blacklist)
+
+if args.misalign:
+    stats = alignment_stats.get_stats()
+    create_gt(os.path.join(THISDIR, 'datasets.json'),
+              gztar=True,
+              alignment_stats=stats,
+              whitelist=args.whitelist,
+              blacklist=args.blacklist)
