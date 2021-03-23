@@ -18,6 +18,7 @@ from .idiot import THISDIR
 from .utils import mat_stretch
 
 NJOBS = -1
+FILE_STATS = os.path.join(THISDIR, "_alignment_stats.pkl")
 
 
 # TODO: refactoring: most of the stuffs are repeated twice for onsets and durations
@@ -241,14 +242,13 @@ class HMMStats(Stats):
             tol=tol,
             verbose=True,
             random_state=self.seed())
-        self.durhmm = GMMHMM(
-            n_components=2,
-            n_mix=3,
-            covariance_type=covariance_type,
-            n_iter=n_iter,
-            tol=tol,
-            verbose=True,
-            random_state=self.seed())
+        self.durhmm = GMMHMM(n_components=2,
+                             n_mix=3,
+                             covariance_type=covariance_type,
+                             n_iter=n_iter,
+                             tol=tol,
+                             verbose=True,
+                             random_state=self.seed())
 
     def get_random_onset_diff(self, k=1):
         x, _state_seq = self.onshmm.sample(k, random_state=self.seed())
@@ -403,10 +403,14 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
         print(f"Std {np.std(distances):.2e}")
 
 
-def get_stats(method='histogram', save=True):
+def get_stats(method='hmm', save=True):
     """
     Computes statistics, histogram, dumps the object to file and returns it
     """
+    if os.path.exists(FILE_STATS):
+        return pickle.load(
+            open(os.path.join(FILE_STATS), "rb"))
+
     dataset = _get_dataset()
     print("Computing statistics")
     stats = Stats()
@@ -441,10 +445,9 @@ def _train_model(stats: Stats, method: str, save: bool):
 
     if save:
         print("Saving statistical model")
-        file_stats = os.path.join(THISDIR, "_alignment_stats.pkl")
-        if os.path.exists(file_stats):
-            os.remove(file_stats)
-        pickle.dump(stats, open(file_stats, 'wb'))
+        if os.path.exists(FILE_STATS):
+            os.remove(FILE_STATS)
+        pickle.dump(stats, open(FILE_STATS, 'wb'))
     return stats
 
 
@@ -456,8 +459,6 @@ if __name__ == '__main__':
                                p=[0.7, 0.3],
                                random_state=stats.seed())
     stats.fill_stats(trainset)
-    # pickle.dump(stats, open("temp.pkl", "wb"))
-    # stats = pickle.load(open("temp.pkl", "rb"))
 
     for method in ['hmm', 'histogram']:
         model = _train_model(stats, method, False)
