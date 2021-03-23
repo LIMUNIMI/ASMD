@@ -84,13 +84,13 @@ def misalign(out, stats):
     offsets).
     """
     if len(out['precise_alignment']['onsets']) > 0:
-        aligned = 'precise_alignment'
+        alignment = 'precise_alignment'
     else:
-        aligned = 'broad_alignment'
-    onsets = stats.get_random_onsets(out[aligned['onsets']])
-    offsets = stats.get_random_offsets(out[aligned['offsets']],
-                                       out[aligned['onsets']])
-    pitches = out[aligned]['pitches']
+        alignment = 'broad_alignment'
+    onsets = stats.get_random_onsets(out[alignment]['onsets'])
+    offsets = stats.get_random_offsets(out[alignment]['offsets'],
+                                       out[alignment]['onsets'])
+    pitches = out[alignment]['pitches']
 
     # set first onset to 0
     first_onset = onsets.min()
@@ -170,7 +170,7 @@ def conversion(arg):
 
         if misaligned and stats:
             # computing deviations for each pitch
-            stats.new_song(seed=l)
+            stats.new_song()
             pitches, onsets, offsets = misalign(out, stats)
             out['misaligned']['onsets'] = onsets
             out['misaligned']['offsets'] = offsets
@@ -181,9 +181,9 @@ def conversion(arg):
             e = np.random.rand() % 0.1 + 0.05
             mask = np.random.choice([0, 1, 2],
                                     p=[m, e, 1 - e - m],
-                                    size=pitches.shape)
-            out['missing'] = mask == 0
-            out['extra'] = mask == 1
+                                    size=len(pitches))
+            out['missing'] = (mask == 0).tolist()
+            out['extra'] = (mask == 1).tolist()
 
         print("   saving " + final_path)
         # pretty printing stolen from official docs
