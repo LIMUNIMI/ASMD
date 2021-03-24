@@ -15,7 +15,7 @@ def choice(dataset, p=[0.6, 0.2, 0.2], random_state=None):
     `random_state` is an int or a np.random.RandomState object.
     """
     # normalize p
-    p = np.asarray(p)
+    p = np.asarray(p, dtype=np.float32)
     p /= p.sum()
 
     # generating non-overlapping splits
