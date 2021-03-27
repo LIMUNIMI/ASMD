@@ -42,7 +42,7 @@ def _is_sorted(a_list: list) -> bool:
     """
     Return True if `a_list` is sorted, False otherwise
     """
-    for i in range(len(a_list)):
+    for i in range(len(a_list) - 1):
         if a_list[i] > a_list[i + 1]:
             return False
     return True
