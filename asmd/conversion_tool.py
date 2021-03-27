@@ -19,8 +19,8 @@ from .idiot import THISDIR
 # this is only for detecting the package path
 
 #: if True, run conversion in parallel processes
-PARALLEL = True
-# PARALLEL = False
+# PARALLEL = True
+PARALLEL = False
 
 
 def normalize_text(text):
@@ -65,10 +65,10 @@ def _is_in_range(a_list: list,
     return True
 
 
-def check(gt: dict) -> bool:
+def check(gt: dict) -> int:
     """
-    Returns True if the ground_truth dictionary representation is correctly built,
-    False otherwise
+    Returns 0 if the ground_truth dictionary representation is correctly built,
+    a value > 0 otherwise
     """
 
     for alignment in [
@@ -76,36 +76,39 @@ def check(gt: dict) -> bool:
     ]:
         # check that onsets are sorted
         if not _is_sorted(gt[alignment]['onsets']):
-            return False
-        # check that offsets are sorted
-        if not _is_sorted(gt[alignment]['offsets']):
-            return False
+            return 1
+        # check that onsets are > 0
+        if not _is_in_range(gt[alignment]['onsets'], 0, None):
+            return 2
+        # check that offsets are > 0
+        if not _is_in_range(gt[alignment]['offsets'], 0, None):
+            return 3
         # check that pitches are in 0-127
         if not _is_in_range(gt[alignment]['pitches'], 0, 127):
-            return False
+            return 4
         # check that velocities are in 0-127
         if not _is_in_range(gt[alignment]['velocities'], 0, 127):
-            return False
+            return 5
 
     # check that ['score']['beats'] is sorted
     if not _is_sorted(gt['score']['beats']):
-        return False
+        return 6
     # check length of 'missing' and 'extra'
     if len(gt['missing']) != len(gt['extra']):
-        return False
+        return 7
     # check that 'f0' is > 0
     if not _is_in_range(gt['f0'], 0, None):
-        return False
+        return 8
 
     for pedal in ['soft', 'sostenuto', 'sustain']:
         # check that 'times' is sorted
         if not _is_sorted(gt[pedal]['times']):
-            return False
+            return 9
         # check that 'values' are in 0-127
         if not _is_in_range(gt[pedal]['values'], 0, 127):
-            return False
+            return 10
 
-    return True
+    return 0
 
 
 def merge_dicts(idx, *args):
@@ -261,11 +264,16 @@ def conversion(arg):
         json.dump(out, gzip.open(final_path, 'wt'), sort_keys=True, indent=4)
 
         # starting debugger if something is wrong
-        if not check(out):
-            print(
-                "Error: a ground-truth has not passed the checks, starting debugger!"
-            )
-            __import__('ipdb').set_trace()
+        if check(out) > 1:
+            if PARALLEL:
+                print("To start the debugger turn `PARALLEL` to False")
+                import sys
+                sys.exit(1)
+            else:
+                print(
+                    "Error: a ground-truth has not passed the checks, starting debugger!"
+                )
+                __import__('ipdb').set_trace()
 
         to_be_included_in_the_archive.append(final_path)
     return to_be_included_in_the_archive
