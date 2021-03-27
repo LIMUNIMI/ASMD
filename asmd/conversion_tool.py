@@ -6,6 +6,7 @@ import tarfile
 from copy import deepcopy
 from difflib import SequenceMatcher
 from os.path import join as joinpath
+from typing import Optional
 
 import numpy as np
 from pretty_midi.constants import INSTRUMENT_MAP
@@ -35,6 +36,76 @@ def text_similarity(a, b):
 INSTRUMENT_MAP = list(map(normalize_text, INSTRUMENT_MAP))
 
 INSTRUMENT_MAP.append('drumkit')
+
+
+def _is_sorted(a_list: list) -> bool:
+    """
+    Return True if `a_list` is sorted, False otherwise
+    """
+    for i in range(len(a_list)):
+        if a_list[i] > a_list[i + 1]:
+            return False
+    return True
+
+
+def _is_in_range(a_list: list,
+                 min: Optional[float] = None,
+                 max: Optional[float] = None) -> bool:
+    """
+    Return True if `a_list` ontains values between `min` and `max`, False
+    otherwise
+    """
+    for el in a_list:
+        if min is not None:
+            if el < min:
+                return False
+        if max is not None:
+            if el > max:
+                return False
+    return True
+
+
+def check(gt: dict) -> bool:
+    """
+    Returns True if the ground_truth dictionary representation is correctly built,
+    False otherwise
+    """
+
+    for alignment in [
+            'precise_alignment', 'broad_alignment', 'score', 'misaligned'
+    ]:
+        # check that onsets are sorted
+        if not _is_sorted(gt[alignment]['onsets']):
+            return False
+        # check that offsets are sorted
+        if not _is_sorted(gt[alignment]['offsets']):
+            return False
+        # check that pitches are in 0-127
+        if not _is_in_range(gt[alignment]['pitches'], 0, 127):
+            return False
+        # check that velocities are in 0-127
+        if not _is_in_range(gt[alignment]['velocities'], 0, 127):
+            return False
+
+    # check that ['score']['beats'] is sorted
+    if not _is_sorted(gt['score']['beats']):
+        return False
+    # check length of 'missing' and 'extra'
+    if len(gt['missing']) != len(gt['extra']):
+        return False
+    # check that 'f0' is > 0
+    if not _is_in_range(gt['f0'], 0, None):
+        return False
+
+    for pedal in ['soft', 'sostenuto', 'sustain']:
+        # check that 'times' is sorted
+        if not _is_sorted(gt[pedal]['times']):
+            return False
+        # check that 'values' are in 0-127
+        if not _is_in_range(gt[pedal]['values'], 0, 127):
+            return False
+
+    return True
 
 
 def merge_dicts(idx, *args):
@@ -188,6 +259,13 @@ def conversion(arg):
         print("   saving " + final_path)
         # pretty printing stolen from official docs
         json.dump(out, gzip.open(final_path, 'wt'), sort_keys=True, indent=4)
+
+        # starting debugger if something is wrong
+        if not check(out):
+            print(
+                "Error: a ground-truth has not passed the checks, starting debugger!"
+            )
+            __import__('ipdb').set_trace()
 
         to_be_included_in_the_archive.append(final_path)
     return to_be_included_in_the_archive

@@ -251,7 +251,7 @@ def filter(dataset,
     return ret
 
 
-def get_score_mat(dataset, idx, score_type=['misaligned'], remove_notes=''):
+def get_score_mat(dataset, idx, score_type=['misaligned'], return_notes=''):
     """
     Get the score of a certain score, with times of `score_type`
 
@@ -262,10 +262,10 @@ def get_score_mat(dataset, idx, score_type=['misaligned'], remove_notes=''):
     score_type : list of str
         The key to retrieve the list of notes from the ground_truths. see
         `chose_score_type` for explanation
-    remove_notes : str
-        ``'missing'`` or ``'extra'``; the notes that will be removed from the
-        returned score; see ``asmd.asmd.Dataset.get_missing_extra_notes`` for
-        more info
+    return_notes : str
+        ``'missing'``, ``'extra'`` or ``'both'``; the notes that will be
+        returned together with the score; see
+        ``asmd.asmd.Dataset.get_missing_extra_notes`` for more info
 
     Returns
     -------
@@ -275,13 +275,16 @@ def get_score_mat(dataset, idx, score_type=['misaligned'], remove_notes=''):
         the instrument. Ordered by onsets. If some information is not
         available, value -255 is used.
         The array is sorted by onset, pitch and offset (in this order)
+    numpy.ndarray :
+        A boolean array with True if the note is missing or extra (depending on
+        ``return_notes``); only if ``return_notes is not None`` 
+    numpy.ndarray :
+        Another boolean array with True if the note is missing or extra (depending on
+        ``return_notes``); only if ``return_notes == 'both'`` 
     """
 
     gts = dataset.get_gts(idx)
     score_type = chose_score_type(score_type, gts)
-    if remove_notes:
-        # removing missing/extra notes
-        missing_extra = dataset.get_missing_extra_notes(idx, remove_notes)
 
     # print("    Loading ground truth " + score_type)
     mat = []
@@ -322,9 +325,6 @@ def get_score_mat(dataset, idx, score_type=['misaligned'], remove_notes=''):
         num = np.full_like(ons, i)
         instr = np.full_like(ons, gt['instrument'])
         gt_mat = np.array([pitches, ons, offs, vel, instr, num])
-        if remove_notes:
-            # removing missing/extra notes
-            gt_mat = gt_mat[~missing_extra[i]]
         mat.append(gt_mat)
 
     if len(mat) > 1:
@@ -336,6 +336,19 @@ def get_score_mat(dataset, idx, score_type=['misaligned'], remove_notes=''):
     mat = mat.T
     # ordering by onset, pitch and offset (in this order)
     ind = np.lexsort([mat[:, 2], mat[:, 0], mat[:, 1]])
+
+    if return_notes:
+        if return_notes == 'both':
+            query = ['missing', 'extra']
+        else:
+            query = [return_notes]
+        # computing missing/extra notes
+        returned_notes = []
+        for q in query:
+            missing_extra = dataset.get_missing_extra_notes(idx, q)
+            missing_extra = np.concatenate(missing_extra)
+            returned_notes.append(missing_extra[ind])
+        return mat[ind], *returned_notes
     return mat[ind]
 
 
