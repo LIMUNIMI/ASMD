@@ -57,62 +57,6 @@ def open_audio(audio_fn: Union[str, pathlib.Path]) -> Tuple[np.ndarray, int]:
     return loader(), sample_rate
 
 
-def open_midi(midi_fn,
-              considered_tracks=slice(None),
-              merge=True,
-              pm_object=False):
-    """
-    Open file `midi_fn` and returns a list of `pretty_midi.Note` existing in
-    `considered_tracks`. The output list contains lists, each one containingh:
-    notes with the same onset time. `considered_tracks` can also be an `int`.
-    If `merge` is True, all `considered_tracks` are merged into one, otherwise
-    a list of tracks will be returned. If `pm` is True, the original
-    PrettyMidi object will also be returned.
-    """
-    import pretty_midi as pm
-    midi_multitrack = pm.PrettyMIDI(midi_fn)
-
-    if type(considered_tracks) is int:
-        considered_tracks = slice(considered_tracks, considered_tracks + 1)
-
-    tracks = []
-    for track in midi_multitrack.instruments[considered_tracks]:
-        if merge:
-            tracks += track.notes
-        else:
-            tracks.append(track.notes)
-
-    if merge:
-        tracks = group_notes_by_onest(tracks)
-    else:
-        for i, notes in enumerate(tracks):
-            tracks[i] = group_notes_by_onest(notes)
-
-    if pm_object:
-        return tracks, midi_multitrack
-    else:
-        return tracks
-
-
-def group_notes_by_onest(notes):
-    """
-    Return a new list which contains lists of notes with the same onset,
-    ordered in ascending order.
-    """
-    output = []
-    notes.sort(key=lambda x: x.start)
-    last_onset = notes[0].start
-    inner_list = [notes[0]]
-    for n in notes[1:]:
-        if n.start == last_onset:
-            inner_list.append(n)
-        else:
-            output.append(inner_list)
-            inner_list = [n]
-            last_onset = n.start
-    return output
-
-
 def f0_to_midi_pitch(f0):
     """
     Return a midi pitch (in 0-127) given a frequency value in Hz

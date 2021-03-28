@@ -210,47 +210,49 @@ def from_midi(midi_fn,
     * `from_midi_asap` is the decorated version which accept extension
       '.score.mid' which is used in the script to import scores from ASAP
 
-    N.B. To allow having some annotation for subgroups of a datset, this
+    N.B. To allow having some annotation for subgroups of a dataset, this
     function returns None when it cannot find the specified midi file; in this
     way, that file is not taken into account while merging the various
     annotations (e.g. asap group inside Maestro dataset)
     """
     try:
-        midi_tracks, pm = utils.open_midi(midi_fn, merge=merge, pm_object=True)
+        pm = pretty_midi.PrettyMIDI(midi_fn)
     except FileNotFoundError:
         return None
 
     out = list()
 
     if merge:
-        midi_tracks = [midi_tracks]
-
-    for i, track in enumerate(midi_tracks):
         data = deepcopy(prototype_gt)
-        for cc in pm.instruments[i].control_changes:
-            if cc.number == 64:
-                data['sustain']['values'].append(cc.value)
-                data['sustain']['times'].append(cc.time)
-            elif cc.number == 66:
-                data['sostenuto']['values'].append(cc.value)
-                data['sostenuto']['times'].append(cc.time)
-            elif cc.number == 67:
-                data['soft']['values'].append(cc.value)
-                data['soft']['times'].append(cc.time)
 
-        for note_group in track:
-            for note in note_group:
-                if pitches:
-                    data[alignment]["pitches"].append(note.pitch)
-                if velocities:
-                    data[alignment]["velocities"].append(note.velocity)
-                if alignment:
-                    data[alignment]["onsets"].append(
-                        float(note.start))
-                    data[alignment]["offsets"].append(
-                        float(note.end))
-                if beats and alignment == 'score':
-                    data[alignment]["beats"] = pm.get_beats().tolist()
+    for track in len(pm.instruments):
+        if not merge:
+            data = deepcopy(prototype_gt)
+        for cc in track.control_changes:
+            if cc.number == 64:
+                cc_name = 'sustain'
+            elif cc.number == 66:
+                cc_name = 'sostenuto'
+            elif cc.number == 67:
+                cc_name = 'soft'
+            data[cc_name]['values'].append(cc.value)
+            data[cc_name]['times'].appen(cc.time)
+
+        for note in track.notes:
+            if pitches:
+                data[alignment]["pitches"].append(note.pitch)
+            if velocities:
+                data[alignment]["velocities"].append(note.velocity)
+            if alignment:
+                data[alignment]["onsets"].append(float(note.start))
+                data[alignment]["offsets"].append(float(note.end))
+
+        if beats and alignment == 'score':
+            data[alignment]["beats"] = sorted(pm.get_beats().tolist())
+
+        if not merge:
+            out.append(data)
+    if merge:
         out.append(data)
 
     return out
