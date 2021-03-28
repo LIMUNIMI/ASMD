@@ -192,7 +192,7 @@ def _sort_lists(*lists):
     Sort multiple lists in-place with reference to the first one
     """
 
-    idx = range(len(lists[0]))
+    idx = list(range(len(lists[0])))
     idx.sort(key=lists[0].__getitem__)
     for i in range(len(lists)):
         if len(lists[i]) > 0:
