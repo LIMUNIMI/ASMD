@@ -255,7 +255,7 @@ def from_midi(midi_fn,
     if merge:
         data = deepcopy(prototype_gt)
 
-    for track in len(pm.instruments):
+    for track in pm.instruments:
         if not merge:
             data = deepcopy(prototype_gt)
         for cc in track.control_changes:
@@ -265,8 +265,10 @@ def from_midi(midi_fn,
                 cc_name = 'sostenuto'
             elif cc.number == 67:
                 cc_name = 'soft'
+            else:
+                continue
             data[cc_name]['values'].append(cc.value)
-            data[cc_name]['times'].appen(cc.time)
+            data[cc_name]['times'].append(cc.time)
 
         for note in track.notes:
             if pitches:
