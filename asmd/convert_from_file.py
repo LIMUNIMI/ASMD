@@ -187,6 +187,36 @@ def change_ext(input_fn, new_ext, no_dot=False, remove_player=False):
     return root + new_ext
 
 
+def _sort_lists(*lists):
+    """
+    Sort multiple lists in-place with reference to the first one
+    """
+
+    idx = range(len(lists[0]))
+    idx.sort(key=lists[0].__getitem__)
+    for i in range(len(lists)):
+        if len(lists[i]) > 0:
+            lists[i][:] = map(lists[i].__getitem__, idx)
+
+
+def _sort_alignment(alignment, data):
+    """
+    Sort `data` in `alignment` (in-place)
+    """
+
+    _sort_lists(data[alignment]['onsets'], data[alignment]['pitches'],
+                data[alignment]['offsets'], data[alignment]['velocities'],
+                data[alignment]['notes'])
+
+
+def _sort_pedal(data):
+    """
+    Sort pedal for `data` (in-place)
+    """
+    for cc_name in ['soft', 'sustain', 'sostenuto']:
+        _sort_lists(data[cc_name]['times'], data[cc_name]['values'])
+
+
 def from_midi(midi_fn,
               alignment='precise_alignment',
               pitches=True,
@@ -251,8 +281,13 @@ def from_midi(midi_fn,
             data[alignment]["beats"] = sorted(pm.get_beats().tolist())
 
         if not merge:
+            _sort_pedal(data)
+            _sort_alignment(alignment, data)
             out.append(data)
+
     if merge:
+        _sort_pedal(data)
+        _sort_alignment(alignment, data)
         out.append(data)
 
     return out
@@ -285,6 +320,7 @@ def from_phenicx_txt(txt_fn):
             pretty_midi.note_name_to_number(fields[2]))
         out["broad_alignment"]["onsets"].append(float(fields[0]))
         out["broad_alignment"]["offsets"].append(float(fields[1]))
+    _sort_alignment("broad_alignment", out)
     out_list.append(out)
 
     return out_list
@@ -313,6 +349,7 @@ def from_bach10_mat(mat_fn, sources=range(4)):
                 (note[0, 0] - 2) * 10 / 1000.)
             out["precise_alignment"]["offsets"].append(
                 (note[0, -1] - 2) * 10 / 1000.)
+        _sort_alignment("precise_alignment", out)
         out_list.append(out)
 
     return out_list
@@ -369,12 +406,13 @@ def from_musicnet_csv(csv_fn, sr=44100.0):
         out["broad_alignment"]["pitches"].append(int(row[3]))
         out["score"]["pitches"].append(int(row[3]))
         out["score"]["onsets"].append(float(row[4]))
-        out["score"]["offsets"].append(
-            float(row[4]) + float(row[5]))
+        out["score"]["offsets"].append(float(row[4]) + float(row[5]))
 
         out["score"]["beats"] = [
             i for i in range(int(max(out["score"]["offsets"])) + 1)
         ]
+    _sort_alignment('score', out)
+    _sort_alignment('broad_alignment', out)
     return out
 
 
@@ -397,4 +435,5 @@ def from_sonic_visualizer(gt_fn, alignment='precise_alignment'):
         pitch = utils.f0_to_midi_pitch(p)
         out[alignment]["pitches"].append(pitch)
 
+    _sort_alignment(alignment, out)
     return out
