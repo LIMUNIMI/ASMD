@@ -162,11 +162,12 @@ class Stats(object):
         new_ons -= new_ons.min()
         return new_ons
 
-    def get_random_offsets(self, aligned_ons, aligned_offs):
+    def get_random_offsets(self, aligned_ons, aligned_offs, new_ons):
         aligned_ons = np.asarray(aligned_ons)
         aligned_offs = np.asarray(aligned_offs)
+        new_ons = np.asarray(new_ons)
         new_dur = self.get_random_durations(aligned_offs - aligned_ons)
-        return aligned_ons + new_dur
+        return new_ons + new_dur
 
     def get_random_onset_diff(self, k=1):
         pass

@@ -201,14 +201,9 @@ def misalign(out, stats):
     else:
         alignment = 'broad_alignment'
     onsets = stats.get_random_onsets(out[alignment]['onsets'])
-    offsets = stats.get_random_offsets(out[alignment]['onsets'],
-                                       out[alignment]['offsets'])
+    offsets = stats.get_random_offsets(
+        out[alignment]['onsets'], out[alignment]['offsets'], onsets)
     pitches = out[alignment]['pitches']
-
-    # set first onset to 0
-    # first_onset = onsets.min()
-    # onsets -= first_onset
-    # offsets -= first_onset
 
     fix_offsets(onsets, offsets, pitches)
 
