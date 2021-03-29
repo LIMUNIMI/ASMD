@@ -157,7 +157,7 @@ class Stats(object):
         new_ons_diff = self.get_random_onset_diff(
             len(aligned)) * self._song_onset_dev + self._song_mean_ons
 
-        return aligned + new_ons_diff
+        return np.sort(aligned + new_ons_diff)
 
     def get_random_offsets(self, aligned_ons, aligned_offs):
         aligned_ons = np.asarray(aligned_ons)
@@ -358,7 +358,7 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
         std = np.std(song_ons_diff)
 
         # computing the estimated ons
-        realigned = aligned[:, 1] + aligned_diff * std + mean,
+        realigned = np.sort(aligned[:, 1] + aligned_diff * std + mean)
 
         if onsoffs == 'offs':
             reference = score[:, 2]
