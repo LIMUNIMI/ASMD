@@ -16,6 +16,7 @@ from .dataset_utils import choice, filter, get_score_mat, union
 from .eita.alignment_eita import get_matching_notes
 from .idiot import THISDIR
 from .utils import mat_stretch
+from .conversion_tool import fix_offsets
 
 NJOBS = -1
 FILE_STATS = os.path.join(THISDIR, "_alignment_stats.pkl")
@@ -148,16 +149,18 @@ class Stats(object):
         aligned_dur = np.asarray(aligned_dur)
         self.seed()
         new_dur_ratio = self.get_random_duration_ratio(
-            len(aligned_dur)) * self._song_duration_dev + self._song_mean_dur
-        return aligned_dur / new_dur_ratio
+            k=len(aligned_dur)) * self._song_duration_dev + self._song_mean_dur
+        return aligned_dur / np.abs(new_dur_ratio)
 
     def get_random_onsets(self, aligned):
         aligned = np.asarray(aligned)
         self.seed()
         new_ons_diff = self.get_random_onset_diff(
-            len(aligned)) * self._song_onset_dev + self._song_mean_ons
+            k=len(aligned)) * self._song_onset_dev + self._song_mean_ons
 
-        return np.sort(aligned + new_ons_diff)
+        new_ons = np.sort(aligned + new_ons_diff)
+        new_ons -= new_ons.min()
+        return new_ons
 
     def get_random_offsets(self, aligned_ons, aligned_offs):
         aligned_ons = np.asarray(aligned_ons)
@@ -358,7 +361,7 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
         std = np.std(song_ons_diff)
 
         # computing the estimated ons
-        realigned = np.sort(aligned[:, 1] + aligned_diff * std + mean)
+        ons = np.sort(aligned[:, 1] + aligned_diff * std + mean)
 
         if onsoffs == 'offs':
             reference = score[:, 2]
@@ -372,7 +375,12 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
             # computing the estimated offs
             est_ratios = dur_ratios * std + mean
             new_dur = song_dur / est_ratios
-            realigned = realigned + new_dur
+            offs = ons + new_dur
+
+            fix_offsets(ons, offs, score[:, 0])
+            realigned = offs
+        else:
+            realigned = ons
 
         # DTW between score and affinely transformed new times
         dtw_res = dtw(
