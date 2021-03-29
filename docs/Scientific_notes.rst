@@ -44,19 +44,22 @@ onset/offset sequence and the real score onset sequence, considering only the
 matchng notes, using the classical DTW symmetric step-pattern and the euclidean
 distance.  The evaluation uses `vienna_corpus`, `traditional_flute`,
 `MusicNet`, `Bach10` and `asap` group from `Maestro` dataset for a total of 875
-scores, split in train-set and test-set with 70-30 proportion, resulting in 626
-songs for training and 249 songs for testing.
+scores, split in train-set and test-set with 70-30 proportion, resulting in 614
+songs for training and 261 songs for testing.
 
 However, since Eita's method takes a long time on some scores, I removed the
 scores for which Eita's method ends after 20 seconds; this resulted in a total
-of 328 songs for training and ~145 songs for testing (~52% and ~58% of the
+of 338 songs for training and ~155 songs for testing (~55% and ~59% of the
 total number of songs with an available score).
 
 Both the two compared methods are based on the random choice of a standard
 deviation and a mean for the whole song according to the collected
 distributions of standard deviations and means. Statistics are collected for
-onsets differences and duration ratios between performance and score. They
-instead differ in how they chose the standardized misalignment:
+onsets differences and duration ratios between performance and score. After the
+estimation of new onsets and offsets, onsets a sorted and offsets are made
+lower than the next onsets with the same pitch. 
+
+The two methods differ for how the standardized misalignment is computed/generated:
 
 * old method randomly choses it according to the collected distribution
 * new method uses an HMM with Gaussian mixture emissions instead of a simple
@@ -64,21 +67,21 @@ instead differ in how they chose the standardized misalignment:
 
 Moreover, the misaligned data are computed with models trained on the stretched
 scores, so that the training data consists of scores at the same average BPM as
-the performance; the misaligned data, then, consists of times at the at that
-average BPM.
+the performance; the misaligned data, then, consists of times at that average
+BPM.
 
 The following table resumes the results of the comparison:
 
-+------+-------------+-------------+
-|      | Ons         | Offs        |
-+------+-------------+-------------+
-| HMM  | 2.48 ± 7.07 | 2.87 ± 7.26 |
-+------+-------------+-------------+
-| Hist | 9.21 ± 26.7 | 9.82 ± 27.0 |
-+------+-------------+-------------+
++------+---------------+--------------+
+|      | Ons           | Offs         |
++------+---------------+--------------+
+| HMM  | 1.27 ± 3.20   | 1.99 ± 2.51  |
++------+---------------+--------------+
+| Hist | 0.244 ± 0.641 | 1.08 ± 0.951 |
++------+---------------+--------------+
 
 Misaligned data are finally created by training GMM-HMM on all the 875 scores
-(~473 considering songs where Eita's method takes less than 20 sec).
+(~481 considering songs where Eita's method takes less than 20 sec).
 Misaligned data are more similar to a new performance than to a symbolic score;
 for most of MIR applications, however, misaligned data are enough for both
 training and evaluation.
