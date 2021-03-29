@@ -2,6 +2,7 @@ import gzip
 import json
 import multiprocessing as mp
 import os
+import sys
 import tarfile
 from copy import deepcopy
 from difflib import SequenceMatcher
@@ -13,6 +14,7 @@ from pretty_midi.constants import INSTRUMENT_MAP
 
 from .alignment_stats import Stats
 from .asmd import load_definitions
+from .convert_from_file import _sort_alignment, _sort_pedal
 from .convert_from_file import *
 from .idiot import THISDIR
 
@@ -226,6 +228,10 @@ def conversion(arg):
                 eval(func)(final_path, **params)
                 for func, params in dataset["install"]["conversion"]
             ])
+        _sort_alignment('score', out)
+        _sort_alignment('broad_alignment', out)
+        _sort_alignment('precise_alignment', out)
+        _sort_pedal(out)
 
         # take the General Midi program number associated with the most
         # similar instrument name
@@ -264,10 +270,9 @@ def conversion(arg):
         json.dump(out, gzip.open(final_path, 'wt'), sort_keys=True, indent=4)
 
         # starting debugger if something is wrong
-        if check(out) > 1:
+        if check(out) > 0:
             if PARALLEL:
                 print("To start the debugger turn `PARALLEL` to False")
-                import sys
                 sys.exit(1)
             else:
                 print(
