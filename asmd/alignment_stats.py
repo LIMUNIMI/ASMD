@@ -7,16 +7,15 @@ from random import choices, uniform
 from typing import List, Tuple
 
 import numpy as np
+from hmmlearn.hmm import GMMHMM
 from sklearn.preprocessing import StandardScaler, minmax_scale
 
-from hmmlearn.hmm import GMMHMM
-
 from .asmd import Dataset
+from .conversion_tool import fix_offsets
 from .dataset_utils import choice, filter, get_score_mat, union
 from .eita.alignment_eita import get_matching_notes
 from .idiot import THISDIR
 from .utils import mat_stretch
-from .conversion_tool import fix_offsets
 
 NJOBS = -1
 FILE_STATS = os.path.join(THISDIR, "_alignment_stats.pkl")
@@ -246,13 +245,14 @@ class HMMStats(Stats):
             tol=tol,
             verbose=True,
             random_state=self.seed())
-        self.durhmm = GMMHMM(n_components=2,
-                             n_mix=3,
-                             covariance_type=covariance_type,
-                             n_iter=n_iter,
-                             tol=tol,
-                             verbose=True,
-                             random_state=self.seed())
+        self.durhmm = GMMHMM(
+            n_components=2,
+            n_mix=3,
+            covariance_type=covariance_type,
+            n_iter=n_iter,
+            tol=tol,
+            verbose=True,
+            random_state=self.seed())
 
     def get_random_onset_diff(self, k=1):
         x, _state_seq = self.onshmm.sample(k, random_state=self.seed())
@@ -326,7 +326,7 @@ def _get_random_value_from_hist(hist, k=1, max_value=None, hmm=False):
     return np.asarray([uniform(start[i], end[i]) for i in range(len(start))])
 
 
-def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
+def evaluate(dataset: Dataset, stats: List[Stats]):
     """
     Computes classical DTW over all datasets and returns avarage and standard
     deviation of all the DTW distances for each `Stats` object in stats
@@ -336,12 +336,6 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
     global process_
 
     def process_(i: int, dataset: Dataset, stat: Stats):
-        try:
-            from dtw import dtw  # noqa: autoimport
-        except ImportError:
-            print(
-                "Please install dtw-python by yourself before of running this function"
-            )
 
         # reset the stats for a new song
         stat.new_song()
@@ -351,10 +345,9 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
             score, aligned = get_matching_scores(dataset, i)
         except RuntimeError:
             # skipping if cannot match notes
-            return -1
+            return -1, -1
 
         # take random standardized differences
-        reference = score[:, 1]
         aligned_diff = stat.get_random_onset_diff(k=score.shape[0])
         song_ons_diff = score[:, 1] - aligned[:, 1]
         # computing meang and dev from the matching notes
@@ -364,33 +357,25 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
         # computing the estimated ons
         ons = np.sort(aligned[:, 1] + aligned_diff * std + mean)
 
-        if onsoffs == 'offs':
-            reference = score[:, 2]
-            dur_ratios = stat.get_random_duration_ratio(k=score.shape[0])
-            song_dur = (aligned[:, 2] - aligned[:, 1])
-            song_dur_ratio = song_dur / (score[:, 2] - score[:, 1])
-            # computing meang and dev from the matching notes
-            mean = np.mean(song_dur_ratio)
-            std = np.std(song_dur_ratio)
+        # computing estmated offs
+        dur_ratios = stat.get_random_duration_ratio(k=score.shape[0])
+        song_dur = (aligned[:, 2] - aligned[:, 1])
+        song_dur_ratio = song_dur / (score[:, 2] - score[:, 1])
+        # computing meang and dev from the matching notes
+        mean = np.mean(song_dur_ratio)
+        std = np.std(song_dur_ratio)
 
-            # computing the estimated offs
-            est_ratios = dur_ratios * std + mean
-            new_dur = song_dur / est_ratios
-            offs = ons + new_dur
+        # computing the estimated offs
+        est_ratios = dur_ratios * std + mean
+        new_dur = song_dur / est_ratios
+        offs = ons + new_dur
 
-            fix_offsets(ons, offs, score[:, 0])
-            realigned = offs
-        else:
-            realigned = ons
+        fix_offsets(ons, offs, score[:, 0])
 
         # DTW between score and affinely transformed new times
-        dtw_res = dtw(
-            reference,
-            realigned,
-            # window_type='slantedband',
-            # window_args=dict(window_size=10),
-            distance_only=True)
-        return dtw_res.normalizedDistance
+        offs_dist = np.abs(offs - score[:, 2]).mean()
+        ons_dist = np.abs(ons - score[:, 1]).mean()
+        return ons_dist, offs_dist
 
     for stat in stats:
         print(f"Evaluating {stat}")
@@ -402,23 +387,26 @@ def evaluate(dataset: Dataset, stats: List[Stats], onsoffs: str):
             backend="multiprocessing")
         # removing scores where we couldn't match notes
         distances = np.asarray(distances)
-        valid_scores = np.count_nonzero(distances > 0)
+        valid_scores = np.count_nonzero(distances[:, 0] > 0)
         print(
             f"Used {valid_scores / len(dataset)} scores ({valid_scores} / {len(dataset)})"
         )
-        distances = distances[distances >= 0]
-        print(f"Statics for {stat} and {onsoffs}")
-        print(f"Avg: {np.mean(distances):.2e}")
-        print(f"Std {np.std(distances):.2e}")
+        distances = distances[distances[:, 0] >= 0]
+        print(f"Statics for {stat} and Onsets")
+        print(f"Avg: {np.mean(distances[:, 0]):.2e}")
+        print(f"Std {np.std(distances[:, 0]):.2e}")
+
+        print(f"Statics for {stat} and Offsets")
+        print(f"Avg: {np.mean(distances[:, 1]):.2e}")
+        print(f"Std {np.std(distances[:, 1]):.2e}")
 
 
-def get_stats(method='hmm', save=True):
+def get_stats(method='histogram', save=True):
     """
     Computes statistics, histogram, dumps the object to file and returns it
     """
     if os.path.exists(FILE_STATS):
-        return pickle.load(
-            open(os.path.join(FILE_STATS), "rb"))
+        return pickle.load(open(os.path.join(FILE_STATS), "rb"))
 
     dataset = _get_dataset()
     print("Computing statistics")
@@ -475,7 +463,4 @@ if __name__ == '__main__':
         #     open(os.path.join(THISDIR, "_alignment_stats.pkl"), "rb"))
         evaluate(testset, [
             model,
-        ], 'offs')
-        evaluate(testset, [
-            model,
-        ], 'ons')
+        ])
