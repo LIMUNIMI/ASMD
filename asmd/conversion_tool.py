@@ -12,10 +12,9 @@ from typing import Optional
 import numpy as np
 from pretty_midi.constants import INSTRUMENT_MAP
 
-from .alignment_stats import Stats
 from .asmd import load_definitions
-from .convert_from_file import _sort_alignment, _sort_pedal
 from .convert_from_file import *
+from .convert_from_file import _sort_alignment, _sort_pedal
 from .idiot import THISDIR
 
 # this is only for detecting the package path
@@ -67,6 +66,13 @@ def _is_in_range(a_list: list,
     return True
 
 
+def _is_greater(list1: list, list2: list):
+    """
+    return True if `list1[i] > list2[i]` for each `i`
+    """
+    return all([list1[i] > list2[i] for i in range(len(list1))])
+
+
 def check(gt: dict) -> int:
     """
     Returns 0 if the ground_truth dictionary representation is correctly built,
@@ -85,30 +91,33 @@ def check(gt: dict) -> int:
         # check that offsets are > 0
         if not _is_in_range(gt[alignment]['offsets'], 0, None):
             return 3
+        # check that offsets are > onsets
+        if not _is_greater(gt[alignment]['offsets'], gt[alignment]['onsets']):
+            return 4
         # check that pitches are in 0-127
         if not _is_in_range(gt[alignment]['pitches'], 0, 127):
-            return 4
+            return 5
         # check that velocities are in 0-127
         if not _is_in_range(gt[alignment]['velocities'], 0, 127):
-            return 5
+            return 6
 
     # check that ['score']['beats'] is sorted
     if not _is_sorted(gt['score']['beats']):
-        return 6
+        return 7
     # check length of 'missing' and 'extra'
     if len(gt['missing']) != len(gt['extra']):
-        return 7
+        return 8
     # check that 'f0' is > 0
     if not _is_in_range(gt['f0'], 0, None):
-        return 8
+        return 9
 
     for pedal in ['soft', 'sostenuto', 'sustain']:
         # check that 'times' is sorted
         if not _is_sorted(gt[pedal]['times']):
-            return 9
+            return 10
         # check that 'values' are in 0-127
         if not _is_in_range(gt[pedal]['values'], 0, 127):
-            return 10
+            return 11
 
     return 0
 
@@ -153,6 +162,34 @@ def merge_dicts(idx, *args):
     return obj1_copy
 
 
+def fix_offsets(onsets, offsets, pitches):
+    """
+    Make each offset smaller than the following onset in the
+    same pitch.
+
+    Modify offsets in-place.
+    """
+
+    # a table to search for same pitches
+    table_pitches = [[]] * 128
+    for i, p in enumerate(pitches):
+        table_pitches[int(p)].append(i)
+
+    for i in range(len(onsets)):
+        # search next note with same pitch
+        j = None
+        for k in table_pitches[int(pitches[i])]:
+            if onsets[k] > onsets[i]:
+                j = k
+                break
+
+        if j is not None and j < len(onsets):
+            if offsets[i] > onsets[j]:
+                offsets[i] = onsets[j] - 0.005
+                if offsets[i] < onsets[i]:
+                    offsets[i] = 2 * (onsets[i] + onsets[j]) / 3
+
+
 def misalign(out, stats):
     """
     Given a ground truth dictionary and a `alignment_stats.Stats` object,
@@ -164,45 +201,18 @@ def misalign(out, stats):
     else:
         alignment = 'broad_alignment'
     onsets = stats.get_random_onsets(out[alignment]['onsets'])
-    offsets = stats.get_random_offsets(out[alignment]['offsets'],
-                                       out[alignment]['onsets'])
+    offsets = stats.get_random_offsets(out[alignment]['onsets'],
+                                       out[alignment]['offsets'])
     pitches = out[alignment]['pitches']
 
     # set first onset to 0
-    first_onset = onsets.min()
-    onsets -= first_onset
-    offsets -= first_onset
+    # first_onset = onsets.min()
+    # onsets -= first_onset
+    # offsets -= first_onset
 
-    # a table to search for same pitches
-    table_pitches = [[]] * 128
-    for i, p in enumerate(pitches):
-        table_pitches[int(p)].append(i)
+    fix_offsets(onsets, offsets, pitches)
 
-    # make each offset being greater than the onset
-    # but smaller than the following onset in the
-    # same pitch
-    def fix_offsets(i):
-
-        ret = offsets[i]
-        if offsets[i] <= onsets[i]:
-            ret = 2 * onsets[i] - offsets[i]
-
-        # search next note with same pitch
-        j = None
-        for k in table_pitches[int(pitches[i])]:
-            if onsets[k] > onsets[i]:
-                j = k
-                break
-
-        if j is not None and j < len(onsets):
-            if ret > onsets[j]:
-                ret = onsets[j] - 0.005
-
-        return ret
-
-    offsets = list(map(fix_offsets, range(len(onsets))))
-
-    return pitches, onsets.tolist(), offsets
+    return pitches, onsets.tolist(), offsets.tolist()
 
 
 def conversion(arg):
@@ -286,7 +296,7 @@ def conversion(arg):
 
 def create_gt(data_fn,
               gztar=False,
-              alignment_stats: Stats = None,
+              alignment_stats=None,
               whitelist=[],
               blacklist=[]):
     """
