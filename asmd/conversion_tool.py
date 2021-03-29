@@ -20,8 +20,8 @@ from .idiot import THISDIR
 # this is only for detecting the package path
 
 #: if True, run conversion in parallel processes
-# PARALLEL = True
-PARALLEL = False
+PARALLEL = True
+# PARALLEL = False
 
 
 def normalize_text(text):
