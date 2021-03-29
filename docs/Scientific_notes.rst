@@ -41,15 +41,15 @@ asmd.alignment_stats``. The script will use Eita Nakamura method to match notes
 between the score and the performance and will collect statistics only on the
 matched notes; it will then compute the distance between the misaligned score
 onset/offset sequence and the real score onset sequence, considering only the
-matchng notes, using the classical DTW symmetric step-pattern and the euclidean
-distance.  The evaluation uses `vienna_corpus`, `traditional_flute`,
-`MusicNet`, `Bach10` and `asap` group from `Maestro` dataset for a total of 875
-scores, split in train-set and test-set with 70-30 proportion, resulting in 614
-songs for training and 261 songs for testing.
+matchng notes, using the L1 error between matching notes.  The evaluation uses
+`vienna_corpus`, `traditional_flute`, `MusicNet`, `Bach10` and `asap` group
+from `Maestro` dataset for a total of 875 scores, split in train-set and
+test-set with 70-30 proportion, resulting in 641 songs for training and 234
+songs for testing.
 
 However, since Eita's method takes a long time on some scores, I removed the
 scores for which Eita's method ends after 20 seconds; this resulted in a total
-of 338 songs for training and ~155 songs for testing (~55% and ~59% of the
+of 347 songs for training and ~143 songs for testing (~54% and ~61% of the
 total number of songs with an available score).
 
 Both the two compared methods are based on the random choice of a standard
@@ -75,9 +75,9 @@ The following table resumes the results of the comparison:
 +------+---------------+--------------+
 |      | Ons           | Offs         |
 +------+---------------+--------------+
-| HMM  | 1.27 ± 3.20   | 1.99 ± 2.51  |
+| HMM  | 18.6 ± 49.7   | 20.7 ± 50.6  |
 +------+---------------+--------------+
-| Hist | 0.244 ± 0.641 | 1.08 ± 0.951 |
+| Hist | 7.43 ± 15.5   | 8.95 ± 15.5  |
 +------+---------------+--------------+
 
 Misaligned data are finally created by training GMM-HMM on all the 875 scores
