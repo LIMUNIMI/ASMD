@@ -302,7 +302,8 @@ def create_gt(data_fn,
     positions.
 
     If ``alignment_stats`` is not None, it should be an object of type
-    ``alignment_stats.Stats`` as the one returned by ``alignment_stats.main``
+    ``alignment_stats.Stats`` as the one returned by
+    ``alignment_stats.get_stats``
     """
 
     print("Opening JSON file: " + data_fn)

@@ -80,7 +80,7 @@ The following table resumes the results of the comparison:
 | Hist | 7.43 ± 15.5   | 8.95 ± 15.5  |
 +------+---------------+--------------+
 
-Misaligned data are finally created by training GMM-HMM on all the 875 scores
+Misaligned data are finally created by training Histogram on all the 875 scores
 (~481 considering songs where Eita's method takes less than 20 sec).
 Misaligned data are more similar to a new performance than to a symbolic score;
 for most of MIR applications, however, misaligned data are enough for both
