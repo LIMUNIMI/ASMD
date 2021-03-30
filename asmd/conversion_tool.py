@@ -188,6 +188,7 @@ def fix_offsets(onsets, offsets, pitches):
                 offsets[i] = onsets[j] - 0.005
                 if offsets[i] < onsets[i]:
                     offsets[i] = 2 * (onsets[i] + onsets[j]) / 3
+        offsets[i] = max(onsets[i] + 0.0625, offsets[i])
 
 
 def misalign(out, stats):
