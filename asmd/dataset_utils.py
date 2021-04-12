@@ -20,8 +20,7 @@ def choice(dataset, p=[0.6, 0.2, 0.2], random_state=None):
 
     # generating non-overlapping splits
     random_state = check_random_state(random_state)
-    random_state.seed()
-    splits = np.random.choice(np.arange(len(p)), p=p, size=(len(dataset), ))
+    splits = random_state.choice(np.arange(len(p)), p=p, size=(len(dataset), ))
 
     # creating output datasets
     out = []
