@@ -48,12 +48,15 @@ if args.train:
         os.remove(alignment_stats.FILE_STATS)
     alignment_stats.get_stats()
 
+stats = None
+create_gt(os.path.join(THISDIR, 'datasets.json'),
+          gztar=True,
+          alignment_stats=stats,
+          whitelist=args.whitelist,
+          blacklist=args.blacklist)
+
 if args.misalign:
     stats = alignment_stats.get_stats()
-else:
-    stats = None
-
-if args.misalign or args.normal:
     create_gt(os.path.join(THISDIR, 'datasets.json'),
               gztar=True,
               alignment_stats=stats,
