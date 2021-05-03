@@ -432,16 +432,16 @@ def complement(dataset, **kwargs):
     """
     out = deepcopy(dataset)
     out.paths = []
-    for i, d in enumerate(dataset['datasets']):
+    for i, d in enumerate(dataset.datasets):
         if d['included']:
-            out['datasets'][i]['included'] = False
+            out.datasets[i]['included'] = False
         else:
-            out['datasets'][i]['included'] = True
+            out.datasets[i]['included'] = True
             for j, s in enumerate(d['songs']):
                 if s['included']:
-                    out['datasets'][i]['songs'][j] = False
+                    out.datasets[i]['songs'][j]['included'] = False
                 else:
-                    out['datasets'][i]['songs'][j] = True
+                    out.datasets[i]['songs'][j]['included'] = True
 
     # populate paths
     return filter(out, **kwargs)
