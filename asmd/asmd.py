@@ -7,6 +7,7 @@ from typing import List, Optional
 
 import numpy as np
 from essentia.standard import MetadataReader, Resample
+import essentia as es
 from joblib import Parallel, delayed
 from tqdm import tqdm
 
@@ -179,7 +180,11 @@ class Dataset(object):
             recordings.append(audio)
 
         if len(recordings) > 1:
-            mix = np.mean(recordings, axis=0)
+            L = max(len(rec) for rec in recordings)
+            mix = np.zeros(L, dtype=np.float32)
+            for rec in recordings:
+                mix[:rec.shape[0]] += rec
+            mix /= len(rec)
         else:
             mix = recordings[0]
 
@@ -424,7 +429,12 @@ class Dataset(object):
 
         if sources is not None:
             audio, sr = self.get_source(idx)
-            audio = np.mean(audio, axis=0)
+            L = max(len(au) for au in audio)
+            out = np.zeros(L, dtype=np.float32)
+            for i, au in enumerate(audio):
+                if i in sources:
+                    out[:au.shape[0]] += au
+            audio = out / len(audio)
         else:
             audio, sr = self.get_mix(idx)
 
