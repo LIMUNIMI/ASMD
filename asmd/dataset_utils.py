@@ -1,8 +1,8 @@
 from copy import deepcopy
 
 import numpy as np
-
 from sklearn.utils import check_random_state
+
 from . import utils
 
 
@@ -102,7 +102,7 @@ def filter(dataset,
     All the attributes are checked at the song level, except for:
 
     * `ensemble`: this is checked at the dataset-level (i.e. each dataset can
-      be for ensembel or not) This may change in future releases
+      be for ensemble or not) This may change in future releases
     * `ground_truth`: this is checked at group level (i.e. each subgroup can
       have different annotations)
 
@@ -247,7 +247,39 @@ def filter(dataset,
             for song in mydataset['songs']:
                 song['included'] = False
 
+    _check_consistency(ret, fix=True)
+
     return ret
+
+
+def _check_consistency(dataset, fix=False):
+    """
+    Checks that is a dataset is included, then at least one of its songs is
+    included and that if a dataset is excluded, then all of its songs are
+    excluded.
+
+    If `fix` is True, if fixes the dataset inclusion, otherwise raise a
+    `RuntimeError`
+    """
+
+    for d in dataset.datasets:
+        included_songs = [s['included'] for s in d['songs']]
+        if d['included']:
+            if not any(included_songs):
+                if fix:
+                    d['included'] = False
+                else:
+                    raise RuntimeError(
+                        f"{d['name']} is included but no song is included")
+
+        else:
+            if any(included_songs):
+                if fix:
+                    d['included'] = True
+                else:
+                    raise RuntimeError(
+                        f"{d['name']} is excluded but at least one song is included"
+                    )
 
 
 def get_score_mat(dataset, idx, score_type=['misaligned'], return_notes=''):
@@ -433,15 +465,18 @@ def complement(dataset, **kwargs):
     out = deepcopy(dataset)
     out.paths = []
     for i, d in enumerate(dataset.datasets):
-        if d['included']:
-            out.datasets[i]['included'] = False
-        else:
+        include_dataset = False
+        for j, s in enumerate(d['songs']):
+            if s['included']:
+                out.datasets[i]['songs'][j]['included'] = False
+            else:
+                out.datasets[i]['songs'][j]['included'] = True
+                include_dataset = True
+        if include_dataset:
+            # some song has been included
             out.datasets[i]['included'] = True
-            for j, s in enumerate(d['songs']):
-                if s['included']:
-                    out.datasets[i]['songs'][j]['included'] = False
-                else:
-                    out.datasets[i]['songs'][j]['included'] = True
+        else:
+            out.datasets[i]['included'] = False
 
     # populate paths
     return filter(out, **kwargs)
