@@ -140,7 +140,7 @@ def filter(dataset,
     datasets : list of strings
         a list of strings containing the name of the datasets to be used.
         If empty, all datasets are used. See :doc:`License` for the
-        list of default datasets.
+        list of default datasets. The matching is case insensitive.
     ground_truth : dict[str, int]
         a dictionary (string, int) representing the type of ground-truths
         needed (logical AND among list elements).
@@ -168,13 +168,14 @@ def filter(dataset,
     # let's remove everything and put only the wanted ones
     ret.paths = []
 
+    datasets = [d.lower() for d in datasets]
     end = 0
     for mydataset in ret.datasets:
         FLAG = True
         if not mydataset['included']:
             FLAG = False
         if len(datasets) > 0:
-            if mydataset['name'] in datasets:
+            if mydataset['name'].lower() in datasets:
                 FLAG = True
             else:
                 FLAG = False
