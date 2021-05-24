@@ -13,7 +13,7 @@ argparser.add_argument(
     '-m',
     '--misalign',
     action='store_true',
-    help="Generate ground-truth artificial misalignment using a trained model")
+    help="Generate ground-truth artificial misalignment using a trained model; train it if not available")
 
 argparser.add_argument(
     '-n',
@@ -46,17 +46,18 @@ args = argparser.parse_args()
 if args.train:
     if os.path.exists(alignment_stats.FILE_STATS):
         os.remove(alignment_stats.FILE_STATS)
-    alignment_stats.get_stats()
+    alignment_stats.get_stats(train=True)
 
-stats = None
-create_gt(os.path.join(THISDIR, 'datasets.json'),
-          gztar=True,
-          alignment_stats=stats,
-          whitelist=args.whitelist,
-          blacklist=args.blacklist)
+if args.normal:
+    stats = None
+    create_gt(os.path.join(THISDIR, 'datasets.json'),
+              gztar=True,
+              alignment_stats=stats,
+              whitelist=args.whitelist,
+              blacklist=args.blacklist)
 
 if args.misalign:
-    stats = alignment_stats.get_stats()
+    stats = alignment_stats.get_stats(train=True)
     create_gt(os.path.join(THISDIR, 'datasets.json'),
               gztar=True,
               alignment_stats=stats,

@@ -401,18 +401,21 @@ def evaluate(dataset: Dataset, stats: List[Stats]):
         print(f"Std {np.std(distances[:, 1]):.2e}")
 
 
-def get_stats(method='histogram', save=True):
+def get_stats(method='histogram', save=True, train=True):
     """
     Computes statistics, histogram, dumps the object to file and returns it
     """
     if os.path.exists(FILE_STATS):
         return pickle.load(open(os.path.join(FILE_STATS), "rb"))
 
-    dataset = _get_dataset()
-    print("Computing statistics")
-    stats = Stats()
-    stats.fill_stats(dataset)
-    return _train_model(stats, method, save)
+    elif train:
+        dataset = _get_dataset()
+        print("Computing statistics")
+        stats = Stats()
+        stats.fill_stats(dataset)
+        return _train_model(stats, method, save)
+    else:
+        return None
 
 
 def _get_dataset():

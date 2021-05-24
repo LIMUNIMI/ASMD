@@ -2,12 +2,13 @@ import gzip
 import json
 import multiprocessing as mp
 import os
+import random
 import sys
 import tarfile
 from copy import deepcopy
 from difflib import SequenceMatcher
 from os.path import join as joinpath
-from typing import Optional
+from typing import Callable, List, Optional
 
 import numpy as np
 from pretty_midi.constants import INSTRUMENT_MAP
@@ -22,6 +23,8 @@ from .idiot import THISDIR
 #: if True, run conversion in parallel processes
 PARALLEL = True
 # PARALLEL = False
+
+rng = np.random.default_rng(1002)
 
 
 def normalize_text(text):
@@ -122,6 +125,38 @@ def check(gt: dict) -> int:
     return 0
 
 
+###################################################
+def slice_intersection(a: slice, b: slice):
+    if b.start < a.start < b.stop or a.start < b.start < a.stop:
+        return False
+    else:
+        return True
+
+
+def random_subslice(length: int, slice_: slice):
+    start = rng.integers(slice_.start, slice_.stop - length)
+    stop = start + length
+    return slice(start, stop)
+
+
+def random_distinct_subslices(tot: int, size: int) -> List[slice]:
+    slice_ = slice(0, size)
+    slices: List[slice] = []
+    nnn = 0
+    while nnn < tot:
+        while True:
+            new_slice = random_subslice(rng.integers(1, tot - nnn + 1), slice_)
+            if all(slice_intersection(new_slice, r) for r in slices):
+                nnn += new_slice.stop - new_slice.start
+                slices.append(new_slice)
+                break
+    slices.sort(key=lambda r: r.start)
+    return slices
+
+
+###################################################
+
+
 def merge_dicts(idx, *args):
     """
     Merges lists of dictionaries, by adding each other the values of
@@ -188,6 +223,8 @@ def fix_offsets(onsets, offsets, pitches):
                 offsets[i] = onsets[j] - 0.005
                 if offsets[i] < onsets[i]:
                     offsets[i] = 2 * (onsets[i] + onsets[j]) / 3
+
+        # minimum duration in 0.0625
         offsets[i] = max(onsets[i] + 0.0625, offsets[i])
 
 
@@ -202,8 +239,8 @@ def misalign(out, stats):
     else:
         alignment = 'broad_alignment'
     onsets = stats.get_random_onsets(out[alignment]['onsets'])
-    offsets = stats.get_random_offsets(
-        out[alignment]['onsets'], out[alignment]['offsets'], onsets)
+    offsets = stats.get_random_offsets(out[alignment]['onsets'],
+                                       out[alignment]['offsets'], onsets)
     pitches = out[alignment]['pitches']
 
     fix_offsets(onsets, offsets, pitches)
@@ -261,15 +298,12 @@ def conversion(arg):
             out['misaligned']['onsets'] = onsets
             out['misaligned']['offsets'] = offsets
             out['misaligned']['pitches'] = pitches
-            # computing the percentage of missing and extra notes (between 0.05
-            # and 0.15)
-            m = np.random.rand() % 0.1 + 0.05
-            e = np.random.rand() % 0.1 + 0.05
-            mask = np.random.choice([0, 1, 2],
-                                    p=[m, e, 1 - e - m],
-                                    size=len(pitches))
-            out['missing'] = (mask == 0).tolist()
-            out['extra'] = (mask == 1).tolist()
+            # computing the percentage of missing and extra notes (between 0.10
+            # and 0.30)
+            L = len(pitches)
+            missing, extra = generate_missing_extra(L)
+            out['missing'] = missing.tolist()
+            out['extra'] = extra.tolist()
 
         print("   saving " + final_path)
         # pretty printing stolen from official docs
@@ -288,6 +322,20 @@ def conversion(arg):
 
         to_be_included_in_the_archive.append(final_path)
     return to_be_included_in_the_archive
+
+
+def generate_missing_extra(L, min_perc=0.01, max_perc=0.30):
+    tot = rng.integers(min_perc * L, max_perc * L)
+    me_proportion = rng.random() / 2 + 0.25
+    slices = random_distinct_subslices(tot, L)
+    missing = np.zeros(L, dtype=np.bool8)
+    extra = np.zeros(L, dtype=np.bool8)
+    for region in slices:
+        if rng.random() > me_proportion:
+            missing[region] = True
+        else:
+            extra[region] = True
+    return missing, extra
 
 
 def create_gt(data_fn,

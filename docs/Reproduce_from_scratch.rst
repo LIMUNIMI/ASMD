@@ -16,13 +16,12 @@ Generate misaligned data
 ------------------------
 
 If you want, you can generate misaligned data using the ``--train`` and
-``--misalign`` options
-of ``generate_ground_truth.py``. It will run ``alignment_stats.py``, which
-collects data about the datasets with real non-aligned scores and saves stats
-in ``_alignment_stats.pkl`` file in the ASMD module directory. Then, it runs
-``generate_ground_truth.py`` using the collected statistics:  it will
-generate misaligned data by using the same deviation distribution of the
-available non-aligned data. 
+``--misalign`` options of ``generate_ground_truth.py``. It will run
+``alignment_stats.py``, which collects data about the datasets with real
+non-aligned scores and saves stats in ``_alignment_stats.pkl`` file in the ASMD
+module directory. Then, it runs ``generate_ground_truth.py`` using the collected
+statistics:  it will generate misaligned data by using the same deviation
+distribution of the available non-aligned data. 
 
 Note that misaligned data should be annotated as ``2`` in the ``ground_truth``
 value of the dataset groups description (see :doc:`./index` ), otherwise no
@@ -35,10 +34,8 @@ For more info, see ``python -m asmd.generate_ground_truth -h``.
 
 A usual pipeline is:
 
-#. Generate normal alignment: ``python -m asmd.generate_ground_truth --normal``
-#. Train a statistical model: ``python -m asmd.generate_ground_truth --train``
-#. Generate misalignment using the trained model: ``python -m
+#. Generate music score data and other ground-truth except artificial one:
+   ``python -m asmd.generate_ground_truth --normal``
+#. Train a statistical model (can skip this): ``python -m asmd.generate_ground_truth --train``
+#. Generate misalignment using the trained model (trains it if not available): ``python -m
    asmd.generate_ground_truth --misalign``
-#. The last two steps can be done in only one: ``python -m
-   asmd.generate_ground_truth -t -m``
-

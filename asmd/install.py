@@ -31,7 +31,7 @@ from .asmd import load_definitions
 #: Set to True to skip datasets which already exist
 SKIP_EXISTING_DIR = True
 
-LINK_GROUND_TRUTH = "https://mega.nz/file/rNdWFTiL#pklIfZt9on_n4JmjmNl093y8GJFwgqcd5AbL-L0LbqU"
+LINK_GROUND_TRUTH = "https://mega.nz/file/WFcGgTJa#JvK1pCjJ4Vsz6i0s0Ojpnj-8xkTi_Abq4fW_Fb1aj0g"
 
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 
