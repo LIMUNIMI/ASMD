@@ -324,7 +324,7 @@ def conversion(arg):
     return to_be_included_in_the_archive
 
 
-def generate_missing_extra(L, min_perc=0.01, max_perc=0.30):
+def generate_missing_extra(L, min_perc=0.10, max_perc=0.50):
     tot = rng.integers(min_perc * L, max_perc * L)
     me_proportion = rng.random() / 2 + 0.25
     slices = random_distinct_subslices(tot, L)
