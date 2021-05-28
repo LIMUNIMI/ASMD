@@ -19,6 +19,25 @@ Other examples in the paper!
 Changelog
 =========
 
+Version 0.5
+^^^^^^^^^^^
+
+#. Improved inference of misalignments
+#. Improved the reproducibility of artificial data
+#. Improved the documentation
+#. Added `ASAP` group in **Maestro: broken backward compatibility**
+#. Added `score` for the original score
+#. Added midi note matching based on EITA method
+#. Added missing and extra notes
+#. General refactoring
+#. Added functions for set operations among datasets (union, intersections,
+   complement and subsampling)
+#. Various fixes
+
+Version 0.4
+^^^^^^^^^^^
+# Skipped
+
 Version 0.3
 ^^^^^^^^^^^
 
@@ -72,12 +91,11 @@ Version 0.2
 Roadmap
 =======
 
+#. Add matching of same music piece among different datasets
 #. Added `torch.DatasetDump` for preprocessing datasets and use them in pytorch
 #. Add new modalities (video, images)
-#. Improve the artificial misalignment
-#. Add datasets for the artificial misalignment (e.g. ASAP, Giant-Midi Piano)
 #. Add other datasets
-#. Refactoring of the API (it's a bit long now...)
+#. Refactoring of the `filter` function (it's a bit long now...)
 
 Cite us
 =======
