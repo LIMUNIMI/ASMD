@@ -10,7 +10,7 @@ Read more in the docs_.
 
 * To install: ``pip install asmd``
 * To install datasets: ``python -m asmd.install``
-* To import API: ``from asmd import audioscoredataset as asd``
+* To import API: ``from asmd import asmd``
 
 Other examples in the paper!
 

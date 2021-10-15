@@ -63,8 +63,8 @@ following field:
       indicating that violin1 and violin2 are playing exactly the same
       thing).
    #. ``groups``: list of strings representing a group of the dataset. The
-         group ``all`` must always be there; any other string is possible and
-         should be exposed in the ``groups`` field at dataset-level
+      group ``all`` must always be there; any other string is possible and
+      should be exposed in the ``groups`` field at dataset-level
    
 #. ``install``: where information for the installation process are stored
 
@@ -100,10 +100,10 @@ dictionary with the following structure:
    #. ``onsets``: onsets in seconds at 20 bpm
    #. ``offsets``: offsets in seconds at 20 bpm
    #. ``pitches``: list of midi pitches in onset ascending order and range [0-127]
-   #. ``notes`: list of note names in onsets ascending order
+   #. ``notes``: list of note names in onsets ascending order
    #. ``velocities``: list of velocities in onsets ascending order and range [0-127]
    #. ``beats``: list of times in which there was a beat in the original score;
-         use this to reconstruct instant BPM
+      use this to reconstruct instant BPM
 
 #. ``misaligned``:
 
@@ -130,11 +130,11 @@ dictionary with the following structure:
    #. ``velocities``: list of velocities in onsets ascending order and range [0-127]
 
 #. ``missing``: list of boolean values indicating which notes are missing in
-     the score (i.e. notes that you can consider as being played but not in
-     the score); use this value to mask the performance/score
+   the score (i.e. notes that you can consider as being played but not in
+   the score); use this value to mask the performance/score
 #. ``extra``: list of boolean values indicating which notes are extra in
-     the score (i.e. notes that you can consider as not being played but in
-     the score); use this value to mask the performance/score
+   the score (i.e. notes that you can consider as not being played but in
+   the score); use this value to mask the performance/score
 
 #. ``f0``: list of f0 frequencies, frame by frame; duration of each frame
    should be 46 ms with 10 ms of hop.

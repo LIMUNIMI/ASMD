@@ -14,7 +14,7 @@ ASMD: Audio-Score Meta Dataset
    Utilities
    Scientific_notes
    License
-   Source Code and Download <https://framagit.org/sapo/asmd>
+   Source Code and Download <https://github.com/LIMUNIMI/ASMD/>
 
 This paper describes an open-source Python framework for handling datasets for
 music processing tasks, built with the aim of improving the reproducibility of
