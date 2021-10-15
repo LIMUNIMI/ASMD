@@ -43,7 +43,7 @@ Example:
    source_array = d.get_source(2)
    ground_truth_list = d.get_gts(2)
 
-   mat = d.get_score(2, score_type=['precise_alignment'])
+   mat = get_score_mat(2, score_type=['precise_alignment'])
 
 Note that you can inherit from ``asmd.Dataset`` and
 ``torch.utils.data.Dataset`` to create a PyTorch compatible dataset which only
