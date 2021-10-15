@@ -18,21 +18,6 @@ annotations and to reproduce it. Indeed, with ``misaligned`` data I mean
 data which try to reproduce the statistical features of the difference
 between scores and aligned data.
 
-Old description
-~~~~~~~~~~~~~~~
-
-For now, the statistical analysis is damn simple: I compute the mean and
-the standard deviation of offsets and onsets for each piece. Then, I
-take memory of the standardized histogram and of the histograms of means
-and standard deviations. To create new misaligned data, I chose a
-standardized value for each note and a mean and a standard deviation for
-each piece, using the corresponding histograms; with these data, I can
-compute a non-standardized value for each note. Note that the histograms
-are first normalized so that they accomplish to given constraints. In
-the present code, the standardized values are normalized to 1 (that is,
-the maximum value is 1 second), while standard deviations are normalized
-to 0.2 (see ``conversion_tool.py`` lines ``17-21``).
-
 New description
 ~~~~~~~~~~~~~~~
 
@@ -92,14 +77,14 @@ BPM for `score` alignment
 Previously, the BPM was always forced to 20, so that, if the BPM is not
 available, notes duration can still be expressed in seconds.
 
-Since 0.4, the BPM is simply set to 60 if not available; however, positions of
+Since 0.5, the BPM is simply set to 60 if not available; however, positions of
 beats are always provided, so that the user can reconstruct the instant BPM.
 The function ``get_initial_bpm`` from the Python API also provides a way to
 retrieve the initial instant BPM from the score.
 
 An easy way to get an approximative BPM, is to `stretch` the score to the
 duration of the corresponding performance. This can also be done for the beats,
-and consequently, for the instant BPM. For instance, let `T_0` and `T_1` be the
+and, consequently, for the instant BPM. For instance, let `T_0` and `T_1` be the
 initial and ending time of the performance, and let `t_0` and `t_1` be the initial
 and ending times of the score. Then, the stretched times of the score at the
 average performance BPM are given by:
