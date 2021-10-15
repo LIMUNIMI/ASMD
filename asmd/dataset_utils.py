@@ -380,7 +380,7 @@ def get_score_mat(dataset, idx, score_type=['misaligned'], return_notes=''):
             missing_extra = dataset.get_missing_extra_notes(idx, q)
             missing_extra = np.concatenate(missing_extra)
             returned_notes.append(missing_extra[ind])
-        return mat[ind], *returned_notes
+        return tuple([mat[ind]] + returned_notes)
     return mat[ind]
 
 
