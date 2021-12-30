@@ -97,8 +97,8 @@ dictionary with the following structure:
 
 #. ``score``:
 
-   #. ``onsets``: onsets in seconds at 20 bpm
-   #. ``offsets``: offsets in seconds at 20 bpm
+   #. ``onsets``: onsets in seconds; if BPM is not available, timings are computed using 60 BPM
+   #. ``offsets``: offsets in seconds; if BPM is not available, timings are computed using 60 BPM
    #. ``pitches``: list of midi pitches in onset ascending order and range [0-127]
    #. ``notes``: list of note names in onsets ascending order
    #. ``velocities``: list of velocities in onsets ascending order and range [0-127]
